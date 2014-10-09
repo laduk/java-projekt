@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.area;
 
 import javax.persistence.Column;
@@ -27,7 +23,7 @@ public class Area {
     private String description;
 
     //@Column
-    //private double area;
+    private float area;
     
     public long getId() {
         return id;
