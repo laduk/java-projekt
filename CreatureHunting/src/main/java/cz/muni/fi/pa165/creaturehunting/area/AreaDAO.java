@@ -4,13 +4,14 @@ import cz.muni.fi.pa165.creaturehunting.DAOException;
 import java.util.List;
 
 /**
+ * This interface represents a contract for a DAO for class Area.
  *
  * @author Radoslav Zajonc
  */
 public interface AreaDAO {
     
     /**
-     * Create the given area in the database. The area ID must be null,
+     * Create the given area in the database. The area ID must not be > 0,
      * otherwise it will throw IllegalArgumentException. After creating,
      * the DAO will set the obtained ID in the given area.
      * @param area The area to be created in the database.
@@ -20,7 +21,7 @@ public interface AreaDAO {
     public void createArea(Area area) throws IllegalArgumentException, DAOException;
     
     /**
-     * Update the given area in the database. The area ID must not be null,
+     * Update the given area in the database. The area ID must be > 0,
      * otherwise it will throw IllegalArgumentException.
      * @param area The area to be updated in the database.
      * @throws IllegalArgumentException If the area ID is null.
@@ -50,6 +51,6 @@ public interface AreaDAO {
      * @return A list of all areas from the database ordered by area ID.
      * @throws DAOException If something fails at database level.
      */
-    public List<Area> findAllAreas(String name) throws DAOException;
+    public List<Area> findAllAreas() throws DAOException;
     
 }

@@ -1,29 +1,46 @@
 package cz.muni.fi.pa165.creaturehunting.area;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- *
+ * This class represents the Area.
+ * 
  * @author Radoslav Zajonc
  */
 @Entity
-public class Area {
+public class Area implements Serializable {
     
+    /**
+     * Unique identifier of area.
+     * Id > 0 means, area is already created.
+     */
     @Id
     @GeneratedValue
     private long id = -1;
     
+    /**
+     * Represents name of area.
+     * Maximal length is 20 chars.
+     */
     @Column(length=20)
     private String name;
     
+    /**
+     * This is description of area.
+     * Maximal length is 200 chars.
+     */
     @Column(length=200)
     private String description;
-
-    //@Column
-    private float area;
+    
+    /**
+     * Acreage of area in meters squared.
+     */
+    @Column
+    private double acreage;
     
     public long getId() {
         return id;
@@ -47,6 +64,14 @@ public class Area {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getAcreage() {
+        return acreage;
+    }
+
+    public void setAcreage(double acreage) {
+        this.acreage = acreage;
     }
     
     @Override
@@ -73,7 +98,7 @@ public class Area {
 
     @Override
     public String toString() {
-        return "Cage [id=" + id + ", name=" + name + ", description=" + description + "]";
+        return "Area [id=" + id + ", name=" + name + ", description=" + description + ", acreage=" + acreage + "m^2]";
     }
     
 }
