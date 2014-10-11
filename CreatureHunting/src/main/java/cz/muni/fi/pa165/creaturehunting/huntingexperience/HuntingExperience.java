@@ -122,6 +122,14 @@ public class HuntingExperience {
         }
         return true;
     }
+    
+    
+      
+    @Override
+    public String toString() {
+        return "HuntingExperience [" + "id=" + id + ", weapon=" + weapon + ", creature=" + creature + ", "
+                + "date of experience:" + dateOfExperience + ", description=" + description + ", "  + " efficiency="  + efficiency +  "% ]";
+    }
         
     
 }

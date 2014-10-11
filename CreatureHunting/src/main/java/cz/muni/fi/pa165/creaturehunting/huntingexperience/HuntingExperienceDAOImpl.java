@@ -25,7 +25,7 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
         this.entityManager = entityManager;
     }
 
-    public void addHuntingExperience(HuntingExperience exp) throws IllegalArgumentException, DAOException {
+    public void createHuntingExperience(HuntingExperience exp) throws IllegalArgumentException, DAOException {
         if (exp.getId() > 0) {
             throw new IllegalArgumentException("Experience is already created, its ID is > 0.");
         }
@@ -98,6 +98,8 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
         }
         
     }
+    
+ 
     
     
 }

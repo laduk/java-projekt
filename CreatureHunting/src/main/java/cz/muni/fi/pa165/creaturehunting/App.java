@@ -6,6 +6,9 @@ import cz.muni.fi.pa165.creaturehunting.area.AreaDAOImpl;
 import cz.muni.fi.pa165.creaturehunting.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.creature.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.creature.CreatureDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.huntingexperience.HuntingExperience;
+import cz.muni.fi.pa165.creaturehunting.huntingexperience.HuntingExperienceDAO;
+import cz.muni.fi.pa165.creaturehunting.huntingexperience.HuntingExperienceDAOImpl;
 import cz.muni.fi.pa165.creaturehunting.weapon.Weapon;
 import cz.muni.fi.pa165.creaturehunting.weapon.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.weapon.WeaponDAOImpl;
@@ -29,6 +32,7 @@ public class App {
         AreaDAO areaDAO = new AreaDAOImpl(em);
         CreatureDAO creatureDAO = new CreatureDAOImpl(em);
         WeaponDAO weapDAO = new WeaponDAOImpl(em);
+        HuntingExperienceDAO expDAO = new HuntingExperienceDAOImpl(em);
         
         Creature creature = new Creature();
         creature.setName("Imp");
@@ -55,6 +59,15 @@ public class App {
         weap2.setName("Kris dagger");
         weap2.setGunReach(1);
         weap2.setAmmunition("none");
+        
+        
+        HuntingExperience exp = new HuntingExperience();
+        exp.setCreature(creature);
+        exp.setWeapon(weap);
+        exp.setDateOfExperience(null);
+        exp.setEfficiency(100);
+        exp.setDescription("Quick headshot");
+                
         
         
         List<Area> listOfAreas = new ArrayList();
@@ -85,6 +98,11 @@ public class App {
         em.getTransaction().commit();
         List<Weapon> listOfWeaponsDB = weapDAO.findAllWeapons();
         
+        em.getTransaction().begin();
+        expDAO.createHuntingExperience(exp);
+        em.getTransaction().commit();
+        List<HuntingExperience> listOfExps = expDAO.findAllHuntingExperience();
+        
         System.out.println(area);
         System.out.println("  Creatures in this area: " + area.getListOfCreatures());
         System.out.println(area2);
@@ -102,6 +120,8 @@ public class App {
         System.out.println("Weapon db: "+listOfWeaponsDB.get(0));
         System.out.println("Weapon2 localy: "+listOfWeapons.get(1));
         System.out.println("Weapon2 db: "+listOfWeaponsDB.get(1));
+        
+        System.out.println("Experiences: "+listOfExps.get(0));
         
         
         em.close();

@@ -17,7 +17,7 @@ import java.util.List;
 public interface HuntingExperienceDAO {
     
     
-    public void addHuntingExperience(HuntingExperience exp) throws IllegalArgumentException, DAOException;
+    public void createHuntingExperience(HuntingExperience exp) throws IllegalArgumentException, DAOException;
     
     
     public void updateHuntingExperience(HuntingExperience exp) throws IllegalArgumentException, DAOException;
