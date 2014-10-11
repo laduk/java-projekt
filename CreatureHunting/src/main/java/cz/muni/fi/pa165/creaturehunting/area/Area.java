@@ -1,10 +1,13 @@
 package cz.muni.fi.pa165.creaturehunting.area;
 
+import cz.muni.fi.pa165.creaturehunting.creature.Creature;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  * This class represents the Area.
@@ -42,6 +45,12 @@ public class Area implements Serializable {
     @Column
     private double acreage;
     
+    /**
+     * Creatures that were spotted in this area
+     */
+    @ManyToMany(mappedBy="listOfAreas")
+    List<Creature> listOfCreatures;
+    
     public long getId() {
         return id;
     }
@@ -72,6 +81,14 @@ public class Area implements Serializable {
 
     public void setAcreage(double acreage) {
         this.acreage = acreage;
+    }
+
+    public List<Creature> getListOfCreatures() {
+        return listOfCreatures;
+    }
+
+    public void setListOfCreatures(List<Creature> listOfCreatures) {
+        this.listOfCreatures = listOfCreatures;
     }
     
     @Override
