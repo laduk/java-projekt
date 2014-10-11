@@ -52,6 +52,7 @@ public class AreaDAOImpl implements AreaDAO {
     public void deleteArea(Area area) throws DAOException {
         try {
             entityManager.remove(area);
+            area.setId(-1);
         } catch (PersistenceException e) {
             throw new DAOException(e);
         }

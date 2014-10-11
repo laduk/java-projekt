@@ -31,7 +31,7 @@ public interface AreaDAO {
     
     /**
      * Delete the given area from the database. After deleting,
-     * the DAO will set the ID of the given area to null.
+     * the DAO will set the ID of the given area to not > 0.
      * @param area The area to be deleted from the database.
      * @throws DAOException If something fails at database level.
      */
