@@ -17,22 +17,20 @@ public interface WeaponDAO {
     /**
      * Store given weapon into database.
      * @param weapon The weapon that should be created.
-     * @throws NullPointerException when weapon is null.
-     * @throws IllegalArgumentException when argument is not object Weapon.
+     * @throws IllegalArgumentException when argument is wrong.
      * @throws DAOException if there is error with database.
      */
-    public void createWeapon(Weapon weapon) throws NullPointerException,
-            IllegalArgumentException, DAOException;
+    public void createWeapon(Weapon weapon) throws IllegalArgumentException, 
+            DAOException;
     
     /**
      * Update given weapon.
      * @param weapon The weapon that should be updated.
-     * @throws NullPointerException when weapon is null.
-     * @throws IllegalArgumentException when argument is not object Weapon.
+     * @throws IllegalArgumentException when argument is wrong.
      * @throws DAOException if there is error with database.
      */
-    public void updateWeapon(Weapon weapon) throws NullPointerException,
-            IllegalArgumentException, DAOException;
+    public void updateWeapon(Weapon weapon) throws IllegalArgumentException,
+            DAOException;
     
     /**
      * Delete the given weapon from database.

@@ -6,6 +6,9 @@ import cz.muni.fi.pa165.creaturehunting.area.AreaDAOImpl;
 import cz.muni.fi.pa165.creaturehunting.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.creature.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.creature.CreatureDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.weapon.Weapon;
+import cz.muni.fi.pa165.creaturehunting.weapon.WeaponDAO;
+import cz.muni.fi.pa165.creaturehunting.weapon.WeaponDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,6 +28,7 @@ public class App {
         
         AreaDAO areaDAO = new AreaDAOImpl(em);
         CreatureDAO creatureDAO = new CreatureDAOImpl(em);
+        WeaponDAO weapDAO = new WeaponDAOImpl(em);
         
         Creature creature = new Creature();
         creature.setName("Imp");
@@ -42,6 +46,17 @@ public class App {
         area.setDescription("Month of Mars");
         area.setAcreage(33.44);
         
+        Weapon weap = new Weapon();
+        weap.setName("Draconic bow");
+        weap.setGunReach(100);
+        weap.setAmmunition("Arrows");
+        
+        Weapon weap2 = new Weapon();
+        weap2.setName("Kris dagger");
+        weap2.setGunReach(1);
+        weap2.setAmmunition("none");
+        
+        
         List<Area> listOfAreas = new ArrayList();
         listOfAreas.add(area);
         creature.setListOfAreas(listOfAreas);
@@ -51,6 +66,10 @@ public class App {
         listOfCreatures.add(creature2);
         area.setListOfCreatures(listOfCreatures);
         
+        List<Weapon> listOfWeapons = new ArrayList();
+        listOfWeapons.add(weap);
+        listOfWeapons.add(weap2);
+        
         em.getTransaction().begin();
         areaDAO.createArea(area);
         creatureDAO.createCreature(creature);
@@ -59,6 +78,11 @@ public class App {
         Area area2 = areaDAO.findArea(1);
         Creature creatureDB = creatureDAO.findCreature(1);
         Creature creatureDB2 = creatureDAO.findCreature(2);
+        
+        weapDAO.createWeapon(weap);
+        weapDAO.createWeapon(weap2);
+        em.getTransaction().commit();
+        List<Weapon> listOfWeaponsDB = weapDAO.findAllWeapons();
         
         System.out.println(area);
         System.out.println("  Creatures in this area: " + area.getListOfCreatures());
@@ -72,6 +96,12 @@ public class App {
         System.out.println("  Areas where this creature is: " + creature2.getListOfAreas());
         System.out.println(creatureDB2);
         System.out.println("  Areas where this creature is: " + creatureDB2.getListOfAreas());
+        
+        System.out.println("Weapon localy: "+listOfWeapons.get(0));
+        System.out.println("Weapon db: "+listOfWeaponsDB.get(0));
+        System.out.println("Weapon2 localy: "+listOfWeapons.get(1));
+        System.out.println("Weapon2 db: "+listOfWeaponsDB.get(1));
+        
         
         em.close();
         emf.close();

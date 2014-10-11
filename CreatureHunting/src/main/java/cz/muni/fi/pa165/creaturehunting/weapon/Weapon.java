@@ -18,7 +18,7 @@ import javax.persistence.Id;
 public class Weapon {
     @Id
     @GeneratedValue
-    private long id;
+    private long id=-1;
     
     @Column(nullable=false)
     private String name;
