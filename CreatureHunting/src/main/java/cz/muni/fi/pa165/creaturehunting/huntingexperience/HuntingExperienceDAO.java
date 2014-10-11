@@ -8,7 +8,6 @@ import cz.muni.fi.pa165.creaturehunting.DAOException;
 import cz.muni.fi.pa165.creaturehunting.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.weapon.Weapon;
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -26,7 +25,7 @@ public interface HuntingExperienceDAO {
     
     public void deleteHuntingExperience(HuntingExperience exp) throws DAOException;
     
-    //public HuntingExperience findHuntingExperience(long id) throws DAOException;
+    public HuntingExperience findHuntingExperience(long id) throws DAOException;
     
     
     public List<HuntingExperience> findAllHuntingExperience() throws DAOException;

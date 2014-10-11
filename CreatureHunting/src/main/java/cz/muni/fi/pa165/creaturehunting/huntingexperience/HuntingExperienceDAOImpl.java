@@ -56,9 +56,24 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
 
     }
 
-//    public HuntingExperience findHuntingExperience(long id) throws DAOException {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    
+    public HuntingExperience findHuntingExperience(long id) throws DAOException {
+        try {
+            Query query = entityManager.createQuery("SELECT a FROM Creature a WHERE a.id=:id", HuntingExperience.class);
+            query.setParameter("id", id);
+            List <HuntingExperience> exps = query.getResultList();
+            if (!exps.isEmpty() && exps.size() > 0) { //toto je divne
+                return exps.get(0);
+            } else {
+                return null;
+            }
+        } catch (PersistenceException e) {
+            throw new DAOException(e);
+        }
+    }
+    
+    
+    
     public List<HuntingExperience> findAllHuntingExperience() throws DAOException {
         try {
             Query query = entityManager.createQuery("SELECT exp FROM HuntingExperience exp ORDER BY exp.id", HuntingExperience.class);         
