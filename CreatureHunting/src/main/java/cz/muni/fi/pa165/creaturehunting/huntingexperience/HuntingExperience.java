@@ -85,7 +85,11 @@ public class HuntingExperience implements Serializable {
     }
 
     public void setEfficiency(int efficiency) {
-        this.efficiency = efficiency;
+         if (efficiency < 0 || efficiency > 100) {
+            throw new IllegalArgumentException("Efficiency is expressed in percent.");
+        } else {
+            this.efficiency = efficiency;
+        }      
     }
 
     public String getDescription() {
@@ -101,7 +105,7 @@ public class HuntingExperience implements Serializable {
         return weapon;
     }
 
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(Weapon weapon) {    
         this.weapon = weapon;
     }
 
