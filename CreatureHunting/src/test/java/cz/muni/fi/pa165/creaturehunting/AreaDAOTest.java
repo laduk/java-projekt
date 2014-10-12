@@ -32,7 +32,7 @@ public class AreaDAOTest {
     
     @BeforeClass
     public static void setup() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unit");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myUnit");
         entityManager = entityManagerFactory.createEntityManager();
     }
     
