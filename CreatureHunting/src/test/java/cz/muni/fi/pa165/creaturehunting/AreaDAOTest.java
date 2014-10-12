@@ -47,15 +47,9 @@ public class AreaDAOTest {
 
         Creature creature = new Creature();
         creature.setName("Imp");
-        creature.setHeight(30);
-        creature.setWeight(2);
-        creature.setAgility(40);
 
         Creature creature2 = new Creature();
         creature2.setName("Dragon");
-        creature2.setHeight(220);
-        creature2.setWeight(150);
-        creature2.setAgility(20);
 
         Area area = new Area();
         area.setName("Phobos");
@@ -127,16 +121,9 @@ public class AreaDAOTest {
         area4.setAcreage(88.77);
 
         Creature creature = new Creature();
-        creature.setName("Imp");
-        creature.setHeight(30);
-        creature.setWeight(2);
-        creature.setAgility(40);
-
+        creature.setName("SuperImp");
         Creature creature2 = new Creature();
-        creature2.setName("Dragon");
-        creature2.setHeight(220);
-        creature2.setWeight(150);
-        creature2.setAgility(20);
+        creature2.setName("SuperDragon");
 
         List<Creature> listOfCreatures = new ArrayList();
         listOfCreatures.add(creature);
@@ -169,9 +156,6 @@ public class AreaDAOTest {
         entityManager.getTransaction().begin();
         Creature creature3 = new Creature();
         creature3.setName("Giantic Troll");
-        creature3.setHeight(520);
-        creature3.setWeight(650);
-        creature3.setAgility(5);
 
         creatureDAO.createCreature(creature3);
         entityManager.getTransaction().commit();
@@ -280,13 +264,10 @@ public class AreaDAOTest {
         Area area = new Area();
         area.setName("Dark Wood");
         area.setDescription("Realy dark area");
-        area.setAcreage(100.7);
         
         Area area1 = new Area();
         area1.setName("Wood of death");
         area1.setDescription("Don't even think of visit it");
-        area1.setAcreage(666.7);
-        
         
         entityManager.getTransaction().begin();  
         int oldSize = areaDAO.findAllAreas().size();        

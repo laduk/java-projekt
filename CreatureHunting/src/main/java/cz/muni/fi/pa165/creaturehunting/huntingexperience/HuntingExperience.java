@@ -50,7 +50,7 @@ public class HuntingExperience implements Serializable {
     private Date dateOfExperience;    
     
     /**
-     * Numeber that measure effeciency in % of the attack can have value from 0 to 100.
+     * Number that measure effeciency in % of the attack can have value from 0 to 100.
      * Sure death of the creature is value 100.
      */
     @Column
@@ -59,7 +59,7 @@ public class HuntingExperience implements Serializable {
     /**
      * Text description of the experience.
      */   
-    @Column
+    @Column(length=1000)
     private String description;
     
     
