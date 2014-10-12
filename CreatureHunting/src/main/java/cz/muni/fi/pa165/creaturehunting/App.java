@@ -65,7 +65,7 @@ public class App {
         exp.setCreature(creature);
         exp.setWeapon(weap);
         exp.setDateOfExperience(null);
-        exp.setEfficiency(100);
+        exp.setEfficiency(75);
         exp.setDescription("Quick headshot");
                 
         
@@ -98,10 +98,28 @@ public class App {
         em.getTransaction().commit();
         List<Weapon> listOfWeaponsDB = weapDAO.findAllWeapons();
         
+              
+        //test create
         em.getTransaction().begin();
         expDAO.createHuntingExperience(exp);
         em.getTransaction().commit();
+        
+        exp.setDescription("Zcela zmeneny description");
+        
+        //test update
+        em.getTransaction().begin();
+        expDAO.updateHuntingExperience(exp);
+        em.getTransaction().commit();
+        
+        //test delete
+//        em.getTransaction().begin();
+//        expDAO.deleteHuntingExperience(exp);
+//        em.getTransaction().commit();
+        
         List<HuntingExperience> listOfExps = expDAO.findAllHuntingExperience();
+        
+        List<Weapon> efficientWeapons = expDAO.findEfficientWeapons(creature,70);
+        
         
         System.out.println(area);
         System.out.println("  Creatures in this area: " + area.getListOfCreatures());
@@ -121,8 +139,20 @@ public class App {
         System.out.println("Weapon2 localy: "+listOfWeapons.get(1));
         System.out.println("Weapon2 db: "+listOfWeaponsDB.get(1));
         
-        System.out.println("Experiences: "+listOfExps.get(0));
+        if (listOfExps.isEmpty()){
+            System.out.println("Experiences: "+ "JE to smazane");
+        } else{
         
+            System.out.println("Experiences: "+listOfExps.get(0));
+        }
+        
+        
+         if (efficientWeapons.isEmpty()){
+            System.out.println("No WEAPONS");
+        } else{
+        
+            System.out.println("Vhodna zbran: " + efficientWeapons.get(0));
+        }
         
         em.close();
         emf.close();
