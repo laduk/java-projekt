@@ -63,10 +63,24 @@ public class App {
         
         HuntingExperience exp = new HuntingExperience();
         exp.setCreature(creature);
-        exp.setWeapon(weap);
+        exp.setWeapon(weap2);
         exp.setDateOfExperience(null);
-        exp.setEfficiency(75);
+        exp.setEfficiency(100);
         exp.setDescription("Quick headshot");
+        
+        HuntingExperience exp2 = new HuntingExperience();
+        exp2.setCreature(creature);
+        exp2.setWeapon(weap);
+        exp2.setDateOfExperience(null);
+        exp2.setEfficiency(70);
+        exp2.setDescription("Serious injury");
+        
+        HuntingExperience exp3 = new HuntingExperience();
+        exp3.setCreature(creature);
+        exp2.setWeapon(weap2);
+        exp2.setDateOfExperience(null);
+        exp2.setEfficiency(80);
+        exp2.setDescription("Extra Serious injury");
                 
         
         
@@ -102,6 +116,8 @@ public class App {
         //test create
         em.getTransaction().begin();
         expDAO.createHuntingExperience(exp);
+        expDAO.createHuntingExperience(exp2);
+        expDAO.createHuntingExperience(exp3);
         em.getTransaction().commit();
         
         exp.setDescription("Zcela zmeneny description");
@@ -118,7 +134,7 @@ public class App {
         
         List<HuntingExperience> listOfExps = expDAO.findAllHuntingExperience();
         
-        List<Weapon> efficientWeapons = expDAO.findEfficientWeapons(creature,70);
+        List<Weapon> efficientWeapons = expDAO.findEfficientWeapons(creature,75);
         
         
         System.out.println(area);
@@ -144,6 +160,8 @@ public class App {
         } else{
         
             System.out.println("Experiences: "+listOfExps.get(0));
+            System.out.println("Experiences: "+listOfExps.get(1));
+            System.out.println("Experiences: "+listOfExps.get(2));
         }
         
         
@@ -152,6 +170,8 @@ public class App {
         } else{
         
             System.out.println("Vhodna zbran: " + efficientWeapons.get(0));
+            System.out.println("Vhodna zbran: " + efficientWeapons.get(1));
+            //System.out.println("Vhodna zbran: " + efficientWeapons.get(2));
         }
         
         em.close();

@@ -84,7 +84,7 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
 
     /* Bude hledat zbran nejmene se zadanou efficiency, nebo vyssi, zadava se tedy nejnizsi mira ucinnosti, ktera nas zajima       */
     public List<Weapon> findEfficientWeapons(Creature creature, int minimalEfficiency) {
-        try {// toto je spatne, je treba oprivat select
+        try {
             Query query = entityManager.createQuery("SELECT exp.weapon FROM HuntingExperience exp WHERE exp.efficiency >= :minEfficiency ORDER BY exp.efficiency", 
                     Weapon.class);
 
