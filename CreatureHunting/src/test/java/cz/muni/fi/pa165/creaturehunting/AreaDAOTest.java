@@ -17,8 +17,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -170,7 +172,7 @@ public class AreaDAOTest {
         creature3.setHeight(520);
         creature3.setWeight(650);
         creature3.setAgility(5);
-       
+
         creatureDAO.createCreature(creature3);
         entityManager.getTransaction().commit();
 
@@ -186,7 +188,7 @@ public class AreaDAOTest {
         creatures.add(creature3);
 
         foundArea.setListOfCreatures(creatures);
-        
+
         areaDAO.updateArea(foundArea);
         entityManager.getTransaction().commit();
 
@@ -203,24 +205,83 @@ public class AreaDAOTest {
 
     }
 
-    
     /**
      * Test deleteArea() method - wheter area is deleted correctly.
      */
     @Test
     public void testDeleteArea() {
         AreaDAO areaDAO = new AreaDAOImpl(entityManager);
-        
+
         Area foundArea = areaDAO.findArea(2);
         assertNotNull("Testing whether area was found", foundArea);
-        
+
         Assert.assertEquals("Wrong name of founded area", foundArea.getName(), "Pandora"); //prepared in section @Before, tests wheter name is ok
-        
+
         entityManager.getTransaction().begin();
         long id = foundArea.getId();
         areaDAO.deleteArea(foundArea);
         entityManager.getTransaction().commit();
-        Assert.assertNull(areaDAO.findArea(id));      
+        Assert.assertNull(areaDAO.findArea(id));
 
+    }
+
+    /**
+     * Test findArea() method - wheter stored area was subsequently found
+     * correctly.
+     */
+    @Test
+    public void testFindArea() {
+
+        AreaDAO areaDAO = new AreaDAOImpl(entityManager);
+        CreatureDAO creatureDAO = new CreatureDAOImpl(entityManager);
+
+        Creature vampire = new Creature();
+        vampire.setName("Vampire");
+        vampire.setHeight(189);
+        vampire.setWeight(65);
+        vampire.setAgility(90);
+
+        entityManager.getTransaction().begin();
+        creatureDAO.createCreature(vampire);
+        entityManager.getTransaction().commit();
+
+        Area area = new Area();
+        area.setName("Brašov");
+        area.setDescription("Do not go out at night! Do not visit castle even if "
+                + "you are welcome.");
+        area.setAcreage(1000);
+
+        List<Creature> creatures = new ArrayList<Creature>();
+        creatures.add(vampire);
+
+        area.setListOfCreatures(creatures);
+
+        entityManager.getTransaction().begin();
+        areaDAO.createArea(area);
+        entityManager.getTransaction().commit();
+
+        entityManager.getTransaction().begin();
+        long id = area.getId();
+        Area foundArea = areaDAO.findArea(id);
+        entityManager.getTransaction().commit();
+
+        assertEquals("Whether has been found proper creature.", area, foundArea);
+
+    }
+
+    /**
+     * Test findAllAreas() method - wheter all stored areas were found
+     * correctly.
+     */
+    @Test
+    public void testFindAllAreas() {
+        AreaDAO areaDAO = new AreaDAOImpl(entityManager);
+        
+        entityManager.getTransaction().begin();
+        List<Area> areas = new ArrayList<Area>();
+        areas.addAll(areaDAO.findAllAreas());
+        entityManager.getTransaction().commit();
+        
+        assertTrue("If list has proper size", areas.size() == 14 );
     }
 }
