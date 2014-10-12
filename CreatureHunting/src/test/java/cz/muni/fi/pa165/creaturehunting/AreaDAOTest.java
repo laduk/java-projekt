@@ -41,37 +41,6 @@ public class AreaDAOTest {
 
     }
 
-    @Before
-    public void initialize() {
-
-
-        Creature creature = new Creature();
-        creature.setName("Imp");
-
-        Creature creature2 = new Creature();
-        creature2.setName("Dragon");
-
-        Area area = new Area();
-        area.setName("Phobos");
-        area.setDescription("Month of Mars");
-        area.setAcreage(33.44);
-
-        Area area2 = new Area();
-        area2.setName("Pandora");
-        area2.setDescription("Endless waterfalls");
-        area2.setAcreage(22.55);
-
-        List<Area> listOfAreas = new ArrayList();
-        listOfAreas.add(area);
-        listOfAreas.add(area2);
-        creature.setListOfAreas(listOfAreas);
-
-        entityManager.persist(area);
-        entityManager.persist(area2);
-
-
-    }
-
     @AfterClass
     public static void close() {
         entityManager.close();
@@ -157,24 +126,29 @@ public class AreaDAOTest {
 
         creatureDAO.createCreature(creature3);
         entityManager.getTransaction().commit();
-
-        Area foundArea = areaDAO.findArea(1);
-        assertNotNull("Testing whether area was found", foundArea);
+  
+                
+        Area area = new Area();
+        area.setName("Plains");
+        entityManager.getTransaction().begin();
+        areaDAO.createArea(area);
+        entityManager.getTransaction().commit();
+        
 
         entityManager.getTransaction().begin();
-        foundArea.setName("Updated name");
-        foundArea.setDescription("Updated description");
-        foundArea.setAcreage(100.1);
+        area.setName("Updated name");
+        area.setDescription("Updated description");
+        area.setAcreage(100.1);
 
         List<Creature> creatures = new ArrayList<Creature>();
         creatures.add(creature3);
 
-        foundArea.setListOfCreatures(creatures);
+        area.setListOfCreatures(creatures);
 
-        areaDAO.updateArea(foundArea);
+        areaDAO.updateArea(area);
         entityManager.getTransaction().commit();
 
-        Area updatedArea = areaDAO.findArea(1);
+        Area updatedArea = areaDAO.findArea(area.getId());
         assertNotNull("Testing whether area was found", updatedArea);
 
         Assert.assertEquals("Wrong name of created area", updatedArea.getName(), "Updated name");
@@ -200,11 +174,6 @@ public class AreaDAOTest {
         areaDAO.createArea(area);
         entityManager.getTransaction().commit();
         
-//        Area foundArea = areaDAO.findArea(2);
-//        assertNotNull("Testing whether area was found", foundArea);
-
-        //Assert.assertEquals("Wrong name of founded area", foundArea.getName(), "Pandora"); //prepared in section @Before, tests wheter name is ok
-
         entityManager.getTransaction().begin();
         long id = area.getId();
         areaDAO.deleteArea(area);
