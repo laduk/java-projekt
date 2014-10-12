@@ -63,7 +63,7 @@ public class App {
         
         HuntingExperience exp = new HuntingExperience();
         exp.setCreature(creature);
-        exp.setWeapon(weap2);
+        exp.setWeapon(weap);
         exp.setDateOfExperience(null);
         exp.setEfficiency(100);
         exp.setDescription("Quick headshot");
