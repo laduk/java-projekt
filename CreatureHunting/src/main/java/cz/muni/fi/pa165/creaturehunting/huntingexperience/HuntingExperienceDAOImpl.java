@@ -63,7 +63,7 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
 
     public HuntingExperience findHuntingExperience(long id) throws DAOException {
         try {
-            Query query = entityManager.createQuery("SELECT a FROM Creature a WHERE a.id=:id", HuntingExperience.class);
+            Query query = entityManager.createQuery("SELECT a FROM HuntingExperience a WHERE a.id=:id", HuntingExperience.class);
             query.setParameter("id", id);
             List<HuntingExperience> exps = query.getResultList();
             if (!exps.isEmpty() && exps.size() > 0) { //toto je divne
