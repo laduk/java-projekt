@@ -83,7 +83,11 @@ public class Creature implements Serializable {
     }
 
     public void setHeight(int height) {
-        this.height = height;
+        if (height < 0) {
+            throw new IllegalArgumentException("Height must be positive number or zero.");
+        } else {
+            this.height = height;
+        }
     }
 
     public int getWeight() {
@@ -91,7 +95,11 @@ public class Creature implements Serializable {
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        if (weight < 0) {
+            throw new IllegalArgumentException("Weight must be positive number or zero.");
+        } else {
+            this.weight = weight;
+        }
     }
 
     public int getAgility() {
@@ -99,7 +107,13 @@ public class Creature implements Serializable {
     }
 
     public void setAgility(int agility) {
-        this.agility = agility;
+        if (agility < 0) {
+            throw new IllegalArgumentException("Agility must be between 0 - 100.");
+        } else if (agility > 100) {
+            throw new IllegalArgumentException("Agility must be between 0 - 100.");
+        } else {
+            this.agility = agility;
+        }
     }
 
     public List<Area> getListOfAreas() {
