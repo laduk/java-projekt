@@ -83,7 +83,7 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
     }
 
     
-    //tato metoda by chtela jeste upravit a promyslet
+    //tato metoda by chtela jeste upravit a promyslet, mozna by mela precejen vracet HuntingExp a ty by zpracovaly uz metody na te service tier
     
     /* Bude hledat zbran nejmene se zadanou efficiency, nebo vyssi, zadava se tedy nejnizsi mira ucinnosti, ktera nas zajima       */
     public List<Weapon> findEfficientWeapons(Creature creature, int minimalEfficiency) {
