@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.creaturehunting.huntingexperience;
 import cz.muni.fi.pa165.creaturehunting.DAOException;
 import cz.muni.fi.pa165.creaturehunting.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.weapon.Weapon;
+import java.util.ArrayList;
 
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -56,12 +57,11 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
 
     }
 
-    
     public HuntingExperience findHuntingExperience(long id) throws DAOException {
         try {
             Query query = entityManager.createQuery("SELECT a FROM Creature a WHERE a.id=:id", HuntingExperience.class);
             query.setParameter("id", id);
-            List <HuntingExperience> exps = query.getResultList();
+            List<HuntingExperience> exps = query.getResultList();
             if (!exps.isEmpty() && exps.size() > 0) { //toto je divne
                 return exps.get(0);
             } else {
@@ -71,12 +71,10 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
             throw new DAOException(e);
         }
     }
-    
-    
-    
+
     public List<HuntingExperience> findAllHuntingExperience() throws DAOException {
         try {
-            Query query = entityManager.createQuery("SELECT exp FROM HuntingExperience exp ORDER BY exp.id", HuntingExperience.class);         
+            Query query = entityManager.createQuery("SELECT exp FROM HuntingExperience exp ORDER BY exp.id", HuntingExperience.class);
             List<HuntingExperience> exps = query.getResultList();
             return exps;
         } catch (PersistenceException e) {
@@ -84,22 +82,21 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
         }
     }
 
+    
+    //tato metoda by chtela jeste upravit a promyslet, mozna by mela precejen vracet HuntingExp a ty by zpracovaly uz metody na te service tier
+    
     /* Bude hledat zbran nejmene se zadanou efficiency, nebo vyssi, zadava se tedy nejnizsi mira ucinnosti, ktera nas zajima       */
     public List<Weapon> findEfficientWeapons(Creature creature, int minimalEfficiency) {
         try {
-            Query query = entityManager.createQuery("SELECT exp FROM HuntingExperience exp WHERE exp.efficiency >= :minEfficiency", HuntingExperience.class);
+            Query query = entityManager.createQuery("SELECT exp.weapon FROM HuntingExperience exp WHERE exp.efficiency >= :minEfficiency ORDER BY exp.efficiency DESC", 
+                    Weapon.class);
+
             query.setParameter("minEfficiency", minimalEfficiency);
-            //List<Weapon> weapons = query.getResultList();
-            //return weapons;
             return query.getResultList();
-            
+
         } catch (PersistenceException e) {
             throw new DAOException(e);
         }
-        
+
     }
-    
- 
-    
-    
 }

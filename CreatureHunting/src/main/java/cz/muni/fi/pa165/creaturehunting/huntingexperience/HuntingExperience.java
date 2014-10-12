@@ -6,6 +6,7 @@ package cz.muni.fi.pa165.creaturehunting.huntingexperience;
 
 import cz.muni.fi.pa165.creaturehunting.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.weapon.Weapon;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-public class HuntingExperience {
+public class HuntingExperience implements Serializable {
     
         
     @Id
@@ -30,11 +31,11 @@ public class HuntingExperience {
 
        
     @OneToOne
-    private Weapon weapon = null;
+    private Weapon weapon;
     
     
     @OneToOne
-    private Creature creature = null;    
+    private Creature creature;    
     
     @Temporal(TemporalType.DATE)
     private Date dateOfExperience;    
