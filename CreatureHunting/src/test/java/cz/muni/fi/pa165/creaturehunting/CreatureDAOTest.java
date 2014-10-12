@@ -98,7 +98,7 @@ public class CreatureDAOTest {
         CreatureDAO creature = new CreatureDAOImpl(entMan);
         creature.createCreature(zombie);
         entMan.getTransaction().commit();
-        assertFalse(null, zombie.getId()<=0);
+        assertFalse("Test whether creature was sez and id set",zombie.getId()<=0);
     }
 
     /**
@@ -109,7 +109,8 @@ public class CreatureDAOTest {
         System.out.println("updateCreature");
         Area area =  new Area();
         area.setName("Brašov");
-        area.setDescription("Do not go out at night! Do not visit castle even if you are welcome.");
+        area.setDescription("Do not go out at night! Do not visit castle even "
+                + "if you are welcome.");
         area.setAcreage(1000);
         
         AreaDAO areas = new AreaDAOImpl(entMan);
@@ -136,7 +137,8 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         creature.updateCreature(vampire);
         entMan.getTransaction().commit();        
-        Assert.assertEquals("Whether is Dracule name set and updated.","Dracula", vampire.getName());
+        Assert.assertEquals("Whether is Dracule name set and updated.","Dracula",
+                vampire.getName());
     }
 
     /**
@@ -147,7 +149,8 @@ public class CreatureDAOTest {
         System.out.println("deleteCreature");
         Area area =  new Area();
         area.setName("Brašov");
-        area.setDescription("Do not go out at night! Do not visit castle even if you are welcome.");
+        area.setDescription("Do not go out at night! Do not visit castle even if"
+                + " you are welcome.");
         area.setAcreage(1000);
         
         AreaDAO areas = new AreaDAOImpl(entMan);
@@ -187,7 +190,8 @@ public class CreatureDAOTest {
         System.out.println("findCreature");
         Area area =  new Area();
         area.setName("Brašov");
-        area.setDescription("Do not go out at night! Do not visit castle even if you are welcome.");
+        area.setDescription("Do not go out at night! Do not visit castle even if "
+                + "you are welcome.");
         area.setAcreage(1000);
         
         AreaDAO areas = new AreaDAOImpl(entMan);
@@ -227,7 +231,8 @@ public class CreatureDAOTest {
         System.out.println("findAllCreatures");
         Area area =  new Area();
         area.setName("Brašov");
-        area.setDescription("Do not go out at night! Do not visit castle even if you are welcome.");
+        area.setDescription("Do not go out at night! Do not visit castle even "
+                + "if you are welcome.");
         area.setAcreage(1000);
         
         AreaDAO areas = new AreaDAOImpl(entMan);
