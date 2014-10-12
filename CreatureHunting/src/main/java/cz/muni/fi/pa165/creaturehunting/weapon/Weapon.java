@@ -11,20 +11,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- *
+ * Class representing weapon.
  * @author Fita
  */
 @Entity
 public class Weapon {
+    
+    /**
+     * Automatically generated unique identifier.
+     */
     @Id
     @GeneratedValue
     private long id=-1;
     
+    /**
+     * Text name of the weapon that must be filled.
+     */
     @Column(nullable=false)
     private String name;
     
+    /**
+     * Number that specify reach of the weapon.
+     */
     private int gunReach;
     
+    /**
+     * Text where ammunition of the weapon will be stored.
+     */
     @Column
     private String ammunition;
 

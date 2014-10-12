@@ -15,13 +15,17 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 /**
- *
+ * Implementation of interface of Data Access Object for HunntingExperience.
  * @author laduska
  */
 public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
 
     private EntityManager entityManager;
 
+    /**
+     * Construct a Creature DAO for the given Entity Manager.
+     * @param entityManager The entity manager to construct.
+     */
     public HuntingExperienceDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }

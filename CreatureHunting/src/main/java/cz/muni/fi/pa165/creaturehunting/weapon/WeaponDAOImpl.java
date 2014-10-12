@@ -12,12 +12,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
-
+/**
+ * Implementation of interface of Data Access Object for weapon.
+ * @author Fita
+ */
 public class WeaponDAOImpl implements WeaponDAO {
     
     
     private EntityManager entityManager;
     
+    /**
+     * Create a Weapon DAO for the given Entity Manager.
+     * @param entityManager The entity manager to construct.
+     */
     public WeaponDAOImpl(EntityManager entityManager){
         this.entityManager=entityManager;
     }

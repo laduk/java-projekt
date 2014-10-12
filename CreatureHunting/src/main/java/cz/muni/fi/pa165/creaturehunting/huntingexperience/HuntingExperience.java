@@ -17,33 +17,48 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- *
+ * Class representing hunting exprience.
  * @author laduska
  */
 
 @Entity
 public class HuntingExperience implements Serializable {
     
-        
+    /**
+     * Indentifier that is automatically generated.
+     */    
     @Id
     @GeneratedValue
     private long id = -1;    
 
-       
+    /**
+     * Weapon that should be stored.
+     */   
     @OneToOne
     private Weapon weapon;
     
-    
+    /**
+     * Creature that should be stored.
+     */
     @OneToOne
     private Creature creature;    
     
+    /**
+     * Date from which is the experience.
+     */
     @Temporal(TemporalType.DATE)
     private Date dateOfExperience;    
     
+    /**
+     * Numeber that measure effeciency in % of the attack can have value from 0 to 100.
+     * Sure death of the creature is value 100.
+     */
     @Column
     private int efficiency;
 
-       
+    /**
+     * Text description of the experience.
+     */   
     @Column
     private String description;
     

@@ -10,7 +10,7 @@ import cz.muni.fi.pa165.creaturehunting.DAOException;
 import java.util.List;
 
 /**
- *
+ * Interface of Data Access Object for Weapon.
  * @author Fita
  */
 public interface WeaponDAO {
