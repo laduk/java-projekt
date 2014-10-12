@@ -52,6 +52,30 @@ public class CreatureDAOTest {
         entMan.getEntityManagerFactory().close();
     }
 
+    
+    /**
+     * Test of right parametr.
+     */
+    @Test
+    public void testAgilityPec(){
+        System.out.println("setingAgility");
+        Creature skeleton = new Creature();
+        skeleton.setName("DEATH");
+        skeleton.setHeight(200);
+        skeleton.setWeight(15);
+        int agility = 15;
+        if(agility<0 ||agility>100){
+            throw new IllegalArgumentException("Out of interval");}
+        else{
+            skeleton.setAgility(agility);
+        }
+        CreatureDAO creat = new CreatureDAOImpl(entMan);
+        entMan.getTransaction().begin();
+        creat.createCreature(skeleton);
+        entMan.getTransaction().commit();
+        assertFalse("Test whether creature was sez and id set",skeleton.getId()<=0);        
+    }
+    
     /**
      * Test of createCreature method, of class CreatureDAO.
      */
