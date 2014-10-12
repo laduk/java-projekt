@@ -193,15 +193,21 @@ public class AreaDAOTest {
     @Test
     public void testDeleteArea() {
         AreaDAO areaDAO = new AreaDAOImpl(entityManager);
-
-        Area foundArea = areaDAO.findArea(2);
-        assertNotNull("Testing whether area was found", foundArea);
+        
+        Area area = new Area();
+        area.setName("Angel Mountains");
+        entityManager.getTransaction().begin();
+        areaDAO.createArea(area);
+        entityManager.getTransaction().commit();
+        
+//        Area foundArea = areaDAO.findArea(2);
+//        assertNotNull("Testing whether area was found", foundArea);
 
         //Assert.assertEquals("Wrong name of founded area", foundArea.getName(), "Pandora"); //prepared in section @Before, tests wheter name is ok
 
         entityManager.getTransaction().begin();
-        long id = foundArea.getId();
-        areaDAO.deleteArea(foundArea);
+        long id = area.getId();
+        areaDAO.deleteArea(area);
         entityManager.getTransaction().commit();
         Assert.assertNull(areaDAO.findArea(id));
 
