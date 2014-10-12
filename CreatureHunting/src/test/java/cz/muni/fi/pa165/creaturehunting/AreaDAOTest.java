@@ -24,6 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * This class tests methods from AreaDAO interface.
  *
  * @author laduska
  */
@@ -83,7 +84,11 @@ public class AreaDAOTest {
         entityManager.getEntityManagerFactory().close();
     }
 
-    //otestuje jestli se zalozila area bez priser
+    /**
+     * Test createArea() method, specifically wheter area without creatures is
+     * correctly created and all parameters except listOfCreatures are stored
+     * right way.
+     */
     @Test
     public void testCreatePlainArea() {
         AreaDAO areaDAO = new AreaDAOImpl(entityManager);
@@ -105,7 +110,10 @@ public class AreaDAOTest {
 
     }
 
-    //otestuje jestli se zalozila area s priserama
+    /**
+     * Test createArea() method, specifically wheter area with creatures is
+     * correctly created and parameter listOfCreatures is stored correctly.
+     */
     @Test
     public void testCreateAreaWithCreatures() {
         AreaDAO areaDAO = new AreaDAOImpl(entityManager);
@@ -147,27 +155,29 @@ public class AreaDAOTest {
         Assert.assertEquals("Wrong name of created area", creatures.get(0), creature);
         Assert.assertEquals("Wrong name of created area", creatures.get(1), creature2);
     }
-    
-    
 
+    /**
+     * Test updateArea() method - wheter all atributes are updated correctly.
+     */
     @Test
     public void testUpdateArea() {
         AreaDAO areaDAO = new AreaDAOImpl(entityManager);
         CreatureDAO creatureDAO = new CreatureDAOImpl(entityManager);
 
+        entityManager.getTransaction().begin();
         Creature creature3 = new Creature();
         creature3.setName("Giantic Troll");
         creature3.setHeight(520);
         creature3.setWeight(650);
         creature3.setAgility(5);
-
-        entityManager.getTransaction().begin();
+       
         creatureDAO.createCreature(creature3);
         entityManager.getTransaction().commit();
 
         Area foundArea = areaDAO.findArea(1);
         assertNotNull("Testing whether area was found", foundArea);
 
+        entityManager.getTransaction().begin();
         foundArea.setName("Updated name");
         foundArea.setDescription("Updated description");
         foundArea.setAcreage(100.1);
@@ -176,21 +186,41 @@ public class AreaDAOTest {
         creatures.add(creature3);
 
         foundArea.setListOfCreatures(creatures);
-
-        entityManager.getTransaction().begin();
+        
         areaDAO.updateArea(foundArea);
         entityManager.getTransaction().commit();
-        
-        Area updatedArea = areaDAO.findArea(foundArea.getId());
-        assertNotNull("Testing whether area was found", updatedArea);     
-        
+
+        Area updatedArea = areaDAO.findArea(1);
+        assertNotNull("Testing whether area was found", updatedArea);
+
         Assert.assertEquals("Wrong name of created area", updatedArea.getName(), "Updated name");
         Assert.assertEquals("Wrong description of created area", updatedArea.getDescription(), "Updated description");
         Assert.assertEquals("Wrong acreage of created area", updatedArea.getAcreage(), 100.1, 0.001);
-        
+
         List<Creature> updatedCreatures = updatedArea.getListOfCreatures();
-        Assert.assertEquals("Wrong name of created area", updatedCreatures.get(0), creature3);      
-               
+        Assert.assertEquals("Wrong name of created area", updatedCreatures.get(0), creature3);
+
+
+    }
+
+    
+    /**
+     * Test deleteArea() method - wheter area is deleted correctly.
+     */
+    @Test
+    public void testDeleteArea() {
+        AreaDAO areaDAO = new AreaDAOImpl(entityManager);
+        
+        Area foundArea = areaDAO.findArea(2);
+        assertNotNull("Testing whether area was found", foundArea);
+        
+        Assert.assertEquals("Wrong name of founded area", foundArea.getName(), "Pandora"); //prepared in section @Before, tests wheter name is ok
+        
+        entityManager.getTransaction().begin();
+        long id = foundArea.getId();
+        areaDAO.deleteArea(foundArea);
+        entityManager.getTransaction().commit();
+        Assert.assertNull(areaDAO.findArea(id));      
 
     }
 }
