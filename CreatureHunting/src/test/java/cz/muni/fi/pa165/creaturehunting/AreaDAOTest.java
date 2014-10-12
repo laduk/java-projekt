@@ -277,11 +277,24 @@ public class AreaDAOTest {
     public void testFindAllAreas() {
         AreaDAO areaDAO = new AreaDAOImpl(entityManager);
         
-        entityManager.getTransaction().begin();
-        List<Area> areas = new ArrayList<Area>();
-        areas.addAll(areaDAO.findAllAreas());
+        Area area = new Area();
+        area.setName("Dark Wood");
+        area.setDescription("Realy dark area");
+        area.setAcreage(100.7);
+        
+        Area area1 = new Area();
+        area1.setName("Wood of death");
+        area1.setDescription("Don't even think of visit it");
+        area1.setAcreage(666.7);
+        
+        
+        entityManager.getTransaction().begin();  
+        int oldSize = areaDAO.findAllAreas().size();        
+        areaDAO.createArea(area);
+        areaDAO.createArea(area1);
+        int newSize = areaDAO.findAllAreas().size();
         entityManager.getTransaction().commit();
         
-        assertTrue("If list has proper size", areas.size() == 14 );
+        assertTrue("Not found proper number of areas", newSize == oldSize + 2 );
     }
 }
