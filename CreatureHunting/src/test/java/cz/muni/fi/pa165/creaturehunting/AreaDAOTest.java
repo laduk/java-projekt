@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -34,14 +35,15 @@ public class AreaDAOTest {
     public static void setup() {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myUnit");
         entityManager = entityManagerFactory.createEntityManager();
+        
     }
     
     
     @Before
     public void initialize(){
         
-        AreaDAO areaDAO = new AreaDAOImpl(entityManager);
-        CreatureDAO creatureDAO = new CreatureDAOImpl(entityManager);
+//        AreaDAO areaDAO = new AreaDAOImpl(entityManager);
+//        CreatureDAO creatureDAO = new CreatureDAOImpl(entityManager);
                
         Creature creature = new Creature();
         creature.setName("Imp");
@@ -71,36 +73,16 @@ public class AreaDAOTest {
         area2.setDescription("Endless waterfalls");
         area2.setAcreage(22.55);
         
-//        Area area3 = new Area();
-//        area3.setName("Hell Mountains");
-//        area3.setDescription("Vulcanic tundra");
-//        area3.setAcreage(11.66);
-        
-        
+       
         //creatura jedna je ve dvou areas
         List<Area> listOfAreas = new ArrayList();
         listOfAreas.add(area);
         listOfAreas.add(area2);
         creature.setListOfAreas(listOfAreas);
-    
-        //area2 ma nastaven vyskyt creatury 2
-//        List<Creature> listOfCreatures = new ArrayList();
-//        listOfCreatures.add(creature2);
-//        area2.setListOfCreatures(listOfCreatures);
-        
-//        entityManager.getTransaction().begin();
-//        areaDAO.createArea(area);
-//        areaDAO.createArea(area2);
-//        creatureDAO.createCreature(creature);
-//        creatureDAO.createCreature(creature2);
-//        creatureDAO.createCreature(creature3);
-//        entityManager.getTransaction().commit();
-
-        
+          
         entityManager.persist(area);
         entityManager.persist(area2);
-        entityManager.persist(creature);
-        entityManager.persist(creature2);
+
     
     }    
     
@@ -113,7 +95,7 @@ public class AreaDAOTest {
     
     //otestuje jestli se zalozila area bez priser
     @Test
-    public void testCreateArea(){ 
+    public void testCreatePlainArea(){ 
         AreaDAO areaDAO = new AreaDAOImpl(entityManager);
         
         Area area3 = new Area();
@@ -124,15 +106,68 @@ public class AreaDAOTest {
         entityManager.getTransaction().begin();
         areaDAO.createArea(area3);
         entityManager.getTransaction().commit();
-        assertFalse("Text assert", area3.getId()<=0);
+        assertFalse("Error in creating area", area3.getId()<=0);      
         
-//        entityManager.getTransaction().begin();
-//                
-//        entityManager.getTransaction().commit();
-    
+        Area testArea = areaDAO.findArea(area3.getId());
+        Assert.assertEquals(testArea.getName(), "Hell Mountains");
+        Assert.assertEquals(testArea.getDescription(), "Vulcanic tundra");
+        Assert.assertEquals(testArea.getAcreage(), 11.66, 0.001);
+        
+//         Weapon weapon = weaponDAO.findWeapon(rock.getId());
+//        Assert.assertEquals(weapon.getName(), "Rock");
+        
+        
     }
     
+    
+     @Test
+     public void testCreateAreaWithCreatures(){
+        AreaDAO areaDAO = new AreaDAOImpl(entityManager);
+        CreatureDAO creatureDAO = new CreatureDAOImpl(entityManager);
+         
+        Area area4 = new Area();
+        area4.setName("Angel Mountains");
+        area4.setDescription("Frozen watterfalls");
+        area4.setAcreage(88.77);
+        
+        Creature creature = new Creature();
+        creature.setName("Imp");
+        creature.setHeight(30);
+        creature.setWeight(2);
+        creature.setAgility(40);
+        
+        Creature creature2 = new Creature();
+        creature2.setName("Dragon");
+        creature2.setHeight(220);
+        creature2.setWeight(150);
+        creature2.setAgility(20);
+
+        
+        List<Creature> listOfCreatures = new ArrayList();
+        listOfCreatures.add(creature);
+        listOfCreatures.add(creature2);
+        area4.setListOfCreatures(listOfCreatures);
+        
+        List<Area> listOfAreas = new ArrayList();
+        listOfAreas.add(area4);
+        creature.setListOfAreas(listOfAreas);
+        creature2.setListOfAreas(listOfAreas);
+        
+        entityManager.getTransaction().begin();
+        areaDAO.createArea(area4);
+        creatureDAO.createCreature(creature);
+        creatureDAO.createCreature(creature2);
+        entityManager.getTransaction().commit();
+        assertFalse("Error in creating area with creatures", area4.getId()<=0);
+
+        
+        
+//         Weapon weapon = weaponDAO.findWeapon(rock.getId());
+//        Assert.assertEquals(weapon.getName(), "Rock");
+        
+        
      
+     }
     
     
     
