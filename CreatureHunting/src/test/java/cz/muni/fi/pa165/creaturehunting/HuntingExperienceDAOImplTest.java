@@ -198,6 +198,11 @@ public class HuntingExperienceDAOImplTest {
     @Test
     public void testFindAllHuntingExperience() throws ParseException {
         System.out.println("findAllHuntingExperience");
+        HuntingExperienceDAO huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
+        
+        List<HuntingExperience> expsOld = new ArrayList<HuntingExperience>();
+        expsOld = huntingExpDAO.findAllHuntingExperience();
+        
         HuntingExperience exp = new HuntingExperience();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
         String dateStr = "5-10-2014";
@@ -213,7 +218,6 @@ public class HuntingExperienceDAOImplTest {
         exp2.setDateOfExperience(date2);
         exp2.setDescription("Killing an imp.");
         exp2.setEfficiency(100);
-        HuntingExperienceDAO huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
         
         entMan.getTransaction().begin();
         huntingExpDAO.createHuntingExperience(exp);
@@ -223,7 +227,7 @@ public class HuntingExperienceDAOImplTest {
         List<HuntingExperience> exps = new ArrayList<HuntingExperience>();
         exps = huntingExpDAO.findAllHuntingExperience();
         
-        assertTrue("If list has proper size", 1 < exps.size());
+        assertTrue("If exactly 2 HuntingExperience-s were created", expsOld.size()+2 ==  exps.size());
     }
 
     /**
