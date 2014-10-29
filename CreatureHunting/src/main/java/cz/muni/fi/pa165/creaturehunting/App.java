@@ -106,6 +106,9 @@ public class App {
         Creature creatureDB = creatureDAO.findCreature(1);
         Creature creatureDB2 = creatureDAO.findCreature(2);
         
+        
+        
+        
         em.getTransaction().begin();    //snad uz ok
         weapDAO.createWeapon(weap);
         weapDAO.createWeapon(weap2);
