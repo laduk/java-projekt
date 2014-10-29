@@ -5,35 +5,17 @@
   <groupId>cz.muni.fi.pa165</groupId>
   <artifactId>CreatureHunting</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-  
+  <packaging>pom</packaging>
   <name>CreatureHunting</name>
   <url>http://maven.apache.org</url>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  
+  <modules>
+    <module>creaturehunting-dao</module>
+    <module>creaturehunting-service</module>
+  </modules>
 
-  <dependencies>
-    <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.9</version>
-        <scope>test</scope>
-    </dependency>
-    
-    <!-- Contains javax.persistence.* package -->
-    <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-entitymanager</artifactId>
-        <version>4.1.4.Final</version>
-    </dependency>
-    
-    <!-- Contains e.g. derby.jdbc.EmbeddedDriver -->
-    <dependency>
-        <groupId>org.apache.derby</groupId>
-        <artifactId>derby</artifactId>
-        <version>10.7.1.1</version>
-    </dependency>
-  </dependencies>
 </project>
