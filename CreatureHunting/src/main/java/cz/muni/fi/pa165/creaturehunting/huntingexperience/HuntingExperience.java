@@ -35,13 +35,13 @@ public class HuntingExperience implements Serializable {
     /**
      * Weapon that should be stored.
      */   
-    @ManyToOne
+    @OneToOne
     private Weapon weapon;
     
     /**
      * Creature that should be stored.
      */
-    @ManyToOne
+    @OneToOne
     private Creature creature;    
     
     /**
