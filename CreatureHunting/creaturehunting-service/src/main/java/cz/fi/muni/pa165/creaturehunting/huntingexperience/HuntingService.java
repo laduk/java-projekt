@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package cz.fi.muni.pa165.creaturehunting.huntingexperiemce;
+package cz.fi.muni.pa165.creaturehunting.huntingexperience;
 
 import java.util.List;
 
