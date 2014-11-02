@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.creaturehunting.creature;
+package cz.muni.fi.pa165.creaturehunting.dao.creature;
 
-import cz.muni.fi.pa165.creaturehunting.DAOException;
-import cz.muni.fi.pa165.creaturehunting.area.Area;
+import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
+import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;

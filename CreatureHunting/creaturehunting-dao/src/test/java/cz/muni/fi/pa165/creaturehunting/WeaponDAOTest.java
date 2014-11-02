@@ -1,8 +1,9 @@
 package cz.muni.fi.pa165.creaturehunting;
 
-import cz.muni.fi.pa165.creaturehunting.weapon.Weapon;
-import cz.muni.fi.pa165.creaturehunting.weapon.WeaponDAO;
-import cz.muni.fi.pa165.creaturehunting.weapon.WeaponDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
+import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAOImpl;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

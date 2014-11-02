@@ -5,12 +5,12 @@
  */
 package cz.muni.fi.pa165.creaturehunting;
 
-import cz.muni.fi.pa165.creaturehunting.area.Area;
-import cz.muni.fi.pa165.creaturehunting.area.AreaDAO;
-import cz.muni.fi.pa165.creaturehunting.area.AreaDAOImpl;
-import cz.muni.fi.pa165.creaturehunting.creature.Creature;
-import cz.muni.fi.pa165.creaturehunting.creature.CreatureDAO;
-import cz.muni.fi.pa165.creaturehunting.creature.CreatureDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
+import cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
+import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;

@@ -1,7 +1,7 @@
-package cz.muni.fi.pa165.creaturehunting.creature;
+package cz.muni.fi.pa165.creaturehunting.dao.creature;
 
-import cz.muni.fi.pa165.creaturehunting.DAOException;
-import cz.muni.fi.pa165.creaturehunting.area.Area;
+import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
+import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import java.util.List;
 
 /**

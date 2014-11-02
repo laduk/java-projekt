@@ -5,15 +5,15 @@
  */
 package cz.muni.fi.pa165.creaturehunting;
 
-import cz.muni.fi.pa165.creaturehunting.creature.Creature;
-import cz.muni.fi.pa165.creaturehunting.creature.CreatureDAO;
-import cz.muni.fi.pa165.creaturehunting.creature.CreatureDAOImpl;
-import cz.muni.fi.pa165.creaturehunting.huntingexperience.HuntingExperience;
-import cz.muni.fi.pa165.creaturehunting.huntingexperience.HuntingExperienceDAO;
-import cz.muni.fi.pa165.creaturehunting.huntingexperience.HuntingExperienceDAOImpl;
-import cz.muni.fi.pa165.creaturehunting.weapon.Weapon;
-import cz.muni.fi.pa165.creaturehunting.weapon.WeaponDAO;
-import cz.muni.fi.pa165.creaturehunting.weapon.WeaponDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
+import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperience;
+import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAOImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

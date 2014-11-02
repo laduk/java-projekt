@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.creaturehunting;
+package cz.muni.fi.pa165.creaturehunting.dao;
 
 /**
  * This class represents a generic DAO exception. It should wrap any

@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package cz.muni.fi.pa165.creaturehunting.weapon;
+package cz.muni.fi.pa165.creaturehunting.dao.weapon;
 
-import cz.muni.fi.pa165.creaturehunting.DAOException;
+import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;

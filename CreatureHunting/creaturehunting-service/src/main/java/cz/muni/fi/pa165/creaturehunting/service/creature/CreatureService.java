@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.creaturehunting.creature;
+package cz.muni.fi.pa165.creaturehunting.service.creature;
 
 import java.util.List;
 
