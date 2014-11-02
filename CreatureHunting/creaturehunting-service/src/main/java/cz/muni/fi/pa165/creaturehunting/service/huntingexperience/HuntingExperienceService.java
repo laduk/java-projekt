@@ -36,10 +36,10 @@ public interface HuntingExperienceService {
     
     /**
      * Find Hunting experience in database.
-     * @param huntExpDTO instance of Hunting experince 
+     * @param id of the hunting experience
      * @return Hunting experience transefer object
      */
-    public HuntingExperienceDTO findHuntExp(HuntingExperienceDTO huntExpDTO);
+    public HuntingExperienceDTO findHuntExp(long id);
     
     /**
      * Find all entities of Hunting experience in database.
