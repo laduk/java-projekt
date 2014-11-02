@@ -28,7 +28,6 @@ public class CreatureTransformation {
      * @param creature This entity will be transformed into DTO.
      * @return DTO object that was created.
      */
-    @SuppressWarnings("empty-statement")
     public CreatureDTO transformToDTO(Creature creature){
         if (creature == null) {
             throw new NullPointerException("Creature given is null.");
@@ -41,7 +40,7 @@ public class CreatureTransformation {
         creatureDTO.setWeight(creature.getWeight());
         creatureDTO.setAgility(creature.getAgility());
         List<Area> areas = creature.getListOfAreas();
-        List<AreaDTO> areasDTO = new ArrayList();;
+        List<AreaDTO> areasDTO = new ArrayList();
         AreaTransformation areaTransformation = new AreaTransformation();
         for (Area area : areas) {
             areasDTO.add(areaTransformation.transformToDTO(area));
