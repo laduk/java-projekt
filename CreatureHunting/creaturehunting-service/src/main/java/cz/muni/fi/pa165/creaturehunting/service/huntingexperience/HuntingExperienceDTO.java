@@ -6,18 +6,19 @@
 
 package cz.muni.fi.pa165.creaturehunting.service.huntingexperience;
 
-import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
+
+//import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
+import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
 import java.util.Date;
 
 /**
  * Data Transfer Object for Hunting Experience.
  * @author Fita
  */
-public class HuntingExperienceTrans {
+public class HuntingExperienceDTO {
     private long id = -1;
-    private Weapon weapon;
-    private Creature creature;
+    private WeaponDTO weapon;
+    private CreatureDTO creature;
     private Date dateOfExperience;
     private int efficiency;
     private String description;
@@ -26,11 +27,11 @@ public class HuntingExperienceTrans {
         this.id = id;
     }
 
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(WeaponDTO weaponDTO) {
         this.weapon = weapon;
     }
 
-    public void setCreature(Creature creature) {
+    public void setCreature(CreatureDTO creatureDTO) {
         this.creature = creature;
     }
 
@@ -50,11 +51,11 @@ public class HuntingExperienceTrans {
         return id;
     }
 
-    public Weapon getWeapon() {
+    public WeaponDTO getWeapon() {
         return weapon;
     }
 
-    public Creature getCreature() {
+    public CreatureDTO getCreature() {
         return creature;
     }
 
@@ -70,18 +71,19 @@ public class HuntingExperienceTrans {
         return description;
     }
     
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if ( !(o instanceof HuntingExperienceTrans) ) return false;
+        if ( !(o instanceof HuntingExperienceDTO) ) return false;
 
-        final HuntingExperienceTrans huntExpTrans = (HuntingExperienceTrans) o;
+        final HuntingExperienceDTO huntExpDTO = (HuntingExperienceDTO) o;
 
-        if (!new Long(id).equals(new Long(huntExpTrans.id))) return false;
-        if (!weapon.equals(huntExpTrans.weapon)) return false;
-        if (!creature.equals(huntExpTrans.creature))return false;
-        if (!dateOfExperience.equals(huntExpTrans.dateOfExperience)) return false;
-        if (!(efficiency==huntExpTrans.efficiency)) return false;
-        if (!description.equals(huntExpTrans.description)) return false;
+        if (!new Long(id).equals(new Long(huntExpDTO.id))) return false;
+        if (!weapon.equals(huntExpDTO.weapon)) return false;
+        if (!creature.equals(huntExpDTO.creature))return false;
+        if (!dateOfExperience.equals(huntExpDTO.dateOfExperience)) return false;
+        if (!(efficiency==huntExpDTO.efficiency)) return false;
+        if (!description.equals(huntExpDTO.description)) return false;
 
         return true;
     }
@@ -92,5 +94,14 @@ public class HuntingExperienceTrans {
         hash = 11 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return "HuntingExperienceDTO{" + "id=" + id + ", weapon=" + weapon + ","
+                + " creature=" + creature + ", dateOfExperience=" +
+                dateOfExperience + ", efficiency=" + efficiency +
+                ", description=" + description + '}';
+    } 
+    
     
 }

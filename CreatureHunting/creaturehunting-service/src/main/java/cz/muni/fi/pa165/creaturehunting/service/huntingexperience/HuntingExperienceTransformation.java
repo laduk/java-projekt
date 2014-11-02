@@ -6,6 +6,7 @@
 
 package cz.muni.fi.pa165.creaturehunting.service.huntingexperience;
 
+//import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperience;
 
 /**
@@ -19,39 +20,39 @@ public class HuntingExperienceTransformation {
      * @param huntExp This entity will be transformed into DTO.
      * @return DTO object that was created.
      */
-    public HuntingExperienceTrans transformToTrans(HuntingExperience huntExp){
+    public HuntingExperienceDTO transformToTrans(HuntingExperience huntExp){
         if (huntExp==null) {
             throw new NullPointerException("HuntingExperience given is null.");
         }
         
-        HuntingExperienceTrans huntExpTrans = new HuntingExperienceTrans();
-        huntExpTrans.setId(huntExp.getId());
-        huntExpTrans.setWeapon(huntExp.getWeapon());
-        huntExpTrans.setCreature(huntExp.getCreature());
-        huntExpTrans.setDateOfExperience(huntExp.getDateOfExperience());
-        huntExpTrans.setEfficiency(huntExp.getEfficiency());
-        huntExpTrans.setDescription(huntExp.getDescription());
+        HuntingExperienceDTO huntExpDTO = new HuntingExperienceDTO();
+        huntExpDTO.setId(huntExp.getId());
+        huntExpDTO.setWeapon(huntExp.getWeapon());
+        huntExpDTO.setCreature(huntExp.getCreature());
+        huntExpDTO.setDateOfExperience(huntExp.getDateOfExperience());
+        huntExpDTO.setEfficiency(huntExp.getEfficiency());
+        huntExpDTO.setDescription(huntExp.getDescription());
         
-        return huntExpTrans;
+        return huntExpDTO;
     }
     
     /**
      * Transformate DTO to entity.
-     * @param huntExpTrans This DTO will be transformed into entity.
+     * @param huntExpDTO This DTO will be transformed into entity.
      * @return Entity created from DTO.
      */
-    public HuntingExperience transformToEntity(HuntingExperienceTrans huntExpTrans){
-        if (huntExpTrans==null) {
+    public HuntingExperience transformToEntity(HuntingExperienceDTO huntExpDTO){
+        if (huntExpDTO==null) {
             throw new NullPointerException("HuntingExperienceTrans given is null.");
         }
         
         HuntingExperience huntExp = new HuntingExperience();
-        huntExp.setId(huntExpTrans.getId());
-        huntExp.setWeapon(huntExpTrans.getWeapon());
-        huntExp.setCreature(huntExpTrans.getCreature());
-        huntExp.setDateOfExperience(huntExpTrans.getDateOfExperience());
-        huntExp.setEfficiency(huntExpTrans.getEfficiency());
-        huntExp.setDescription(huntExpTrans.getDescription());
+        huntExp.setId(huntExpDTO.getId());
+        huntExp.setWeapon(huntExpDTO.getWeapon());
+        huntExp.setCreature(huntExpDTO.getCreature());
+        huntExp.setDateOfExperience(huntExpDTO.getDateOfExperience());
+        huntExp.setEfficiency(huntExpDTO.getEfficiency());
+        huntExp.setDescription(huntExpDTO.getDescription());
         
         return huntExp;
     }

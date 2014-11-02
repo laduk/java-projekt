@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import cz.muni.fi.pa165.creaturehunting.area.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.area.AreaTransformation;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class CreatureTransformation {
      * @param creature This entity will be transformed into DTO.
      * @return DTO object that was created.
      */
+    @SuppressWarnings("empty-statement")
     public CreatureDTO transformToDTO(Creature creature){
         if (creature == null) {
             throw new NullPointerException("Creature given is null.");
@@ -39,7 +41,7 @@ public class CreatureTransformation {
         creatureDTO.setWeight(creature.getWeight());
         creatureDTO.setAgility(creature.getAgility());
         List<Area> areas = creature.getListOfAreas();
-        List<AreaDTO> areasDTO;
+        List<AreaDTO> areasDTO = new ArrayList();;
         AreaTransformation areaTransformation = new AreaTransformation();
         for (Area area : areas) {
             areasDTO.add(areaTransformation.transformToDTO(area));
@@ -66,7 +68,7 @@ public class CreatureTransformation {
         creature.setWeight(creatureDTO.getWeight());
         creature.setAgility(creatureDTO.getAgility());
         List<AreaDTO> areasDTO = creatureDTO.getListOfAreas();
-        List<Area> areas;
+        List<Area> areas = new ArrayList();
         AreaTransformation areaTransformation = new AreaTransformation();
         for (AreaDTO areaDTO : areasDTO) {
             areas.add(areaTransformation.transformToEntity(areaDTO));

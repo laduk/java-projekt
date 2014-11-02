@@ -6,32 +6,38 @@
 
 package cz.muni.fi.pa165.creaturehunting.service.huntingexperience;
 
+//import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
+import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
 import java.util.List;
 
 
-public class HuntingServiceImpl implements HuntingService {
+public class HuntingExperienceServiceImpl implements HuntingExperienceService {
 
-    public void create(HuntingExperienceTrans huntExpTrans) {
+    public void create(HuntingExperienceDTO huntExpDTO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void update(HuntingExperienceTrans huntExpTrans) {
+    public void update(HuntingExperienceDTO huntExpDTO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void delete(HuntingExperienceTrans huntExpTrans) {
+    public void delete(HuntingExperienceDTO huntExpDTO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public HuntingExperienceTrans findHuntExp(HuntingExperienceTrans huntExpTrans) {
+    public HuntingExperienceDTO findHuntExp(HuntingExperienceDTO huntExpDTO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<HuntingExperienceTrans> findAllHuntExp(HuntingExperienceTrans huntExpTrans) {
+    public List<HuntingExperienceDTO> findAllHuntExp(HuntingExperienceDTO huntExpDTO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<WeaponTrans> findEfficientWeapons(CreatureTrans creatureTrans, int effeciency) {
+    public List<WeaponDTO> findEfficientWeapons(CreatureDTO creatureDTO, int effeciency) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<WeaponDTO> findEfficientWeapons(CreatureDTO creatureDTO, int effeciency) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
