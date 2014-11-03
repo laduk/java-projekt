@@ -28,7 +28,7 @@ public class CreatureTransformation {
      * @param creature This entity will be transformed into DTO.
      * @return DTO object that was created.
      */
-    public CreatureDTO transformToDTO(Creature creature){
+    public static CreatureDTO transformToDTO(Creature creature){
         if (creature == null) {
             throw new NullPointerException("Creature given is null.");
         }
@@ -55,7 +55,7 @@ public class CreatureTransformation {
      * @param creatureDTO This DTO will be transformed into entity.
      * @return Entity created from DTO.
      */
-    public Creature transformToEntity(CreatureDTO creatureDTO){
+    public static Creature transformToEntity(CreatureDTO creatureDTO){
         if (creatureDTO == null) {
             throw new NullPointerException("CreatureDTO given is null.");
         }
