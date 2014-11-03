@@ -6,7 +6,7 @@
 
 package cz.muni.fi.pa165.creaturehunting.service.huntingexperience;
 
-//import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
+import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
 import java.util.List;
 
@@ -36,17 +36,17 @@ public interface HuntingExperienceService {
     
     /**
      * Find Hunting experience in database.
-     * @param id of the hunting experience
+     * @param huntExpDTO instance of Hunting experince 
      * @return Hunting experience transefer object
      */
-    public HuntingExperienceDTO findHuntExp(long id);
+    public HuntingExperienceDTO findHuntExp(Long id);
     
     /**
      * Find all entities of Hunting experience in database.
      * @param huntExpDTO instance of Hunting experince 
      * @return list of  Hunting experience transefer objects
      */
-    public List<HuntingExperienceDTO> findAllHuntExp(HuntingExperienceDTO huntExpDTO);     
+    public List<HuntingExperienceDTO> findAllHuntExp();     
     
     /**
      * 

@@ -7,7 +7,7 @@
 package cz.muni.fi.pa165.creaturehunting.service.huntingexperience;
 
 
-//import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
+import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
 import java.util.Date;
 
