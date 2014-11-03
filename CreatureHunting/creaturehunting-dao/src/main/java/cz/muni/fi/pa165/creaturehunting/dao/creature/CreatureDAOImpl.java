@@ -6,18 +6,21 @@
 package cz.muni.fi.pa165.creaturehunting.dao.creature;
 
 import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
-import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Matej Čižik
  */
+@Repository
 public class CreatureDAOImpl implements CreatureDAO {
     
+    @PersistenceContext
     private EntityManager entityManager;
 
     /**
