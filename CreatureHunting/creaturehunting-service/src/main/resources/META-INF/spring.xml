@@ -37,6 +37,13 @@
         <constructor-arg ref="entityManager" />
     </bean>
     
+    <!-- AREA -->
+    <bean id="areaService" class="cz.muni.fi.pa165.creaturehunting.service.area.AreaServiceImpl">
+        <property name="araeDAO" ref="areaDAO">
+    </bean>
+    
+    <bean id="areaDAO" class="cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAOImpl"/>
+    
     
     <!-- WEAPON -->
     <bean id="weaponService" 
