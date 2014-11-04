@@ -36,7 +36,7 @@ public interface AreaService {
      * @param long id - ID of the area
      * @return AreaDTO object
      */
-    public AreaDTO findArea(long id);
+    public AreaDTO findArea(Long id);
 
     
     /*
