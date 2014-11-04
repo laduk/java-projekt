@@ -13,6 +13,7 @@
 
     <tx:annotation-driven />
   
+    <!-- MANAGERS -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="myUnit" />  
     </bean>
@@ -24,13 +25,37 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
+       
+   
+    <!-- CREATURE -->
+    <bean id="creatureService" 
+          class="cz.muni.fi.pa165.creaturehunting.service.creature.CreatureServiceImpl">
+        <property name="creatureDAO" ref="creatureDAO">
+    </bean>
     
-    <bean id="creatureDAOImpl" class="cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl">
+    <bean id="creatureDAO" class="cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl">
         <constructor-arg ref="entityManager" />
     </bean>
-   
-    <bean id="creatureServiceImpl" class="cz.muni.fi.pa165.creaturehunting.service.creature.CreatureServiceImpl">
-        <constructor-arg ref="creatureDAOImpl" />
+    
+    
+    <!-- WEAPON -->
+    <bean id="weaponService" 
+          class="cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponServiceImpl">
+        <property name="weaponDAO" ref="weaponDAO">
+    </bean>    
+
+    <bean id="weaponDAO" class="cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl" />
+        
+    
+    <!-- HUNTINGEXPERIENCE -->
+    <bean id="HuntingExperienceService" 
+          class="cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceServiceImpl">
+          <property name="HuntingExperienceDAO" ref="HuntingExperienceDAO">
     </bean>
+    
+    <bean id="HuntingExperienceDAO" 
+          class="cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAOImpl"/>
+ 
+        
 
 </beans>

@@ -6,6 +6,8 @@ import cz.muni.fi.pa165.creaturehunting.area.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.area.AreaTransformation;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * This class transforms data transform object to entity and back.
@@ -13,12 +15,14 @@ import java.util.List;
  *
  * @author Radoslav Zajonc
  */
+@Transactional
 public class CreatureTransformation {
     
     private static final CreatureTransformation instance = new CreatureTransformation();
     
     private CreatureTransformation() { }
     
+    @Autowired
     public static CreatureTransformation getObject() {
         return instance;
     }

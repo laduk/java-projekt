@@ -15,10 +15,13 @@ import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponTransformation;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-
+@Transactional
 public class HuntingExperienceServiceImpl implements HuntingExperienceService {
     
+    @Autowired
     private HuntingExperienceDAO hunExpDAO;
     
     public void setHuntingExperienceDAO (HuntingExperienceDAO  hunExpDAO){

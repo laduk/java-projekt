@@ -8,15 +8,19 @@ import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author laduska
  */
+@Transactional
 public class WeaponServiceImpl implements WeaponService {
 
     private WeaponDAO weaponDao;
-
+    
+    @Autowired
     public void setWeaponDao(WeaponDAO weaponDao) {
         this.weaponDao = weaponDao;
     }
@@ -69,9 +73,8 @@ public class WeaponServiceImpl implements WeaponService {
     
     
     /**
-     * Find a weapon by ID.
-     *
-     * @param weaponDTO - data transfer object as a source of data
+     * Find a weapon by ID. 
+     * @param id given id to be find
      * @return weapon data transfer object
      */
     public WeaponDTO findWeapon(long id) {
