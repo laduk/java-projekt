@@ -9,12 +9,14 @@ import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author laduska
  */
+@Service
 @Transactional
 public class WeaponServiceImpl implements WeaponService {
 
@@ -37,7 +39,7 @@ public class WeaponServiceImpl implements WeaponService {
         }
 
         //Weapon weapon = WeaponTranformation.transformToDTO(weaponDTO);
-        weaponDao.createWeapon(WeaponTranformation.transformToDTO(weaponDTO));
+        weaponDao.createWeapon(WeaponTransformation.transformToEntity(weaponDTO));
     }
 
     /**
@@ -51,7 +53,7 @@ public class WeaponServiceImpl implements WeaponService {
         }
 
         //Weapon weapon = WeaponTranformation.transformToDTO(weaponDTO);
-        weaponDao.updateWeapon(WeaponTranformation.transformToDTO(weaponDTO));
+        weaponDao.updateWeapon(WeaponTransformation.transformToEntity(weaponDTO));
     }
 
     
@@ -66,7 +68,7 @@ public class WeaponServiceImpl implements WeaponService {
             throw new NullPointerException("WeaponDTO argument for deleting of entity cannot be null.");
         }
         //Weapon weapon = WeaponTranformation.transformToDTO(weaponDTO);
-        weaponDao.deleteWeapon(WeaponTranformation.transformToDTO(weaponDTO));
+        weaponDao.deleteWeapon(WeaponTransformation.transformToEntity(weaponDTO));
     }
 
     
@@ -82,11 +84,10 @@ public class WeaponServiceImpl implements WeaponService {
             throw new IllegalArgumentException("ID of the wanted weapon cannot be negative");
         }
 
-        return WeaponTranformation.transformToEntity(weaponDao.findWeapon(id));
+        return WeaponTransformation.transformToDTO(weaponDao.findWeapon(id));
     }
     
-    
-    
+        
     
     /**
      * Find all weapons.
@@ -100,7 +101,7 @@ public class WeaponServiceImpl implements WeaponService {
         List<WeaponDTO> weaponsDto = new ArrayList<WeaponDTO>();
         
         for(Weapon wep : weapons){
-            weaponsDto.add(WeaponTransformation.transformToDto(wep));
+            weaponsDto.add(WeaponTransformation.transformToDTO(wep));
         }
         
         return weaponsDto;
