@@ -40,16 +40,16 @@ public class CreatureDAOTest {
     public static void tearDownClass() {
     }
     
-    @Before
+    @Before //overit ze se dela opravdu pred kazdou metodou
     public void setUp() {
-        EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");
+        EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
         entMan = entManFact.createEntityManager();
     }
     
     @After
     public void tearDown() {        
         entMan.close();
-        entMan.getEntityManagerFactory().close();
+        entMan.getEntityManagerFactory().close();//afterclass
     }
 
     
