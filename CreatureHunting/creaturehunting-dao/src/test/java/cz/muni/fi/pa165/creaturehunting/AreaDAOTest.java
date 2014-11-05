@@ -15,12 +15,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,19 +33,29 @@ import org.junit.Test;
  */
 public class AreaDAOTest {
 
-    private static EntityManager entityManager;
-
+    private EntityManager entityManager;
+    private static EntityManagerFactory entManFact; //pridane Lada - 4.11.
+       
     @BeforeClass
-    public static void setup() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myUnit");
-        entityManager = entityManagerFactory.createEntityManager();
-
+    public static void setUpClass() {        
+        entManFact = Persistence.createEntityManagerFactory("myUnit"); //pridane Lada - 4.11.
     }
-
+    
     @AfterClass
-    public static void close() {
+    public static void tearDownClass() {
+        if(entManFact.isOpen()) entManFact.close(); //afterclass
+    }
+    
+    @Before //toto se dela pred kazdym testem
+    public void setUp() {
+        //EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
+        entityManager = entManFact.createEntityManager();
+    }
+    
+    @After
+    public void tearDown() {        
         entityManager.close();
-        entityManager.getEntityManagerFactory().close();
+        //entMan.getEntityManagerFactory().close();//afterclass
     }
 
     /**

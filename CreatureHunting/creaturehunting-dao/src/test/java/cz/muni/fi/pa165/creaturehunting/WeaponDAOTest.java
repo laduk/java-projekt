@@ -8,8 +8,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,17 +23,28 @@ import org.junit.Test;
 public class WeaponDAOTest {
     
     private static EntityManager entityManager;
-    
+    private static EntityManagerFactory entManFact; 
+       
     @BeforeClass
-    public static void setup() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("myUnit");
-        entityManager = entityManagerFactory.createEntityManager();
+    public static void setUpClass() {        
+        entManFact = Persistence.createEntityManagerFactory("myUnit");
     }
     
     @AfterClass
-    public static void close() {
+    public static void tearDownClass() {
+        if(entManFact.isOpen()) entManFact.close(); 
+    }
+    
+    @Before
+    public void setUp() {
+        //EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
+        entityManager = entManFact.createEntityManager();
+    }
+    
+    @After
+    public void tearDown() {        
         entityManager.close();
-        entityManager.getEntityManagerFactory().close();
+        //entityManager.getEntityManagerFactory().close();//afterclass
     }
     
     /**

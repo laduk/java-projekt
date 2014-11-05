@@ -39,25 +39,28 @@ public class HuntingExperienceDAOImplTest {
     }
     
     private EntityManager entMan;
-    
+    private static EntityManagerFactory entManFact; 
+       
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() {        
+        entManFact = Persistence.createEntityManagerFactory("myUnit");
     }
     
     @AfterClass
     public static void tearDownClass() {
+        if(entManFact.isOpen()) entManFact.close(); 
     }
     
     @Before
     public void setUp() {
-        EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");
+        //EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
         entMan = entManFact.createEntityManager();
     }
     
     @After
-    public void tearDown() {
+    public void tearDown() {        
         entMan.close();
-        entMan.getEntityManagerFactory().close();
+        //entMan.getEntityManagerFactory().close();//afterclass
     }
 
     /**
