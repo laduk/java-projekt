@@ -18,6 +18,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.*;
 import org.springframework.dao.DataAccessException;
+import org.mockito.ArgumentCaptor;
 
 /**
  *
@@ -49,16 +50,16 @@ public class WeaponServiceImplTest {
         weaponDto.setName("Sword");
         weaponDto.setGunReach(1);
         weaponDto.setAmmunition("Power of Hands");
-        doNothing().when(weaponDao).update(WeaponTransformation.convertToEntity(weaponDto));
+        doNothing().when(weaponDao).update(WeaponTransformation.transformToEntity(weaponDto));
         weaponService.create(weaponDto);
         ArgumentCaptor<Weapon> captor = ArgumentCaptor.forClass(Weapon.class);
-        verify(weaponDao).create(captor.capture());
+        verify(weaponDao).createWeapon(captor.capture());
         assertEquals(captor.getValue().getName(), weaponDto.getName());
         assertEquals(captor.getValue().getGunReach(), weaponDto.getGunReach());
         assertEquals(captor.getValue().getAmmunition(), weaponDto.getAmmunition());
         
-        verify(weaponDao, never()).update(any(Weapon.class));
-        verify(weaponDao, never()).delete(anyLong());
+        verify(weaponDao, never()).updateWeapon(any(Weapon.class));
+        verify(weaponDao, never()).deleteWepon(anyLong());
     
     }
     
