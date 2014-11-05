@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.creaturehunting.service.area;
 
+import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAO;
+import cz.muni.fi.pa165.creaturehunting.service.exception.DataAccessExceptionService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ public class AreaServiceImpl implements AreaService {
     @Autowired
     public void setAreaDao(AreaDAO areaDAO) {
         if (areaDAO==null) {
-            throw new IllegalArgumentException("areaDAO mus not be null!");           
+            throw new NullPointerException("AreaDAO mus not be null!");           
         }
         this.areaDAO = areaDAO;
     }
@@ -33,33 +35,33 @@ public class AreaServiceImpl implements AreaService {
      */
     public void create(AreaDTO areaDTO) {
         if (areaDTO==null) {
-            throw new IllegalArgumentException("AreaExpDTO must not null!");
+            throw new NullPointerException("AreaExpDTO must not null!");
         }
-        Area area = new Area();
+        Area area = AreaTransformation.transformToEntity(areaDTO);
         try {
-            area = AreaTransformation.transformToEntity(areaDTO);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Id must not null!",e);
+            areaDAO.createArea(area);
+        } catch (DAOException e) {
+            throw new DataAccessExceptionService("Transformation was not "
+                    + "succesful or data was corrupted.",e);
         }
-        areaDAO.createArea(area);
     }
 
     /**
      * Update an area.
      *
-     * @param areaDTO - data transfer object as a source of data
+     * @param areaDTO - data transfer object as a source of data     
      */
     public void update(AreaDTO areaDTO) {
         if (areaDTO==null) {
-            throw new IllegalArgumentException("AreaDTO must not null!");
+            throw new NullPointerException("AreaDTO must not null!");
         }
-        Area area = new Area();
+        Area area = AreaTransformation.transformToEntity(areaDTO);
         try {
-            area = AreaTransformation.transformToEntity(areaDTO);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("HuntExpDTO must not null!",e);
+            areaDAO.updateArea(area);
+        } catch (DAOException e) {
+            throw new DataAccessExceptionService("Transformation was not "
+                    + "succesful or data was corrupted.",e);
         }
-        areaDAO.updateArea(area);
     }
 
     /**
@@ -69,9 +71,14 @@ public class AreaServiceImpl implements AreaService {
      */
     public void delete(AreaDTO areaDTO) {
         if (areaDTO==null) {
-            throw new IllegalArgumentException("AreaExpDTO must not null!");
+            throw new NullPointerException("AreaExpDTO must not null!");
         }
-        areaDAO.deleteArea(AreaTransformation.transformToEntity(areaDTO));
+        try {
+            areaDAO.deleteArea(AreaTransformation.transformToEntity(areaDTO));
+        } catch (DAOException e) {
+            throw new DataAccessExceptionService("Transformation was not "
+                    + "succesful or data was corrupted.",e);
+        }
     }
 
     /**
@@ -81,17 +88,17 @@ public class AreaServiceImpl implements AreaService {
      */
     public AreaDTO findArea(Long id) {
         if (id==null) {
-            throw new IllegalArgumentException("Id must not null!");
+            throw new NullPointerException("Id must not null!");
         }
-        Area area;
-        area = areaDAO.findArea(id);
-        
-        AreaDTO areaDTO = new AreaDTO();
+        Area area = new Area();        
         try {
-            areaDTO = AreaTransformation.transformToDTO(area);
-        } catch (IllegalArgumentException e) {
-            return areaDTO;
-        }
+            area = areaDAO.findArea(id);
+        } catch (DAOException e) {
+            throw new DataAccessExceptionService("Transformation was not "
+                    + "succesful or data was corrupted.",e);
+        }        
+        AreaDTO areaDTO = AreaTransformation.transformToDTO(area);
+      
         return areaDTO;
     }
 
@@ -102,16 +109,16 @@ public class AreaServiceImpl implements AreaService {
      */
     public List<AreaDTO> findAllAreas() {
         List<AreaDTO> listAreasDTO = new ArrayList<AreaDTO>();
-        List<Area> listAreas;
-        listAreas = areaDAO.findAllAreas();
+        List<Area> listAreas = new ArrayList<Area>();
+        try {
+            listAreas = areaDAO.findAllAreas();
+        } catch (DAOException e) {
+            throw new DataAccessExceptionService("Transformation was not "
+                    + "succesful or data was corrupted.",e);
+        }
         
         for(Area area : listAreas){
-            AreaDTO areaDTO = new AreaDTO();
-            try {
-                areaDTO = AreaTransformation.transformToDTO(area);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Wrong transformation from entity to DTO",e);
-            }
+            AreaDTO areaDTO = AreaTransformation.transformToDTO(area);          
             listAreasDTO.add(areaDTO);
         }
         return listAreasDTO;
