@@ -17,7 +17,6 @@ import org.junit.Test;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.*;
-import org.springframework.dao.DataAccessException;
 import org.mockito.ArgumentCaptor;
 
 /**
@@ -43,7 +42,7 @@ public class WeaponServiceImplTest {
         try {
             weaponService.create(null);
             fail();
-        } catch (DataAccessException ex) {
+        } catch (NullPointerException ex) {
         }
 
         WeaponDTO weaponDto = new WeaponDTO();
