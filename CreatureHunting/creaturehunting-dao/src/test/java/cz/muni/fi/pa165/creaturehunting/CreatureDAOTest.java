@@ -31,25 +31,28 @@ import static org.junit.Assert.*;
 public class CreatureDAOTest {
     
     private EntityManager entMan;
+    private static EntityManagerFactory entManFact; //pridane Lada - 4.11.
        
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() {        
+        entManFact = Persistence.createEntityManagerFactory("myUnit"); //pridane Lada - 4.11.
     }
     
     @AfterClass
     public static void tearDownClass() {
+        if(entManFact.isOpen()) entManFact.close(); //afterclass
     }
     
-    @Before //overit ze se dela opravdu pred kazdou metodou
+    @Before //toto se dela pred kazdym testem
     public void setUp() {
-        EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
+        //EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
         entMan = entManFact.createEntityManager();
     }
     
     @After
     public void tearDown() {        
         entMan.close();
-        entMan.getEntityManagerFactory().close();//afterclass
+        //entMan.getEntityManagerFactory().close();//afterclass
     }
 
     
