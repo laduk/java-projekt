@@ -118,7 +118,7 @@ public class HuntingExperienceServiceImplTest {
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
-            System.out.println("Awaiting exception"+ex.getMessage());
+            System.out.println("Awaiting exception: "+ex.getMessage());
         }        
     }
     
@@ -131,7 +131,7 @@ public class HuntingExperienceServiceImplTest {
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
-            System.out.println("Awaiting exception"+ex.getMessage());
+            System.out.println("Awaiting exception: "+ex.getMessage());
         }        
     }
     
@@ -145,7 +145,7 @@ public class HuntingExperienceServiceImplTest {
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
-            System.out.println("Awaiting exception"+ex.getMessage());
+            System.out.println("Awaiting exception: "+ex.getMessage());
         }        
     }
     
@@ -159,7 +159,7 @@ public class HuntingExperienceServiceImplTest {
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
-            System.out.println("Awaiting exception"+ex.getMessage());
+            System.out.println("Awaiting exception: "+ex.getMessage());
         }        
     }
     
@@ -173,7 +173,7 @@ public class HuntingExperienceServiceImplTest {
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
-            System.out.println("Awaiting exception"+ex.getMessage());
+            System.out.println("Awaiting exception: "+ex.getMessage());
         }        
     }
     
@@ -184,7 +184,7 @@ public class HuntingExperienceServiceImplTest {
             huntExpSerImpl.findHuntExp(null);       
             fail("Nothing throwned!");
         } catch(NullPointerException ex){
-            System.out.println("Awaiting exception"+ex.getMessage());
+            System.out.println("Awaiting exception Null: "+ex.getMessage());
         }        
     }
     
@@ -195,7 +195,7 @@ public class HuntingExperienceServiceImplTest {
             huntExpSerImpl.create(null);       
             fail("Nothing throwned!");
         } catch(NullPointerException ex){
-            System.out.println("Awaiting exception"+ex.getMessage()+ex.getMessage());
+            System.out.println("Awaiting exception Null: "+ex.getMessage());
         }        
     }
     
@@ -206,7 +206,7 @@ public class HuntingExperienceServiceImplTest {
             huntExpSerImpl.update(null);       
             fail("Nothing throwned!");
         } catch(NullPointerException ex){
-            System.out.println("Awaiting exception"+ex.getMessage()+ex.getMessage());
+            System.out.println("Awaiting exception Null: "+ex.getMessage());
         } 
     }
     
@@ -217,7 +217,7 @@ public class HuntingExperienceServiceImplTest {
             huntExpSerImpl.delete(null);       
             fail("Nothing throwned!");
         } catch(NullPointerException ex){
-            System.out.println("Awaiting exception"+ex.getMessage()+ex.getMessage());
+            System.out.println("Awaiting exception Null: "+ex.getMessage());
         } 
     }
     
