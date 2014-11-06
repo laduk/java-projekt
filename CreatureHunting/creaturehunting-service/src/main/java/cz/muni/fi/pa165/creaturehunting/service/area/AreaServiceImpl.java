@@ -6,7 +6,6 @@ import cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAO;
 import cz.muni.fi.pa165.creaturehunting.service.exception.DataAccessExceptionService;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +19,7 @@ public class AreaServiceImpl implements AreaService {
     
     private AreaDAO areaDAO;
 
-    @Autowired
-    public void setAreaDao(AreaDAO areaDAO) {
-        if (areaDAO==null) {
-            throw new NullPointerException("AreaDAO mus not be null!");           
-        }
+    public AreaServiceImpl(AreaDAO areaDAO) {
         this.areaDAO = areaDAO;
     }
 

@@ -31,10 +31,13 @@ public class CreatureTransformation {
         creatureDTO.setWeight(creature.getWeight());
         creatureDTO.setAgility(creature.getAgility());
         List<AreaDTO> areasDTO = new ArrayList();
-        for (Area area : creature.getListOfAreas()) {
-            areasDTO.add(AreaTransformation.transformToDTO(area));
+        List<Area> areas = creature.getListOfAreas();
+        if (areas != null && areas.size() > 0) {
+            for (Area area : areas) {
+                areasDTO.add(AreaTransformation.transformToDTO(area));
+            }
+            creatureDTO.setListOfAreas(areasDTO);
         }
-        creatureDTO.setListOfAreas(areasDTO);
         
         return creatureDTO;
     }
@@ -72,10 +75,13 @@ public class CreatureTransformation {
         creature.setAgility(agility);
         
         List<Area> areas = new ArrayList();
-        for (AreaDTO areaDTO : creatureDTO.getListOfAreas()) {
-            areas.add(AreaTransformation.transformToEntity(areaDTO));
+        List<AreaDTO> areasDTO = creatureDTO.getListOfAreas();
+        if (areasDTO != null && areasDTO.size() > 0) {
+            for (AreaDTO areaDTO : areasDTO) {
+                areas.add(AreaTransformation.transformToEntity(areaDTO));
+            }
+            creature.setListOfAreas(areas);
         }
-        creature.setListOfAreas(areas);
         
         return creature;
     }

@@ -128,4 +128,28 @@ public class CreatureServiceImplTest {
 
         creatureService.findAllCreatures();
     }
+    
+    
+    /**
+     * Test find all creatures by name.
+     */
+    @Test (expected = DataAccessException.class)
+    public void testFindAllCreaturesByName() {
+        List<Creature> creatures = new ArrayList();
+        CreatureDTO fooCreatureDTO = new CreatureDTO();
+        fooCreatureDTO.setName("foo");
+        creatures.add(CreatureTransformation.transformToEntity(fooCreatureDTO));
+        creatures.add(CreatureTransformation.transformToEntity(creatureDTO));
+        when(creatureDAO.findAllCreatures()).thenReturn(creatures);
+        
+        Assert.assertTrue("Wrong creature by name was found.", 
+                creatureService.findAllCreaturesByName("Balrog").get(0).
+                equals(creatureDTO));
+        Assert.assertTrue("Wrong list of creatures by name was found.",
+                creatureService.findAllCreaturesByName("Balrog").size() == 1);
+
+        doThrow(DAOException.class).when(creatureDAO).findAllCreatures();
+
+        creatureService.findAllCreaturesByName("Balrog");
+    }
 }

@@ -37,7 +37,7 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
 
     public void create(HuntingExperienceDTO huntExpDTO) {
         if (huntExpDTO==null) {
-            throw new NullPointerException("HuntExpDTO must not null!");
+            throw new NullPointerException("HuntExpDTO must not be null!");
         }
         HuntingExperience huntExp = new HuntingExperience();
         try {
@@ -50,7 +50,7 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
 
     public void update(HuntingExperienceDTO huntExpDTO) {
         if (huntExpDTO==null) {
-            throw new NullPointerException("HuntExpDTO must not null!");
+            throw new NullPointerException("HuntExpDTO must not be null!");
         }
         HuntingExperience huntExp = new HuntingExperience();
         try {
@@ -63,7 +63,7 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
 
     public void delete(HuntingExperienceDTO huntExpDTO) {
         if (huntExpDTO==null) {
-            throw new NullPointerException("HuntExpDTO must not null!");
+            throw new NullPointerException("HuntExpDTO must not be null!");
         }
         try {
             hunExpDAO.deleteHuntingExperience(HuntingExperienceTransformation.transformToEntity(huntExpDTO));

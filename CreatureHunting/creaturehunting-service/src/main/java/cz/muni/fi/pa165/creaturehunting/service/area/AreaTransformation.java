@@ -42,11 +42,12 @@ public class AreaTransformation {
         areaDTO.setName(area.getName());
 //        List<Creature> creatures = area.getListOfCreatures();
 //        List<CreatureDTO> creaturesDTO = new ArrayList();
-//        CreatureTransformation creatureTransformation = new CreatureTransformation();
-//        for (Creature creature : creatures) {
-//            creaturesDTO.add(creatureTransformation.transformToDTO(creature));
+//        if (creatures != null && creatures.size() > 0) {
+//            for (Creature creature : creatures) {
+//                creaturesDTO.add(CreatureTransformation.transformToDTO(creature));
+//            }
+//            areaDTO.setListOfCreatures(creaturesDTO);
 //        }
-//        areaDTO.setListOfCreatures(creaturesDTO);
         
         return areaDTO;
     }
@@ -69,11 +70,12 @@ public class AreaTransformation {
         
 //        List<CreatureDTO> creaturesDTO = areaDTO.getListOfCreatures();
 //        List<Creature> creatures = new ArrayList();
-//        CreatureTransformation creatureTransformation = new CreatureTransformation();
-//        for (CreatureDTO creatureDTO : creaturesDTO) {
-//            creatures.add(creatureTransformation.transformToEntity(creatureDTO));
+//        if (creaturesDTO != null && creaturesDTO.size() > 0) {
+//            for (CreatureDTO creatureDTO : creaturesDTO) {
+//                creatures.add(CreatureTransformation.transformToEntity(creatureDTO));
+//            }
+//            area.setListOfCreatures(creatures);
 //        }
-//        area.setListOfCreatures(creatures);
         
         return area;
     }
