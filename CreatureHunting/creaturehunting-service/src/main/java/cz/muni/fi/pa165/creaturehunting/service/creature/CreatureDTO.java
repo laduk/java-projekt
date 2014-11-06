@@ -11,11 +11,35 @@ import java.util.List;
  */
 public class CreatureDTO {
     
+    /**
+     * Unique identifier of creature.
+     * Id > 0 means that the creature is already created.
+     */
     private long id = -1;
+    
+    /**
+     * Represents name of creature.
+     */
     private String name;
+    
+    /**
+     * Height of the creature in cm.
+     */
     private int height;
+    
+    /**
+     * Weight of the creature in kg.
+     */
     private int weight;
+    
+    /**
+     * Agility of the creature in %.
+     */
     private int agility;
+    
+    /**
+     * Areas where the creature was spotted.
+     */
     private List<AreaDTO> listOfAreas;
 
     public long getId() {

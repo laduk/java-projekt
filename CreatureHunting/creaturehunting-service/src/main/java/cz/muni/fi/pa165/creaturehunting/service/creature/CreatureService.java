@@ -39,4 +39,11 @@ public interface CreatureService {
      * @return A list of all creatures.
      */
     public List<CreatureDTO> findAllCreatures();
+    
+    /**
+     * Finds and returns a list of all creatures ordered by ID.
+     * Creature's names are equaled finding name.
+     * @return A list of all creatures by name.
+     */
+    public List<CreatureDTO> findAllCreaturesByName(String name);
 }

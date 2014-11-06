@@ -7,7 +7,6 @@ import cz.muni.fi.pa165.creaturehunting.service.exception.DataAccessExceptionSer
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Radoslav Zajonc
  */
 @Service
+@Transactional
 public class CreatureServiceImpl implements CreatureService {
   
     private final CreatureDAO creatureDAO;
@@ -24,7 +24,6 @@ public class CreatureServiceImpl implements CreatureService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
     public void create(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
             throw new NullPointerException("CreatureDTO must not be null.");
@@ -39,7 +38,6 @@ public class CreatureServiceImpl implements CreatureService {
     }
     
     @Override
-    @Transactional
     public void update(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
             throw new NullPointerException("CreatureDTO must not be null.");
@@ -54,7 +52,6 @@ public class CreatureServiceImpl implements CreatureService {
     }
     
     @Override
-    @Transactional
     public void delete(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
             throw new NullPointerException("CreatureDTO must not be null.");
@@ -69,7 +66,6 @@ public class CreatureServiceImpl implements CreatureService {
     }
     
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public CreatureDTO findCreature(long id) {
         CreatureDTO creatureDTO = new CreatureDTO();
         try {
@@ -83,7 +79,6 @@ public class CreatureServiceImpl implements CreatureService {
     }
     
     @Override
-    @Transactional(readOnly = true)
     public List<CreatureDTO> findAllCreatures() {
         List<Creature> creatures = new ArrayList();
         try {
@@ -98,4 +93,16 @@ public class CreatureServiceImpl implements CreatureService {
         }
         return creaturesDTO;
     }
+    
+    @Override
+    public List<CreatureDTO> findAllCreaturesByName(String name) {
+        List creaturesDTO = new ArrayList();
+        for (CreatureDTO creatureDTO : this.findAllCreatures()) {
+            if (creatureDTO.getName().equals(name)) {
+                creaturesDTO.add(creatureDTO);
+            }
+        }
+        return creaturesDTO;
+    }
+    
 }

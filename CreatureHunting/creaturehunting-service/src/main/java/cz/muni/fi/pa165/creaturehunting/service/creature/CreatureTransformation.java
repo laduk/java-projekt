@@ -6,26 +6,13 @@ import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * This class transforms data transform object to entity and back.
- * It's a singleton.
  *
  * @author Radoslav Zajonc
  */
-@Transactional
 public class CreatureTransformation {
-    
-    private static final CreatureTransformation instance = new CreatureTransformation();
-    
-    private CreatureTransformation() { }
-    
-    @Autowired
-    public static CreatureTransformation getObject() {
-        return instance;
-    }
     
     /**
      * Transforms entity to data transfer object.
@@ -43,11 +30,9 @@ public class CreatureTransformation {
         creatureDTO.setHeight(creature.getHeight());
         creatureDTO.setWeight(creature.getWeight());
         creatureDTO.setAgility(creature.getAgility());
-        List<Area> areas = creature.getListOfAreas();
         List<AreaDTO> areasDTO = new ArrayList();
-        AreaTransformation areaTransformation = new AreaTransformation();
-        for (Area area : areas) {
-            areasDTO.add(areaTransformation.transformToDTO(area));
+        for (Area area : creature.getListOfAreas()) {
+            areasDTO.add(AreaTransformation.transformToDTO(area));
         }
         creatureDTO.setListOfAreas(areasDTO);
         
@@ -56,6 +41,8 @@ public class CreatureTransformation {
     
     /**
      * Transforms data transfer object to entity.
+     * If attributes name, height, weight and agility are overflowed,
+     * they will be cut off.
      * @param creatureDTO This DTO will be transformed into entity.
      * @return Entity created from DTO.
      */
@@ -66,15 +53,27 @@ public class CreatureTransformation {
         
         Creature creature = new Creature();
         creature.setId(creatureDTO.getId());
-        creature.setName(creatureDTO.getName());
-        creature.setHeight(creatureDTO.getHeight());
-        creature.setWeight(creatureDTO.getWeight());
-        creature.setAgility(creatureDTO.getAgility());
-        List<AreaDTO> areasDTO = creatureDTO.getListOfAreas();
+        
+        String name = creatureDTO.getName();
+        if (name.length() > 20) name = name.substring(0,20);
+        creature.setName(name);
+        
+        int height = creatureDTO.getHeight();
+        if (height < 0) height = 0;
+        creature.setHeight(height);
+        
+        int weight = creatureDTO.getWeight();
+        if (weight < 0) weight = 0;
+        creature.setWeight(weight);
+        
+        int agility = creatureDTO.getAgility();
+        if (agility < 0) agility = 0;
+        if (agility > 100) agility = 100;
+        creature.setAgility(agility);
+        
         List<Area> areas = new ArrayList();
-        AreaTransformation areaTransformation = new AreaTransformation();
-        for (AreaDTO areaDTO : areasDTO) {
-            areas.add(areaTransformation.transformToEntity(areaDTO));
+        for (AreaDTO areaDTO : creatureDTO.getListOfAreas()) {
+            areas.add(AreaTransformation.transformToEntity(areaDTO));
         }
         creature.setListOfAreas(areas);
         
