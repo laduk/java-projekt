@@ -93,9 +93,18 @@ public class WeaponServiceImplTest {
         assertEquals(captor.getValue().getGunReach(), weaponDto.getGunReach());
         assertEquals(captor.getValue().getAmmunition(), weaponDto.getAmmunition());
         
+        weaponDto.setName("Updated Sword Name");
+        weaponDto.setAmmunition("Updated Hand Power");
+        weaponDto.setGunReach(1);
         
+        weaponService.update(weaponDto);
+        ArgumentCaptor<Weapon> captor2 = ArgumentCaptor.forClass(Weapon.class);
+        verify(weaponDao).updateWeapon(captor2.capture());
         
-        
+        assertEquals(captor2.getValue().getName(), weaponDto.getName());
+        assertEquals(captor2.getValue().getGunReach(), weaponDto.getGunReach());
+        assertEquals(captor2.getValue().getAmmunition(), weaponDto.getAmmunition());
+               
         
         
     }
