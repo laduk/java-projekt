@@ -14,8 +14,6 @@ import org.junit.Before;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.*;
 import org.mockito.ArgumentCaptor;
 
@@ -24,32 +22,70 @@ import org.mockito.ArgumentCaptor;
  * @author laduska
  */
 public class WeaponServiceImplTest {
-    
+
     private WeaponService weaponService;
     private WeaponDAO weaponDao;
-    
+
     @Before
-    public void setUp(){
+    public void setUp() {
         weaponDao = mock(WeaponDAO.class);
         WeaponServiceImpl weaponServiceImpl = new WeaponServiceImpl();
         weaponServiceImpl.setWeaponDao(weaponDao);
-        weaponService = weaponServiceImpl;        
+        weaponService = weaponServiceImpl;
     }
-    
-    
+
     @Test
-    public void testCreateWeapon(){
+    public void testCreateWeapon() {
         try {
             weaponService.create(null);
             fail();
         } catch (NullPointerException ex) {
         }
-
+        
+        verify(weaponDao, never()).createWeapon(null);    
+        
         WeaponDTO weaponDto = new WeaponDTO();
+        weaponDto.setId(10);
         weaponDto.setName("Sword");
         weaponDto.setGunReach(1);
         weaponDto.setAmmunition("Power of Hands");
-        doNothing().when(weaponDao).updateWeapon(WeaponTransformation.transformToEntity(weaponDto));
+        
+        ArgumentCaptor<Weapon> captor = ArgumentCaptor.forClass(Weapon.class);
+        weaponService.create(weaponDto);
+        
+        doNothing().when(weaponDao).updateWeapon(WeaponTransformation.transformToEntity(weaponDto)); //nevim sice proc update
+        
+        Weapon weapon = WeaponTransformation.transformToEntity(weaponDto);
+                
+        verify(weaponDao).createWeapon(captor.capture());
+        assertEquals(captor.getValue().getName(), weaponDto.getName());
+        assertEquals(captor.getValue().getGunReach(), weaponDto.getGunReach());
+        assertEquals(captor.getValue().getAmmunition(), weaponDto.getAmmunition());
+
+//        
+//        
+//        verify(weaponDao, never()).updateWeapon(any(Weapon.class));
+//        verify(weaponDao, never()).deleteWeapon(any(Weapon.class));
+
+    }
+
+    @Test
+    public void testUpdateWeapon() {
+        long id = 20;
+        
+        try {
+            weaponService.update(null);
+            fail();
+        } catch (NullPointerException ex) {
+        }
+        
+        WeaponDTO weaponDto = new WeaponDTO();
+                
+        weaponDto.setId(id);
+        weaponDto.setName("Dual Sword");
+        weaponDto.setGunReach(2);
+        weaponDto.setAmmunition("Hand Power");
+        
         weaponService.create(weaponDto);
         ArgumentCaptor<Weapon> captor = ArgumentCaptor.forClass(Weapon.class);
         verify(weaponDao).createWeapon(captor.capture());
@@ -57,11 +93,14 @@ public class WeaponServiceImplTest {
         assertEquals(captor.getValue().getGunReach(), weaponDto.getGunReach());
         assertEquals(captor.getValue().getAmmunition(), weaponDto.getAmmunition());
         
-        verify(weaponDao, never()).updateWeapon(any(Weapon.class));
-        verify(weaponDao, never()).deleteWeapon(any(Weapon.class));
-    
+        
+        
+        
+        
+        
     }
-    
-    
-    
+
+
+
+
 }
