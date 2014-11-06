@@ -49,7 +49,7 @@ public class WeaponServiceImplTest {
         weaponDto.setName("Sword");
         weaponDto.setGunReach(1);
         weaponDto.setAmmunition("Power of Hands");
-        doNothing().when(weaponDao).update(WeaponTransformation.transformToEntity(weaponDto));
+        doNothing().when(weaponDao).updateWeapon(WeaponTransformation.transformToEntity(weaponDto));
         weaponService.create(weaponDto);
         ArgumentCaptor<Weapon> captor = ArgumentCaptor.forClass(Weapon.class);
         verify(weaponDao).createWeapon(captor.capture());
@@ -58,7 +58,7 @@ public class WeaponServiceImplTest {
         assertEquals(captor.getValue().getAmmunition(), weaponDto.getAmmunition());
         
         verify(weaponDao, never()).updateWeapon(any(Weapon.class));
-        verify(weaponDao, never()).deleteWepon(anyLong());
+        verify(weaponDao, never()).deleteWeapon(any(Weapon.class));
     
     }
     
