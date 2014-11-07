@@ -12,8 +12,8 @@
             http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <tx:annotation-driven />
-    <context:annotation-config />
-    <tx:annotation-driven  proxy-target-class="true" transaction-manager="transactionManager"/>
+    <!--context:annotation-config /-->
+    <!--tx:annotation-driven  proxy-target-class="true" transaction-manager="transactionManager"/-->
   
     <!-- MANAGERS -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
@@ -28,18 +28,18 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-    <!-- CREATURE -->    
+    <!-- CREATURE -->
     <bean id="creatureService" class="cz.muni.fi.pa165.creaturehunting.service.creature.CreatureServiceImpl">
-        <property name="creatureDAO" ref="creatureDAO"/>
+        <constructor-arg ref="creatureDAO"/>
     </bean>
     
     <bean id="creatureDAO" class="cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl">
-          <constructor-arg ref="entityManager"/>
+        <constructor-arg ref="entityManager"/>
     </bean>
     
     <!-- AREA -->
     <bean id="areaService" class="cz.muni.fi.pa165.creaturehunting.service.area.AreaServiceImpl">
-        <property name="areaDao" ref="areaDAO"/>
+        <constructor-arg ref="areaDAO"/>
     </bean>
     
     <bean id="areaDAO" class="cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAOImpl">
@@ -49,7 +49,7 @@
     
     <!-- WEAPON -->
     <bean id="weaponService" class="cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponServiceImpl">
-        <property name="weaponDAO" ref="weaponDAO"/>
+        <property name="weaponDao" ref="weaponDAO"/>
     </bean>
     
     <bean id="weaponDAO" class="cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAOImpl">
@@ -59,7 +59,7 @@
     <!-- HUNTINGEXPERIENCE -->    
     <bean id="huntingExperienceService" 
           class="cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceServiceImpl">
-        <property name="huntingExperienceDAO" ref="huntingExperienceDAO"/>
+        <constructor-arg ref="huntingExperienceDAO"/>
     </bean>
     
     <bean id="huntingExperienceDAO" 
