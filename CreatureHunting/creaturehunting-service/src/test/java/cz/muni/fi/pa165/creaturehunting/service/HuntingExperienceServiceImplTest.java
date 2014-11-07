@@ -9,18 +9,14 @@ package cz.muni.fi.pa165.creaturehunting.service;
 import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAO;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureServiceImpl;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureTransformation;
 import cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceDTO;
 import cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceServiceImpl;
 import cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceTransformation;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
-import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponServiceImpl;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponTransformation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,10 +30,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import static org.mockito.Matchers.any;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -56,17 +49,13 @@ public class HuntingExperienceServiceImplTest {
     @Mock
     private HuntingExperienceDAO huntingExperienceDAO;
     
-    @Mock
-    private WeaponDAO weaponDAO;
-    
-    @Mock
-    private CreatureDAO creatureDAO;    
-    
-    
     private HuntingExperienceDTO huntExperienceDTO;
     private CreatureDTO creatureDTO;
     private WeaponDTO weaponDTO;
     
+    /**
+     * Initial set up of objects that is done before any of tests.
+     */
     @Before
     public void initMock(){
         MockitoAnnotations.initMocks(this);
@@ -130,6 +119,9 @@ public class HuntingExperienceServiceImplTest {
         huntExperienceDTO.setDescription("Headshot!");  
     }
     
+    /**
+     * Test covering of DAOexception.
+     */
     @Test
     public void testFindByIdExcept(){
         System.out.println("--- Testing finding by id Exception ---");        
@@ -144,6 +136,9 @@ public class HuntingExperienceServiceImplTest {
         }        
     }
     
+    /**
+     * Test covering of DAOexception.
+     */
     @Test
     public void testFindAllEcept(){
         System.out.println("--- Testing findingAll Exception ---"); 
@@ -158,6 +153,9 @@ public class HuntingExperienceServiceImplTest {
         }        
     }
     
+    /**
+     * Test covering of DAOexception.
+     */
     @Test
     public void testCreateExcept(){
         System.out.println("--- Testing creating Exception ---"); 
@@ -173,6 +171,10 @@ public class HuntingExperienceServiceImplTest {
         }        
     }
     
+    
+    /**
+     * Test covering of DAOexception.
+     */
     @Test
     public void testUpdateExcept(){
         System.out.println("--- Testing updating Exception ---"); 
@@ -188,6 +190,9 @@ public class HuntingExperienceServiceImplTest {
         }        
     }
     
+    /**
+     * Test covering of DAOexception.
+     */
     @Test
     public void testDeleteExcept(){
         System.out.println("--- Testing deleting Exception ---"); 
@@ -203,6 +208,9 @@ public class HuntingExperienceServiceImplTest {
         }        
     }
     
+    /**
+     * Test of throwning NullPointerException.
+     */
     @Test
     public void testFindByIdNull(){
         System.out.println("--- Testing Null parametr Exception ---");
@@ -214,6 +222,9 @@ public class HuntingExperienceServiceImplTest {
         }        
     }
     
+    /**
+     * Test of throwning NullPointerException.
+     */
     @Test
     public void testCreateNull(){
         System.out.println("--- Testing Null parametr Exception ---");
@@ -225,6 +236,9 @@ public class HuntingExperienceServiceImplTest {
         }        
     }
     
+    /**
+     * Test of throwning NullPointerException.
+     */
     @Test
     public void testUpdateNull(){
         System.out.println("--- Testing Null parametr Exception ---");
@@ -236,6 +250,9 @@ public class HuntingExperienceServiceImplTest {
         } 
     }
     
+    /**
+     * Test of throwning NullPointerException.
+     */
     @Test
     public void testDeleteNull(){
         System.out.println("--- Testing Null parametr Exception ---");
@@ -247,6 +264,9 @@ public class HuntingExperienceServiceImplTest {
         } 
     }
     
+    /**
+     * Test whether is creation functional.
+     */
     @Test
     public void testCreate(){
         System.out.println("--- Test Update ---");
@@ -256,6 +276,9 @@ public class HuntingExperienceServiceImplTest {
                         transformToEntity(huntExperienceDTO));
     }
     
+    /**
+     * Test whether is updating functional.
+     */
     @Test
     public  void testUpdate(){
         System.out.println("--- Test Update ---");
@@ -266,6 +289,9 @@ public class HuntingExperienceServiceImplTest {
                         transformToEntity(huntExperienceDTO));
     }
     
+    /**
+     * Test whether is deleting functional.
+     */
     @Test
     public void testDelete(){
         System.out.println("--- Test Delete ---");
@@ -276,17 +302,25 @@ public class HuntingExperienceServiceImplTest {
                         transformToEntity(huntExperienceDTO));
     }
     
+    /**
+     * Test whether is finfing by id functional.
+     */
     @Test
     public void testFindById(){
         System.out.println("--- Test Find By Id ---");
-        huntExpService.create(huntExperienceDTO);
-        
-        when(huntingExperienceDAO.findHuntingExperience(any(Long.class))).
-                thenReturn(HuntingExperienceTransformation.
+        when(huntingExperienceDAO.findHuntingExperience(huntExperienceDTO.getId()))
+                .thenReturn(HuntingExperienceTransformation.
                         transformToEntity(huntExperienceDTO));
+
+        huntExpService.findHuntExp(huntExperienceDTO.getId());
         verify(huntingExperienceDAO).findHuntingExperience(huntExperienceDTO.getId());
+        Assert.assertEquals(huntExpService.findHuntExp(huntExperienceDTO.getId()),
+                huntExperienceDTO);
     }
     
+    /**
+     * Test wether is findingAllExperience functional.
+     */
     @Test
     public void testFindAll(){
         System.out.println("--- Test Find All ---");
@@ -295,9 +329,15 @@ public class HuntingExperienceServiceImplTest {
         verify(huntingExperienceDAO).findAllHuntingExperience();
     }
     
-    
-    
-    
-    
-    
+    /**
+     * Test whether is finding Effecient weapon functional.
+     */
+    @Test
+    public void testFindEfficient(){
+        System.out.println("--- Test Find All Effecient weapon ---");
+        huntExpService.create(huntExperienceDTO);
+        huntExpService.findEfficientWeapons(creatureDTO, 10);
+        verify(huntingExperienceDAO).findEfficientWeapons(CreatureTransformation.
+                transformToEntity(creatureDTO), 10);
+    }
 }

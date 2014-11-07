@@ -34,7 +34,9 @@ public class HuntingExperienceTransformationTest {
     private HuntingExperienceDTO huntExperienceDTO;
     private HuntingExperience huntExperience;
             
-    
+    /**
+     * Class where initition of object id done, it is done before all test.
+     */
     @Before
     public void setUp(){
         huntExperienceDTO = new HuntingExperienceDTO();
@@ -98,7 +100,7 @@ public class HuntingExperienceTransformationTest {
     }
     
     /**
-     *
+     * Testing transforming to DTO.
      */
     @Test
     public void testTransfrormToDTO(){       
@@ -108,6 +110,9 @@ public class HuntingExperienceTransformationTest {
                         transformToDTO(huntExperience)));
     }
     
+    /**
+     * Testing transforming to Entity.
+     */
     @Test
     public void testTransfrormToEntity(){       
         System.out.println("--- Transform to Entity");
