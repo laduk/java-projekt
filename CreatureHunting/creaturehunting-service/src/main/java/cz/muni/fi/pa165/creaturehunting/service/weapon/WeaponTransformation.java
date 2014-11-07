@@ -23,8 +23,8 @@ public class WeaponTransformation {
      */
     public static WeaponDTO transformToDTO(Weapon weapon) {
 
-        if (weapon == null) {
-            throw new NullPointerException("Entity object for transformation cannot be null");        }
+        if (weapon == null) return null;//{
+            //throw new NullPointerException("Entity object for transformation cannot be null");        }
 
         WeaponDTO weaponDto = new WeaponDTO();
 
