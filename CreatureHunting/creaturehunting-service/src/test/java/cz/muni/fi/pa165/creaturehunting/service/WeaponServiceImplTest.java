@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.pa165.creaturehunting.service;
 
+import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
@@ -35,7 +36,7 @@ public class WeaponServiceImplTest {
     }
 
     @Test
-    public void testCreateWeapon() {
+    public void createWeaponTest() {
         try {
             weaponService.create(null);
             fail();
@@ -53,7 +54,7 @@ public class WeaponServiceImplTest {
         ArgumentCaptor<Weapon> captor = ArgumentCaptor.forClass(Weapon.class);
         weaponService.create(weaponDto);
         
-        doNothing().when(weaponDao).updateWeapon(WeaponTransformation.transformToEntity(weaponDto)); //nevim sice proc update
+        //doNothing().when(weaponDao).updateWeapon(WeaponTransformation.transformToEntity(weaponDto));
         
         Weapon weapon = WeaponTransformation.transformToEntity(weaponDto);
                 
@@ -61,16 +62,16 @@ public class WeaponServiceImplTest {
         assertEquals(captor.getValue().getName(), weaponDto.getName());
         assertEquals(captor.getValue().getGunReach(), weaponDto.getGunReach());
         assertEquals(captor.getValue().getAmmunition(), weaponDto.getAmmunition());
-
-//        
-//        
-//        verify(weaponDao, never()).updateWeapon(any(Weapon.class));
-//        verify(weaponDao, never()).deleteWeapon(any(Weapon.class));
+        
+        doThrow(DAOException.class).when(weaponDao).createWeapon(any(Weapon.class));
+  
+        verify(weaponDao, never()).updateWeapon(any(Weapon.class));
+        verify(weaponDao, never()).deleteWeapon(any(Weapon.class));
 
     }
 
     @Test
-    public void testUpdateWeapon() {
+    public void updateWeaponTest() {
         long id = 20;
         
         try {
@@ -100,16 +101,48 @@ public class WeaponServiceImplTest {
         weaponService.update(weaponDto);
         ArgumentCaptor<Weapon> captor2 = ArgumentCaptor.forClass(Weapon.class);
         verify(weaponDao).updateWeapon(captor2.capture());
+        verify(weaponDao, never()).deleteWeapon(any(Weapon.class));
+        //verify(weaponDao, never()).createWeapon(any(Weapon.class));
+        
         
         assertEquals(captor2.getValue().getName(), weaponDto.getName());
         assertEquals(captor2.getValue().getGunReach(), weaponDto.getGunReach());
         assertEquals(captor2.getValue().getAmmunition(), weaponDto.getAmmunition());
                
-        
+        doThrow(DAOException.class).when(weaponDao).updateWeapon(any(Weapon.class));
         
     }
 
 
+    @Test
+    public void deleteWeaponTest() {
+        
+        try {
+            weaponService.delete(null);
+            fail();
+        } catch (NullPointerException ex) {
+        }
+    
+        WeaponDTO weaponDto = new WeaponDTO();
+        weaponDto.setId(1);
+        weaponService.delete(weaponDto);
+        
+        verify(weaponDao).deleteWeapon(WeaponTransformation.transformToEntity(weaponDto));
+        verify(weaponDao, never()).createWeapon(any(Weapon.class));
+        verify(weaponDao, never()).updateWeapon(any(Weapon.class));
+        
+    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
