@@ -27,11 +27,11 @@ public class HuntingExperienceDTO {
         this.id = id;
     }
 
-    public void setWeapon(WeaponDTO weaponDTO) {
+    public void setWeapon(WeaponDTO weapon) {
         this.weapon = weapon;
     }
 
-    public void setCreature(CreatureDTO creatureDTO) {
+    public void setCreature(CreatureDTO creature) {
         this.creature = creature;
     }
 
@@ -78,9 +78,7 @@ public class HuntingExperienceDTO {
 
         final HuntingExperienceDTO huntExpDTO = (HuntingExperienceDTO) o;
 
-        if (!new Long(id).equals(new Long(huntExpDTO.id))) return false;
-        if (!weapon.equals(huntExpDTO.weapon)) return false;
-        if (!creature.equals(huntExpDTO.creature))return false;
+        if (!new Long(id).equals(huntExpDTO.id)) return false;
         if (!dateOfExperience.equals(huntExpDTO.dateOfExperience)) return false;
         if (!(efficiency==huntExpDTO.efficiency)) return false;
         if (!description.equals(huntExpDTO.description)) return false;

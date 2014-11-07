@@ -57,7 +57,7 @@
     </bean>
     
     <!-- HUNTINGEXPERIENCE -->    
-    <bean id="huntingExperienceSerice" 
+    <bean id="huntingExperienceService" 
           class="cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceServiceImpl">
         <property name="huntingExperienceDAO" ref="huntingExperienceDAO"/>
     </bean>

@@ -9,14 +9,18 @@ package cz.muni.fi.pa165.creaturehunting.service;
 import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
+import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAO;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
+import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureServiceImpl;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureTransformation;
 import cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceDTO;
 import cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceServiceImpl;
 import cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceTransformation;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
+import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponServiceImpl;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponTransformation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,12 +29,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.Assert;
 import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import static org.mockito.Matchers.any;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.dao.DataAccessException;
 
@@ -41,10 +51,17 @@ import org.springframework.dao.DataAccessException;
 public class HuntingExperienceServiceImplTest {
     
     @InjectMocks
-    private HuntingExperienceServiceImpl huntExpSerImpl;
+    private HuntingExperienceServiceImpl huntExpService;    
     
     @Mock
     private HuntingExperienceDAO huntingExperienceDAO;
+    
+    @Mock
+    private WeaponDAO weaponDAO;
+    
+    @Mock
+    private CreatureDAO creatureDAO;    
+    
     
     private HuntingExperienceDTO huntExperienceDTO;
     private CreatureDTO creatureDTO;
@@ -54,9 +71,12 @@ public class HuntingExperienceServiceImplTest {
     public void initMock(){
         MockitoAnnotations.initMocks(this);
         
+        huntExpService = new HuntingExperienceServiceImpl(huntingExperienceDAO);
+        
         huntExperienceDTO = new HuntingExperienceDTO();
         creatureDTO =  new CreatureDTO();
         weaponDTO = new WeaponDTO();
+        
         
         List<Creature> listC = new ArrayList();
         Creature creature = new Creature();
@@ -103,7 +123,8 @@ public class HuntingExperienceServiceImplTest {
         try {
             date = sdf.parse(dateStr);
         } catch (ParseException ex) {
-            Logger.getLogger(HuntingExperienceServiceImplTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HuntingExperienceServiceImplTest.class.getName()).
+                    log(Level.SEVERE, null, ex);
         }
         huntExperienceDTO.setDateOfExperience(date);
         huntExperienceDTO.setDescription("Headshot!");  
@@ -111,10 +132,11 @@ public class HuntingExperienceServiceImplTest {
     
     @Test
     public void testFindByIdExcept(){
-        System.out.println("--- Testing finding by id Exception ---"); 
+        System.out.println("--- Testing finding by id Exception ---");        
         try {
             doThrow(DAOException.class).when(huntingExperienceDAO).
                     findHuntingExperience(huntExperienceDTO.getId());
+            huntExpService.findHuntExp(huntExperienceDTO.getId()); 
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
@@ -123,11 +145,12 @@ public class HuntingExperienceServiceImplTest {
     }
     
     @Test
-    public void testFindAll(){
+    public void testFindAllEcept(){
         System.out.println("--- Testing findingAll Exception ---"); 
         try {
             doThrow(DAOException.class).when(huntingExperienceDAO).
                     findAllHuntingExperience();
+            huntExpService.findAllHuntExp();
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
@@ -142,6 +165,7 @@ public class HuntingExperienceServiceImplTest {
             doThrow(DAOException.class).when(huntingExperienceDAO).
                     createHuntingExperience(HuntingExperienceTransformation.
                             transformToEntity(huntExperienceDTO));
+            huntExpService.create(huntExperienceDTO);
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
@@ -156,6 +180,7 @@ public class HuntingExperienceServiceImplTest {
             doThrow(DAOException.class).when(huntingExperienceDAO).
                     updateHuntingExperience(HuntingExperienceTransformation.
                             transformToEntity(huntExperienceDTO));
+            huntExpService.update(huntExperienceDTO);
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
@@ -170,6 +195,7 @@ public class HuntingExperienceServiceImplTest {
             doThrow(DAOException.class).when(huntingExperienceDAO).
                     deleteHuntingExperience(HuntingExperienceTransformation.
                             transformToEntity(huntExperienceDTO));
+            huntExpService.delete(huntExperienceDTO);
         } catch (DAOException da) {
             fail("Wrong exception, covering in not functional.");
         } catch(DataAccessException ex){
@@ -181,7 +207,7 @@ public class HuntingExperienceServiceImplTest {
     public void testFindByIdNull(){
         System.out.println("--- Testing Null parametr Exception ---");
         try {
-            huntExpSerImpl.findHuntExp(null);       
+            huntExpService.findHuntExp(null);       
             fail("Nothing throwned!");
         } catch(NullPointerException ex){
             System.out.println("Awaiting exception Null: "+ex.getMessage());
@@ -192,7 +218,7 @@ public class HuntingExperienceServiceImplTest {
     public void testCreateNull(){
         System.out.println("--- Testing Null parametr Exception ---");
         try {
-            huntExpSerImpl.create(null);       
+            huntExpService.create(null);       
             fail("Nothing throwned!");
         } catch(NullPointerException ex){
             System.out.println("Awaiting exception Null: "+ex.getMessage());
@@ -203,7 +229,7 @@ public class HuntingExperienceServiceImplTest {
     public void testUpdateNull(){
         System.out.println("--- Testing Null parametr Exception ---");
         try {
-            huntExpSerImpl.update(null);       
+            huntExpService.update(null);       
             fail("Nothing throwned!");
         } catch(NullPointerException ex){
             System.out.println("Awaiting exception Null: "+ex.getMessage());
@@ -214,12 +240,62 @@ public class HuntingExperienceServiceImplTest {
     public void testDeleteNull(){
         System.out.println("--- Testing Null parametr Exception ---");
         try {
-            huntExpSerImpl.delete(null);       
+            huntExpService.delete(null);       
             fail("Nothing throwned!");
         } catch(NullPointerException ex){
             System.out.println("Awaiting exception Null: "+ex.getMessage());
         } 
     }
+    
+    @Test
+    public void testCreate(){
+        System.out.println("--- Test Update ---");
+        huntExpService.create(huntExperienceDTO);
+        verify(huntingExperienceDAO).
+                createHuntingExperience(HuntingExperienceTransformation.
+                        transformToEntity(huntExperienceDTO));
+    }
+    
+    @Test
+    public  void testUpdate(){
+        System.out.println("--- Test Update ---");
+        huntExpService.update(huntExperienceDTO);
+        
+        verify(huntingExperienceDAO).
+                updateHuntingExperience(HuntingExperienceTransformation.
+                        transformToEntity(huntExperienceDTO));
+    }
+    
+    @Test
+    public void testDelete(){
+        System.out.println("--- Test Delete ---");
+        huntExpService.delete(huntExperienceDTO);
+        
+        verify(huntingExperienceDAO).
+                deleteHuntingExperience(HuntingExperienceTransformation.
+                        transformToEntity(huntExperienceDTO));
+    }
+    
+    @Test
+    public void testFindById(){
+        System.out.println("--- Test Find By Id ---");
+        huntExpService.create(huntExperienceDTO);
+        
+        when(huntingExperienceDAO.findHuntingExperience(any(Long.class))).
+                thenReturn(HuntingExperienceTransformation.
+                        transformToEntity(huntExperienceDTO));
+        verify(huntingExperienceDAO).findHuntingExperience(huntExperienceDTO.getId());
+    }
+    
+    @Test
+    public void testFindAll(){
+        System.out.println("--- Test Find All ---");
+        huntExpService.create(huntExperienceDTO);
+        huntExpService.findAllHuntExp();
+        verify(huntingExperienceDAO).findAllHuntingExperience();
+    }
+    
+    
     
     
     
