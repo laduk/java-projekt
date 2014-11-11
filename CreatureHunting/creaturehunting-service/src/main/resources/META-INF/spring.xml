@@ -28,18 +28,18 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-    <!-- CREATURE -->
+    <!-- CREATURE -->    
     <bean id="creatureService" class="cz.muni.fi.pa165.creaturehunting.service.creature.CreatureServiceImpl">
-        <constructor-arg ref="creatureDAO"/>
+        <property name="creatureDAO" ref="creatureDAO"/>
     </bean>
     
     <bean id="creatureDAO" class="cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl">
-        <constructor-arg ref="entityManager"/>
+          <constructor-arg ref="entityManager"/>
     </bean>
     
     <!-- AREA -->
     <bean id="areaService" class="cz.muni.fi.pa165.creaturehunting.service.area.AreaServiceImpl">
-        <constructor-arg ref="areaDAO"/>
+        <property name="areaDao" ref="areaDAO"/>
     </bean>
     
     <bean id="areaDAO" class="cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAOImpl">

@@ -6,13 +6,11 @@
 
 package cz.muni.fi.pa165.creaturehunting.service.huntingexperience;
 
-import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperience;
 import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAO;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureTransformation;
-import cz.muni.fi.pa165.creaturehunting.service.exception.DataAccessExceptionService;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponTransformation;
 import java.util.ArrayList;
@@ -42,41 +40,26 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         if (huntExpDTO==null) {
             throw new NullPointerException("HuntExpDTO must not be null!");
         }
-        HuntingExperience huntExp = new HuntingExperience();
-        huntExp = HuntingExperienceTransformation.transformToEntity(huntExpDTO);
-        try {
-            hunExpDAO.createHuntingExperience(huntExp);
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Transformation was not "
-                    + "succesful or data was corrupted.",e);
-        }
+        HuntingExperience huntExp =HuntingExperienceTransformation.
+                transformToEntity(huntExpDTO);
+        hunExpDAO.createHuntingExperience(huntExp);
     }
 
     public void update(HuntingExperienceDTO huntExpDTO) {
         if (huntExpDTO==null) {
             throw new NullPointerException("HuntExpDTO must not be null!");
         }
-        HuntingExperience huntExp = new HuntingExperience();
-        huntExp = HuntingExperienceTransformation.transformToEntity(huntExpDTO);
-        try {
-            hunExpDAO.updateHuntingExperience(huntExp);
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Transformation was not "
-                    + "succesful or data was corrupted.",e);
-        }
+        HuntingExperience huntExp =  HuntingExperienceTransformation.
+                transformToEntity(huntExpDTO);
+        hunExpDAO.updateHuntingExperience(huntExp);
     }
 
     public void delete(HuntingExperienceDTO huntExpDTO) {
         if (huntExpDTO==null) {
             throw new NullPointerException("HuntExpDTO must not be null!");
         }
-        try {
-            hunExpDAO.deleteHuntingExperience(HuntingExperienceTransformation.
-                    transformToEntity(huntExpDTO));
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Transformation was not "
-                    + "succesful or data was corrupted.",e);
-        }
+        hunExpDAO.deleteHuntingExperience(HuntingExperienceTransformation.
+                    transformToEntity(huntExpDTO));        
     }
 
     public HuntingExperienceDTO findHuntExp(Long id) {
@@ -84,13 +67,7 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
             throw new NullPointerException("Id must not null!");
         }
         
-        HuntingExperience huntExp = new HuntingExperience();
-        try {
-            huntExp = hunExpDAO.findHuntingExperience(id);
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Transformation was not"
-                    + " succesful or data was corrupted.",e);
-        }
+        HuntingExperience huntExp = hunExpDAO.findHuntingExperience(id);       
         
         HuntingExperienceDTO huntExpDTO = HuntingExperienceTransformation.
                 transformToDTO(huntExp);
@@ -99,13 +76,7 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
 
     public List<HuntingExperienceDTO> findAllHuntExp() {
         List<HuntingExperienceDTO> listHuntExpsDTO = new ArrayList<HuntingExperienceDTO>();
-        List<HuntingExperience> listHuntExps = new ArrayList<HuntingExperience>();
-        try {
-            listHuntExps = hunExpDAO.findAllHuntingExperience();
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Transformation was not "
-                    + "succesful or data was corrupted.",e);
-        }
+        List<HuntingExperience> listHuntExps = hunExpDAO.findAllHuntingExperience();    
         
         for(HuntingExperience huntExp : listHuntExps){
             HuntingExperienceDTO huntExpDTO = HuntingExperienceTransformation.
@@ -119,14 +90,8 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         List<WeaponDTO> listWeaponsDTO = new ArrayList<WeaponDTO>();
         List<Weapon> listWeapons = new ArrayList<Weapon>();
         if (creatureDTO!=null && effeciency>=0 &&  effeciency<=100) {
-            try {
-                listWeapons = hunExpDAO.findEfficientWeapons(CreatureTransformation.
-                        transformToEntity(creatureDTO), effeciency);
-            } catch (DAOException e) {
-                throw new DataAccessExceptionService("Transformation was not"
-                        + " succesful or data was corrupted.",e);
-            }
-            
+            listWeapons = hunExpDAO.findEfficientWeapons(CreatureTransformation.
+                    transformToEntity(creatureDTO), effeciency);        
         }else{
             throw new NullPointerException("Creature must not be null and"
                     + " effeciency must be in %");

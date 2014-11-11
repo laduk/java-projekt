@@ -4,10 +4,8 @@
  */
 package cz.muni.fi.pa165.creaturehunting.service.weapon;
 
-import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
-import cz.muni.fi.pa165.creaturehunting.service.exception.DataAccessExceptionService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +39,7 @@ public class WeaponServiceImpl implements WeaponService {
         if (weaponDTO == null) {
             throw new NullPointerException("WeaponDTO argument for creation of entity cannot be null.");
         }
-
-        try {
-            weaponDao.createWeapon(WeaponTransformation.transformToEntity(weaponDTO));
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Transformation was not "
-                    + "succesful or data was corrupted.", e);
-        }
+        weaponDao.createWeapon(WeaponTransformation.transformToEntity(weaponDTO));      
     }
 
     /**
@@ -59,13 +51,7 @@ public class WeaponServiceImpl implements WeaponService {
         if (weaponDTO == null) {
             throw new NullPointerException("WeaponDTO argument for updating of entity cannot be null.");
         }
-
-        try {
-            weaponDao.updateWeapon(WeaponTransformation.transformToEntity(weaponDTO));
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Transformation was not "
-                    + "succesful or data was corrupted.", e);
-        }
+        weaponDao.updateWeapon(WeaponTransformation.transformToEntity(weaponDTO));
     }
 
     /**
@@ -77,12 +63,7 @@ public class WeaponServiceImpl implements WeaponService {
         if (weaponDTO == null) {
             throw new NullPointerException("WeaponDTO argument for deleting of entity cannot be null.");
         }
-        try {
-            weaponDao.deleteWeapon(WeaponTransformation.transformToEntity(weaponDTO));
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Transformation was not "
-                    + "succesful or data was corrupted.", e);
-        }
+        weaponDao.deleteWeapon(WeaponTransformation.transformToEntity(weaponDTO));      
     }
 
     /**
@@ -96,14 +77,9 @@ public class WeaponServiceImpl implements WeaponService {
             throw new IllegalArgumentException("ID of the wanted weapon cannot be negative");
         }
 
-        WeaponDTO weaponDto = new WeaponDTO();
-        try {
-             weaponDto = WeaponTransformation.transformToDTO(weaponDao.findWeapon(id));
-        } catch (DAOException e) {
-            throw new DataAccessExceptionService("Fail to get or tranform data.",e);
-        }
-        return weaponDto;
-                
+        WeaponDTO weaponDto  = WeaponTransformation.transformToDTO(weaponDao.findWeapon(id));
+
+        return weaponDto;                
     }
 
     /**
@@ -113,13 +89,7 @@ public class WeaponServiceImpl implements WeaponService {
      */
     public List<WeaponDTO> findAllWeapons() {
 
-        List<Weapon> weapons = new ArrayList<Weapon>();
-        
-        try{
-            weapons = weaponDao.findAllWeapons();
-        } catch (DAOException ex){
-            throw new DataAccessExceptionService("Fail to get or tranform data.");
-        }
+        List<Weapon> weapons = weaponDao.findAllWeapons();
         List<WeaponDTO> weaponsDto = new ArrayList<WeaponDTO>();
 
         for (Weapon wep : weapons) {
