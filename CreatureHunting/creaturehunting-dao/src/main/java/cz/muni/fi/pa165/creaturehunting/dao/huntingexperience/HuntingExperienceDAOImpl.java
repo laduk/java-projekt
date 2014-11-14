@@ -1,16 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.dao.huntingexperience;
 
 import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
-import java.util.ArrayList;
-
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
@@ -20,6 +15,7 @@ import javax.persistence.Query;
  */
 public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
 
+    @PersistenceContext
     private EntityManager entityManager;
 
     /**
@@ -46,7 +42,7 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
             throw new IllegalArgumentException("Experience is not created yet, its ID is not > 0.");
         }
         try {
-            entityManager.persist(exp);
+            entityManager.merge(exp);
         } catch (PersistenceException e) {
             throw new DAOException(e);
         }
@@ -54,7 +50,8 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
 
     public void deleteHuntingExperience(HuntingExperience exp) throws DAOException {
         try {
-            entityManager.remove(exp);
+            HuntingExperience managedExp = entityManager.find(HuntingExperience.class, exp.getId());
+            entityManager.remove(managedExp);
         } catch (PersistenceException e) {
             throw new DAOException(e);
         }

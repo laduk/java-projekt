@@ -49,7 +49,7 @@ public class Area implements Serializable {
      * Creatures that were spotted in this area
      */
     @ManyToMany(mappedBy="listOfAreas")
-    List<Creature> listOfCreatures;
+    private List<Creature> listOfCreatures;
     
     public long getId() {
         return id;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting;
 
 import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
@@ -16,7 +11,6 @@ import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAOImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -53,14 +47,12 @@ public class HuntingExperienceDAOImplTest {
     
     @Before
     public void setUp() {
-        //EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
         entMan = entManFact.createEntityManager();
     }
     
     @After
     public void tearDown() {        
         entMan.close();
-        //entMan.getEntityManagerFactory().close();//afterclass
     }
 
     /**
@@ -123,6 +115,9 @@ public class HuntingExperienceDAOImplTest {
         entMan.getTransaction().begin();
         huntingExpDAO.createHuntingExperience(exp);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
+        huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
         
         assertFalse("Test whether HuntingExperience was saved and id is set", exp.getId()<=0);
         
@@ -135,10 +130,13 @@ public class HuntingExperienceDAOImplTest {
         foundExp.setEfficiency(altEff);
         huntingExpDAO.updateHuntingExperience(foundExp);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
+        huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
         
         HuntingExperience exp2 = huntingExpDAO.findHuntingExperience(foundExp.getId());
-        assertEquals("Has the description been updated.", exp.getDescription(), exp2.getDescription());
-        assertEquals("Has the efficiency been updated.", exp.getEfficiency(), exp2.getEfficiency());
+        assertEquals("Has the description been updated.", foundExp.getDescription(), exp2.getDescription());
+        assertEquals("Has the efficiency been updated.", foundExp.getEfficiency(), exp2.getEfficiency());
     }
 
     /**
@@ -155,17 +153,21 @@ public class HuntingExperienceDAOImplTest {
         exp.setDescription("Killing a dead zombie.");
         exp.setEfficiency(20);
         HuntingExperienceDAO huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
-        WeaponDAO weaponDAO = new WeaponDAOImpl(entMan);
-        CreatureDAO creatureDAO = new CreatureDAOImpl(entMan);
         
         entMan.getTransaction().begin();
         huntingExpDAO.createHuntingExperience(exp);
         entMan.getTransaction().commit();
         long id = exp.getId();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
+        huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
         
         entMan.getTransaction().begin();
         huntingExpDAO.deleteHuntingExperience(exp);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
+        huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
         
         assertNull("Whether object with id is deleted.", huntingExpDAO.findHuntingExperience(id));
     }
@@ -188,6 +190,9 @@ public class HuntingExperienceDAOImplTest {
         entMan.getTransaction().begin();
         huntingExpDAO.createHuntingExperience(exp);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
+        huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
         
         long id = exp.getId();
         
@@ -203,8 +208,7 @@ public class HuntingExperienceDAOImplTest {
         System.out.println("findAllHuntingExperience");
         HuntingExperienceDAO huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
         
-        List<HuntingExperience> expsOld = new ArrayList<HuntingExperience>();
-        expsOld = huntingExpDAO.findAllHuntingExperience();
+        List<HuntingExperience> expsOld = huntingExpDAO.findAllHuntingExperience();
         
         HuntingExperience exp = new HuntingExperience();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
@@ -226,9 +230,11 @@ public class HuntingExperienceDAOImplTest {
         huntingExpDAO.createHuntingExperience(exp);
         huntingExpDAO.createHuntingExperience(exp2);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
+        huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
         
-        List<HuntingExperience> exps = new ArrayList<HuntingExperience>();
-        exps = huntingExpDAO.findAllHuntingExperience();
+        List<HuntingExperience> exps = huntingExpDAO.findAllHuntingExperience();
         
         assertTrue("If exactly 2 HuntingExperience-s were created", expsOld.size()+2 ==  exps.size());
     }

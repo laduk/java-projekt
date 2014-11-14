@@ -39,7 +39,7 @@ public class App {
         hulk = creatureService.findAllCreaturesByName("Hulk").get(0);
         
         hulk.setHeight(200);
-        //creatureService.update(hulk);
+        creatureService.update(hulk);
         hulk = creatureService.findAllCreaturesByName("Hulk").get(0);
         
         System.out.println(hulk);

@@ -37,14 +37,12 @@ public class WeaponDAOTest {
     
     @Before
     public void setUp() {
-        //EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
         entityManager = entManFact.createEntityManager();
     }
     
     @After
     public void tearDown() {        
         entityManager.close();
-        //entityManager.getEntityManagerFactory().close();//afterclass
     }
     
     /**
@@ -56,20 +54,6 @@ public class WeaponDAOTest {
         Weapon weapon = new Weapon();
         weapon.setId(100);
         weaponDAO.createWeapon(weapon);
-    }
-    
-    /**
-     * Test createWeapon generate id.
-     */
-    @Test
-    public void testGenerateIdCreateWeapon() {
-        WeaponDAO weaponDAO = new WeaponDAOImpl(entityManager);
-        entityManager.getTransaction().begin();
-        Weapon weapon = new Weapon();
-        weapon.setName("Any weapon");
-        weaponDAO.createWeapon(weapon);
-        entityManager.getTransaction().commit();
-        Assert.assertTrue(weapon.getId() > 0);
     }
     
     /**
@@ -90,113 +74,68 @@ public class WeaponDAOTest {
     }
 
     /**
-     * Test createWeapon for attribute name.
+     * Test createWeapon and findWeapon for create new weapon.
      */
     @Test
-    public void testStoreNameWeapon() {
+    public void testCreateFindWeapon() {
         WeaponDAO weaponDAO = new WeaponDAOImpl(entityManager);
         entityManager.getTransaction().begin();
         Weapon rock = new Weapon();
         rock.setName("Rock");
+        rock.setGunReach(10);
+        rock.setAmmunition("Any rock");
         weaponDAO.createWeapon(rock);
         entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManager = entManFact.createEntityManager();
+        weaponDAO = new WeaponDAOImpl(entityManager);
         Weapon weapon = weaponDAO.findWeapon(rock.getId());
-        Assert.assertEquals(weapon.getName(), "Rock");
+        Assert.assertTrue("Wrong id of created weapon.",
+                weapon.getId() > 0);
+        Assert.assertEquals("Wrong name of created weapon.",
+                weapon.getName(), "Rock");
+        Assert.assertEquals("Wrong runReach of created weapon.",
+                weapon.getGunReach(), 10);
+        Assert.assertEquals("Wrong ammunition of created weapon",
+                weapon.getAmmunition(), "Any rock");
     }
 
     /**
-     * Test updateWeapon for attribute name.
+     * Test updateWeapon and findWeapon for update exist weapon.
      */
     @Test
-    public void testUpdateNameWeapon() {
+    public void testUpdateFindWeapon() {
         WeaponDAO weaponDAO = new WeaponDAOImpl(entityManager);
         entityManager.getTransaction().begin();
-        Weapon gun = new Weapon();
-        gun.setName("Gun");
-        weaponDAO.createWeapon(gun);
+        Weapon riffle = new Weapon();
+        riffle.setName("Rifle");
+        riffle.setGunReach(25);
+        riffle.setAmmunition("12 mm");
+        weaponDAO.createWeapon(riffle);
         entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManager = entManFact.createEntityManager();
+        weaponDAO = new WeaponDAOImpl(entityManager);
         entityManager.getTransaction().begin();
-        gun.setName("Rifle");
-        weaponDAO.updateWeapon(gun);
+        riffle.setName("New Riffle");
+        riffle.setGunReach(50);
+        riffle.setAmmunition("9 mm");
+        weaponDAO.updateWeapon(riffle);
         entityManager.getTransaction().commit();
-        Weapon weapon = weaponDAO.findWeapon(gun.getId());
-        Assert.assertEquals(weapon.getName(), "Rifle");
+        entityManager.close();
+        entityManager = entManFact.createEntityManager();
+        weaponDAO = new WeaponDAOImpl(entityManager);
+        Weapon weapon = weaponDAO.findWeapon(riffle.getId());
+        Assert.assertEquals("Wrong name of updated weapon.",
+                weapon.getName(), "New Riffle");
+        Assert.assertEquals("Wrong runReach of updated weapon.",
+                weapon.getGunReach(), 50);
+        Assert.assertEquals("Wrong ammunition of updated weapon",
+                weapon.getAmmunition(), "9 mm");
     }
 
     /**
-     * Test createWeapon for attribute gunReach.
-     */
-    @Test
-    public void testStoreGunReachWeapon() {
-        WeaponDAO weaponDAO = new WeaponDAOImpl(entityManager);
-        entityManager.getTransaction().begin();
-        Weapon granade = new Weapon();
-        granade.setName("Granade");
-        granade.setGunReach(20);
-        weaponDAO.createWeapon(granade);
-        entityManager.getTransaction().commit();
-        Weapon weapon = weaponDAO.findWeapon(granade.getId());
-        Assert.assertEquals(weapon.getGunReach(), 20);
-    }
-    
-    /**
-     * Test updateWeapon for attribute gunReach.
-     */
-    @Test
-    public void testUpdateGunReachWeapon() {
-        WeaponDAO weaponDAO = new WeaponDAOImpl(entityManager);
-        entityManager.getTransaction().begin();
-        Weapon gun = new Weapon();
-        gun.setName("No name");
-        gun.setGunReach(25);
-        weaponDAO.createWeapon(gun);
-        entityManager.getTransaction().commit();
-        entityManager.getTransaction().begin();
-        gun.setGunReach(50);
-        weaponDAO.updateWeapon(gun);
-        entityManager.getTransaction().commit();
-        Weapon weapon = weaponDAO.findWeapon(gun.getId());
-        Assert.assertEquals(weapon.getGunReach(), 50);
-    }
-    
-    /**
-     * Test createWeapon for attribute ammunition.
-     */
-    @Test
-    public void testStoreAmmunitionWeapon() {
-        WeaponDAO weaponDAO = new WeaponDAOImpl(entityManager);
-        entityManager.getTransaction().begin();
-        Weapon revolver = new Weapon();
-        revolver.setName("Revolver");
-        revolver.setAmmunition(".357 Magnum");
-        weaponDAO.createWeapon(revolver);
-        entityManager.getTransaction().commit();
-        Weapon weapon = weaponDAO.findWeapon(revolver.getId());
-        Assert.assertEquals(weapon.getAmmunition(), ".357 Magnum");
-    }
-
-    /**
-     * Test updateWeapon for attribute ammunition.
-     */
-    @Test
-    public void testUpdateAmmunitionWeapon() {
-        WeaponDAO weaponDAO = new WeaponDAOImpl(entityManager);
-        entityManager.getTransaction().begin();
-        Weapon gun = new Weapon();
-        gun.setName("Weapon");
-        gun.setAmmunition("12 mm");
-        weaponDAO.createWeapon(gun);
-        entityManager.getTransaction().commit();
-        entityManager.getTransaction().begin();
-        gun.setAmmunition("9 mm");
-        weaponDAO.updateWeapon(gun);
-        entityManager.getTransaction().commit();
-        Weapon weapon = weaponDAO.findWeapon(gun.getId());
-        Assert.assertEquals(weapon.getAmmunition(), "9 mm");
-    }
-    
-    /**
-     * Test deleteWeapon. When delete weapon, weapon must not have id > 0.
+     * Test deleteWeapon for delete created weapon.
      */
     @Test
     public void testDeleteWeapon() {
@@ -206,6 +145,9 @@ public class WeaponDAOTest {
         chainsaw.setName("Chainsaw");
         weaponDAO.createWeapon(chainsaw);
         entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManager = entManFact.createEntityManager();
+        weaponDAO = new WeaponDAOImpl(entityManager);
         entityManager.getTransaction().begin();
         long id = chainsaw.getId();
         weaponDAO.deleteWeapon(chainsaw);
@@ -232,5 +174,5 @@ public class WeaponDAOTest {
         List <Weapon> newWeapons = weaponDAO.findAllWeapons();
         Assert.assertTrue(oldWeapons.size() + 2 == newWeapons.size());
     }
-
+    
 }

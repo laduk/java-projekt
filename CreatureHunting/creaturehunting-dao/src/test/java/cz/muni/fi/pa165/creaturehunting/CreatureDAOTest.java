@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting;
 
 import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
@@ -31,33 +26,31 @@ import static org.junit.Assert.*;
 public class CreatureDAOTest {
     
     private EntityManager entMan;
-    private static EntityManagerFactory entManFact; //pridane Lada - 4.11.
+    private static EntityManagerFactory entManFact;
        
     @BeforeClass
     public static void setUpClass() {        
-        entManFact = Persistence.createEntityManagerFactory("myUnit"); //pridane Lada - 4.11.
+        entManFact = Persistence.createEntityManagerFactory("myUnit");
     }
     
     @AfterClass
     public static void tearDownClass() {
-        if(entManFact.isOpen()) entManFact.close(); //afterclass
+        if(entManFact.isOpen()) entManFact.close();
     }
     
     @Before //toto se dela pred kazdym testem
     public void setUp() {
-        //EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
         entMan = entManFact.createEntityManager();
     }
     
     @After
     public void tearDown() {        
         entMan.close();
-        //entMan.getEntityManagerFactory().close();//afterclass
     }
 
     
     /**
-     * Test of right parametr.
+     * Test of right parameter.
      */
     @Test
     public void testAgilityPec(){
@@ -102,8 +95,10 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         areas.createArea(area);
         entMan.getTransaction().commit();
-              
+        entMan.close();
         
+        entMan = entManFact.createEntityManager();
+        areas = new AreaDAOImpl(entMan);
         Area area2 = new Area();
         area2.setName("Brno");
         area2.setDescription("Place for odd beings.");
@@ -113,6 +108,8 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         areas.createArea(area2);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
         
         List<Area> places = new ArrayList<Area>();
         places.add(area);
@@ -144,6 +141,8 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         areas.createArea(area);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
         
         List<Area> place = new ArrayList<Area>();
         place.add(area);
@@ -159,7 +158,10 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         creature.createCreature(vampire);
         entMan.getTransaction().commit();
+        entMan.close();
         
+        entMan = entManFact.createEntityManager();
+        creature = new CreatureDAOImpl(entMan);
         vampire.setName("Dracula");
         entMan.getTransaction().begin();
         creature.updateCreature(vampire);
@@ -184,6 +186,8 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         areas.createArea(area);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
         
         List<Area> place = new ArrayList<Area>();
         place.add(area);
@@ -198,15 +202,17 @@ public class CreatureDAOTest {
         CreatureDAO creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
         creature.createCreature(vampire);
-        entMan.getTransaction().commit();        
+        entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
         long id = vampire.getId();
         
+        creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
         creature.deleteCreature(vampire);
         entMan.getTransaction().commit();
         
         assertNull("Whether object with id is deleted.", creature.findCreature(id));
-
     }
 
     /**
@@ -225,6 +231,8 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         areas.createArea(area);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
         
         List<Area> place = new ArrayList<Area>();
         place.add(area);
@@ -240,14 +248,16 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         creature.createCreature(vampire);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
         
         long id = vampire.getId();
         
+        creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
         Creature vampireFind = creature.findCreature(id);
         entMan.getTransaction().commit();
         assertEquals("Whether has been found proper creature.",vampire, vampireFind);
-
     }
 
     /**
@@ -266,6 +276,8 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         areas.createArea(area);
         entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
         
         List<Area> place = new ArrayList<Area>();
         place.add(area);
@@ -288,11 +300,17 @@ public class CreatureDAOTest {
         entMan.getTransaction().begin();
         creature.createCreature(vampire);
         entMan.getTransaction().commit();
+        entMan.close();
         
+        entMan = entManFact.createEntityManager();
+        creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
         creature.createCreature(slave);
         entMan.getTransaction().commit();
-       
+        entMan.close();
+        
+        entMan = entManFact.createEntityManager();
+        creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
         List<Creature> creat = new ArrayList<Creature>();
         creat.addAll(creature.findAllCreatures());

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.dao.creature;
 
 import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
@@ -49,7 +44,7 @@ public class CreatureDAOImpl implements CreatureDAO {
             throw new IllegalArgumentException("Creature is not created yet, the creature ID is not > 0.");
         }
         try {
-            entityManager.persist(creature);
+            entityManager.merge(creature);
         } catch (PersistenceException e) {
             throw new DAOException(e);
         }
@@ -58,7 +53,8 @@ public class CreatureDAOImpl implements CreatureDAO {
     @Override
     public void deleteCreature(Creature creature) throws DAOException {
         try {
-            entityManager.remove(creature);
+            Creature managedCreature = entityManager.find(Creature.class, creature.getId());
+            entityManager.remove(managedCreature);
         } catch (PersistenceException e) {
             throw new DAOException(e);
         }

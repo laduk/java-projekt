@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting;
 
 import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
@@ -33,7 +29,7 @@ import org.junit.Test;
  */
 public class AreaDAOTest {
 
-    private EntityManager entityManager;
+    private static EntityManager entityManager;
     private static EntityManagerFactory entManFact; //pridane Lada - 4.11.
        
     @BeforeClass
@@ -48,18 +44,16 @@ public class AreaDAOTest {
     
     @Before //toto se dela pred kazdym testem
     public void setUp() {
-        //EntityManagerFactory entManFact = Persistence.createEntityManagerFactory("myUnit");//beforeclass
         entityManager = entManFact.createEntityManager();
     }
     
     @After
     public void tearDown() {        
         entityManager.close();
-        //entMan.getEntityManagerFactory().close();//afterclass
     }
 
     /**
-     * Test createArea() method, specifically wheter area without creatures is
+     * Test createArea() method, specifically whether area without creatures is
      * correctly created and all parameters except listOfCreatures are stored
      * right way.
      */
@@ -75,17 +69,19 @@ public class AreaDAOTest {
         entityManager.getTransaction().begin();
         areaDAO.createArea(area3);
         entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManager = entManFact.createEntityManager();
+        areaDAO = new AreaDAOImpl(entityManager);
         assertFalse("Error in creating area", area3.getId() <= 0);
 
         Area testArea = areaDAO.findArea(area3.getId());
         Assert.assertEquals("Wrong name of created area", testArea.getName(), "Hell Mountains");
         Assert.assertEquals("Wrong description of created area", testArea.getDescription(), "Vulcanic tundra");
         Assert.assertEquals("Wrong acreage of created area", testArea.getAcreage(), 11.66, 0.001);
-
     }
 
     /**
-     * Test createArea() method, specifically wheter area with creatures is
+     * Test createArea() method, specifically whether area with creatures is
      * correctly created and parameter listOfCreatures is stored correctly.
      */
     @Test
@@ -108,23 +104,26 @@ public class AreaDAOTest {
         listOfCreatures.add(creature2);
         area4.setListOfCreatures(listOfCreatures);
 
-
+        
         entityManager.getTransaction().begin();
         creatureDAO.createCreature(creature);
         creatureDAO.createCreature(creature2);
         areaDAO.createArea(area4);
         entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManager = entManFact.createEntityManager();
+        areaDAO = new AreaDAOImpl(entityManager);
         assertFalse("Error in creating area with creatures", area4.getId() <= 0);
 
         Area testedArea = areaDAO.findArea(area4.getId());
         List<Creature> creatures = testedArea.getListOfCreatures();
-
+        
         Assert.assertEquals("Wrong name of created area", creatures.get(0), creature);
         Assert.assertEquals("Wrong name of created area", creatures.get(1), creature2);
     }
 
     /**
-     * Test updateArea() method - wheter all atributes are updated correctly.
+     * Test updateArea() method - whether all attributes are updated correctly.
      */
     @Test
     public void testUpdateArea() {
@@ -144,8 +143,10 @@ public class AreaDAOTest {
         entityManager.getTransaction().begin();
         areaDAO.createArea(area);
         entityManager.getTransaction().commit();
+        entityManager.close();
         
-
+        entityManager = entManFact.createEntityManager();
+        areaDAO = new AreaDAOImpl(entityManager);
         entityManager.getTransaction().begin();
         area.setName("Updated name");
         area.setDescription("Updated description");
@@ -168,12 +169,10 @@ public class AreaDAOTest {
 
         List<Creature> updatedCreatures = updatedArea.getListOfCreatures();
         Assert.assertEquals("Wrong name of created area", updatedCreatures.get(0), creature3);
-
-
     }
 
     /**
-     * Test deleteArea() method - wheter area is deleted correctly.
+     * Test deleteArea() method - whether area is deleted correctly.
      */
     @Test
     public void testDeleteArea() {
@@ -184,23 +183,23 @@ public class AreaDAOTest {
         entityManager.getTransaction().begin();
         areaDAO.createArea(area);
         entityManager.getTransaction().commit();
+        entityManager.close();
         
+        entityManager = entManFact.createEntityManager();
+        areaDAO = new AreaDAOImpl(entityManager);
         entityManager.getTransaction().begin();
         long id = area.getId();
         areaDAO.deleteArea(area);
         entityManager.getTransaction().commit();
         Assert.assertNull(areaDAO.findArea(id));
-
     }
 
     /**
-     * Test findArea() method - wheter stored area was subsequently found
+     * Test findArea() method - whether stored area was subsequently found
      * correctly.
      */
     @Test
     public void testFindArea() {
-
-        AreaDAO areaDAO = new AreaDAOImpl(entityManager);
         CreatureDAO creatureDAO = new CreatureDAOImpl(entityManager);
 
         Creature vampire = new Creature();
@@ -212,6 +211,9 @@ public class AreaDAOTest {
         entityManager.getTransaction().begin();
         creatureDAO.createCreature(vampire);
         entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManager = entManFact.createEntityManager();
+        AreaDAO areaDAO = new AreaDAOImpl(entityManager);
 
         Area area = new Area();
         area.setName("Brašov");
@@ -227,18 +229,20 @@ public class AreaDAOTest {
         entityManager.getTransaction().begin();
         areaDAO.createArea(area);
         entityManager.getTransaction().commit();
-
+        entityManager.close();
+        
+        entityManager = entManFact.createEntityManager();
+        areaDAO = new AreaDAOImpl(entityManager);
         entityManager.getTransaction().begin();
         long id = area.getId();
         Area foundArea = areaDAO.findArea(id);
         entityManager.getTransaction().commit();
 
         assertEquals("Whether has been found proper creature.", area, foundArea);
-
     }
 
     /**
-     * Test findAllAreas() method - wheter all stored areas were found
+     * Test findAllAreas() method - whether all stored areas were found
      * correctly.
      */
     @Test

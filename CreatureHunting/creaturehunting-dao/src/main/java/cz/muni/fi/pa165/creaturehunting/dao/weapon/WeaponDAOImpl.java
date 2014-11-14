@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.muni.fi.pa165.creaturehunting.dao.weapon;
 
 import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
@@ -18,7 +13,7 @@ import javax.persistence.Query;
  */
 public class WeaponDAOImpl implements WeaponDAO {
     
-    
+    @PersistenceContext
     private EntityManager entityManager;
     
     /**
@@ -45,7 +40,7 @@ public class WeaponDAOImpl implements WeaponDAO {
             throw new IllegalArgumentException("The weapon was not even created and id was not set.");
         }
         try {
-            entityManager.persist(weapon);
+            entityManager.merge(weapon);
         } catch (PersistenceException pe) {
             throw new DAOException(pe);
         }
@@ -53,7 +48,8 @@ public class WeaponDAOImpl implements WeaponDAO {
 
     public void deleteWeapon(Weapon weapon) throws DAOException {
         try {
-            entityManager.remove(weapon);
+            Weapon managedWeapon = entityManager.find(Weapon.class, weapon.getId());
+            entityManager.remove(managedWeapon);
         } catch (PersistenceException pe) {
             throw new DAOException(pe);
         }

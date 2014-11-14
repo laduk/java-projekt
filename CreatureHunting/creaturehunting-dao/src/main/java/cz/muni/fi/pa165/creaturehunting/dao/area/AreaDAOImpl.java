@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.creaturehunting.dao.area;
 import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
@@ -14,6 +15,7 @@ import javax.persistence.Query;
  */
 public class AreaDAOImpl implements AreaDAO {
     
+    @PersistenceContext
     private EntityManager entityManager;
 
     /**
@@ -42,7 +44,7 @@ public class AreaDAOImpl implements AreaDAO {
             throw new IllegalArgumentException("Area is not created yet, the area ID is not > 0.");
         }
         try {
-            entityManager.persist(area);
+            entityManager.merge(area);
         } catch (PersistenceException e) {
             throw new DAOException(e);
         }
@@ -51,7 +53,8 @@ public class AreaDAOImpl implements AreaDAO {
     @Override
     public void deleteArea(Area area) throws DAOException {
         try {
-            entityManager.remove(area);
+            Area managedArea = entityManager.find(Area.class, area.getId());
+            entityManager.remove(managedArea);
             area.setId(-1);
         } catch (PersistenceException e) {
             throw new DAOException(e);
