@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.creaturehunting;
+package cz.muni.fi.pa165.creaturehunting.dao;
 
 import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
