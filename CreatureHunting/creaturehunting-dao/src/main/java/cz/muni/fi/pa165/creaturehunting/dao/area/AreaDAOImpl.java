@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  * This class is implementation of AreaDAO by JDBC derby.
@@ -13,6 +14,7 @@ import javax.persistence.Query;
  *
  * @author Radoslav Zajonc
  */
+@Repository
 public class AreaDAOImpl implements AreaDAO {
     
     @PersistenceContext

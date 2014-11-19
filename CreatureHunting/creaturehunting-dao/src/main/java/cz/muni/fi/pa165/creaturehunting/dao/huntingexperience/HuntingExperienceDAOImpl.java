@@ -8,11 +8,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  * Implementation of interface of Data Access Object for HunntingExperience.
  * @author laduska
  */
+@Repository
 public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
 
     @PersistenceContext

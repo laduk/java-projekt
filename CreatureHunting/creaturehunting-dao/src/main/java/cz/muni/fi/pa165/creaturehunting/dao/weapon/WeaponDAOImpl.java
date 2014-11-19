@@ -6,11 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  * Implementation of interface of Data Access Object for weapon.
  * @author Fita
  */
+@Repository
 public class WeaponDAOImpl implements WeaponDAO {
     
     @PersistenceContext
