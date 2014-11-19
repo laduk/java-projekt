@@ -123,6 +123,8 @@ public class CreatureDAOTest {
         creature.createCreature(zombie);
         entMan.getTransaction().commit();
         assertFalse("Test whether creature was sez and id set",zombie.getId()<=0);
+        assertTrue("Creature doesn't associate areas.",
+                creature.findCreature(zombie.getId()).getListOfAreas().size() == 2);
     }
 
     /**

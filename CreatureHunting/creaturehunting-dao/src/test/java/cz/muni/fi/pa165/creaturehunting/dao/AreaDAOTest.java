@@ -99,10 +99,10 @@ public class AreaDAOTest {
         Creature creature2 = new Creature();
         creature2.setName("SuperDragon");
 
-        List<Creature> listOfCreatures = new ArrayList();
-        listOfCreatures.add(creature);
-        listOfCreatures.add(creature2);
-        area4.setListOfCreatures(listOfCreatures);
+        List<Area> listOfAreas = new ArrayList();
+        listOfAreas.add(area4);
+        creature.setListOfAreas(listOfAreas);
+        creature2.setListOfAreas(listOfAreas);
 
         
         entityManager.getTransaction().begin();
@@ -129,36 +129,37 @@ public class AreaDAOTest {
     public void testUpdateArea() {
         AreaDAO areaDAO = new AreaDAOImpl(entityManager);
         CreatureDAO creatureDAO = new CreatureDAOImpl(entityManager);
-
         entityManager.getTransaction().begin();
+        
         Creature creature3 = new Creature();
         creature3.setName("Giantic Troll");
-
         creatureDAO.createCreature(creature3);
-        entityManager.getTransaction().commit();
   
-                
         Area area = new Area();
         area.setName("Plains");
-        entityManager.getTransaction().begin();
         areaDAO.createArea(area);
+        
         entityManager.getTransaction().commit();
         entityManager.close();
-        
         entityManager = entManFact.createEntityManager();
         areaDAO = new AreaDAOImpl(entityManager);
+        creatureDAO = new CreatureDAOImpl(entityManager);
         entityManager.getTransaction().begin();
+        
         area.setName("Updated name");
         area.setDescription("Updated description");
         area.setAcreage(100.1);
-
-        List<Creature> creatures = new ArrayList<Creature>();
-        creatures.add(creature3);
-
-        area.setListOfCreatures(creatures);
-
         areaDAO.updateArea(area);
+        
+        List<Area> areas = new ArrayList<Area>();
+        areas.add(area);
+        creature3.setListOfAreas(areas);
+        creatureDAO.updateCreature(creature3);
+        
         entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManager = entManFact.createEntityManager();
+        areaDAO = new AreaDAOImpl(entityManager);
 
         Area updatedArea = areaDAO.findArea(area.getId());
         assertNotNull("Testing whether area was found", updatedArea);
