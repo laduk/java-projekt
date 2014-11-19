@@ -12,13 +12,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * Class representing hunting exprience.
+ * Class representing hunting experience.
  * @author laduska
  */
 
@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 public class HuntingExperience implements Serializable {
     
     /**
-     * Indentifier that is automatically generated.
+     * Identifier that is automatically generated.
      */    
     @Id
     @GeneratedValue
@@ -35,13 +35,15 @@ public class HuntingExperience implements Serializable {
     /**
      * Weapon that should be stored.
      */   
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="WEAPON_ID", referencedColumnName="ID")
     private Weapon weapon;
     
     /**
      * Creature that should be stored.
      */
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="CREATURE_ID", referencedColumnName="ID")
     private Creature creature;    
     
     /**
@@ -51,7 +53,7 @@ public class HuntingExperience implements Serializable {
     private Date dateOfExperience;    
     
     /**
-     * Number that measure effeciency in % of the attack can have value from 0 to 100.
+     * Number that measure efficiency in % of the attack can have value from 0 to 100.
      * Sure death of the creature is value 100.
      */
     @Column
