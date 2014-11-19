@@ -57,10 +57,10 @@
         <version>4.1.4.Final</version>
     </dependency>
     
-    <!-- Contains e.g. derby.jdbc.EmbeddedDriver -->
+    <!-- Contains e.g. derby.jdbc.ClientDriver -->
     <dependency>
         <groupId>org.apache.derby</groupId>
-        <artifactId>derby</artifactId>
+        <artifactId>derbyclient</artifactId>
         <version>10.7.1.1</version>
     </dependency>
   </dependencies>
