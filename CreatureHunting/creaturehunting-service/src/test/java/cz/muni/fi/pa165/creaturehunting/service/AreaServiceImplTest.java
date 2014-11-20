@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAO;
 import cz.muni.fi.pa165.creaturehunting.service.area.AreaDTO;
@@ -14,12 +13,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import org.springframework.dao.DataAccessException;
 
 /**
  * This class tests methods from AreaServiceImpl.
@@ -52,52 +48,40 @@ public class AreaServiceImplTest {
     /**
      * Test create area.
      */
-    @Test (expected = DataAccessException.class)
+    @Test
     public void testCreateArea() {
         areaService.create(areaDTO);
         
         verify(areaDAO).
                 createArea(AreaTransformation.transformToEntity(areaDTO));
-        doThrow(DAOException.class).when(areaDAO).
-                createArea(any(Area.class));
-
-        areaService.create(areaDTO);
     }
     
     /**
      * Test update area.
      */
-    @Test (expected = DataAccessException.class)
+    @Test
     public void testUpdateArea() {
         areaService.update(areaDTO);
         
         verify(areaDAO).
                 updateArea(AreaTransformation.transformToEntity(areaDTO));
-        doThrow(DAOException.class).when(areaDAO).
-                updateArea(any(Area.class));
-
-        areaService.update(areaDTO);
     }
     
     /**
      * Test delete area.
      */
-    @Test (expected = DataAccessException.class)
+    @Test
     public void testDeleteArea() {
         areaService.delete(areaDTO);
         
         verify(areaDAO).
                 deleteArea(AreaTransformation.transformToEntity(areaDTO));
-        doThrow(DAOException.class).when(areaDAO).
-                deleteArea(any(Area.class));
-
-        areaService.delete(areaDTO);
     }
     
     /**
      * Test find area by id.
      */
-    @Test (expected = DataAccessException.class)
+    @Test
     public void testFindArea() {
         when(areaDAO.findArea(any(Long.class))).
                 thenReturn(AreaTransformation.transformToEntity(areaDTO));
@@ -105,17 +89,12 @@ public class AreaServiceImplTest {
         long pom = 51;
         Assert.assertTrue("Wrong area was found.", 
                 areaService.findArea(pom).equals(areaDTO));
-        
-        doThrow(DAOException.class).when(areaDAO).
-                findArea(anyInt());
-
-        areaService.findArea(pom);
     }
     
     /**
      * Test find all areas by id.
      */
-    @Test (expected = DataAccessException.class)
+    @Test
     public void testFindAllAreas() {
         List<Area> areas = new ArrayList();
         areas.add(AreaTransformation.transformToEntity(areaDTO));
@@ -123,9 +102,5 @@ public class AreaServiceImplTest {
         
         Assert.assertTrue("Wrong list of areas was found.", 
                 areaService.findAllAreas().get(0).equals(areaDTO));
-
-        doThrow(DAOException.class).when(areaDAO).findAllAreas();
-
-        areaService.findAllAreas();
     }
 }

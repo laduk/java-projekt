@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.creaturehunting.dao;
 
-import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAOImpl;
@@ -8,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -59,16 +59,16 @@ public class WeaponDAOTest {
     /**
      * Test for attribute name can not be not null.
      */
-    @Test (expected = DAOException.class)
+    @Test (expected = PersistenceException.class)
     public void testNotNullNameWeapon() {
         WeaponDAO weaponDAO = new WeaponDAOImpl(entityManager);
         entityManager.getTransaction().begin();
         Weapon weapon = new Weapon();
         try {
             weaponDAO.createWeapon(weapon);
-        } catch (DAOException e) {
+        } catch (PersistenceException e) {
             entityManager.getTransaction().rollback();
-            throw new DAOException(e);
+            throw e;
         }
         entityManager.getTransaction().commit();
     }

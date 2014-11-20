@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.service.area.AreaDTO;
@@ -18,7 +13,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
-import org.springframework.dao.DataAccessException;
 
 /**
  * This class tests methods from CreatureServiceImpl.
@@ -53,69 +47,52 @@ public class CreatureServiceImplTest {
     /**
      * Test create creature.
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void testCreateCreature() {
         creatureService.create(creatureDTO);
-
+        
         verify(creatureDAO).
                 createCreature(CreatureTransformation.transformToEntity(creatureDTO));
-        doThrow(DAOException.class).when(creatureDAO).
-                createCreature(any(Creature.class));
-
-        creatureService.create(creatureDTO);
     }
 
     /**
      * Test update creature.
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void testUpdateCreature() {
         creatureService.update(creatureDTO);
-
+        
         verify(creatureDAO).
                 updateCreature(CreatureTransformation.transformToEntity(creatureDTO));
-        doThrow(DAOException.class).when(creatureDAO).
-                updateCreature(any(Creature.class));
-
-        creatureService.update(creatureDTO);
     }
 
     /**
      * Test delete creature.
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void testDeleteCreature() {
         creatureService.delete(creatureDTO);
-
+        
         verify(creatureDAO).
                 deleteCreature(CreatureTransformation.transformToEntity(creatureDTO));
-        doThrow(DAOException.class).when(creatureDAO).
-                deleteCreature(any(Creature.class));
-
-        creatureService.delete(creatureDTO);
     }
 
     /**
      * Test find creature by id.
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void testFindCreature() {
         when(creatureDAO.findCreature(any(Long.class))).
                 thenReturn(CreatureTransformation.transformToEntity(creatureDTO));
-
+        
         Assert.assertTrue("Wrong creature was found.",
                 creatureService.findCreature(42).equals(creatureDTO));
-
-        doThrow(DAOException.class).when(creatureDAO).
-                findCreature(anyInt());
-
-        creatureService.findCreature(42);
     }
 
     /**
      * Test find all creatures by id.
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void testFindAllCreatures() {
         List<Creature> creatures = new ArrayList();
         creatures.add(CreatureTransformation.transformToEntity(creatureDTO));
@@ -123,16 +100,12 @@ public class CreatureServiceImplTest {
 
         Assert.assertTrue("Wrong list of creatures was found.",
                 creatureService.findAllCreatures().get(0).equals(creatureDTO));
-
-        doThrow(DAOException.class).when(creatureDAO).findAllCreatures();
-
-        creatureService.findAllCreatures();
     }
 
     /**
      * Test find all creatures by name.
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void testFindAllCreaturesByName() {
         List<Creature> creatures = new ArrayList();
         CreatureDTO fooCreatureDTO = new CreatureDTO();
@@ -146,9 +119,5 @@ public class CreatureServiceImplTest {
                 equals(creatureDTO));
         Assert.assertTrue("Wrong list of creatures by name was found.",
                 creatureService.findAllCreaturesByName("Balrog").size() == 1);
-
-        doThrow(DAOException.class).when(creatureDAO).findAllCreatures();
-
-        creatureService.findAllCreaturesByName("Balrog");
     }
 }

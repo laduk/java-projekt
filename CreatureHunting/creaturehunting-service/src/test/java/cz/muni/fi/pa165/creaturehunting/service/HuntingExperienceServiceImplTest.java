@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
 import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
 import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAO;
@@ -31,11 +24,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
-import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -120,96 +111,7 @@ public class HuntingExperienceServiceImplTest {
     }
     
     /**
-     * Test covering of DAOexception.
-     */
-    @Test
-    public void testFindByIdExcept(){
-        System.out.println("--- Testing finding by id Exception ---");        
-        try {
-            doThrow(DAOException.class).when(huntingExperienceDAO).
-                    findHuntingExperience(huntExperienceDTO.getId());
-            huntExpService.findHuntExp(huntExperienceDTO.getId()); 
-        } catch (DAOException da) {
-            fail("Wrong exception, covering in not functional.");
-        } catch(DataAccessException ex){
-            System.out.println("Awaiting exception: "+ex.getMessage());
-        }        
-    }
-    
-    /**
-     * Test covering of DAOexception.
-     */
-    @Test
-    public void testFindAllEcept(){
-        System.out.println("--- Testing findingAll Exception ---"); 
-        try {
-            doThrow(DAOException.class).when(huntingExperienceDAO).
-                    findAllHuntingExperience();
-            huntExpService.findAllHuntExp();
-        } catch (DAOException da) {
-            fail("Wrong exception, covering in not functional.");
-        } catch(DataAccessException ex){
-            System.out.println("Awaiting exception: "+ex.getMessage());
-        }        
-    }
-    
-    /**
-     * Test covering of DAOexception.
-     */
-    @Test
-    public void testCreateExcept(){
-        System.out.println("--- Testing creating Exception ---"); 
-        try {
-            doThrow(DAOException.class).when(huntingExperienceDAO).
-                    createHuntingExperience(HuntingExperienceTransformation.
-                            transformToEntity(huntExperienceDTO));
-            huntExpService.create(huntExperienceDTO);
-        } catch (DAOException da) {
-            fail("Wrong exception, covering in not functional.");
-        } catch(DataAccessException ex){
-            System.out.println("Awaiting exception: "+ex.getMessage());
-        }        
-    }
-    
-    
-    /**
-     * Test covering of DAOexception.
-     */
-    @Test
-    public void testUpdateExcept(){
-        System.out.println("--- Testing updating Exception ---"); 
-        try {
-            doThrow(DAOException.class).when(huntingExperienceDAO).
-                    updateHuntingExperience(HuntingExperienceTransformation.
-                            transformToEntity(huntExperienceDTO));
-            huntExpService.update(huntExperienceDTO);
-        } catch (DAOException da) {
-            fail("Wrong exception, covering in not functional.");
-        } catch(DataAccessException ex){
-            System.out.println("Awaiting exception: "+ex.getMessage());
-        }        
-    }
-    
-    /**
-     * Test covering of DAOexception.
-     */
-    @Test
-    public void testDeleteExcept(){
-        System.out.println("--- Testing deleting Exception ---"); 
-        try {
-            doThrow(DAOException.class).when(huntingExperienceDAO).
-                    deleteHuntingExperience(HuntingExperienceTransformation.
-                            transformToEntity(huntExperienceDTO));
-            huntExpService.delete(huntExperienceDTO);
-        } catch (DAOException da) {
-            fail("Wrong exception, covering in not functional.");
-        } catch(DataAccessException ex){
-            System.out.println("Awaiting exception: "+ex.getMessage());
-        }        
-    }
-    
-    /**
-     * Test of throwning NullPointerException.
+     * Test of throwing NullPointerException.
      */
     @Test
     public void testFindByIdNull(){
@@ -223,7 +125,7 @@ public class HuntingExperienceServiceImplTest {
     }
     
     /**
-     * Test of throwning NullPointerException.
+     * Test of throwing NullPointerException.
      */
     @Test
     public void testCreateNull(){
@@ -237,7 +139,7 @@ public class HuntingExperienceServiceImplTest {
     }
     
     /**
-     * Test of throwning NullPointerException.
+     * Test of throwing NullPointerException.
      */
     @Test
     public void testUpdateNull(){
@@ -251,7 +153,7 @@ public class HuntingExperienceServiceImplTest {
     }
     
     /**
-     * Test of throwning NullPointerException.
+     * Test of throwing NullPointerException.
      */
     @Test
     public void testDeleteNull(){
@@ -303,7 +205,7 @@ public class HuntingExperienceServiceImplTest {
     }
     
     /**
-     * Test whether is finfing by id functional.
+     * Test whether is finding by id functional.
      */
     @Test
     public void testFindById(){
@@ -319,7 +221,7 @@ public class HuntingExperienceServiceImplTest {
     }
     
     /**
-     * Test wether is findingAllExperience functional.
+     * Test whether is findingAllExperience functional.
      */
     @Test
     public void testFindAll(){
@@ -330,7 +232,7 @@ public class HuntingExperienceServiceImplTest {
     }
     
     /**
-     * Test whether is finding Effecient weapon functional.
+     * Test whether is finding Efficient weapon functional.
      */
     @Test
     public void testFindEfficient(){

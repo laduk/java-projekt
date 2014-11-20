@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.dao.DAOException;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
 import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
@@ -14,12 +9,10 @@ import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponTransformation;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import org.mockito.ArgumentCaptor;
-import org.springframework.dao.DataAccessException;
 
 /**
  * Test class for Weapon at service tier.
@@ -43,7 +36,7 @@ public class WeaponServiceImplTest {
      *
      * Testing create method on service tier using mock dao object
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void createWeaponTest() {
         try {
             weaponService.create(null);
@@ -70,9 +63,6 @@ public class WeaponServiceImplTest {
         verify(weaponDao, never()).updateWeapon(any(Weapon.class));
         verify(weaponDao, never()).deleteWeapon(any(Weapon.class));
 
-        doThrow(DAOException.class).when(weaponDao).createWeapon(any(Weapon.class));
-        weaponService.create(weaponDto);
-
     }
 
     
@@ -80,7 +70,7 @@ public class WeaponServiceImplTest {
      *
      * Testing update method on service tier using mock dao object
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void updateWeaponTest() {
         try {
             weaponService.update(null);
@@ -106,9 +96,6 @@ public class WeaponServiceImplTest {
         assertEquals(captor2.getValue().getGunReach(), weaponDto.getGunReach());
         assertEquals(captor2.getValue().getAmmunition(), weaponDto.getAmmunition());
 
-        doThrow(DAOException.class).when(weaponDao).updateWeapon(any(Weapon.class));
-        weaponService.update(weaponDto);
-
     }
 
     
@@ -116,7 +103,7 @@ public class WeaponServiceImplTest {
      *
      * Testing delete method on service tier using mock dao object
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void deleteWeaponTest() {
 
         try {
@@ -133,9 +120,6 @@ public class WeaponServiceImplTest {
         verify(weaponDao, never()).createWeapon(any(Weapon.class));
         verify(weaponDao, never()).updateWeapon(any(Weapon.class));
 
-        doThrow(DAOException.class).when(weaponDao).deleteWeapon(any(Weapon.class));
-        weaponService.delete(weaponDto);
-
     }
 
     
@@ -143,7 +127,7 @@ public class WeaponServiceImplTest {
      *
      * Testing findWeapon method on service tier using mock dao object
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void findWeaponByIdTest() {
         try {
             weaponService.findWeapon(-1);
@@ -168,10 +152,6 @@ public class WeaponServiceImplTest {
         assertEquals(returnDto, weaponDto);
         verify(weaponDao, times(2)).findWeapon(weaponDto.getId());
 
-
-        doThrow(DAOException.class).when(weaponDao).findWeapon(weaponDto.getId());
-        weaponService.findWeapon(weaponDto.getId());
-
     }
 
     
@@ -179,7 +159,7 @@ public class WeaponServiceImplTest {
      *
      * Testing findAllWeapons method on service tier using mock dao object
      */
-    @Test(expected = DataAccessException.class)
+    @Test
     public void findAllWeaponsTest() {
 
         //pro pripad zadneho zaznamu
@@ -211,10 +191,6 @@ public class WeaponServiceImplTest {
         assertEquals(returnedList.size(), listOfWeaponsDto.size());
         assertEquals(returnedList.get(0), listOfWeaponsDto.get(0));
         verify(weaponDao, times(2)).findAllWeapons();
-
-        doThrow(DAOException.class).when(weaponDao).findAllWeapons();
-        weaponService.findAllWeapons();
-
 
     }
 }
