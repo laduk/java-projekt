@@ -37,7 +37,7 @@ public class HuntingExperienceDAOImplTest {
        
     @BeforeClass
     public static void setUpClass() {        
-        entManFact = Persistence.createEntityManagerFactory("myUnit");
+        entManFact = Persistence.createEntityManagerFactory("testUnit");
     }
     
     @AfterClass

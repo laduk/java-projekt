@@ -26,7 +26,7 @@ public class App {
     public static void main( String[] args ) {
         
         System.out.println(" ****** STARTING APPLICATOIN ****** ");
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("testUnit");
         EntityManager em = emf.createEntityManager();
         
         AreaDAO areaDAO = new AreaDAOImpl(em);

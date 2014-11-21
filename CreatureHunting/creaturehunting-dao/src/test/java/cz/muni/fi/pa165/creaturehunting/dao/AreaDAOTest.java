@@ -30,16 +30,16 @@ import org.junit.Test;
 public class AreaDAOTest {
 
     private static EntityManager entityManager;
-    private static EntityManagerFactory entManFact; //pridane Lada - 4.11.
+    private static EntityManagerFactory entManFact;
        
     @BeforeClass
     public static void setUpClass() {        
-        entManFact = Persistence.createEntityManagerFactory("myUnit"); //pridane Lada - 4.11.
+        entManFact = Persistence.createEntityManagerFactory("testUnit");
     }
     
     @AfterClass
     public static void tearDownClass() {
-        if(entManFact.isOpen()) entManFact.close(); //afterclass
+        if(entManFact.isOpen()) entManFact.close();
     }
     
     @Before //toto se dela pred kazdym testem
