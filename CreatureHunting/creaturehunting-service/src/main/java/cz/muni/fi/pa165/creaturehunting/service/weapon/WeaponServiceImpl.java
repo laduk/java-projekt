@@ -4,8 +4,8 @@
  */
 package cz.muni.fi.pa165.creaturehunting.service.weapon;
 
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.dao.WeaponDAO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,8 @@
-package cz.muni.fi.pa165.creaturehunting.dao.huntingexperience;
+package cz.muni.fi.pa165.creaturehunting.dao.dao;
 
-import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.HuntingExperience;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
 import java.util.List;
 
 

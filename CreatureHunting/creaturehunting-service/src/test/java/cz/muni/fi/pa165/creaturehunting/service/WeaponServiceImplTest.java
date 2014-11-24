@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.dao.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponService;
 import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponServiceImpl;

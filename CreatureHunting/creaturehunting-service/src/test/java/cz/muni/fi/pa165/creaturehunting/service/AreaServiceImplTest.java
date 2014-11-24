@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
-import cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Area;
+import cz.muni.fi.pa165.creaturehunting.dao.dao.AreaDAO;
 import cz.muni.fi.pa165.creaturehunting.service.area.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.service.area.AreaService;
 import cz.muni.fi.pa165.creaturehunting.service.area.AreaServiceImpl;

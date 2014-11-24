@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.creaturehunting.dao.area;
+package cz.muni.fi.pa165.creaturehunting.dao.dao;
 
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Area;
 import java.util.List;
 
 /**

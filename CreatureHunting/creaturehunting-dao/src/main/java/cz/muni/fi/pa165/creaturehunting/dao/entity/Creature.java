@@ -1,6 +1,6 @@
-package cz.muni.fi.pa165.creaturehunting.dao.creature;
+package cz.muni.fi.pa165.creaturehunting.dao.entity;
 
-import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Area;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;

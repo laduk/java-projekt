@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package cz.muni.fi.pa165.creaturehunting.dao.weapon;
+package cz.muni.fi.pa165.creaturehunting.dao.entity;
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

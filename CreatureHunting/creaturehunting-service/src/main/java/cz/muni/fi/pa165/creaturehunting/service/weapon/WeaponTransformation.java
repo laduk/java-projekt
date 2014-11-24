@@ -4,7 +4,7 @@
  */
 package cz.muni.fi.pa165.creaturehunting.service.weapon;
 
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

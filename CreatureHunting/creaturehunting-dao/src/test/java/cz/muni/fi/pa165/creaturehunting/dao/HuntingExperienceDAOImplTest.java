@@ -1,14 +1,14 @@
 package cz.muni.fi.pa165.creaturehunting.dao;
 
-import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAO;
-import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl;
-import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperience;
-import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAO;
-import cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAOImpl;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAO;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
+import cz.muni.fi.pa165.creaturehunting.dao.dao.CreatureDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.daoimpl.CreatureDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.HuntingExperience;
+import cz.muni.fi.pa165.creaturehunting.dao.dao.HuntingExperienceDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.daoimpl.HuntingExperienceDAOImpl;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.dao.WeaponDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.daoimpl.WeaponDAOImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

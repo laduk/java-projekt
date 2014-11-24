@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.creaturehunting.service.area;
 
-import cz.muni.fi.pa165.creaturehunting.dao.area.Area;
-import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Area;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureTransformation;
 import java.util.ArrayList;

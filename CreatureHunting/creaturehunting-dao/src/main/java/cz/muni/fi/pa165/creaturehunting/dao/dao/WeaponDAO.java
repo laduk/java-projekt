@@ -1,5 +1,6 @@
-package cz.muni.fi.pa165.creaturehunting.dao.weapon;
+package cz.muni.fi.pa165.creaturehunting.dao.dao;
 
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
 import java.util.List;
 
 /**

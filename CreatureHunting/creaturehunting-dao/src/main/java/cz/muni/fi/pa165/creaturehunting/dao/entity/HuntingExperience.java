@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.creaturehunting.dao.huntingexperience;
+package cz.muni.fi.pa165.creaturehunting.dao.entity;
 
-import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.weapon.Weapon;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;

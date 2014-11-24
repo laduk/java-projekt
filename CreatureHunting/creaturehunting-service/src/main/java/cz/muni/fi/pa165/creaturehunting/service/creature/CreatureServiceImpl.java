@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.creaturehunting.service.creature;
 
-import cz.muni.fi.pa165.creaturehunting.dao.creature.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAO;
+import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
+import cz.muni.fi.pa165.creaturehunting.dao.dao.CreatureDAO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
