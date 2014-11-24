@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.service.serviceimpl;
 
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.WeaponTransformation;
-import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
-import cz.muni.fi.pa165.creaturehunting.dao.dao.WeaponDAO;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Weapon;
+import cz.muni.fi.pa165.creaturehunting.data.dao.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
 import java.util.ArrayList;

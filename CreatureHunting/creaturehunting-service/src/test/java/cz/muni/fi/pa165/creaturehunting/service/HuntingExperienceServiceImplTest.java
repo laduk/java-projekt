@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.dao.entity.Area;
-import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.dao.HuntingExperienceDAO;
-import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Area;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
+import cz.muni.fi.pa165.creaturehunting.data.dao.HuntingExperienceDAO;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Weapon;
 import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.CreatureTransformation;
 import cz.muni.fi.pa165.creaturehunting.api.dto.HuntingExperienceDTO;

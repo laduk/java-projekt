@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.creaturehunting.service.serviceimpl;
 
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.CreatureTransformation;
-import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.dao.CreatureDAO;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
+import cz.muni.fi.pa165.creaturehunting.data.dao.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
 import java.util.ArrayList;

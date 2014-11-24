@@ -14,7 +14,7 @@
   </properties>
   
   <modules>
-    <module>creaturehunting-dao</module>
+    <module>creaturehunting-data</module>
     <module>creaturehunting-service</module>
     <module>creaturehunting-api</module>
     <module>creaturehunting-web</module>

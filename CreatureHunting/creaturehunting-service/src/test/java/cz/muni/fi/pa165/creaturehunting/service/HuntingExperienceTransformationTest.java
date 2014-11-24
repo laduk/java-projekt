@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.dao.entity.Area;
-import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
-import cz.muni.fi.pa165.creaturehunting.dao.entity.HuntingExperience;
-import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Area;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
+import cz.muni.fi.pa165.creaturehunting.data.entity.HuntingExperience;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Weapon;
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.CreatureTransformation;
 import cz.muni.fi.pa165.creaturehunting.api.dto.HuntingExperienceDTO;
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.HuntingExperienceTransformation;

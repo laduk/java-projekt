@@ -32,41 +32,41 @@
     </bean>
     
     <!-- CREATURE -->
-    <bean id="creatureService" class="cz.muni.fi.pa165.creaturehunting.service.creature.CreatureServiceImpl">
+    <bean id="creatureService" class="cz.muni.fi.pa165.creaturehunting.service.serviceimpl.CreatureServiceImpl">
         <constructor-arg ref="creatureDAO"/>
     </bean>
     
-    <bean id="creatureDAO" class="cz.muni.fi.pa165.creaturehunting.dao.creature.CreatureDAOImpl">
+    <bean id="creatureDAO" class="cz.muni.fi.pa165.creaturehunting.data.daoimpl.CreatureDAOImpl">
         <constructor-arg ref="entityManager"/>
     </bean>
     
     <!-- AREA -->
-    <bean id="areaService" class="cz.muni.fi.pa165.creaturehunting.service.area.AreaServiceImpl">
+    <bean id="areaService" class="cz.muni.fi.pa165.creaturehunting.service.serviceimpl.AreaServiceImpl">
         <constructor-arg ref="areaDAO"/>
     </bean>
     
-    <bean id="areaDAO" class="cz.muni.fi.pa165.creaturehunting.dao.area.AreaDAOImpl">
+    <bean id="areaDAO" class="cz.muni.fi.pa165.creaturehunting.data.daoimpl.AreaDAOImpl">
         <constructor-arg ref="entityManager"/>
     </bean>
     
     
     <!-- WEAPON -->
-    <bean id="weaponService" class="cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponServiceImpl">
+    <bean id="weaponService" class="cz.muni.fi.pa165.creaturehunting.service.serviceimpl.WeaponServiceImpl">
         <property name="weaponDao" ref="weaponDAO"/>
     </bean>
     
-    <bean id="weaponDAO" class="cz.muni.fi.pa165.creaturehunting.dao.weapon.WeaponDAOImpl">
+    <bean id="weaponDAO" class="cz.muni.fi.pa165.creaturehunting.data.daoimpl.WeaponDAOImpl">
         <constructor-arg ref="entityManager"/>
     </bean>
     
     <!-- HUNTINGEXPERIENCE -->    
     <bean id="huntingExperienceService" 
-          class="cz.muni.fi.pa165.creaturehunting.service.huntingexperience.HuntingExperienceServiceImpl">
+          class="cz.muni.fi.pa165.creaturehunting.service.serviceimpl.HuntingExperienceServiceImpl">
         <constructor-arg ref="huntingExperienceDAO"/>
     </bean>
     
     <bean id="huntingExperienceDAO" 
-          class="cz.muni.fi.pa165.creaturehunting.dao.huntingexperience.HuntingExperienceDAOImpl">
+          class="cz.muni.fi.pa165.creaturehunting.data.daoimpl.HuntingExperienceDAOImpl">
         <constructor-arg ref="entityManager"/>
     </bean>
     
