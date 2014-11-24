@@ -1,7 +1,10 @@
-package cz.muni.fi.pa165.creaturehunting.service.area;
+package cz.muni.fi.pa165.creaturehunting.service.serviceimpl;
 
+import cz.muni.fi.pa165.creaturehunting.service.datatransformation.AreaTransformation;
 import cz.muni.fi.pa165.creaturehunting.dao.entity.Area;
 import cz.muni.fi.pa165.creaturehunting.dao.dao.AreaDAO;
+import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
+import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.AreaService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;

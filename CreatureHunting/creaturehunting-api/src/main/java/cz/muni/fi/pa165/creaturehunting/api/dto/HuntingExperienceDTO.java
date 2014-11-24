@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 
-package cz.muni.fi.pa165.creaturehunting.service.huntingexperience;
+package cz.muni.fi.pa165.creaturehunting.api.dto;
 
 
-import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
 import java.util.Date;
 
 /**

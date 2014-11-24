@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.service.area.AreaDTO;
-import cz.muni.fi.pa165.creaturehunting.service.area.AreaService;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureService;
+import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
+import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.AreaService;
+import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
+import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.context.ApplicationContext;

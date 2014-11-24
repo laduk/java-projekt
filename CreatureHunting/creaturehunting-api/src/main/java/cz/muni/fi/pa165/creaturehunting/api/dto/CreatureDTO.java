@@ -1,7 +1,5 @@
-package cz.muni.fi.pa165.creaturehunting.service.creature;
+package cz.muni.fi.pa165.creaturehunting.api.dto;
 
-
-import cz.muni.fi.pa165.creaturehunting.service.area.AreaDTO;
 import java.util.List;
 
 /**

@@ -2,11 +2,11 @@ package cz.muni.fi.pa165.creaturehunting.service;
 
 import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
 import cz.muni.fi.pa165.creaturehunting.dao.dao.CreatureDAO;
-import cz.muni.fi.pa165.creaturehunting.service.area.AreaDTO;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureService;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureServiceImpl;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureTransformation;
+import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
+import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
+import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
+import cz.muni.fi.pa165.creaturehunting.service.serviceimpl.CreatureServiceImpl;
+import cz.muni.fi.pa165.creaturehunting.service.datatransformation.CreatureTransformation;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;

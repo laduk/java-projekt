@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package cz.muni.fi.pa165.creaturehunting.service.area;
+package cz.muni.fi.pa165.creaturehunting.api.serviceinterface;
 
+import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
 import java.util.List;
 
 /**

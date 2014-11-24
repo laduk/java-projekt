@@ -1,9 +1,9 @@
-package cz.muni.fi.pa165.creaturehunting.service.area;
+package cz.muni.fi.pa165.creaturehunting.service.datatransformation;
 
 import cz.muni.fi.pa165.creaturehunting.dao.entity.Area;
 import cz.muni.fi.pa165.creaturehunting.dao.entity.Creature;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureDTO;
-import cz.muni.fi.pa165.creaturehunting.service.creature.CreatureTransformation;
+import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
+import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

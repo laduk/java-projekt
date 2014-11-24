@@ -2,10 +2,10 @@ package cz.muni.fi.pa165.creaturehunting.service;
 
 import cz.muni.fi.pa165.creaturehunting.dao.entity.Weapon;
 import cz.muni.fi.pa165.creaturehunting.dao.dao.WeaponDAO;
-import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponDTO;
-import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponService;
-import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponServiceImpl;
-import cz.muni.fi.pa165.creaturehunting.service.weapon.WeaponTransformation;
+import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
+import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
+import cz.muni.fi.pa165.creaturehunting.service.serviceimpl.WeaponServiceImpl;
+import cz.muni.fi.pa165.creaturehunting.service.datatransformation.WeaponTransformation;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
