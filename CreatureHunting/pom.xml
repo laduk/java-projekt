@@ -17,6 +17,7 @@
     <module>creaturehunting-dao</module>
     <module>creaturehunting-service</module>
     <module>creaturehunting-api</module>
+    <module>creaturehunting-web</module>
   </modules>
 
 </project>
