@@ -13,9 +13,7 @@
     <context-param>
         <description>config file for Spring</description>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/appContext.xml
-        </param-value>
+        <param-value>/WEB-INF/appContext.xml</param-value>
     </context-param>
     
     
@@ -36,7 +34,7 @@
         <init-param>
             <description>where Stripes searches for ActionBeans</description>
             <param-name>ActionResolver.Packages</param-name>
-            <param-value>cz.muni.fi.PA165</param-value>
+            <param-value>cz.muni.fi.pa165.creaturehunting</param-value>
         </init-param>
         
         <init-param>
