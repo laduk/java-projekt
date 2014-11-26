@@ -20,7 +20,50 @@
         </head>
         
         <body>
-            <h1><f:message key="${titlekey}"/></h1>
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-6">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    
+                </div>                
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <s:link beanclass="cz.muni.fi.PA165.actionBean.HuntExpActionBean">
+                                <f:message key="navigation.huntExp"/>
+                            </s:link>
+                        </li>
+                        <li>
+                            <s:link href="cz.muni.fi.PA165.actionBean.CreatureActionBean">
+                                <f:message key="navigation.creature"/>
+                            </s:link>
+                        </li>
+                        <li>
+                            <s:link href="cz.muni.fi.PA165.actionBean.AreaActionBean">
+                                <f:message key="navigation.area"/>
+                            </s:link>
+                        </li>
+                        <li>
+                            <s:link href="cz.muni.fi.PA165.actionBean.WeaponActionBean">
+                                <f:message key="navigation.weapon"/>
+                            </s:link>
+                        </li>
+                    </ul>
+                </div>            
+                <s:layout-component name="header"/>
+                <div class="content">
+                    <s:messages/>
+                    <s:layout-component name="body"/>
+                </div>
+            </nav>
         </body>
     </html>
 </s:layout-definition>
