@@ -1,4 +1,4 @@
-package cz.muni.fi.PA165.actionBean;
+package cz.muni.fi.pa165.creaturehunting.web;
 
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
