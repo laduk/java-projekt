@@ -17,25 +17,38 @@
             <title><f:message key="${titlekey}"/></title>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
             <s:layout-component name="head"/>
+        
+            <link rel="stylesheet"
+            href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+            <link rel="stylesheet"
+            href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+            <script src="http://code.jquery.com/jquery.min.js">                
+            </script>
+            <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js">                
+            </script>
         </head>
+    <style>.bootstrap-demo{margin:30px;}</style>
         
         <body>
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-6">
-                            <span class="sr-only">Toggle navigation</span>
+                            <span class="sr-only"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
+                                <f:message key="navigation.huntExp"/>
+                            </s:link>
                         </button>
                     </div>
                 </div>
                 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-                    <ul class="nav navbar-nav">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="min-width: 500px">
+                    <ul class="nav navbar-nav" style="min-width: 500px">
                         <li class="active">
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
                                 <f:message key="navigation.huntExp"/>
@@ -66,6 +79,7 @@
                     <s:layout-component name="body"/>
                 </div>
             </nav>
+                
         </body>
     </html>
 </s:layout-definition>
