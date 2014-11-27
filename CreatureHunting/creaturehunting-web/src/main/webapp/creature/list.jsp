@@ -3,11 +3,11 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<s:layout-render name="/layout.jsp" titlekey="navigation.creature">
+<s:layout-render name="/layout.jsp" titlekey="creature.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" var="actionBean"/>
 
-        <p><f:message key="creature.listcreatures"/></p>
+        <h1><f:message key="creature.list.title"/></h1>
 
         <table class="basic">
             <tr>
@@ -29,25 +29,21 @@
                     <td>
                         <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
                             <s:param name="creature.id" value="${creature.id}"/>
-                            edit
+                            <f:message key="all.edit" />
                         </s:link>
                     </td>
                     <td>
-                        <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean">
-                            <s:hidden name="creature.id" value="${creature.id}"/>
-                            <s:submit name="delete"><f:message key="creature.delete"/></s:submit>
-                        </s:form>
+                        <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="delete">
+                            <s:param name="creature.id" value="${creature.id}"/>
+                            <f:message key="all.delete"/>
+                        </s:link>
                     </td>
                 </tr>
             </c:forEach>
         </table>
 
-        <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean">
-            <fieldset>
-                <legend><f:message key="creature.newcreature"/></legend>
-                <!--%@include file="form.jsp"%-->
-                <s:submit name="add">Vytvořit novou knihu</s:submit>
-            </fieldset>
-        </s:form>
+        <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="add">
+            <f:message key="creature.add.title"/>
+        </s:link>
     </s:layout-component>
 </s:layout-render>
