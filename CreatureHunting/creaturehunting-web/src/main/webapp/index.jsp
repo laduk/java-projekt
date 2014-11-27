@@ -3,14 +3,8 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
 
-<s:layout-render name="/layout.jsp" titlekey="index.title">
+<s:layout-render name="/layout.jsp" titlekey="index.creatureHunt">
     <s:layout-component name="body">
-       <ul>
-           <li>
-               <s:link beanclass="cz.muni.fi.PA165.actionBean.HuntExpActionBean">
-                   <f:message key="index.creatureHunt"/>
-               </s:link>
-           </li>
-       </ul>
+        <h1><f:message key="index.welcome"/></h1>
     </s:layout-component>
 </s:layout-render>

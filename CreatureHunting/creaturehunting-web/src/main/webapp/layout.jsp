@@ -32,33 +32,35 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-                    
-                </div>                
+                </div>
+                
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <s:link beanclass="cz.muni.fi.PA165.actionBean.HuntExpActionBean">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
                                 <f:message key="navigation.huntExp"/>
                             </s:link>
                         </li>
                         <li>
-                            <s:link href="cz.muni.fi.PA165.actionBean.CreatureActionBean">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean">
                                 <f:message key="navigation.creature"/>
                             </s:link>
                         </li>
                         <li>
-                            <s:link href="cz.muni.fi.PA165.actionBean.AreaActionBean">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
                                 <f:message key="navigation.area"/>
                             </s:link>
                         </li>
                         <li>
-                            <s:link href="cz.muni.fi.PA165.actionBean.WeaponActionBean">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
                                 <f:message key="navigation.weapon"/>
                             </s:link>
                         </li>
                     </ul>
-                </div>            
+                </div>
+                
                 <s:layout-component name="header"/>
+                
                 <div class="content">
                     <s:messages/>
                     <s:layout-component name="body"/>

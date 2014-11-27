@@ -34,7 +34,7 @@
         <init-param>
             <description>where Stripes searches for ActionBeans</description>
             <param-name>ActionResolver.Packages</param-name>
-            <param-value>cz.muni.fi.pa165.creaturehunting</param-value>
+            <param-value>cz.muni.fi.pa165.creaturehunting.web</param-value>
         </init-param>
         
         <init-param>
