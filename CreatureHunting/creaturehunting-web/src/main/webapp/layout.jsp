@@ -65,7 +65,7 @@
                             </s:link>
                         </li>
                         <li>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean">
                                 <f:message key="navigation.weapon"/>
                             </s:link>
                         </li>
