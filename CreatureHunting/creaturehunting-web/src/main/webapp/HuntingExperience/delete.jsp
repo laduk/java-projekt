@@ -20,7 +20,7 @@
                 </f:message>
             </h4>
             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" class="form-horizontal">
-                <s:hidden name="huntHuntExp.id"/>
+                <s:hidden name="huntExp.id"/>
                 <fieldset>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">

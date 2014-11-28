@@ -30,26 +30,29 @@
                 <c:forEach items="${actionBean.huntExp}" var="hunt">
                     <tr>
                         <td>${hunt.id}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><c:out value="${hunt.weapon.name}"/></td>
+                        <td><c:out value="${hunt.creature.name}"/></td>
+                        <td><c:out value="${hunt.dateOfExperience}"/></td>
+                        <td><c:out value="${hunt.efficiency}"/></td>
+                        <td><c:out value="${hunt.description}"/></td>
                         <td>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
-                                <s:param name="creature.id" value="${hunt.id}"/>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="edit">
+                                <s:param name="huntExp.id" value="${hunt.id}"/>
                                 <f:message key="all.edit" />
                             </s:link>
                         </td>
                         <td>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="delete">
-                                <s:param name="creature.id" value="${hunt.id}"/>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="delete">
+                                <s:param name="huntExp.id" value="${hunt.id}"/>
                                 <f:message key="all.delete"/>
                             </s:link>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
+            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="create">
+                <f:message key="exp.create.title"/>
+            </s:link>
         </div>
     </s:layout-component>
 </s:layout-render>
