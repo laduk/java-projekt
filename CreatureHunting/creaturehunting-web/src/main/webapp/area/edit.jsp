@@ -6,14 +6,20 @@
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" var="actionBean"/>
 
-        <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean">
-            <s:hidden name="area.id"/>
-            <fieldset>
-                <legend><f:message key="area.edit.title"/></legend>
-                <%@include file="form.jsp"%>
-                <s:submit name="doEdit"><f:message key="all.save"/></s:submit>
-            </fieldset>
-        </s:form>
+        <div class="container">
+            <h2><f:message key="area.edit.title"/></h2>
+            <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" class="form-horizontal">
+                <s:hidden name="area.id"/>
+                <fieldset>
+                    <%@include file="form.jsp"%>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <s:submit name="doEdit" class="btn btn-default"><f:message key="all.save"/></s:submit>
+                            </div>
+                        </div>
+                    </fieldset>
+            </s:form>
+        </div>
 
     </s:layout-component>
 </s:layout-render>

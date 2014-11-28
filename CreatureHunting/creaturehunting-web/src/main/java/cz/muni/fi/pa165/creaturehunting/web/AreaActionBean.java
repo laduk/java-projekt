@@ -8,7 +8,6 @@ package cz.muni.fi.pa165.creaturehunting.web;
 import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.AreaService;
 import static cz.muni.fi.pa165.creaturehunting.web.BaseActionBean.escapeHTML;
-import static java.security.AccessController.getContext;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;

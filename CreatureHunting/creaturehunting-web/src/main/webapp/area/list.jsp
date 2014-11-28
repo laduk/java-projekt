@@ -7,41 +7,43 @@
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" var="actionBean"/>
 
-        <h1><f:message key="area.list.title"/></h1>
+        <div class="container">
+            <h2><f:message key="area.list.title"/></h2>
 
-        <table class="basic">
-            <tr>
-                <th>id</th>
-                <th><f:message key="area.name"/></th>
-                <th><f:message key="area.description"/></th>
-                <th><f:message key="area.acreage"/></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <c:forEach items="${actionBean.areas}" var="area">
+            <table class="table">
                 <tr>
-                    <td>${area.id}</td>
-                    <td><c:out value="${area.name}"/></td>
-                    <td><c:out value="${area.description}"/></td>
-                    <td><c:out value="${area.acreage}"/></td>
-                    <td>
-                        <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="edit">
-                            <s:param name="area.id" value="${area.id}"/>
-                            <f:message key="all.edit" />
-                        </s:link>
-                    </td>
-                    <td>
-                        <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="delete">
-                            <s:param name="area.id" value="${area.id}"/>
-                            <f:message key="all.delete"/>
-                        </s:link>
-                    </td>
+                    <th>id</th>
+                    <th><f:message key="area.name"/></th>
+                    <th><f:message key="area.description"/></th>
+                    <th><f:message key="area.acreage"/></th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach items="${actionBean.areas}" var="area">
+                    <tr>
+                        <td>${area.id}</td>
+                        <td><c:out value="${area.name}"/></td>
+                        <td><c:out value="${area.description}"/></td>
+                        <td><c:out value="${area.acreage}"/></td>
+                        <td>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="edit">
+                                <s:param name="area.id" value="${area.id}"/>
+                                <f:message key="all.edit" />
+                            </s:link>
+                        </td>
+                        <td>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="delete">
+                                <s:param name="area.id" value="${area.id}"/>
+                                <f:message key="all.delete"/>
+                            </s:link>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
 
-        <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="add">
-            <f:message key="area.add.title"/>
-        </s:link>
+            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="add">
+                <f:message key="area.add.title"/>
+            </s:link>
+        </div>
     </s:layout-component>
 </s:layout-render>
