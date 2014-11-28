@@ -41,7 +41,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
-                                <f:message key="navigation.huntExp"/>
+                                <f:message key="navigation.home"/>
                             </s:link>
                         </button>
                     </div>
@@ -50,7 +50,12 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6" style="min-width: 500px">
                     <ul class="nav navbar-nav" style="min-width: 500px">
                         <li class="active">
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
+                            <s:link href="/pa165/index.jsp">
+                                <f:message key="navigation.home"/>
+                            </s:link>
+                        </li>
+                        <li>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean">
                                 <f:message key="navigation.huntExp"/>
                             </s:link>
                         </li>

@@ -22,39 +22,31 @@
                     <th><f:message key="exp.weapon"/></th>
                     <th><f:message key="exp.creature"/></th>
                     <th><f:message key="exp.dateOfExperience"/></th>
-                    <th><f:message key="exp.dateOfExperience"/></th>
                     <th><f:message key="exp.efficiency"/></th>
                     <th><f:message key="exp.description"/></th>
                     <th></th>
                     <th></th>
                 </tr>
-                <c:forEach items="${actionBean.huntEx}" var="exp">
-                    <tr>
-                        <td>${exp.id}</td>
-                        <td><c:out value="${exp.weapon}"/></td>
-                        <td><c:out value="${exp.creature}"/></td>
-                        <td><c:out value="${exp.dateOfExperience}"/></td>
-                        <td><c:out value="${exp.efficiency}"/></td>
-                        <td><c:out value="${exp.description}"/></td>
+                <tr>
+                        <td>${huntExp.id}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="edit">
-                                <s:param name="exp.id" value="${exp.id}"/>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
+                                <s:param name="creature.id" value="${creature.id}"/>
                                 <f:message key="all.edit" />
                             </s:link>
                         </td>
                         <td>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="delete">
-                                <s:param name="area.id" value="${area.id}"/>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="delete">
+                                <s:param name="creature.id" value="${creature.id}"/>
                                 <f:message key="all.delete"/>
                             </s:link>
                         </td>
                     </tr>
-                </c:forEach>
             </table>
-
-            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="create">
-                <f:message key="exp.add.title"/>
-            </s:link>
         </div>
     </s:layout-component>
 </s:layout-render>

@@ -7,12 +7,14 @@ import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.HuntingExperienceService;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
 import java.util.List;
+import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.LocalizableMessage;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
@@ -23,7 +25,7 @@ import net.sourceforge.stripes.validation.ValidationErrors;
  *
  * @author Fita
  */
-@UrlBinding("/huntexperince/{$event}")
+@UrlBinding("/huntexperince/{$event}/{huntExp.id}")
 public class HuntExpActionBean extends BaseActionBean implements ValidationErrorHandler{
     
     @SpringBean
@@ -48,6 +50,13 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     )
     private HuntingExperienceDTO huntExpDTO;
     
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "deleteHuntExp", "edit", "editHuntExp"})
+    public void loadHuntExpFromDB() {
+        String ids = getContext().getRequest().getParameter("huntExp.id");
+        if (ids == null) return;
+        huntExpDTO = huntExpService.findHuntExp(Long.parseLong(ids));
+    }
+    
     public void setWeapon(WeaponDTO weapon) {
         this.weapon = weapon;
     }
@@ -58,6 +67,10 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     
     public List<CreatureDTO> getAllCreatures(){
         return creatureService.findAllCreatures();
+    }
+    
+    public List<HuntingExperienceDTO> getHuntingExp() {
+        return huntExp;
     }
     
     public List<WeaponDTO> getAllWeapons(){
@@ -89,7 +102,7 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     
     public Resolution createHuntExp(){
         huntExpService.create(huntExpDTO);
-        getContext().getMessages().add(new LocalizableMessage("exp.create.done", escapeHTML(creature.getName())));
+        getContext().getMessages().add(new LocalizableMessage("exp.create.done", escapeHTML(huntExpDTO.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
@@ -99,7 +112,7 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     
     public Resolution editHuntExp(){
         huntExpService.update(huntExpDTO);
-        getContext().getMessages().add(new LocalizableMessage("exp.edit.done", escapeHTML(creature.getName())));
+        getContext().getMessages().add(new LocalizableMessage("exp.edit.done", escapeHTML(huntExpDTO.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
@@ -109,7 +122,7 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     
     public Resolution deleteHuntExp(){
         huntExpService.delete(huntExpDTO);
-        getContext().getMessages().add(new LocalizableMessage("exp.delete.done", escapeHTML(creature.getName())));
+        getContext().getMessages().add(new LocalizableMessage("exp.delete.done", escapeHTML(huntExpDTO.getDescription())));
         return new RedirectResolution(this.getClass(), "list");        
     }
     
