@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.PreRemove;
 
 /**
  * This class represents the Area.
@@ -49,6 +50,13 @@ public class Area implements Serializable {
      */
     @ManyToMany(mappedBy="listOfAreas")
     private List<Creature> listOfCreatures;
+    
+    @PreRemove
+    private void removeAreaFromCreatures() {
+    for (Creature c : listOfCreatures) {
+        c.getListOfAreas().remove(this);
+    }
+}
     
     public long getId() {
         return id;

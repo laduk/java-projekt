@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.creaturehunting.data.daoimpl;
 
 import cz.muni.fi.pa165.creaturehunting.data.dao.AreaDAO;
 import cz.muni.fi.pa165.creaturehunting.data.entity.Area;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -47,6 +48,11 @@ public class AreaDAOImpl implements AreaDAO {
     @Override
     public void deleteArea(Area area) {
         Area managedArea = entityManager.find(Area.class, area.getId());
+        for (Creature creature : managedArea.getListOfCreatures()) {
+            List<Area> areasToDelete = creature.getListOfAreas();
+            areasToDelete.remove(area);
+            creature.setListOfAreas(areasToDelete);
+        }
         entityManager.remove(managedArea);
         area.setId(-1);
     }
