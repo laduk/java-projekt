@@ -111,6 +111,8 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     }
     
     public Resolution create(){
+        weapons = weaponService.findAllWeapons();
+        creatures = creatureService.findAllCreatures();
         return new ForwardResolution("/HuntingExperience/create.jsp");
     }
     
@@ -127,6 +129,8 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     }
     
     public Resolution edit(){
+        weapons = weaponService.findAllWeapons();
+        creatures = creatureService.findAllCreatures();
         return new ForwardResolution("/HuntingExperience/edit.jsp");
     }
     
