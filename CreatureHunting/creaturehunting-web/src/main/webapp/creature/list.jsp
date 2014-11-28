@@ -7,43 +7,45 @@
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" var="actionBean"/>
 
-        <h1><f:message key="creature.list.title"/></h1>
+        <div class="container">
+            <h2><f:message key="creature.list.title"/></h2>
 
-        <table class="basic">
-            <tr>
-                <th>id</th>
-                <th><f:message key="creature.name"/></th>
-                <th><f:message key="creature.height"/></th>
-                <th><f:message key="creature.weight"/></th>
-                <th><f:message key="creature.agility"/></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <c:forEach items="${actionBean.creatures}" var="creature">
+            <table class="table">
                 <tr>
-                    <td>${creature.id}</td>
-                    <td><c:out value="${creature.name}"/></td>
-                    <td><c:out value="${creature.height}"/></td>
-                    <td><c:out value="${creature.weight}"/></td>
-                    <td><c:out value="${creature.agility}"/></td>
-                    <td>
-                        <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
-                            <s:param name="creature.id" value="${creature.id}"/>
-                            <f:message key="all.edit" />
-                        </s:link>
-                    </td>
-                    <td>
-                        <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="delete">
-                            <s:param name="creature.id" value="${creature.id}"/>
-                            <f:message key="all.delete"/>
-                        </s:link>
-                    </td>
+                    <th>id</th>
+                    <th><f:message key="creature.name"/></th>
+                    <th><f:message key="creature.height"/></th>
+                    <th><f:message key="creature.weight"/></th>
+                    <th><f:message key="creature.agility"/></th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach items="${actionBean.creatures}" var="creature">
+                    <tr>
+                        <td>${creature.id}</td>
+                        <td><c:out value="${creature.name}"/></td>
+                        <td><c:out value="${creature.height}"/></td>
+                        <td><c:out value="${creature.weight}"/></td>
+                        <td><c:out value="${creature.agility}"/></td>
+                        <td>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
+                                <s:param name="creature.id" value="${creature.id}"/>
+                                <f:message key="all.edit" />
+                            </s:link>
+                        </td>
+                        <td>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="delete">
+                                <s:param name="creature.id" value="${creature.id}"/>
+                                <f:message key="all.delete"/>
+                            </s:link>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
 
-        <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="add">
-            <f:message key="creature.add.title"/>
-        </s:link>
+            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="add">
+                <f:message key="creature.add.title"/>
+            </s:link>
+        </div>
     </s:layout-component>
 </s:layout-render>

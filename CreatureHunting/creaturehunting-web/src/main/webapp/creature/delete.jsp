@@ -6,21 +6,26 @@
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" var="actionBean"/>
 
-        <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean">
-            <s:hidden name="creature.id"/>
-            <fieldset>
-                <legend>
-                    <f:message key="creature.delete.title"/>
-                </legend>
+        <div class="container">
+            <h2><f:message key="creature.delete.title"/></h2>
+            <h4>
                 <f:message key="creature.delete.ask">
                     <f:param value="${actionBean.creature.name}"/>
                 </f:message>
-                <br />
-                <s:submit name="doDelete">
-                    <f:message key="all.delete"/>
-                </s:submit>
-            </fieldset>
-        </s:form>
+            </h4>
+            <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" class="form-horizontal">
+                <s:hidden name="creature.id"/>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <s:submit name="doDelete" class="btn btn-default">
+                                <f:message key="all.delete"/>
+                            </s:submit>
+                        </div>
+                    </div>
+                </fieldset>
+            </s:form>
+        </div>
 
     </s:layout-component>
 </s:layout-render>

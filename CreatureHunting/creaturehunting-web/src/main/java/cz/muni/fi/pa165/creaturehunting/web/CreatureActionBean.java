@@ -23,23 +23,9 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
 
     @SpringBean
     protected CreatureService creatureService;
-
-    //--- part for showing a list of creatures ---
     
     private List<CreatureDTO> creatures;
-
-    @DefaultHandler
-    public Resolution list() {
-        creatures = creatureService.findAllCreatures();
-        return new ForwardResolution("/creature/list.jsp");
-    }
-
-    public List<CreatureDTO> getCreatures() {
-        return creatures;
-    }
-
-    //--- part for adding a creatures ----
-
+    
     @ValidateNestedProperties(value = {
         @Validate(on = {"doAdd", "doEdit"}, field = "name", required = true),
         @Validate(on = {"doAdd", "doEdit"}, field = "height", minvalue = 0),
@@ -47,6 +33,24 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
         @Validate(on = {"doAdd", "doEdit"}, field = "agility", minvalue = 0, maxvalue = 100)
     })
     private CreatureDTO creature;
+
+    public List<CreatureDTO> getCreatures() {
+        return creatures;
+    }
+    
+    public CreatureDTO getCreature() {
+        return creature;
+    }
+
+    public void setCreature(CreatureDTO creature) {
+        this.creature = creature;
+    }
+    
+    @DefaultHandler
+    public Resolution list() {
+        creatures = creatureService.findAllCreatures();
+        return new ForwardResolution("/creature/list.jsp");
+    }
     
     public Resolution add() {
         return new ForwardResolution("/creature/add.jsp");
@@ -65,16 +69,13 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
         //return null to let the event handling continue
         return null;
     }
-
-    public CreatureDTO getCreature() {
-        return creature;
+    
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit"})
+    public void loadCreatureFromDatabase() {
+        String ids = getContext().getRequest().getParameter("creature.id");
+        if (ids == null) return;
+        creature = creatureService.findCreature(Long.parseLong(ids));
     }
-
-    public void setCreature(CreatureDTO creature) {
-        this.creature = creature;
-    }
-
-    //--- part for deleting a creature ----
 
     public Resolution delete() {
         return new ForwardResolution("/creature/delete.jsp");
@@ -84,15 +85,6 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
         creatureService.delete(creature);
         getContext().getMessages().add(new LocalizableMessage("creature.delete.done", escapeHTML(creature.getName())));
         return new RedirectResolution(this.getClass(), "list");
-    }
-
-    //--- part for editing a creature ----
-
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit"})
-    public void loadCreatureFromDatabase() {
-        String ids = getContext().getRequest().getParameter("creature.id");
-        if (ids == null) return;
-        creature = creatureService.findCreature(Long.parseLong(ids));
     }
 
     public Resolution edit() {
