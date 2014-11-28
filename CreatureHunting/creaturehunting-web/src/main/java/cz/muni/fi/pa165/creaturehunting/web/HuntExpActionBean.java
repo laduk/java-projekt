@@ -39,8 +39,8 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     
     private List<HuntingExperienceDTO> huntExp;
     
-    private WeaponDTO weapon;
-    private CreatureDTO creature;
+    private Long weaponId;
+    private Long creatureId;
 
     @ValidateNestedProperties(
             value = {
@@ -57,12 +57,12 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
         huntExpDTO = huntExpService.findHuntExp(Long.parseLong(ids));
     }
     
-    public void setWeapon(WeaponDTO weapon) {
-        this.weapon = weapon;
+    public void setWeapon(Long weaponId) {
+        this.weaponId = weaponId;
     }
 
-    public void setCreature(CreatureDTO creature) {
-        this.creature = creature;
+    public void setCreature(Long creatureId) {
+        this.creatureId = creatureId;
     }    
     
     public List<CreatureDTO> getAllCreatures(){
@@ -101,6 +101,12 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     }
     
     public Resolution createHuntExp(){
+        CreatureDTO creatureDTO = creatureService.findCreature(creatureId);
+        huntExpDTO.setCreature(creatureDTO);
+        
+        WeaponDTO weaponDTO = weaponService.findWeapon(weaponId);
+        huntExpDTO.setWeapon(weaponDTO);
+        
         huntExpService.create(huntExpDTO);
         getContext().getMessages().add(new LocalizableMessage("exp.create.done", escapeHTML(huntExpDTO.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
@@ -111,6 +117,12 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     }
     
     public Resolution editHuntExp(){
+        CreatureDTO creatureDTO = creatureService.findCreature(creatureId);
+        huntExpDTO.setCreature(creatureDTO);
+        
+        WeaponDTO weaponDTO = weaponService.findWeapon(weaponId);
+        huntExpDTO.setWeapon(weaponDTO);
+        
         huntExpService.update(huntExpDTO);
         getContext().getMessages().add(new LocalizableMessage("exp.edit.done", escapeHTML(huntExpDTO.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
