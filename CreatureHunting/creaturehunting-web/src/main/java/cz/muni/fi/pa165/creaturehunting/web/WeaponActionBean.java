@@ -26,20 +26,24 @@ public class WeaponActionBean extends BaseActionBean implements ValidationErrorH
     @SpringBean
     private WeaponService weaponService;
     private List<WeaponDTO> weapons;
-    private WeaponDTO weapon;
-
-    @ValidateNestedProperties(
-            value = {
+    
+    @ValidateNestedProperties(value = {
         @Validate(on = {"doAdd", "doSave"}, field = "name", required = true),
         @Validate(on = {"doAdd", "doSave"}, field = "gunReach", minvalue = 0, required = true),
         @Validate(on = {"doAdd", "doSave"}, field = "ammunition", required = true)
     })
+    private WeaponDTO weapon;
+
     public List<WeaponDTO> getWeapons() {
         return weapons;
     }
 
     public WeaponDTO getWeapon() {
         return weapon;
+    }
+
+    public void setWeapon(WeaponDTO weapon) {
+        this.weapon = weapon;
     }
 
     public void setWeapons(List<WeaponDTO> weapons) {
