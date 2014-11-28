@@ -20,7 +20,7 @@ import net.sourceforge.stripes.validation.ValidationErrors;
  *
  * @author lada
  */
-@UrlBinding("/weapon/{$event}/{weapon.id}")
+@UrlBinding("/weapons/{$event}/{weapon.id}")
 public class WeaponActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     @SpringBean
