@@ -17,7 +17,7 @@
                     <th><f:message key="creature.height"/></th>
                     <th><f:message key="creature.weight"/></th>
                     <th><f:message key="creature.agility"/></th>
-                    <th></th>
+                    <th><f:message key="creature.listOfAreas"/></th>
                     <th></th>
                 </tr>
                 <c:forEach items="${actionBean.creatures}" var="creature">
@@ -28,12 +28,15 @@
                         <td><c:out value="${creature.weight}"/></td>
                         <td><c:out value="${creature.agility}"/></td>
                         <td>
+                            <c:forEach items="${creature.listOfAreas}" var="area">
+                                <c:out value="${area.name}"/>
+                            </c:forEach>
+                        </td>
+                        <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
                                 <s:param name="creature.id" value="${creature.id}"/>
                                 <f:message key="all.edit" />
                             </s:link>
-                        </td>
-                        <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="delete">
                                 <s:param name="creature.id" value="${creature.id}"/>
                                 <f:message key="all.delete"/>
@@ -43,9 +46,11 @@
                 </c:forEach>
             </table>
 
-            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="add">
-                <f:message key="creature.add.title"/>
-            </s:link>
+            <p>
+                <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="add">
+                    <f:message key="creature.add.title"/>
+                </s:link>
+            </p>
         </div>
     </s:layout-component>
 </s:layout-render>
