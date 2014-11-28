@@ -27,8 +27,9 @@
                     <th></th>
                     <th></th>
                 </tr>
-                <tr>
-                        <td>${huntExp.id}</td>
+                <c:forEach items="${actionBean.huntExp}" var="hunt">
+                    <tr>
+                        <td>${hunt.id}</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -36,17 +37,18 @@
                         <td></td>
                         <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
-                                <s:param name="creature.id" value="${creature.id}"/>
+                                <s:param name="creature.id" value="${hunt.id}"/>
                                 <f:message key="all.edit" />
                             </s:link>
                         </td>
                         <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="delete">
-                                <s:param name="creature.id" value="${creature.id}"/>
+                                <s:param name="creature.id" value="${hunt.id}"/>
                                 <f:message key="all.delete"/>
                             </s:link>
                         </td>
                     </tr>
+                </c:forEach>
             </table>
         </div>
     </s:layout-component>

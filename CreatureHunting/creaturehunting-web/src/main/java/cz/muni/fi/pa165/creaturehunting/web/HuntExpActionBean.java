@@ -69,7 +69,7 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
         return creatureService.findAllCreatures();
     }
     
-    public List<HuntingExperienceDTO> getHuntingExp() {
+    public List<HuntingExperienceDTO> getHuntExp() {
         return huntExp;
     }
     
