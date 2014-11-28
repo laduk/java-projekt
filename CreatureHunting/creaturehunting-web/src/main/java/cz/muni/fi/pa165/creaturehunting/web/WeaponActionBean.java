@@ -4,7 +4,6 @@
  */
 package cz.muni.fi.pa165.creaturehunting.web;
 
-
 import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
 import java.util.List;
@@ -16,7 +15,6 @@ import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
-
 
 /**
  *
@@ -32,9 +30,9 @@ public class WeaponActionBean extends BaseActionBean implements ValidationErrorH
 
     @ValidateNestedProperties(
             value = {
-        @Validate(on = {"add", "save"}, field = "name", required = true),
-        @Validate(on = {"add", "save"}, field = "gunReach", minvalue = 0, required = true),
-        @Validate(on = {"add", "save"}, field = "ammunition", required = true)
+        @Validate(on = {"doAdd", "doSave"}, field = "name", required = true),
+        @Validate(on = {"doAdd", "doSave"}, field = "gunReach", minvalue = 0, required = true),
+        @Validate(on = {"doAdd", "doSave"}, field = "ammunition", required = true)
     })
     public List<WeaponDTO> getWeapons() {
         return weapons;
@@ -55,18 +53,13 @@ public class WeaponActionBean extends BaseActionBean implements ValidationErrorH
     }
 
     public Resolution add() {
-        weaponService.create(weapon);
-        getContext().getMessages().add(new LocalizableMessage("Cosi", escapeHTML(weapon.getName())));
-        return new RedirectResolution(this.getClass(), "list");
+        return new ForwardResolution("/weapon/add.jsp");
     }
 
-    public Resolution delete() {
-
-        weapon = weaponService.findWeapon(weapon.getId());
-        weaponService.delete(weapon);
-        getContext().getMessages().add(new LocalizableMessage("Cosi",escapeHTML(weapon.getName())));
+    public Resolution doAdd() {
+        weaponService.create(weapon);
+        getContext().getMessages().add(new LocalizableMessage("weapon.add.done", escapeHTML(weapon.getName())));
         return new RedirectResolution(this.getClass(), "list");
-
     }
 
     @Override
@@ -75,8 +68,8 @@ public class WeaponActionBean extends BaseActionBean implements ValidationErrorH
         return null;
     }
 
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
-    public void loadCreatureFromDatabase() {
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "doEdit", "delete", "doDelete"})
+    public void loadWeaponFromDatabase() {
         String identification = getContext().getRequest().getParameter("weapon.id");
         if (identification == null) {
             return;
@@ -84,12 +77,27 @@ public class WeaponActionBean extends BaseActionBean implements ValidationErrorH
         weapon = weaponService.findWeapon(Long.parseLong(identification));
     }
 
+    public Resolution delete() {
+        return new ForwardResolution("/weapon/delete.jsp");
+    }
+
+    public Resolution doDelete() {
+
+        weapon = weaponService.findWeapon(weapon.getId());
+        weaponService.delete(weapon);
+        getContext().getMessages().add(new LocalizableMessage("weapon.delete.done", escapeHTML(weapon.getName())));
+        return new RedirectResolution(this.getClass(), "list");
+
+    }
+
     public Resolution edit() {
         return new ForwardResolution("/weapon/edit.jsp");
     }
 
-    public Resolution save() {
+    public Resolution doEdit() {
         weaponService.update(weapon);
+        getContext().getMessages().add(new LocalizableMessage("weapon.edit.done", escapeHTML(weapon.getName())));
         return new RedirectResolution(this.getClass(), "list");
     }
 }
+
