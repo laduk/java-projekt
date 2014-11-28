@@ -53,9 +53,9 @@
         
     <div class="form-group">
         <s:label for="b5" name="HuntExpDate" class="col-sm-2 control-label">
-            <f:message key="exp.efficiency"/>
+            <f:message key="exp.description"/>
         </s:label>
         <div class="col-sm-4">
-            <s:text class="form-control" id="b5" name="huntExp.efficiency"/>
+            <s:text class="form-control" id="b5" name="huntExp.description"/>
         </div>
     </div>
