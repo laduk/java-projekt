@@ -38,6 +38,8 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     private CreatureService creatureService;
     
     private List<HuntingExperienceDTO> huntExp;
+    private List<WeaponDTO> weapons;
+    private List<CreatureDTO> creatures;
     
     private Long weaponId;
     private Long creatureId;
@@ -65,21 +67,31 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
         this.creatureId = creatureId;
     }    
     
-    public List<CreatureDTO> getAllCreatures(){
-        return creatureService.findAllCreatures();
+    public List<CreatureDTO> getCreatures(){
+        return creatures;
     }
     
     public List<HuntingExperienceDTO> getHuntExp() {
         return huntExp;
     }
     
-    public List<WeaponDTO> getAllWeapons(){
-        return weaponService.findAllWeapons();
+    public List<WeaponDTO> getWeapons(){
+        return weapons;
     }
     
     public List<HuntingExperienceDTO> getAllHuntExp(){
         huntExp = huntExpService.findAllHuntExp();
         return huntExp;
+    }
+    
+    public List<CreatureDTO> getAllCreatures(){
+        creatures = creatureService.findAllCreatures();
+        return creatures;
+    }
+    
+    public List<WeaponDTO> getAllWeapons(){
+        weapons = weaponService.findAllWeapons();
+        return weapons;
     }
     
     public HuntingExperienceDTO getHuntingExperienceDTO(){
@@ -93,6 +105,8 @@ public class HuntExpActionBean extends BaseActionBean implements ValidationError
     @DefaultHandler
     public Resolution list() {
         huntExp = huntExpService.findAllHuntExp();
+        creatures = creatureService.findAllCreatures();
+        weapons = weaponService.findAllWeapons();
         return new ForwardResolution("/HuntingExperience/list.jsp");
     }
     

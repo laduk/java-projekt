@@ -24,4 +24,3 @@
             <s:text id="b4" name="creature.agility" size="4" class="form-control"  style="width:50px"/>
         </div>
     </div>
-</table>
