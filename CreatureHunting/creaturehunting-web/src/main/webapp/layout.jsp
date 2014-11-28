@@ -60,7 +60,7 @@
                             </s:link>
                         </li>
                         <li>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.BaseActionBean">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean">
                                 <f:message key="navigation.area"/>
                             </s:link>
                         </li>
