@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.creaturehunting.data.entity;
 
-import cz.muni.fi.pa165.creaturehunting.data.entity.Area;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  * This class represents a Creature
@@ -61,7 +62,13 @@ public class Creature implements Serializable {
       joinColumns={@JoinColumn(name="CREATURE_ID", referencedColumnName="ID")},
       inverseJoinColumns={@JoinColumn(name="AREA_ID", referencedColumnName="ID")})
     private List<Area> listOfAreas;
-
+    
+    /**
+     * List of Hunting Experiences for removing.
+     */
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy="creature")
+    private List<HuntingExperience> listOfHuntingExperiences;
+    
     public long getId() {
         return id;
     }
@@ -124,6 +131,14 @@ public class Creature implements Serializable {
         this.listOfAreas = listOfAreas;
     }
 
+    public List<HuntingExperience> getListOfHuntingExperiences() {
+        return listOfHuntingExperiences;
+    }
+
+    public void setListOfHuntingExperiences(List<HuntingExperience> listOfHuntingExperiences) {
+        this.listOfHuntingExperiences = listOfHuntingExperiences;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

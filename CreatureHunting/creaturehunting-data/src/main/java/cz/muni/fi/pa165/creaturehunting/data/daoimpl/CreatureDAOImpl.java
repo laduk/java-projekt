@@ -46,12 +46,6 @@ public class CreatureDAOImpl implements CreatureDAO {
     @Override
     public void deleteCreature(Creature creature) {
         Creature managedCreature = entityManager.find(Creature.class, creature.getId());
-        Query query = entityManager.createQuery("SELECT a FROM HuntingExperience a WHERE a.creature=:id", HuntingExperience.class);
-        query.setParameter("id", managedCreature);
-        List <HuntingExperience> exps = query.getResultList();
-        for (HuntingExperience he : exps) {
-            he.setCreature(null);
-        }
         entityManager.remove(managedCreature);
     }
 

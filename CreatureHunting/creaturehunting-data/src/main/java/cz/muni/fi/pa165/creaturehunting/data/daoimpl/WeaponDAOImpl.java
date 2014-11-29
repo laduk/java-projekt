@@ -43,12 +43,6 @@ public class WeaponDAOImpl implements WeaponDAO {
 
     public void deleteWeapon(Weapon weapon) {
         Weapon managedWeapon = entityManager.find(Weapon.class, weapon.getId());
-        Query query = entityManager.createQuery("SELECT a FROM HuntingExperience a WHERE a.weapon=:id", HuntingExperience.class);
-        query.setParameter("id", managedWeapon);
-        List <HuntingExperience> exps = query.getResultList();
-        for (HuntingExperience he : exps) {
-            he.setWeapon(null);
-        }
         entityManager.remove(managedWeapon);
     }
 

@@ -2,12 +2,12 @@ package cz.muni.fi.pa165.creaturehunting.data.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.PreRemove;
 
 /**
  * This class represents the Area.
@@ -48,15 +48,8 @@ public class Area implements Serializable {
     /**
      * Creatures that were spotted in this area
      */
-    @ManyToMany(mappedBy="listOfAreas")
+    @ManyToMany(cascade = CascadeType.REMOVE, mappedBy="listOfAreas")
     private List<Creature> listOfCreatures;
-    
-    @PreRemove
-    private void removeAreaFromCreatures() {
-    for (Creature c : listOfCreatures) {
-        c.getListOfAreas().remove(this);
-    }
-}
     
     public long getId() {
         return id;

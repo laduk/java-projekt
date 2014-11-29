@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.data.entity;
 
-import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -43,7 +38,7 @@ public class HuntingExperience implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name="CREATURE_ID", referencedColumnName="ID")
-    private Creature creature;    
+    private Creature creature;
     
     /**
      * Date from which is the experience.

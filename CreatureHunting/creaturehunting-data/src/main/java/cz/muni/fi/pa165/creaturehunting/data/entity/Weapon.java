@@ -1,21 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.muni.fi.pa165.creaturehunting.data.entity;
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Class representing weapon.
  * @author Fita
  */
 @Entity
-public class Weapon {
+public class Weapon implements Serializable {
     
     /**
      * Automatically generated unique identifier.
@@ -40,6 +38,12 @@ public class Weapon {
      */
     @Column
     private String ammunition;
+    
+    /**
+     * List of Hunting Experiences for removing.
+     */
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy="weapon")
+    private List<HuntingExperience> listOfHuntingExperiences;
 
     public long getId() {
         return id;
@@ -71,6 +75,14 @@ public class Weapon {
 
     public void setAmmunition(String ammunition) {
         this.ammunition = ammunition;
+    }
+
+    public List<HuntingExperience> getListOfHuntingExperiences() {
+        return listOfHuntingExperiences;
+    }
+
+    public void setListOfHuntingExperiences(List<HuntingExperience> listOfHuntingExperiences) {
+        this.listOfHuntingExperiences = listOfHuntingExperiences;
     }
 
     @Override
