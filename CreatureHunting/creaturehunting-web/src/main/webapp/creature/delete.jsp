@@ -18,9 +18,10 @@
                 <fieldset>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <s:submit name="doDelete" class="btn btn-default">
+                            <button type="submit" name="doDelete" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-remove"></span>
                                 <f:message key="all.delete"/>
-                            </s:submit>
+                            </button>
                         </div>
                     </div>
                 </fieldset>

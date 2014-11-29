@@ -35,10 +35,12 @@
                         <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
                                 <s:param name="creature.id" value="${creature.id}"/>
-                                <f:message key="all.edit" />
+                                <span class="glyphicon glyphicon-edit"></span>
+                                <f:message key="all.edit"/>
                             </s:link>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="delete">
                                 <s:param name="creature.id" value="${creature.id}"/>
+                                <span class="glyphicon glyphicon-remove"></span>
                                 <f:message key="all.delete"/>
                             </s:link>
                         </td>
@@ -48,6 +50,7 @@
 
             <p>
                 <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="add">
+                    <span class="glyphicon glyphicon-plus"></span>
                     <f:message key="creature.add.title"/>
                 </s:link>
             </p>
