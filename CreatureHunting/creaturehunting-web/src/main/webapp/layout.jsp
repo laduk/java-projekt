@@ -15,7 +15,6 @@
     <html lang="${pageContext.request.locale}">
         <head>
             <title><f:message key="${titlekey}"/></title>
-            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
             <s:layout-component name="head"/>
         
             <link rel="stylesheet"
