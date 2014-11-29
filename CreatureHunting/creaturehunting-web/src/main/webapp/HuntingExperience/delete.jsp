@@ -16,7 +16,7 @@
             <h2><f:message key="exp.delete.title"/></h2>
             <h4>
                 <f:message key="exp.delete.ask">
-                    <f:param value="${actionBean.huntExp.id}"/>
+                    <f:param value="${actionBean.huntingExperienceDTO.description}"/>
                 </f:message>
             </h4>
             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" class="form-horizontal">
