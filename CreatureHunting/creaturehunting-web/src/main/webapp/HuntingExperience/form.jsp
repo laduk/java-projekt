@@ -38,7 +38,7 @@
             <f:message key="exp.dateOfExperience"/>
         </s:label>
         <div class="col-sm-4">
-            <s:text class="form-control" id="b3" name="huntExp.date"/>
+            <s:text class="form-control" id="datepicker" name="huntExp.date"/>
         </div>
     </div>
 
