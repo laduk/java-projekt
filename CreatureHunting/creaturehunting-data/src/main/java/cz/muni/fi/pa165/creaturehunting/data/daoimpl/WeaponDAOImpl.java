@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.creaturehunting.data.daoimpl;
 
 import cz.muni.fi.pa165.creaturehunting.data.dao.WeaponDAO;
+import cz.muni.fi.pa165.creaturehunting.data.entity.HuntingExperience;
 import cz.muni.fi.pa165.creaturehunting.data.entity.Weapon;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -42,6 +43,12 @@ public class WeaponDAOImpl implements WeaponDAO {
 
     public void deleteWeapon(Weapon weapon) {
         Weapon managedWeapon = entityManager.find(Weapon.class, weapon.getId());
+        Query query = entityManager.createQuery("SELECT a FROM HuntingExperience a WHERE a.weapon=:id", HuntingExperience.class);
+        query.setParameter("id", managedWeapon);
+        List <HuntingExperience> exps = query.getResultList();
+        for (HuntingExperience he : exps) {
+            he.setWeapon(null);
+        }
         entityManager.remove(managedWeapon);
     }
 

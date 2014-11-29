@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.creaturehunting.data.daoimpl;
 
 import cz.muni.fi.pa165.creaturehunting.data.dao.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
+import cz.muni.fi.pa165.creaturehunting.data.entity.HuntingExperience;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,6 +46,12 @@ public class CreatureDAOImpl implements CreatureDAO {
     @Override
     public void deleteCreature(Creature creature) {
         Creature managedCreature = entityManager.find(Creature.class, creature.getId());
+        Query query = entityManager.createQuery("SELECT a FROM HuntingExperience a WHERE a.creature=:id", HuntingExperience.class);
+        query.setParameter("id", managedCreature);
+        List <HuntingExperience> exps = query.getResultList();
+        for (HuntingExperience he : exps) {
+            he.setCreature(null);
+        }
         entityManager.remove(managedCreature);
     }
 
