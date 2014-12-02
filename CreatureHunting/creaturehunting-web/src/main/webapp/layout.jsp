@@ -61,7 +61,7 @@
                             </s:link>
                         </li>
                         <li>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean">
                                 <f:message key="navigation.huntExp"/>
                             </s:link>
                         </li>

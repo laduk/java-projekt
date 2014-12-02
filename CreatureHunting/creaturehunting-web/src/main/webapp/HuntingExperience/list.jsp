@@ -11,7 +11,7 @@
 
 <s:layout-render name="/layout.jsp" titlekey="exp.list.title">
     <s:layout-component name="body">
-        <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" var="actionBean"/>
+        <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" var="actionBean"/>
 
         <div class="container">
             <h2><f:message key="exp.list.title"/></h2>
@@ -36,13 +36,13 @@
                         <td><c:out value="${hunt.efficiency}"/></td>
                         <td><c:out value="${hunt.description}"/></td>
                         <td>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="edit">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="edit">
                                 <s:param name="huntExp.id" value="${hunt.id}"/>
                                 <f:message key="all.edit" />
                             </s:link>
                         </td>
                         <td>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="delete">
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="delete">
                                 <s:param name="huntExp.id" value="${hunt.id}"/>
                                 <f:message key="all.delete"/>
                             </s:link>
@@ -50,7 +50,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" event="create">
+            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="create">
                 <f:message key="exp.create.title"/>
             </s:link>
         </div>

@@ -27,7 +27,7 @@
             <f:message key="exp.creature"/>
         </s:label>
         <div class="col-sm-4">
-            <s:select class="form-control" id="b2" name="WeaponID">
+            <s:select class="form-control" id="b2" name="CreatureID">
                 <s:options-collection collection="${actionBean.creatures}" value="id" label="name"/>
             </s:select>
         </div>

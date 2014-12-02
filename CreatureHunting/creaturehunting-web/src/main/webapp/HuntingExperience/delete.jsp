@@ -10,7 +10,7 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <s:layout-render name="/layout.jsp" titlekey="exp.create.title">
     <s:layout-component name="body">
-        <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" var="actionBean"/>
+        <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" var="actionBean"/>
 
         <div class="container">
             <h2><f:message key="exp.delete.title"/></h2>
@@ -19,7 +19,7 @@
                     <f:param value="${actionBean.huntingExperienceDTO.description}"/>
                 </f:message>
             </h4>
-            <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" class="form-horizontal">
+            <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" class="form-horizontal">
                 <s:hidden name="huntExp.id"/>
                 <fieldset>
                     <div class="form-group">
