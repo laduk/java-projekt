@@ -11,10 +11,10 @@
 
 <s:layout-render name="/layout.jsp" titlekey="exp.create.title">
     <s:layout-component name="body">
-        <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" var="actionBean"/>
+        <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" var="actionBean"/>
         <div class="container">
             <h2><f:message key="exp.create.title"/></h2>
-            <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntExpActionBean" class="form-horizontal">
+            <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" class="form-horizontal">
                 <fieldset>
                     <%@include file="form.jsp"%>
                     <div class="form-group">
