@@ -50,7 +50,8 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     private CreatureDTO creatureDTO;
     
     private String ids;
-    private String ids2;    
+    private String ids2;
+    private String ids3;
     private String ar3;
     private String ar4;
     private Date date;
@@ -67,12 +68,12 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "deleteHuntExp", "edit", "editHuntExp"})
     public void loadHuntExpFromDB() {         
-        String ids3 = getContext().getRequest().getParameter("huntExp.id");
+        ids3 = getContext().getRequest().getParameter("huntExp.id");
         if (ids3 == null) return;
         huntExpDTO = huntExpService.findHuntExp(Long.parseLong(ids3));
     }
     
-    @Before(stages = LifecycleStage.EventHandling, on = {"createHuntExp","editHuntExp"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"createHuntExp","editHuntExp"})
     public void loadCreatureAndWeaponFromDB()
     {
         ids = getContext().getRequest().getParameter("WeaponID");
@@ -171,7 +172,6 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     }
     
     public Resolution editHuntExp(){
-        huntExpDTO = new HuntingExperienceDTO();
         huntExpDTO.setCreature(creatureDTO);        
         huntExpDTO.setWeapon(weaponDTO);
         huntExpDTO.setDateOfExperience(date);
