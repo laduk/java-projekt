@@ -33,6 +33,11 @@
                             </c:forEach>
                         </td>
                         <td>
+                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="show">
+                                <s:param name="creature.id" value="${creature.id}"/>
+                                <span class="glyphicon glyphicon-info-sign"></span>
+                                <f:message key="all.show"/>
+                            </s:link>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" event="edit">
                                 <s:param name="creature.id" value="${creature.id}"/>
                                 <span class="glyphicon glyphicon-edit"></span>
