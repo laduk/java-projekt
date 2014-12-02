@@ -48,7 +48,12 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
     
     @DefaultHandler
     public Resolution list() {
-        creatures = creatureService.findAllCreatures();
+        String ids = getContext().getRequest().getParameter("creature.id");
+        if (ids == null) {
+            creatures = creatureService.findAllCreatures();
+        } else {
+            creatures = creatureService.findAllCreaturesByName(ids);
+        }
         return new ForwardResolution("/creature/list.jsp");
     }
     
