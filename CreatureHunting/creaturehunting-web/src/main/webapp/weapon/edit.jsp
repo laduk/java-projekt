@@ -19,7 +19,11 @@
                     <%@include file="form.jsp"%>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <s:submit name="doEdit" class="btn btn-default"><f:message key="all.save"/></s:submit>
+                            <button type="submit" name="doEdit" 
+                                    class="btn btn-default">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                <f:message key="all.save"/>
+                            </button>
                         </div>
                     </div>
                 </fieldset>

@@ -28,12 +28,14 @@
                         <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="edit">
                                 <s:param name="area.id" value="${area.id}"/>
+                                <span class="glyphicon glyphicon-edit"></span>
                                 <f:message key="all.edit" />
                             </s:link>
                         </td>
                         <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="delete">
                                 <s:param name="area.id" value="${area.id}"/>
+                                <span class="glyphicon glyphicon-remove"></span>
                                 <f:message key="all.delete"/>
                             </s:link>
                         </td>
@@ -42,6 +44,7 @@
             </table>
 
             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="add">
+                <span class="glyphicon glyphicon-plus"></span>                
                 <f:message key="area.add.title"/>
             </s:link>
         </div>

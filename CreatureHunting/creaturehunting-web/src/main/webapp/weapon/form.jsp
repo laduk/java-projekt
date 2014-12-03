@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="form-group">
-        <s:label for="b2" name="weapon.gunReach" class="control-label col-sm-2"/>
+        <s:label for="b2" name="weapon.gunreach" class="control-label col-sm-2"/>
         <div class="col-sm-10">
             <s:text id="b2" name="weapon.gunReach" class="form-control" style="width:300px"/>
         </div>

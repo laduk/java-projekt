@@ -38,12 +38,14 @@
                         <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="edit">
                                 <s:param name="huntExp.id" value="${hunt.id}"/>
+                                <span class="glyphicon glyphicon-edit"></span>
                                 <f:message key="all.edit" />
                             </s:link>
                         </td>
                         <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="delete">
                                 <s:param name="huntExp.id" value="${hunt.id}"/>
+                                <span class="glyphicon glyphicon-remove"></span>
                                 <f:message key="all.delete"/>
                             </s:link>
                         </td>
@@ -51,6 +53,7 @@
                 </c:forEach>
             </table>
             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="create">
+                <span class="glyphicon glyphicon-plus"></span>
                 <f:message key="exp.create.title"/>
             </s:link>
         </div>
