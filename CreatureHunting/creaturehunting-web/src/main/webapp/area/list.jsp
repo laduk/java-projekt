@@ -16,7 +16,7 @@
                     <th><f:message key="area.name"/></th>
                     <th><f:message key="area.description"/></th>
                     <th><f:message key="area.acreage"/></th>
-                    <th></th>
+                    <th><f:message key="area.listOfCreatures"/></th>
                     <th></th>
                 </tr>
                 <c:forEach items="${actionBean.areas}" var="area">
@@ -26,13 +26,16 @@
                         <td><c:out value="${area.description}"/></td>
                         <td><c:out value="${area.acreage}"/></td>
                         <td>
+                            <c:forEach items="${area.listOfCreatures}" var="creature">
+                                <c:out value="${creature.name}"/>
+                            </c:forEach>
+                        </td>
+                        <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="edit">
                                 <s:param name="area.id" value="${area.id}"/>
                                 <span class="glyphicon glyphicon-edit"></span>
                                 <f:message key="all.edit" />
                             </s:link>
-                        </td>
-                        <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="delete">
                                 <s:param name="area.id" value="${area.id}"/>
                                 <span class="glyphicon glyphicon-remove"></span>

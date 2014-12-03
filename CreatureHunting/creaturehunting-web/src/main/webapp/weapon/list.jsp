@@ -23,7 +23,6 @@
                     <th><f:message key="weapon.gunreach"/></th>
                     <th><f:message key="weapon.ammunition"/></th>
                     <th></th>
-                    <th></th>
                 </tr>
                 <c:forEach items="${actionBean.weapons}" var="weapon">
                     <tr>
@@ -37,8 +36,6 @@
                                 <span class="glyphicon glyphicon-edit"></span>
                                 <f:message key="all.edit" />
                             </s:link>
-                        </td>
-                        <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" event="delete">
                                 <s:param name="weapon.id" value="${weapon.id}"/>
                                 <span class="glyphicon glyphicon-remove"></span>

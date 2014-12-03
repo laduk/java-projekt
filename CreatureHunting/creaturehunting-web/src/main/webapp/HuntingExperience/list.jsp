@@ -25,7 +25,6 @@
                     <th><f:message key="exp.efficiency"/></th>
                     <th><f:message key="exp.description"/></th>
                     <th></th>
-                    <th></th>
                 </tr>
                 <c:forEach items="${actionBean.huntExp}" var="hunt">
                     <tr>
@@ -41,8 +40,6 @@
                                 <span class="glyphicon glyphicon-edit"></span>
                                 <f:message key="all.edit" />
                             </s:link>
-                        </td>
-                        <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="delete">
                                 <s:param name="huntExp.id" value="${hunt.id}"/>
                                 <span class="glyphicon glyphicon-remove"></span>
