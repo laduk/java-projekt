@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
 
-<s:layout-render name="/layout.jsp" titlekey="index.creatureHunt">
+<s:layout-render name="/layout.jsp" titlekey="index.creatureHunt" activeHomeTab="active">
     <s:layout-component name="body">
         <h1><f:message key="index.welcome"/></h1>
     </s:layout-component>
