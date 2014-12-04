@@ -101,10 +101,4 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
         getContext().getMessages().add(new LocalizableMessage("creature.edit.done", escapeHTML(creature.getName())));
         return new RedirectResolution(this.getClass(), "list");
     }
-    
-    public Resolution show() {
-        String ids = getContext().getRequest().getParameter("creature.id");
-        creature = creatureService.findCreature(Long.parseLong(ids));
-        return new ForwardResolution("/creature/show.jsp");
-    }
 }
