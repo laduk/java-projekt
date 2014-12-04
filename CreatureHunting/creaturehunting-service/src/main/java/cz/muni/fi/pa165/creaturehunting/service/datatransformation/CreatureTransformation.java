@@ -15,11 +15,21 @@ import java.util.List;
 public class CreatureTransformation {
     
     /**
-     * Transforms entity to data transfer object.
+     * Transforms entity to data transfer object (with filled listOfAreas).
      * @param creature This entity will be transformed into DTO.
      * @return DTO object that was created.
      */
-    public static CreatureDTO transformToDTO(Creature creature){
+    public static CreatureDTO transformToDTO(Creature creature) {
+        return transformToDTO(creature, true);
+    }
+    
+    /**
+     * Transforms entity to data transfer object.
+     * @param creature This entity will be transformed into DTO.
+     * @param isParrent true - witch listOfAreas; false - without it.
+     * @return DTO object that was created.
+     */
+    public static CreatureDTO transformToDTO(Creature creature, Boolean isParrent) {
         if (creature == null) {
             throw new NullPointerException("Creature given is null.");
         }
@@ -32,9 +42,9 @@ public class CreatureTransformation {
         creatureDTO.setAgility(creature.getAgility());
         List<AreaDTO> areasDTO = new ArrayList();
         List<Area> areas = creature.getListOfAreas();
-        if (areas != null && areas.size() > 0) {
+        if (isParrent && areas != null && areas.size() > 0) {
             for (Area area : areas) {
-                areasDTO.add(AreaTransformation.transformToDTO(area));
+                areasDTO.add(AreaTransformation.transformToDTO(area, false));
             }
             creatureDTO.setListOfAreas(areasDTO);
         }
@@ -43,13 +53,23 @@ public class CreatureTransformation {
     }
     
     /**
-     * Transforms data transfer object to entity.
+     * Transforms data transfer object to entity (with filled listOfAreas).
      * If attributes name, height, weight and agility are overflowed,
      * they will be cut off.
      * @param creatureDTO This DTO will be transformed into entity.
      * @return Entity created from DTO.
      */
-    public static Creature transformToEntity(CreatureDTO creatureDTO){
+    public static Creature transformToEntity(CreatureDTO creatureDTO) {
+        return transformToEntity(creatureDTO, true);
+    }
+    
+    /**
+     * Transforms data transfer object to entity.
+     * @param creatureDTO This DTO will be transformed into entity.
+     * @param isParrent true - witch listOfAreas; false - without it.
+     * @return Entity created from DTO.
+     */
+    public static Creature transformToEntity(CreatureDTO creatureDTO, Boolean isParrent) {
         if (creatureDTO == null) {
             throw new NullPointerException("CreatureDTO given is null.");
         }
@@ -58,7 +78,7 @@ public class CreatureTransformation {
         creature.setId(creatureDTO.getId());
         
         String name = creatureDTO.getName();
-        if (name.length() > 20) name = name.substring(0,20);
+        if (name != null && name.length() > 20) name = name.substring(0,20);
         creature.setName(name);
         
         int height = creatureDTO.getHeight();
@@ -76,9 +96,9 @@ public class CreatureTransformation {
         
         List<Area> areas = new ArrayList();
         List<AreaDTO> areasDTO = creatureDTO.getListOfAreas();
-        if (areasDTO != null && areasDTO.size() > 0) {
+        if (isParrent && areasDTO != null && areasDTO.size() > 0) {
             for (AreaDTO areaDTO : areasDTO) {
-                areas.add(AreaTransformation.transformToEntity(areaDTO));
+                areas.add(AreaTransformation.transformToEntity(areaDTO, false));
             }
             creature.setListOfAreas(areas);
         }
