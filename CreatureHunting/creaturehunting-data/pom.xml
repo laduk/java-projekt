@@ -72,4 +72,31 @@
     </dependency>
     
   </dependencies>
+  
+    <build>
+        <plugins>
+            <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sql-maven-plugin</artifactId>
+            <version>1.4</version>
+                <configuration>
+                    <driver>org.apache.derby.jdbc.ClientDriver</driver>
+                    <url>jdbc:derby://localhost:1527/pa165</url>
+                    <username>pa165</username>
+                    <password>pa165</password>
+                    <autocommit>true</autocommit>
+                    <srcFiles>
+                        <srcFile>src/main/resources/META-INF/import.sql</srcFile>
+                    </srcFiles>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.derby</groupId>
+                        <artifactId>derbyclient</artifactId>
+                        <version>10.7.1.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 </project>
