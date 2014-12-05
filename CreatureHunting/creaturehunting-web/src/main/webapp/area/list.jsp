@@ -26,8 +26,8 @@
                         <td><c:out value="${area.description}"/></td>
                         <td><c:out value="${area.acreage}"/></td>
                         <td>
-                            <c:forEach items="${area.listOfCreatures}" var="creature">
-                                <c:out value="${creature.name}"/>
+                            <c:forEach items="${area.listOfCreatures}" var="creature" varStatus="status">
+                                <c:out value="${creature.name}${not status.last ? ',' : ''}"/>
                             </c:forEach>
                         </td>
                         <td>

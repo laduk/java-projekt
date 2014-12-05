@@ -41,8 +41,8 @@
                                 <td><c:out value="${creature.weight}"/></td>
                                 <td><c:out value="${creature.agility}"/></td>
                                 <td>
-                                    <c:forEach items="${creature.listOfAreas}" var="area">
-                                        <c:out value="${area.name}"/>
+                                    <c:forEach items="${creature.listOfAreas}" var="area" varStatus="status">
+                                        <c:out value="${area.name}${not status.last ? ',' : ''}"/>
                                     </c:forEach>
                                 </td>
                                 <td>
