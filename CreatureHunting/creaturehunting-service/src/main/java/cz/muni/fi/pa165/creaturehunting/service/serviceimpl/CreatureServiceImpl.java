@@ -53,10 +53,8 @@ public class CreatureServiceImpl implements CreatureService {
     
     @Override
     public CreatureDTO findCreature(long id) {
-        CreatureDTO creatureDTO = new CreatureDTO();
-        creatureDTO = CreatureTransformation.transformToDTO(
+        CreatureDTO creatureDTO = CreatureTransformation.transformToDTO(
                 creatureDAO.findCreature(id));
-        
         return creatureDTO;
     }
     
@@ -74,7 +72,7 @@ public class CreatureServiceImpl implements CreatureService {
     public List<CreatureDTO> findAllCreaturesByName(String name) {
         List creaturesDTO = new ArrayList();
         for (CreatureDTO creatureDTO : this.findAllCreatures()) {
-            if (creatureDTO.getName().equals(name)) {
+            if (creatureDTO.getName().toLowerCase().contains(name.toLowerCase())) {
                 creaturesDTO.add(creatureDTO);
             }
         }

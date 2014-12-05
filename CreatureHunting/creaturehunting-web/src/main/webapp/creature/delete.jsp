@@ -15,16 +15,14 @@
             </h4>
             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean" class="form-horizontal">
                 <s:hidden name="creature.id"/>
-                <fieldset>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" name="doDelete" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <f:message key="all.delete"/>
-                            </button>
-                        </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" name="doDelete" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            <f:message key="all.delete"/>
+                        </button>
                     </div>
-                </fieldset>
+                </div>
             </s:form>
         </div>
 
