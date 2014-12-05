@@ -34,11 +34,6 @@
         <body>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    <div class="navbar-header">
-                        <s:link href="/pa165/index.jsp" class="navbar-brand">
-                            <f:message key="index.creatureHunt"/>
-                        </s:link>
-                    </div>
                     <ul class="nav nav-tabs">
                         <li class="${activeHomeTab}">
                             <s:link href="/pa165/index.jsp">

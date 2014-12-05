@@ -5,6 +5,8 @@
 
 <s:layout-render name="/layout.jsp" titlekey="index.creatureHunt" activeHomeTab="active">
     <s:layout-component name="body">
-        <h1><f:message key="index.welcome"/></h1>
+        <div class="container">
+            <h1><f:message key="index.welcome"/></h1>
+        </div>
     </s:layout-component>
 </s:layout-render>
