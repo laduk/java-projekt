@@ -24,3 +24,11 @@
             <s:text id="b4" name="creature.agility" size="4" class="form-control"  style="width:50px"/>
         </div>
     </div>
+    <div class="form-group">
+        <s:label for="b5" name="creature.listOfAreas" class="control-label col-sm-2"/>
+        <div class="col-sm-10">
+            <s:select class="form-control" id="b5" name="creature.listOfAreas.id" style="width:250px" multiple="true" size="10">
+                <s:options-collection collection="${actionBean.areas}" value="id" label="name"/>
+            </s:select>
+        </div>
+    </div>

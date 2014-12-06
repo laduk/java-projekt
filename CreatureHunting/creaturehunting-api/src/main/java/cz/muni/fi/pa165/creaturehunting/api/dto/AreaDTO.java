@@ -13,6 +13,11 @@ public class AreaDTO {
      private double acreage;
      List<CreatureDTO> listOfCreatures;
 
+     public AreaDTO() {}
+     public AreaDTO(long id) {
+         this.id = id;
+     }
+     
     public long getId() {
         return id;
     }

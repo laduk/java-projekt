@@ -1,8 +1,11 @@
 package cz.muni.fi.pa165.creaturehunting.web;
 
+import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
+import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.AreaService;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
 import static cz.muni.fi.pa165.creaturehunting.web.BaseActionBean.escapeHTML;
+import java.util.ArrayList;
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
@@ -22,7 +25,10 @@ import java.util.List;
 public class CreatureActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     @SpringBean
-    protected CreatureService creatureService;
+    private CreatureService creatureService;
+    
+    @SpringBean
+    private AreaService areaService;
     
     private List<CreatureDTO> creatures;
     
@@ -44,6 +50,10 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
 
     public void setCreature(CreatureDTO creature) {
         this.creature = creature;
+    }
+
+    public List<AreaDTO> getAreas() {
+        return areaService.findAllAreas();
     }
     
     @DefaultHandler
@@ -81,7 +91,7 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
         if (ids == null) return;
         creature = creatureService.findCreature(Long.parseLong(ids));
     }
-
+    
     public Resolution delete() {
         return new ForwardResolution("/creature/delete.jsp");
     }
@@ -96,6 +106,15 @@ public class CreatureActionBean extends BaseActionBean implements ValidationErro
         return new ForwardResolution("/creature/edit.jsp");
     }
 
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"doAdd", "doEdit"})
+    public void getListOfAreasFromRequest() {
+        List<AreaDTO> listOfAreas = new ArrayList();
+        for (String id : getContext().getRequest().getParameterValues("creature.listOfAreas.id")) {
+            listOfAreas.add(new AreaDTO(Long.parseLong(id)));
+        }
+        creature.setListOfAreas(listOfAreas);
+    }
+    
     public Resolution doEdit() {
         creatureService.update(creature);
         getContext().getMessages().add(new LocalizableMessage("creature.edit.done", escapeHTML(creature.getName())));
