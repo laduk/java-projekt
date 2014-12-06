@@ -21,7 +21,7 @@
                     <th>id</th>
                     <th><f:message key="exp.weapon"/></th>
                     <th><f:message key="exp.creature"/></th>
-                    <th><f:message key="exp.dateOfExperience"/></th>
+                    <th><f:message key="exp.dateOfExperienceR"/></th>
                     <th><f:message key="exp.efficiency"/></th>
                     <th><f:message key="exp.description"/></th>
                     <th></th>

@@ -40,8 +40,6 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     private List<HuntingExperienceDTO> huntings;
     private List<WeaponDTO> weapons;
     private List<CreatureDTO> creatures;
-        
-    private String date;
 
     @ValidateNestedProperties(value = {
         @Validate(on = {"doCreate", "doEdit"}, field = "efficiency", required = true, minvalue = 0, maxvalue = 100),
