@@ -6,12 +6,7 @@ import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.HuntingExperienceService;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -30,11 +25,11 @@ import net.sourceforge.stripes.validation.ValidationErrors;
  *
  * @author Fita
  */
-@UrlBinding("/huntexperince/{$event}/{huntExp.id}")
+@UrlBinding("/huntexperince/{$event}/{hunting.id}")
 public class HuntActionBean extends BaseActionBean implements ValidationErrorHandler{
     
     @SpringBean
-    private HuntingExperienceService huntExpService;
+    private HuntingExperienceService huntingService;
     
     @SpringBean
     private WeaponService weaponService;
@@ -42,163 +37,121 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     @SpringBean
     private CreatureService creatureService;
     
-    private List<HuntingExperienceDTO> huntExp;
+    private List<HuntingExperienceDTO> huntings;
     private List<WeaponDTO> weapons;
     private List<CreatureDTO> creatures;
     
-    private WeaponDTO weaponDTO;
-    private CreatureDTO creatureDTO;
-    
-    private String ids;
-    private String ids2;
-    private String ids3;
-    private String ar3;
-    private String ar4;
-    private Date date;
-    private int effeciency;
-    private String description;
+    private WeaponDTO weapon;
+    private CreatureDTO creature;
 
-    @ValidateNestedProperties(
-            value = {
-                    @Validate(on = {"createHuntExp", "editHuntExp"}, field = "efficiency", required = true, minvalue = 0, maxvalue = 100),
-                    @Validate(on = {"createHuntExp", "editHuntExp"}, field = "description", required = true, maxlength = 300),                  
-            }
-    )
-    private HuntingExperienceDTO huntExpDTO;
+    @ValidateNestedProperties(value = {
+        @Validate(on = {"doCreate", "doEdit"}, field = "efficiency", required = true, minvalue = 0, maxvalue = 100),
+        @Validate(on = {"doCreate", "doEdit"}, field = "description", required = true, maxlength = 300),                  
+    })
+    private HuntingExperienceDTO hunting;
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "deleteHuntExp", "edit", "editHuntExp"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit"})
     public void loadHuntExpFromDB() {         
-        ids3 = getContext().getRequest().getParameter("huntExp.id");
-        if (ids3 == null) return;
-        huntExpDTO = huntExpService.findHuntExp(Long.parseLong(ids3));
+        String ids = getContext().getRequest().getParameter("hunting.id");
+        if (ids == null) return;
+        hunting = huntingService.findHuntExp(Long.parseLong(ids));
     }
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"createHuntExp","editHuntExp"})
-    public void loadCreatureAndWeaponFromDB()
-    {
-        ids = getContext().getRequest().getParameter("WeaponID");
-        ids2 = getContext().getRequest().getParameter("CreatureID");
-        ar3 = getContext().getRequest().getParameter("huntExp.date");
-        ar4 = getContext().getRequest().getParameter("huntExp.efficiency");
-        description = getContext().getRequest().getParameter("huntExp.description");        
-
-        if ((ids == null)||(ids2 == null)||(ar3 == null)||(ar4==null)) return;
-        weaponDTO = weaponService.findWeapon(Long.parseLong(ids));
-        creatureDTO = creatureService.findCreature(Long.parseLong(ids2));
-        effeciency = Integer.parseInt(ar4);
-        date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
-        try {
-            date = sdf.parse(ar3);
-        } catch (ParseException ex) {
-            Logger.getLogger(HuntActionBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public List<CreatureDTO> getCreatures(){
-        return creatures;
-    }
-    
-    public List<HuntingExperienceDTO> getHuntExp() {
-        return huntExp;
-    }
-    
-    public List<WeaponDTO> getWeapons(){
-        return weapons;
-    }
-    
-    public List<HuntingExperienceDTO> getAllHuntExp(){
-        huntExp = huntExpService.findAllHuntExp();
-        return huntExp;
-    }
-    
-    public List<CreatureDTO> getAllCreatures(){
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"create", "doCreate", "edit", "doEdit"})
+    public void loadWeaponsAndCreaturesFromDB() {         
         creatures = creatureService.findAllCreatures();
-        return creatures;
-    }
-    
-    public List<WeaponDTO> getAllWeapons(){
         weapons = weaponService.findAllWeapons();
+    }
+
+    public List<HuntingExperienceDTO> getHuntings() {
+        return huntings;
+    }
+
+    public void setHuntings(List<HuntingExperienceDTO> huntings) {
+        this.huntings = huntings;
+    }
+
+    public List<WeaponDTO> getWeapons() {
         return weapons;
     }
-    
-    public HuntingExperienceDTO getHuntingExperienceDTO(){
-        return huntExpDTO;
+
+    public void setWeapons(List<WeaponDTO> weapons) {
+        this.weapons = weapons;
     }
-    
-    public void setHuntingExperienceDTO(HuntingExperienceDTO huntExpDTO){
-        this.huntExpDTO=huntExpDTO;
+
+    public List<CreatureDTO> getCreatures() {
+        return creatures;
     }
-    
-    public CreatureDTO getCreatureDTO(){
-        return creatureDTO;
+
+    public void setCreatures(List<CreatureDTO> creatures) {
+        this.creatures = creatures;
     }
-    
-    public WeaponDTO getWeaponDTO(){
-        return weaponDTO;
+
+    public WeaponDTO getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(WeaponDTO weapon) {
+        this.weapon = weapon;
+    }
+
+    public CreatureDTO getCreature() {
+        return creature;
+    }
+
+    public void setCreature(CreatureDTO creature) {
+        this.creature = creature;
+    }
+
+    public HuntingExperienceDTO getHunting() {
+        return hunting;
+    }
+
+    public void setHunting(HuntingExperienceDTO hunting) {
+        this.hunting = hunting;
     }
     
     @DefaultHandler
     public Resolution list() {
-        huntExp = huntExpService.findAllHuntExp();
-        creatures = creatureService.findAllCreatures();
-        weapons = weaponService.findAllWeapons();
+        huntings = huntingService.findAllHuntExp();
         return new ForwardResolution("/HuntingExperience/list.jsp");
     }
     
-    public Resolution create(){
-        weapons = weaponService.findAllWeapons();
-        creatures = creatureService.findAllCreatures();
+    public Resolution create() {
         return new ForwardResolution("/HuntingExperience/create.jsp");
     }
     
-    public Resolution createHuntExp(){
-        huntExpDTO = new HuntingExperienceDTO();
-        huntExpDTO.setCreature(creatureDTO);        
-        huntExpDTO.setWeapon(weaponDTO);
-        huntExpDTO.setDateOfExperience(date);
-        huntExpDTO.setEfficiency(effeciency);
-        huntExpDTO.setDescription(description); 
-        
-        huntExpService.create(huntExpDTO);
-        getContext().getMessages().add(new LocalizableMessage("exp.create.done", escapeHTML(huntExpDTO.getDescription())));
+    public Resolution doCreate() {
+        huntingService.create(hunting);
+        getContext().getMessages().add(new LocalizableMessage("exp.create.done", escapeHTML(hunting.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
-    public Resolution edit(){
-        weapons = weaponService.findAllWeapons();
-        creatures = creatureService.findAllCreatures();
+    public Resolution edit() {
         return new ForwardResolution("/HuntingExperience/edit.jsp");
     }
     
-    public Resolution editHuntExp(){
-        huntExpDTO.setCreature(creatureDTO);        
-        huntExpDTO.setWeapon(weaponDTO);
-        huntExpDTO.setDateOfExperience(date);
-        huntExpDTO.setEfficiency(effeciency);
-        huntExpDTO.setDescription(description); 
-        
-        huntExpService.update(huntExpDTO);
-        getContext().getMessages().add(new LocalizableMessage("exp.edit.done", escapeHTML(huntExpDTO.getDescription())));
+    public Resolution doEdit() {
+        huntingService.update(hunting);
+        getContext().getMessages().add(new LocalizableMessage("exp.edit.done", escapeHTML(hunting.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
-    public Resolution delete(){
+    public Resolution delete() {
         return new ForwardResolution("/HuntingExperience/delete.jsp");
     }            
     
-    public Resolution deleteHuntExp(){
-        huntExpService.delete(huntExpDTO);
-        getContext().getMessages().add(new LocalizableMessage("exp.delete.done", escapeHTML(huntExpDTO.getDescription())));
+    public Resolution doDelete() {
+        huntingService.delete(hunting);
+        getContext().getMessages().add(new LocalizableMessage("exp.delete.done", escapeHTML(hunting.getDescription())));
         return new RedirectResolution(this.getClass(), "list");        
     }
     
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         //fill up the data for the table if validation errors occured
-        huntExp = huntExpService.findAllHuntExp();
+        huntings = huntingService.findAllHuntExp();
         //return null to let the event handling continue
         return null;
     }
- 
 }

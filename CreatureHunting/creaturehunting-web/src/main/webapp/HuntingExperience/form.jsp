@@ -14,7 +14,7 @@
     <div class="form-group">
         <s:label for="b1" name="exp.weapon" class="col-sm-2 control-label"/>
         <div class="col-sm-4">
-            <s:select class="form-control" id="b1" name="WeaponID">
+            <s:select class="form-control" id="b1" name="hunting.weapon.id">
                 <s:options-collection collection="${actionBean.weapons}" value="id" label="name"/>
             </s:select>
         </div>
@@ -23,16 +23,16 @@
     <div class="form-group">
         <s:label for="b2" name="exp.creature" class="col-sm-2 control-label"/>
         <div class="col-sm-4">
-            <s:select class="form-control" id="b2" name="CreatureID">
+            <s:select class="form-control" id="b2" name="hunting.creature.id">
                 <s:options-collection collection="${actionBean.creatures}" value="id" label="name"/>
             </s:select>
         </div>
     </div>
 
     <div class="form-group">
-        <s:label for="b3" name="exp.dateOfExperience" class="col-sm-2 control-label"/>
+        <s:label for="datepicker" name="exp.dateOfExperience" class="col-sm-2 control-label"/>
         <div class="col-sm-4">
-            <s:text class="form-control" id="datepicker" name="huntExp.date"/>
+            <s:text class="form-control" id="datepicker" name="hunting.date"/>
         </div>
     </div>
 
@@ -41,13 +41,13 @@
             <f:message key="exp.efficiency"/>
         </s:label>
         <div class="col-sm-4">
-            <s:text class="form-control" id="b4" name="huntExp.efficiency"/>
+            <s:text class="form-control" id="b4" name="hunting.efficiency"/>
         </div>
     </div>
         
     <div class="form-group">
         <s:label for="b5" name="exp.description" class="col-sm-2 control-label"/>
         <div class="col-sm-4">
-            <s:text id="b5" name="huntExp.description" class="form-control" style="width:360px" />
+            <s:text id="b5" name="hunting.description" class="form-control" style="width:360px" />
         </div>
     </div>

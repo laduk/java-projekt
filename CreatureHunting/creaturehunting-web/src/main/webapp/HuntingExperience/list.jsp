@@ -26,22 +26,22 @@
                     <th><f:message key="exp.description"/></th>
                     <th></th>
                 </tr>
-                <c:forEach items="${actionBean.huntExp}" var="hunt">
+                <c:forEach items="${actionBean.huntings}" var="hunting">
                     <tr>
-                        <td>${hunt.id}</td>
-                        <td><c:out value="${hunt.weapon.name}"/></td>
-                        <td><c:out value="${hunt.creature.name}"/></td>
-                        <td><c:out value="${hunt.dateOfExperience}"/></td>
-                        <td><c:out value="${hunt.efficiency}"/></td>
-                        <td><c:out value="${hunt.description}"/></td>
+                        <td>${hunting.id}</td>
+                        <td><c:out value="${hunting.weapon.name}"/></td>
+                        <td><c:out value="${hunting.creature.name}"/></td>
+                        <td><c:out value="${hunting.dateOfExperience}"/></td>
+                        <td><c:out value="${hunting.efficiency}"/></td>
+                        <td><c:out value="${hunting.description}"/></td>
                         <td>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="edit">
-                                <s:param name="huntExp.id" value="${hunt.id}"/>
+                                <s:param name="hunting.id" value="${hunting.id}"/>
                                 <span class="glyphicon glyphicon-edit"></span>
                                 <f:message key="all.edit" />
                             </s:link>
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="delete">
-                                <s:param name="huntExp.id" value="${hunt.id}"/>
+                                <s:param name="hunting.id" value="${hunting.id}"/>
                                 <span class="glyphicon glyphicon-remove"></span>
                                 <f:message key="all.delete"/>
                             </s:link>

@@ -16,20 +16,18 @@
             <h2><f:message key="exp.delete.title"/></h2>
             <h4>
                 <f:message key="exp.delete.ask">
-                    <f:param value="${actionBean.huntingExperienceDTO.description}"/>
+                    <f:param value="${actionBean.hunting.description}"/>
                 </f:message>
             </h4>
             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" class="form-horizontal">
-                <s:hidden name="huntExp.id"/>
-                <fieldset>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <s:submit name="deleteHuntExp" class="btn btn-default">
-                                <f:message key="all.delete"/>
-                            </s:submit>
-                        </div>
+                <s:hidden name="hunting.id"/>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <s:submit name="doDelete" class="btn btn-default">
+                            <f:message key="all.delete"/>
+                        </s:submit>
                     </div>
-                </fieldset>
+                </div>
             </s:form>
         </div>
     </s:layout-component>
