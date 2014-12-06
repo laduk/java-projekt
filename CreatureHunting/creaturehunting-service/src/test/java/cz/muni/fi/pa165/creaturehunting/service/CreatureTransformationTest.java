@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.creaturehunting.service;
 
 import cz.muni.fi.pa165.creaturehunting.data.entity.Area;
 import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
-import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.CreatureTransformation;
 import java.util.ArrayList;
@@ -29,11 +28,9 @@ public class CreatureTransformationTest {
         creatureDTO.setWeight(35);
         creatureDTO.setAgility(99);
         
-        AreaDTO areaDTO = new AreaDTO();
-        areaDTO.setId(4242);
-        List<AreaDTO> areasDTO = new ArrayList();
-        areasDTO.add(areaDTO);
-        creatureDTO.setListOfAreas(areasDTO);
+        List<Long> idAreas = new ArrayList();
+        idAreas.add(Long.parseLong("4242"));
+        creatureDTO.setIdAreas(idAreas);
         
         Creature creature = CreatureTransformation.transformToEntity(creatureDTO);
         Assert.assertTrue("Wrong transform id of creature to entity.",
@@ -81,6 +78,8 @@ public class CreatureTransformationTest {
                 creatureDTO.getAgility() == 100);
         Assert.assertTrue("Wrong transform listOfAreas of creature to DTO.",
                 creatureDTO.getListOfAreas().get(0).getId() == 51);
+        Assert.assertTrue("Wrong transform idAreas of creature to DTO.",
+                creatureDTO.getIdAreas().get(0) == 51);
     }
     
 }

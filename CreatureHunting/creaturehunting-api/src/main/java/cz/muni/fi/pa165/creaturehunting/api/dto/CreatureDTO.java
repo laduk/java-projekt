@@ -37,8 +37,15 @@ public class CreatureDTO {
     
     /**
      * Areas where the creature was spotted.
+     * This objects has only information character.
      */
     private List<AreaDTO> listOfAreas;
+    
+    /**
+     * IDs of areas where the creature was spotted.
+     * This objects need to save.
+     */
+    private List<Long> idAreas;
 
     public long getId() {
         return id;
@@ -86,6 +93,14 @@ public class CreatureDTO {
 
     public void setListOfAreas(List<AreaDTO> listOfAreas) {
         this.listOfAreas = listOfAreas;
+    }
+
+    public List<Long> getIdAreas() {
+        return idAreas;
+    }
+
+    public void setIdAreas(List<Long> idAreas) {
+        this.idAreas = idAreas;
     }
     
     @Override

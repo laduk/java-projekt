@@ -12,11 +12,6 @@ public class AreaDTO {
      private String description;
      private double acreage;
      List<CreatureDTO> listOfCreatures;
-
-     public AreaDTO() {}
-     public AreaDTO(long id) {
-         this.id = id;
-     }
      
     public long getId() {
         return id;

@@ -27,7 +27,7 @@
     <div class="form-group">
         <s:label for="b5" name="creature.listOfAreas" class="control-label col-sm-2"/>
         <div class="col-sm-10">
-            <s:select class="form-control" id="b5" name="creature.listOfAreas.id" style="width:250px" multiple="true" size="10">
+            <s:select class="form-control" id="b5" name="creature.idAreas" style="width:250px" multiple="true" size="10">
                 <s:options-collection collection="${actionBean.areas}" value="id" label="name"/>
             </s:select>
         </div>

@@ -51,6 +51,11 @@ public class Area implements Serializable {
     @ManyToMany(cascade = CascadeType.REMOVE, mappedBy="listOfAreas")
     private List<Creature> listOfCreatures;
     
+    public Area() { }
+    public Area(Long id){
+        this.id = id;
+    }
+    
     public long getId() {
         return id;
     }
