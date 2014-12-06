@@ -4,7 +4,7 @@ DELETE FROM AREA;
 DELETE FROM CREATURE;
 DELETE FROM WEAPON;
 
-INSERT INTO AREA (ID, NAME, DESCRIPTION, ACREAGE) VALUES (1, 'Transilvania', 'Area full of valleys and mysterios castles, fortresses.', 103600);
+INSERT INTO AREA (ID, NAME, DESCRIPTION, ACREAGE) VALUES (1, 'Transilvania', 'Area full of valleys and mysterious castles, fortresses.', 103600);
 INSERT INTO AREA (ID, NAME, DESCRIPTION, ACREAGE) VALUES (2, 'Chernobyl', 'Fallout area after nuclear disaster.', 1732);
 INSERT INTO AREA (ID, NAME, DESCRIPTION, ACREAGE) VALUES (3, 'Borneo', 'Place from where has canibalism spreaded.', 743330);
 INSERT INTO AREA (ID, NAME, DESCRIPTION, ACREAGE) VALUES (4, 'Bermuda triangle', 'Mystery place it is easy to get lost or disappear.', 840000);
@@ -49,7 +49,6 @@ INSERT INTO WEAPON (ID, NAME, GUNREACH, AMMUNITION) VALUES ( 20, 'Uzi', 40, 'Amm
 ALTER TABLE WEAPON ALTER COLUMN ID RESTART WITH 21;
 
 INSERT INTO HUNTINGEXPERIENCE (ID, WEAPON_ID, CREATURE_ID, DATEOFEXPERIENCE, EFFICIENCY, DESCRIPTION) VALUES (1, 1, 1, '2015-11-27', 100, 'Group creature be aware of crowd if you dont have enough ammo.');
-INSERT INTO HUNTINGEXPERIENCE (ID, WEAPON_ID, CREATURE_ID, DATEOFEXPERIENCE, EFFICIENCY, DESCRIPTION) VALUES (2, 5, 15, '2013-12-11', 0, 'Run away it has not got a neck to choke.');
 INSERT INTO HUNTINGEXPERIENCE (ID, WEAPON_ID, CREATURE_ID, DATEOFEXPERIENCE, EFFICIENCY, DESCRIPTION) VALUES (3, 6, 10, '2015-1-1', 95, 'It works but it is dangerous unless it is only pile of dust.');
 INSERT INTO HUNTINGEXPERIENCE (ID, WEAPON_ID, CREATURE_ID, DATEOFEXPERIENCE, EFFICIENCY, DESCRIPTION) VALUES (4, 9, 6, '2013-5-8', 20, 'They are not stupid. Mine field would be better.');
 INSERT INTO HUNTINGEXPERIENCE (ID, WEAPON_ID, CREATURE_ID, DATEOFEXPERIENCE, EFFICIENCY, DESCRIPTION) VALUES (5, 2, 9, '2013-7-2', 80, 'Joints are pretty durable.');
