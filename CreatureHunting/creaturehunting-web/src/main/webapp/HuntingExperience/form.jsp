@@ -34,7 +34,7 @@
     <div class="form-group">
         <s:label for="datepicker" name="exp.dateOfExperience" class="col-sm-2 control-label"/>
         <div class="col-sm-4">
-            <s:text class="form-control" id="datepicker" name="hunting.date"/>
+            <s:text class="form-control" id="datepicker" formatPattern="dd-MM-yyyy" name="hunting.dateOfExperience"/>
         </div>
     </div>
 
