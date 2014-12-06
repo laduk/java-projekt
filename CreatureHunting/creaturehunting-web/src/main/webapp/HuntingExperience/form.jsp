@@ -15,6 +15,7 @@
         <s:label for="b1" name="exp.weapon" class="col-sm-2 control-label"/>
         <div class="col-sm-4">
             <s:select class="form-control" id="b1" name="hunting.weapon.id">
+                <s:option value="null"/>
                 <s:options-collection collection="${actionBean.weapons}" value="id" label="name"/>
             </s:select>
         </div>
@@ -24,6 +25,7 @@
         <s:label for="b2" name="exp.creature" class="col-sm-2 control-label"/>
         <div class="col-sm-4">
             <s:select class="form-control" id="b2" name="hunting.creature.id">
+                <s:option value="null"/>
                 <s:options-collection collection="${actionBean.creatures}" value="id" label="name"/>
             </s:select>
         </div>
