@@ -51,6 +51,6 @@ public interface HuntingExperienceDAO {
      * @param minimalEfficiency Value of efficiency for the weapon. 
      * @return List of weapons.
      */
-    public List<Weapon> findEfficientWeapons(Creature creature, int minimalEfficiency);
+    public List<HuntingExperience> findEfficientWeaponExperiences(Creature creature, int minimalEfficiency);
 
 }

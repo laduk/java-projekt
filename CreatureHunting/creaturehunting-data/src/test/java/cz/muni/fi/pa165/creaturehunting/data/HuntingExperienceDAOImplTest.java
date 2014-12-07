@@ -239,20 +239,90 @@ public class HuntingExperienceDAOImplTest {
         assertTrue("If exactly 2 HuntingExperience-s were created", expsOld.size()+2 ==  exps.size());
     }
 
+    
+    
     /**
      * Test of findEfficientWeapons method, of class HuntingExperienceDAOImpl.
      */
-    /*@Test
-    public void testFindEfficientWeapons() {
-        System.out.println("findEfficientWeapons");
-        Creature creature = null;
-        int minimalEfficiency = 0;
-        HuntingExperienceDAOImpl instance = null;
-        List<Weapon> expResult = null;
-        List<Weapon> result = instance.findEfficientWeapons(creature, minimalEfficiency);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
+    @Test
+    public void testfindEfficientWeaponExperiences() throws ParseException {
+    System.out.println("findEfficientWeaponExperiences");
+        HuntingExperienceDAO huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
+        WeaponDAO weaponDAO = new WeaponDAOImpl(entMan);
+        CreatureDAO creatureDAO = new CreatureDAOImpl(entMan);
+        
+        Creature creature1 = new Creature();
+        creature1.setAgility(25);
+        creature1.setHeight(180);
+        creature1.setWeight(80);
+        creature1.setName("Green zombie");
+        creature1.setListOfAreas(null); //this one has not been seen yet
+        
+        Weapon weapon = new Weapon();
+        weapon.setName("Rifle");
+        weapon.setAmmunition("0.30 cal");
+        weapon.setGunReach(100);
+  
+        Weapon weapon2 = new Weapon();
+        weapon2.setName("Bow");
+        weapon2.setAmmunition("Arrows");
+        weapon2.setGunReach(200);
+        
+        HuntingExperience exp = new HuntingExperience();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+        String dateStr = "5-11-2014";
+        Date date = sdf.parse(dateStr);
+        exp.setWeapon(weapon);
+        exp.setCreature(creature1);
+        exp.setDateOfExperience(date);
+        exp.setDescription("Killing a Forest Ogre.");
+        exp.setEfficiency(20);
+        
+        HuntingExperience exp2 = new HuntingExperience();
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd-M-yyyy");
+        String dateStr2 = "25-11-2013";
+        Date date2 = sdf2.parse(dateStr2);
+        exp2.setWeapon(weapon);
+        exp2.setCreature(creature1);
+        exp2.setDateOfExperience(date2);
+        exp2.setDescription("Killing an Orfen.");
+        exp2.setEfficiency(100);
+        
+        HuntingExperience exp3 = new HuntingExperience();
+        SimpleDateFormat sdf3 = new SimpleDateFormat("dd-M-yyyy");
+        String dateStr3 = "06-06-2006";
+        Date date3 = sdf3.parse(dateStr3);
+        exp3.setWeapon(weapon2);
+        exp3.setCreature(creature1);
+        exp3.setDateOfExperience(date3);
+        exp3.setDescription("Killing an Evil Spirit.");
+        exp3.setEfficiency(70);
+        
+        entMan.getTransaction().begin();
+        creatureDAO.createCreature(creature1);
+        weaponDAO.createWeapon(weapon);
+        weaponDAO.createWeapon(weapon2);
+        huntingExpDAO.createHuntingExperience(exp);
+        huntingExpDAO.createHuntingExperience(exp2);
+        huntingExpDAO.createHuntingExperience(exp3);
+        entMan.getTransaction().commit();
+        entMan.close();
+        entMan = entManFact.createEntityManager();
+        huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
+        
+       
+        List<HuntingExperience> exps = huntingExpDAO.findEfficientWeaponExperiences(creature1,70);
+        
+        assertTrue("For efficiency of 70%, two experiences were found", exps.size() ==  2);
+        
+        List<HuntingExperience> exps2 = huntingExpDAO.findEfficientWeaponExperiences(creature1,100);
+        
+        assertTrue("For efficiency of 100%, only one experience was found", exps2.size() ==  1);
+        assertTrue("Found experience contain th right weapon", exps2.get(0).getWeapon().equals(weapon));
+        
+         List<HuntingExperience> exps3 = huntingExpDAO.findEfficientWeaponExperiences(creature1,20);
+        
+        assertTrue("For efficiency of 20%, all of three experiences were found", exps3.size() ==  3);
+    }
     
 }

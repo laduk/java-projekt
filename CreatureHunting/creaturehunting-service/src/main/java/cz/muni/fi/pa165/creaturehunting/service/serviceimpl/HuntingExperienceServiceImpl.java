@@ -88,24 +88,27 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         }
         return listHuntExpsDTO;
     }
+    
+    //Upravit jeste na servisni vrstve
 
-    public List<WeaponDTO> findEfficientWeapons(CreatureDTO creatureDTO, int effeciency) {
-        List<WeaponDTO> listWeaponsDTO = new ArrayList<WeaponDTO>();
-        List<Weapon> listWeapons = new ArrayList<Weapon>();
-        if (creatureDTO!=null && effeciency>=0 &&  effeciency<=100) {
-            listWeapons = hunExpDAO.findEfficientWeapons(CreatureTransformation.
-                    transformToEntity(creatureDTO), effeciency);        
-        }else{
-            throw new NullPointerException("Creature must not be null and"
-                    + " effeciency must be in %");
-        }
-        WeaponDTO weaponDTO = new WeaponDTO();
-        for(Weapon weapon : listWeapons){
-            weaponDTO = WeaponTransformation.transformToDTO(weapon);
-            listWeaponsDTO.add(weaponDTO);
-        }
-        return listWeaponsDTO;
-        
-    }
+//    public List<WeaponDTO> findEfficientWeapons(CreatureDTO creatureDTO, int effeciency) {
+//        List<WeaponDTO> listWeaponsDTO = new ArrayList<WeaponDTO>();
+//        List<Weapon> listWeapons = new ArrayList<Weapon>();
+//        if (creatureDTO!=null && effeciency>=0 &&  effeciency<=100) {
+//            listWeapons = hunExpDAO.findEfficientWeapons(CreatureTransformation.
+//                    transformToEntity(creatureDTO), effeciency);        
+//        }else{
+//            throw new NullPointerException("Creature must not be null and"
+//                    + " effeciency must be in %");
+//        }
+//        WeaponDTO weaponDTO = new WeaponDTO();
+//        for(Weapon weapon : listWeapons){
+//            weaponDTO = WeaponTransformation.transformToDTO(weapon);
+//            listWeaponsDTO.add(weaponDTO);
+//        }
+//        return listWeaponsDTO;
+//        
+//    }
+
     
 }

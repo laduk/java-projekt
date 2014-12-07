@@ -68,11 +68,22 @@ public class HuntingExperienceDAOImpl implements HuntingExperienceDAO {
     //tato metoda by chtela jeste upravit a promyslet, mozna by mela precejen vracet HuntingExp a ty by zpracovaly uz metody na te service tier
     
     /* Bude hledat zbran nejmene se zadanou efficiency, nebo vyssi, zadava se tedy nejnizsi mira ucinnosti, ktera nas zajima       */
-    public List<Weapon> findEfficientWeapons(Creature creature, int minimalEfficiency) {
-        Query query = entityManager.createQuery("SELECT exp.weapon FROM HuntingExperience exp WHERE exp.efficiency >= :minEfficiency ORDER BY exp.efficiency DESC", 
-                Weapon.class);
+//    public List<Weapon> findEfficientWeapons(Creature creature, int minimalEfficiency) {
+//        Query query = entityManager.createQuery("SELECT exp.weapon FROM HuntingExperience exp WHERE exp.efficiency >= :minEfficiency ORDER BY exp.efficiency DESC", 
+//                Weapon.class);
+//
+//        query.setParameter("minEfficiency", minimalEfficiency);
+//        return query.getResultList();
+//    }
+//    
+    
+        public List<HuntingExperience> findEfficientWeaponExperiences(Creature creature, int minimalEfficiency) {
+        Query query = entityManager.createQuery("SELECT exp FROM HuntingExperience exp WHERE exp.efficiency >= :minEfficiency ORDER BY exp.efficiency DESC", 
+                HuntingExperience.class);
 
-        query.setParameter("minEfficiency", minimalEfficiency);
+        query.setParameter("minEfficiency", minimalEfficiency); //co je tohle?
         return query.getResultList();
+        
     }
+    
 }

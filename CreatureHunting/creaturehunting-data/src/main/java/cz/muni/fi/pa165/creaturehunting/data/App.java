@@ -137,7 +137,7 @@ public class App {
         
         List<HuntingExperience> listOfExps = expDAO.findAllHuntingExperience();
         
-        List<Weapon> efficientWeapons = expDAO.findEfficientWeapons(creature,75);
+        List<HuntingExperience> efficientWeaponsExps = expDAO.findEfficientWeaponExperiences(creature,75);
         
         
         System.out.println(area);
@@ -168,12 +168,12 @@ public class App {
         }
         
         
-         if (efficientWeapons.isEmpty()){
+         if (efficientWeaponsExps.isEmpty()){
             System.out.println("No WEAPONS");
         } else{
         
-            System.out.println("Vhodna zbran: " + efficientWeapons.get(0));
-            System.out.println("Vhodna zbran: " + efficientWeapons.get(1));
+            System.out.println("Vhodna zbran: " + efficientWeaponsExps.get(0).getWeapon());
+            System.out.println("Vhodna zbran: " + efficientWeaponsExps.get(1).getWeapon());
             //System.out.println("Vhodna zbran: " + efficientWeapons.get(2));
         }
         
