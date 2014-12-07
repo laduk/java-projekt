@@ -1,13 +1,17 @@
 package cz.muni.fi.pa165.creaturehunting.service;
 
+import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.data.entity.Weapon;
 import cz.muni.fi.pa165.creaturehunting.data.dao.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
+import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
+import cz.muni.fi.pa165.creaturehunting.service.datatransformation.CreatureTransformation;
 import cz.muni.fi.pa165.creaturehunting.service.serviceimpl.WeaponServiceImpl;
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.WeaponTransformation;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.Before;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -157,7 +161,7 @@ public class WeaponServiceImplTest {
     
     /**
      *
-     * Testing findAllWeapons method on service tier using mock dao object
+     * Testing findAllWeapons method on service tier using mock dao object.
      */
     @Test
     public void findAllWeaponsTest() {
@@ -192,5 +196,35 @@ public class WeaponServiceImplTest {
         assertEquals(returnedList.get(0), listOfWeaponsDto.get(0));
         verify(weaponDao, times(2)).findAllWeapons();
 
+    }
+    
+    /**
+     * Testing finding weapons by given name.
+     */
+    @Test
+    public void findAllByNameTest(){
+        List<Weapon> weaponsByName = new ArrayList();
+        WeaponDTO weaponDTO = new WeaponDTO();
+        weaponDTO.setId(5);
+        weaponDTO.setName("Bow");
+        weaponDTO.setGunReach(1);
+        weaponDTO.setAmmunition("Arrow");
+        
+        WeaponDTO weaponDTO2 = new WeaponDTO();
+        weaponDTO2.setId(5);
+        weaponDTO2.setName("CrossBow");
+        weaponDTO2.setGunReach(1);
+        weaponDTO2.setAmmunition("Bolt");
+        
+        weaponsByName.add(WeaponTransformation.transformToEntity(weaponDTO));
+        weaponsByName.add(WeaponTransformation.transformToEntity(weaponDTO2));
+        when(weaponDao.findAllWeapons()).thenReturn(weaponsByName);
+
+        Assert.assertTrue("Wrong weapon by name was found.",
+                weaponService.findAllByName("Bow").get(0).equals(weaponDTO));
+        Assert.assertTrue("Wrong list of creatures by name was found.",
+                weaponService.findAllByName("Bow").size()==1);
+        Assert.assertTrue("Wrong list of creatures by name was found.",
+                weaponService.findAllByName("CrossBow").size()==1);        
     }
 }

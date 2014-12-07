@@ -45,4 +45,11 @@ public interface WeaponService {
      * @return list of WeaponDTO objects
      */
     public List<WeaponDTO> findAllWeapons();
+    
+    /**
+     * Find all weapons that contains string name.
+     * @param name String value
+     * @return List of weapons.
+     */
+    public List<WeaponDTO> findAllByName(String name);
 }

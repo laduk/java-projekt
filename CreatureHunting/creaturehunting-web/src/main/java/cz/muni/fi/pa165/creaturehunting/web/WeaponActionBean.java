@@ -48,7 +48,12 @@ public class WeaponActionBean extends BaseActionBean implements ValidationErrorH
 
     @DefaultHandler
     public Resolution list() {
-        weapons = weaponService.findAllWeapons();
+        String name = getContext().getRequest().getParameter("find");
+        if (name == null || name.isEmpty()) {
+            weapons = weaponService.findAllWeapons();
+        } else {
+            weapons = weaponService.findAllByName(name);
+        }
         return new ForwardResolution("/weapon/list.jsp");
     }
 

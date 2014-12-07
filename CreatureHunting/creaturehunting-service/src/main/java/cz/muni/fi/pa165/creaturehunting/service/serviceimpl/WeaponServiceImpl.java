@@ -97,4 +97,15 @@ public class WeaponServiceImpl implements WeaponService {
 
         return weaponsDto;
     }
+
+    public List<WeaponDTO> findAllByName(String string) {
+        
+        List<WeaponDTO> weaponByName = new ArrayList();
+        for (WeaponDTO weaponDTO : this.findAllWeapons()){
+            if (weaponDTO.getName().toLowerCase().matches(string.toLowerCase())) {
+                weaponByName.add(weaponDTO);
+            }
+        }
+        return weaponByName;
+    }
 }
