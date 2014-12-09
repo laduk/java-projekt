@@ -14,7 +14,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" var="actionBean"/>
 
         <div class="container">
-             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" class="form-inline text-right">
+            <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" class="form-inline text-right">
                 <div class="form-group">
                     <s:label for="b1" name="weapon.name"/>
                     <s:text id="b1" name="find" class="form-control"/>
@@ -22,7 +22,22 @@
                 <button type="submit" name="list" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-search"></span>
                     <f:message key="all.find"/>
-                </button>
+                </button>                
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('[data-toggle="popover"]').popover({
+                        placement : 'bottom'
+                        });
+                    });
+                </script>
+
+                    <a href="#" class="btn btn-primary" data-toggle="popover" 
+                       tabindex="0" data-trigger="focus" 
+                       title="<f:message key="find.weapon.title"/>" 
+                       data-content="<f:message key="find.text.reg"/>">
+                        <span class="glyphicon glyphicon-info-sign">                            
+                        </span>
+                    </a>   
             </s:form>
             
             <h2><f:message key="weapon.list.title"/></h2>
