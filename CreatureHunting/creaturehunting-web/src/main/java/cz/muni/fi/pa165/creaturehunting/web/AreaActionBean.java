@@ -34,8 +34,13 @@ public class AreaActionBean extends BaseActionBean implements ValidationErrorHan
     private List<AreaDTO> areas;
 
     @DefaultHandler
-    public Resolution list() {
-        areas = areaService.findAllAreas();
+    public Resolution list() {        
+        String name = getContext().getRequest().getParameter("find");
+        if (name == null || name.isEmpty()) {
+            areas = areaService.findAllAreas();
+        } else {
+            areas = areaService.findAllByName(name);
+        }
         return new ForwardResolution("/area/list.jsp");
     }
 

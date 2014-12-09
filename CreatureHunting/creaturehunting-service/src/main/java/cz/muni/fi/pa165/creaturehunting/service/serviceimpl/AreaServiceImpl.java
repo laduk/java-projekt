@@ -92,5 +92,20 @@ public class AreaServiceImpl implements AreaService {
         }
         return listAreasDTO;
     }
-    
+
+    /**
+     * Find all areas by name.
+     * @param name
+     * @return list of area data transfer objects
+     */
+    public List<AreaDTO> findAllByName(String name) {
+        List<AreaDTO> areaByName = new ArrayList();
+
+        for (AreaDTO areaDTO : this.findAllAreas()){
+            if (areaDTO.getName().toLowerCase().contains(name.toLowerCase())) {
+                areaByName.add(areaDTO);
+            }
+        }
+        return areaByName;
+    }    
 }

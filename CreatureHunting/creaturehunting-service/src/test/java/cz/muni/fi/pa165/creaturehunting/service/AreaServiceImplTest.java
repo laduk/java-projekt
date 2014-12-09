@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
  */
 public class AreaServiceImplTest {
     private AreaDTO areaDTO;
+    private AreaDTO areaDTO2;
     private AreaDAO areaDAO;
     private AreaService areaService;
     
@@ -34,6 +35,12 @@ public class AreaServiceImplTest {
         areaDTO.setName("Brno");
         areaDTO.setAcreage(236);
         areaDTO.setDescription("Beautiful city");
+        
+        areaDTO2 = new AreaDTO();
+        areaDTO2.setId(52);
+        areaDTO2.setName("Praha");
+        areaDTO2.setAcreage(236);
+        areaDTO2.setDescription("Awful city");
         
         List<CreatureDTO> creaturesDTO = new ArrayList();
         CreatureDTO creatureDTO = new CreatureDTO();
@@ -102,5 +109,27 @@ public class AreaServiceImplTest {
         
         Assert.assertTrue("Wrong list of areas was found.", 
                 areaService.findAllAreas().get(0).equals(areaDTO));
+    }
+    
+    /**
+     * Test find all areas by name.
+     */
+    @Test
+    public void testFindAllByNameTest(){
+        List<Area> areaWeaponByName = new ArrayList();
+        
+        areaWeaponByName.add(AreaTransformation.transformToEntity(areaDTO));
+        areaWeaponByName.add(AreaTransformation.transformToEntity(areaDTO2));
+        when(areaDAO.findAllAreas()).thenReturn(areaWeaponByName);
+        
+        Assert.assertTrue("Wrong area by name was found.",
+                areaService.findAllByName("Brno").get(0).equals(areaDTO));
+        Assert.assertTrue("Wrong area by name was found.",
+                areaService.findAllByName("Praha").get(0).equals(areaDTO2));
+
+        Assert.assertTrue("Wrong list of areas by name was found.",
+                areaService.findAllByName("Br").size()==1);
+        Assert.assertTrue("Wrong list of areas by name was found.",
+                areaService.findAllByName("Pr").size()==1);
     }
 }

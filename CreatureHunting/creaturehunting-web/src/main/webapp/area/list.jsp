@@ -8,6 +8,17 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" var="actionBean"/>
 
         <div class="container">
+            <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" class="form-inline text-right">
+                <div class="form-group">
+                    <s:label for="b1" name="area.name.find"/>
+                    <s:text id="b1" name="find" class="form-control"/>
+                </div>
+                <button type="submit" name="list" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-search"></span>
+                    <f:message key="all.find"/>
+                </button>
+            </s:form>            
+            
             <h2><f:message key="area.list.title"/></h2>
 
             <table class="table">

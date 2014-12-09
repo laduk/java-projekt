@@ -18,6 +18,7 @@
     <module>creaturehunting-service</module>
     <module>creaturehunting-api</module>
     <module>creaturehunting-web</module>
+    <module>creaturehunting-restClient</module>
   </modules>
 
 </project>

@@ -45,4 +45,12 @@ public interface AreaService {
      * @return list of AreaDTO objects
      */
     public List<AreaDTO> findAllAreas();
+    
+    /**
+     * Find all Areas by given name.
+     * @param name String parametr it is name of area to be search
+     * @return list of areasSTO
+     * @returnlist of AreaDto
+     */
+    public List<AreaDTO> findAllByName(String name);
 }
