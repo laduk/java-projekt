@@ -109,6 +109,36 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
 //        return listWeaponsDTO;
 //        
 //    }
+    
+    
+    public List<HuntingExperienceDTO> findEfficientWeaponExperiences(CreatureDTO creatureDTO, int effeciency){
+            
+        List<HuntingExperienceDTO> listHuntingExpDTO = new ArrayList<HuntingExperienceDTO>();
+        List<HuntingExperience> listHuntExp = new ArrayList<HuntingExperience>();
+        
+        if (creatureDTO!=null && effeciency>=0 &&  effeciency<=100) {
+            
+            listHuntExp = hunExpDAO.findEfficientWeaponExperiences(CreatureTransformation.
+                    transformToEntity(creatureDTO), effeciency);        
+        }else{
+            throw new NullPointerException("Creature must not be null and"
+                    + " effeciency must be in %");
+        }
+        
+       
+        //presype a transformuje
+        HuntingExperienceDTO huntExpDTO = new HuntingExperienceDTO();
+        for(HuntingExperience exp : listHuntExp){
+            huntExpDTO = HuntingExperienceTransformation.transformToDTO(exp);
+            listHuntingExpDTO.add(huntExpDTO);
+        }
+        
+        //TODO / dodelat
+        
+        return listHuntingExpDTO;
+    
+    }
+    
 
     
 }

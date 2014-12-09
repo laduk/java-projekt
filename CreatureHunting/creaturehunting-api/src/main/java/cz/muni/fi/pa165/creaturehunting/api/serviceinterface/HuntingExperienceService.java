@@ -49,11 +49,22 @@ public interface HuntingExperienceService {
      */
     public List<HuntingExperienceDTO> findAllHuntExp();     
     
-//    /**
-//     * 
-//     * @param creatureDTO paramentr of Creature
-//     * @param effeciency paramentr of effeciency of the weapon
-//     * @return  list of weapon transefer object
-//     */
-    //public List<WeaponDTO> findEfficientWeapons(CreatureDTO creatureDTO, int effeciency);
+    /**
+     * 
+     * @param creatureDTO paramentr of Creature
+     * @param effeciency paramentr of effeciency of the weapon
+     * @return  list of weapon transefer object
+     */
+    public List<HuntingExperienceDTO> findEfficientWeaponExperiences(CreatureDTO creatureDTO, int effeciency);
+    
+       
+    /**
+     * 
+     * @param creatureDTO paramentr of Creature
+     * 
+     * @return  list of weapon transefer object
+     */
+    //public List<WeaponDTO> findDeadlyWeapons(CreatureDTO creatureDTO); //bude redukovat duplicity a vypise jen zbrane
+
+
 }
