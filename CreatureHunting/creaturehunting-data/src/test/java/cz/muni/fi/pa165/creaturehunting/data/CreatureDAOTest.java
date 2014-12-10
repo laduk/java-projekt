@@ -44,7 +44,8 @@ public class CreatureDAOTest {
     }
     
     @After
-    public void tearDown() {        
+    public void tearDown() {
+        entMan.clear();
         entMan.close();
     }
 
@@ -53,7 +54,7 @@ public class CreatureDAOTest {
      * Test of right parameter.
      */
     @Test
-    public void testAgilityPec(){
+    public void testAgilityPercent(){
         System.out.println("setingAgility");
         Creature skeleton = new Creature();
         skeleton.setName("DEATH");
@@ -65,11 +66,13 @@ public class CreatureDAOTest {
         else{
             skeleton.setAgility(agility);
         }
-        CreatureDAO creat = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
-        creat.createCreature(skeleton);
+        entMan.persist(skeleton);
+        entMan.getTransaction().commit();        
+        assertFalse("Test whether creature was set and id set",skeleton.getId()<=0);
+        entMan.getTransaction().begin();
+        entMan.remove(skeleton);
         entMan.getTransaction().commit();
-        assertFalse("Test whether creature was sez and id set",skeleton.getId()<=0);        
     }
     
     /**
@@ -91,14 +94,10 @@ public class CreatureDAOTest {
         area.setAcreage(50000);
         assertNotNull("Testing whether is Area null",zombie);
         
-        AreaDAO areas = new AreaDAOImpl(entMan);
         entMan.getTransaction().begin();
-        areas.createArea(area);
-        entMan.getTransaction().commit();
-        entMan.close();
-        
-        entMan = entManFact.createEntityManager();
-        areas = new AreaDAOImpl(entMan);
+        entMan.persist(area);
+        entMan.getTransaction().commit();        
+
         Area area2 = new Area();
         area2.setName("Brno");
         area2.setDescription("Place for odd beings.");
@@ -106,10 +105,8 @@ public class CreatureDAOTest {
         assertNotNull("Testing whether is Area2 null",zombie);
         
         entMan.getTransaction().begin();
-        areas.createArea(area2);
+        entMan.persist(area2);
         entMan.getTransaction().commit();
-        entMan.close();
-        entMan = entManFact.createEntityManager();
         
         List<Area> places = new ArrayList<Area>();
         places.add(area);
@@ -118,13 +115,16 @@ public class CreatureDAOTest {
         
         zombie.setListOfAreas(places);
         
-        entMan.getTransaction().begin();
         CreatureDAO creature = new CreatureDAOImpl(entMan);
+        entMan.getTransaction().begin();
         creature.createCreature(zombie);
         entMan.getTransaction().commit();
         assertFalse("Test whether creature was sez and id set",zombie.getId()<=0);
         assertTrue("Creature doesn't associate areas.",
-                creature.findCreature(zombie.getId()).getListOfAreas().size() == 2);
+        creature.findCreature(zombie.getId()).getListOfAreas().size() == 2);
+        entMan.getTransaction().begin();
+        entMan.remove(zombie);
+        entMan.getTransaction().commit();
     }
 
     /**
@@ -141,10 +141,8 @@ public class CreatureDAOTest {
         
         AreaDAO areas = new AreaDAOImpl(entMan);
         entMan.getTransaction().begin();
-        areas.createArea(area);
+        entMan.persist(area);
         entMan.getTransaction().commit();
-        entMan.close();
-        entMan = entManFact.createEntityManager();
         
         List<Area> place = new ArrayList<Area>();
         place.add(area);
@@ -156,20 +154,20 @@ public class CreatureDAOTest {
         vampire.setAgility(90);
         vampire.setListOfAreas(place);
         
-        CreatureDAO creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
-        creature.createCreature(vampire);
+        entMan.persist(vampire);
         entMan.getTransaction().commit();
-        entMan.close();
-        
-        entMan = entManFact.createEntityManager();
-        creature = new CreatureDAOImpl(entMan);
+
+        CreatureDAO creature = new CreatureDAOImpl(entMan);
         vampire.setName("Dracula");
         entMan.getTransaction().begin();
         creature.updateCreature(vampire);
         entMan.getTransaction().commit();        
         Assert.assertEquals("Whether is Dracule name set and updated.","Dracula",
                 vampire.getName());
+        entMan.getTransaction().begin();
+        entMan.remove(vampire);
+        entMan.getTransaction().commit();
     }
 
     /**
@@ -186,10 +184,8 @@ public class CreatureDAOTest {
         
         AreaDAO areas = new AreaDAOImpl(entMan);
         entMan.getTransaction().begin();
-        areas.createArea(area);
+        entMan.persist(area);
         entMan.getTransaction().commit();
-        entMan.close();
-        entMan = entManFact.createEntityManager();
         
         List<Area> place = new ArrayList<Area>();
         place.add(area);
@@ -201,15 +197,12 @@ public class CreatureDAOTest {
         vampire.setAgility(90);
         vampire.setListOfAreas(place);
         
-        CreatureDAO creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
-        creature.createCreature(vampire);
+        entMan.persist(vampire);
         entMan.getTransaction().commit();
-        entMan.close();
-        entMan = entManFact.createEntityManager();
         long id = vampire.getId();
         
-        creature = new CreatureDAOImpl(entMan);
+        CreatureDAO creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
         creature.deleteCreature(vampire);
         entMan.getTransaction().commit();
@@ -229,12 +222,9 @@ public class CreatureDAOTest {
                 + "you are welcome.");
         area.setAcreage(1000);
         
-        AreaDAO areas = new AreaDAOImpl(entMan);
         entMan.getTransaction().begin();
-        areas.createArea(area);
+        entMan.persist(area);
         entMan.getTransaction().commit();
-        entMan.close();
-        entMan = entManFact.createEntityManager();
         
         List<Area> place = new ArrayList<Area>();
         place.add(area);
@@ -246,20 +236,20 @@ public class CreatureDAOTest {
         vampire.setAgility(90);
         vampire.setListOfAreas(place);
         
-        CreatureDAO creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
-        creature.createCreature(vampire);
+        entMan.persist(vampire);
         entMan.getTransaction().commit();
-        entMan.close();
-        entMan = entManFact.createEntityManager();
         
         long id = vampire.getId();
         
-        creature = new CreatureDAOImpl(entMan);
+        CreatureDAO creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
         Creature vampireFind = creature.findCreature(id);
         entMan.getTransaction().commit();
         assertEquals("Whether has been found proper creature.",vampire, vampireFind);
+        entMan.getTransaction().begin();
+        entMan.remove(vampire);
+        entMan.getTransaction().commit();
     }
 
     /**
@@ -274,12 +264,9 @@ public class CreatureDAOTest {
                 + "if you are welcome.");
         area.setAcreage(1000);
         
-        AreaDAO areas = new AreaDAOImpl(entMan);
         entMan.getTransaction().begin();
-        areas.createArea(area);
+        entMan.persist(area);
         entMan.getTransaction().commit();
-        entMan.close();
-        entMan = entManFact.createEntityManager();
         
         List<Area> place = new ArrayList<Area>();
         place.add(area);
@@ -300,25 +287,21 @@ public class CreatureDAOTest {
         
         CreatureDAO creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
-        creature.createCreature(vampire);
+        entMan.persist(vampire);
+        entMan.persist(slave);
         entMan.getTransaction().commit();
-        entMan.close();
         
-        entMan = entManFact.createEntityManager();
-        creature = new CreatureDAOImpl(entMan);
-        entMan.getTransaction().begin();
-        creature.createCreature(slave);
-        entMan.getTransaction().commit();
-        entMan.close();
-        
-        entMan = entManFact.createEntityManager();
-        creature = new CreatureDAOImpl(entMan);
         entMan.getTransaction().begin();
         List<Creature> creat = new ArrayList<Creature>();
         creat.addAll(creature.findAllCreatures());
-        entMan.getTransaction().commit();       
-        
-        assertTrue("If list has proper size", 1 < creat.size());
+        entMan.getTransaction().commit();
+        System.out.println("Velikost");
+        System.out.println(creat.size());
+        assertTrue("If list has proper size",creat.size()==2);
+        entMan.getTransaction().begin();
+        entMan.remove(vampire);
+        entMan.remove(slave);
+        entMan.getTransaction().commit();
     }
     
 }
