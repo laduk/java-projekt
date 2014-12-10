@@ -31,13 +31,13 @@
                     });
                 </script>
 
-                    <a href="#" class="btn btn-primary" data-toggle="popover" 
+                <a href="#" class="btn btn-primary" data-toggle="popover" 
                        tabindex="0" data-trigger="focus" 
                        title="<f:message key="find.weapon.title"/>" 
                        data-content="<f:message key="find.text.reg"/>">
-                        <span class="glyphicon glyphicon-info-sign">                            
-                        </span>
-                    </a>   
+                    <span class="glyphicon glyphicon-info-sign">                            
+                    </span>
+                </a>   
             </s:form>
             
             <h2><f:message key="weapon.list.title"/></h2>
