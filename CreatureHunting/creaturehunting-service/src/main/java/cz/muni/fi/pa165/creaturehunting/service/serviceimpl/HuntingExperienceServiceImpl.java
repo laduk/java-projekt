@@ -127,13 +127,13 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         
        
         //presype a transformuje
-        HuntingExperienceDTO huntExpDTO = new HuntingExperienceDTO();
+        HuntingExperienceDTO huntExpDTO;// = new HuntingExperienceDTO();
         for(HuntingExperience exp : listHuntExp){
             huntExpDTO = HuntingExperienceTransformation.transformToDTO(exp);
             listHuntingExpDTO.add(huntExpDTO);
         }
         
-        //TODO / dodelat
+        //TODO / upravit?
         
         return listHuntingExpDTO;
     

@@ -47,18 +47,21 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     })
     private HuntingExperienceDTO hunting;
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit"})
-    public void loadHuntExpFromDB() {         
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit", "list"})
+    public void loadHuntExpFromDB() {  
         String ids = getContext().getRequest().getParameter("hunting.id");
         if (ids == null) return;
         hunting = huntingService.findHuntExp(Long.parseLong(ids));
     }
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"create", "doCreate", "edit", "doEdit"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"create", "doCreate", "edit", "doEdit", "list"})
     public void loadWeaponsAndCreaturesFromDB() {         
         creatures = creatureService.findAllCreatures();
         weapons = weaponService.findAllWeapons();
     }
+    
+    
+    
 
     public List<HuntingExperienceDTO> getHuntings() {
         return huntings;
@@ -92,11 +95,40 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
         this.hunting = hunting;
     }
     
+    
     @DefaultHandler
-    public Resolution list() {
-        huntings = huntingService.findAllHuntExp();
+    public Resolution list() {//TODO
+        
+        String creatureId = getContext().getRequest().getParameter("hunting.creature.id");
+        String findWepEff = getContext().getRequest().getParameter("findWepEff");
+        int efficiency;
+        int parsedId;
+        
+        try{
+            efficiency = Integer.parseInt(findWepEff);
+        }catch(NumberFormatException ex){
+            efficiency = -1;
+        }        
+       
+        try{
+            parsedId = Integer.parseInt(creatureId);
+        }catch(NumberFormatException ex){
+            parsedId = -1;
+        }
+        
+        
+        if(creatureId == null || creatureId.isEmpty() || findWepEff == null || findWepEff.isEmpty()
+                || 100 < efficiency || efficiency < 0 || parsedId < 0){            
+            huntings = huntingService.findAllHuntExp();        
+        }else{      
+            
+            huntings = huntingService.findEfficientWeaponExperiences(creatureService.findCreature(parsedId), efficiency);        
+        }       
+        
         return new ForwardResolution("/HuntingExperience/list.jsp");
     }
+    
+
     
     public Resolution create() {
         return new ForwardResolution("/HuntingExperience/create.jsp");
