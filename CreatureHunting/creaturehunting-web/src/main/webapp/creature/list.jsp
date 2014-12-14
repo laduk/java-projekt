@@ -17,6 +17,21 @@
                     <span class="glyphicon glyphicon-search"></span>
                     <f:message key="all.find"/>
                 </button>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('[data-toggle="popover"]').popover({
+                        placement : 'bottom'
+                        });
+                    });
+                </script>
+
+                <a href="#" class="btn btn-primary" data-toggle="popover" 
+                       tabindex="0" data-trigger="focus" 
+                       title="<f:message key="find.creature.title"/>" 
+                       data-content="<f:message key="find.text.con"/>">
+                    <span class="glyphicon glyphicon-info-sign">                            
+                    </span>
+                </a>
             </s:form>
             
             <h2><f:message key="creature.list.title"/></h2>
