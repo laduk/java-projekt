@@ -128,8 +128,6 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
         return new ForwardResolution("/HuntingExperience/list.jsp");
     }
     
-
-    
     public Resolution create() {
         return new ForwardResolution("/HuntingExperience/create.jsp");
     }

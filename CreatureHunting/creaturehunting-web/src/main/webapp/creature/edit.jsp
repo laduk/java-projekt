@@ -17,6 +17,9 @@
                             <span class="glyphicon glyphicon-ok"></span>
                             <f:message key="all.save"/>
                         </button>
+                        <button type="button" name="back" class="btn btn-default" onclick="history.back(-1);">                          
+                            <f:message key="all.back"/>
+                        </button>
                     </div>
                 </div>
             </s:form>
