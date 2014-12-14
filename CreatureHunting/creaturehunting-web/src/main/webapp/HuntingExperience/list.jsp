@@ -21,12 +21,13 @@
                 <div class="form-group">
                     <s:label for="b1" name="exp.creature" class="col-sm-2 control-label"/>
                     <div class="col-sm-10">
-                        <s:select class="form-control" id="b1" name="hunting.creature.id" style="width:250px" size="4">                           
+                        <s:select class="form-control" id="b1" name="hunting.creature.id" style="width:250px" >
+                            <s:option value="null"/>
                             <s:options-collection collection="${actionBean.creatures}" value="id" label="name"/>
                         </s:select>
                     </div>
                 </div></p><p>
-
+              
             <div class="form-group">
                 <s:label for="b2" name="exp.weapon.efficiency"/>
                 <s:text id="b2" name="findWepEff" class="form-control"/> %
