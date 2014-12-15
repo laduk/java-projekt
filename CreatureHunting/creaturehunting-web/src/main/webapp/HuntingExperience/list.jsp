@@ -40,45 +40,55 @@
         </s:form>
 
 
-    <h2><f:message key="exp.list.title"/></h2>
-
-    <table class="table">
-        <tr>
-            <th>id</th>
-            <th><f:message key="exp.weapon"/></th>
-            <th><f:message key="exp.creature"/></th>
-            <th><f:message key="exp.dateOfExperienceR"/></th>
-            <th><f:message key="exp.efficiency"/></th>
-            <th><f:message key="exp.description"/></th>
-            <th></th>
-        </tr>
-        <c:forEach items="${actionBean.huntings}" var="hunting">
-            <tr>
-                <td>${hunting.id}</td>
-                <td><c:out value="${hunting.weapon.name}"/></td>
-                <td><c:out value="${hunting.creature.name}"/></td>
-                <td><c:out value="${hunting.dateOfExperience}"/></td>
-                <td><c:out value="${hunting.efficiency}"/></td>
-                <td><c:out value="${hunting.description}"/></td>
-                <td>
-                    <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="edit">
-                        <s:param name="hunting.id" value="${hunting.id}"/>
-                        <span class="glyphicon glyphicon-edit"></span>
-                        <f:message key="all.edit" />
-                    </s:link>
-                    <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="delete">
-                        <s:param name="hunting.id" value="${hunting.id}"/>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <f:message key="all.delete"/>
-                    </s:link>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
-    <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="create">
-        <span class="glyphicon glyphicon-plus"></span>
-        <f:message key="exp.create.title"/>
-    </s:link>
-</div>
-</s:layout-component>
+            <h2><f:message key="exp.list.title"/></h2>
+    
+            <c:choose>
+                <c:when test="${actionBean.huntings != null && actionBean.huntings.size() > 0}">
+                    <table class="table">
+                        <tr>
+                            <th>id</th>
+                            <th><f:message key="exp.weapon"/></th>
+                            <th><f:message key="exp.creature"/></th>
+                            <th><f:message key="exp.dateOfExperienceR"/></th>
+                            <th><f:message key="exp.efficiency"/></th>
+                            <th><f:message key="exp.description"/></th>
+                            <th></th>
+                        </tr>
+                        <c:forEach items="${actionBean.huntings}" var="hunting">
+                            <tr>
+                                <td>${hunting.id}</td>
+                                <td><c:out value="${hunting.weapon.name}"/></td>
+                                <td><c:out value="${hunting.creature.name}"/></td>
+                                <td><c:out value="${hunting.dateOfExperience}"/></td>
+                                <td><c:out value="${hunting.efficiency}"/></td>
+                                <td><c:out value="${hunting.description}"/></td>
+                                <td>
+                                    <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="edit">
+                                        <s:param name="hunting.id" value="${hunting.id}"/>
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                        <f:message key="all.edit" />
+                                    </s:link>
+                                    <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="delete">
+                                        <s:param name="hunting.id" value="${hunting.id}"/>
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        <f:message key="all.delete"/>
+                                    </s:link>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:when>
+                <c:otherwise>
+                    <h6><f:message key="exp.list.empty"/></h6>
+                </c:otherwise>
+            </c:choose>
+                    
+            <p>
+                <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="create">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <f:message key="exp.create.title"/>
+                </s:link>
+            </p>
+        </div>
+    </s:layout-component>
 </s:layout-render>

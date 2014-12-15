@@ -42,40 +42,49 @@
             
             <h2><f:message key="weapon.list.title"/></h2>
             
-            <table class="table">
-                <tr>
-                    <th>id</th>
-                    <th><f:message key="weapon.name"/></th>
-                    <th><f:message key="weapon.gunreach"/></th>
-                    <th><f:message key="weapon.ammunition"/></th>
-                    <th></th>
-                </tr>
-                <c:forEach items="${actionBean.weapons}" var="weapon">
-                    <tr>
-                        <td>${weapon.id}</td>
-                        <td><c:out value="${weapon.name}"/></td>
-                        <td><c:out value="${weapon.gunReach}"/></td>
-                        <td><c:out value="${weapon.ammunition}"/></td>
-                        <td>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" event="edit">
-                                <s:param name="weapon.id" value="${weapon.id}"/>
-                                <span class="glyphicon glyphicon-edit"></span>
-                                <f:message key="all.edit" />
-                            </s:link>
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" event="delete">
-                                <s:param name="weapon.id" value="${weapon.id}"/>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <f:message key="all.delete"/>
-                            </s:link>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
+            <c:choose>
+                <c:when test="${actionBean.weapons != null && actionBean.weapons.size() > 0}">
+                    <table class="table">
+                        <tr>
+                            <th>id</th>
+                            <th><f:message key="weapon.name"/></th>
+                            <th><f:message key="weapon.gunreach"/></th>
+                            <th><f:message key="weapon.ammunition"/></th>
+                            <th></th>
+                        </tr>
+                        <c:forEach items="${actionBean.weapons}" var="weapon">
+                            <tr>
+                                <td>${weapon.id}</td>
+                                <td><c:out value="${weapon.name}"/></td>
+                                <td><c:out value="${weapon.gunReach}"/></td>
+                                <td><c:out value="${weapon.ammunition}"/></td>
+                                <td>
+                                    <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" event="edit">
+                                        <s:param name="weapon.id" value="${weapon.id}"/>
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                        <f:message key="all.edit" />
+                                    </s:link>
+                                    <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" event="delete">
+                                        <s:param name="weapon.id" value="${weapon.id}"/>
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        <f:message key="all.delete"/>
+                                    </s:link>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:when>
+                <c:otherwise>
+                    <h6><f:message key="weapon.list.empty"/></h6>
+                </c:otherwise>
+            </c:choose>
 
-            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" event="add">
-                <span class="glyphicon glyphicon-plus"></span> 
-                <f:message key="weapon.add.title"/>
-            </s:link>
+            <p>
+                <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" event="add">
+                    <span class="glyphicon glyphicon-plus"></span> 
+                    <f:message key="weapon.add.title"/>
+                </s:link>
+            </p>
         </div>
     </s:layout-component>
 </s:layout-render>
