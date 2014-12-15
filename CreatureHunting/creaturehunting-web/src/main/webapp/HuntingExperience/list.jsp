@@ -16,29 +16,22 @@
         <div class="container">
 
             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" class="form-inline text-right">
-
-                <p>
                 <div class="form-group">
-                    <s:label for="b1" name="exp.creature" class="col-sm-2 control-label"/>
-                    <div class="col-sm-10">
-                        <s:select class="form-control" id="b1" name="hunting.creature.id" style="width:250px" >
-                            <s:option value="null"/>
-                            <s:options-collection collection="${actionBean.creatures}" value="id" label="name"/>
-                        </s:select>
-                    </div>
-                </div></p><p>
-              
-            <div class="form-group">
-                <s:label for="b2" name="exp.weapon.efficiency"/>
-                <s:text id="b2" name="findWepEff" class="form-control"/> %
-            </div></p><p>
-
-            <button type="submit" name="list" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-search"></span>
-                <f:message key="all.find"/>
-            </button></p>
-        </s:form>
-
+                    <s:label for="b1" name="exp.creature"/>
+                    <s:select class="form-control" id="b1" name="hunting.creature.id">
+                        <s:option value="null"/>
+                        <s:options-collection collection="${actionBean.creatures}" value="id" label="name"/>
+                    </s:select>
+                </div>
+                <div class="form-group" style="margin-left:20px">
+                    <s:label for="b2" name="exp.weapon.efficiency"/>
+                    <s:text id="b2" name="findWepEff" class="form-control" style="width:50px"/> %
+                </div>
+                <button type="submit" name="list" class="btn btn-default btn-sm" style="margin-left:20px">
+                    <span class="glyphicon glyphicon-search"></span>
+                    <f:message key="all.find"/>
+                </button></p>
+            </s:form>
 
             <h2><f:message key="exp.list.title"/></h2>
     
