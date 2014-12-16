@@ -7,6 +7,7 @@
     <s:layout-component name="body">
         <div class="container">
             <h1><f:message key="index.welcome"/></h1>
+            <img src="http://i1106.photobucket.com/albums/h378/PIVOISISKI/650px-MonstersScale-small.png"/>
         </div>
     </s:layout-component>
 </s:layout-render>
