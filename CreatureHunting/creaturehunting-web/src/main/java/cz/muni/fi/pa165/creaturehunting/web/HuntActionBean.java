@@ -117,14 +117,7 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
         if (creatureId == null || creatureId.isEmpty() || 100 < efficiency || efficiency < 0 || parsedId < 0) {
 
             huntings = huntingService.findAllHuntExp(); 
-            
-//            if (100 >= efficiency && efficiency >= 0) {
-//                for (int i = 0; i < huntings.size(); i++) {
-//                    if (huntings.get(i).getEfficiency() < efficiency) {
-//                        huntings.remove(i);
-//                    }
-//                }
-//            }
+
         } else {
 
             huntings = huntingService.findEfficientWeaponExperiences(creatureService.findCreature(parsedId), efficiency);
