@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.muni.fi.pa165.creaturehunting.api.serviceinterface;
 
 import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
@@ -48,7 +42,7 @@ public interface AreaService {
     
     /**
      * Find all Areas by given name.
-     * @param name String parametr it is name of area to be search
+     * @param name String parameter it is name of area to be search
      * @return list of areasSTO
      * @returnlist of AreaDto
      */
