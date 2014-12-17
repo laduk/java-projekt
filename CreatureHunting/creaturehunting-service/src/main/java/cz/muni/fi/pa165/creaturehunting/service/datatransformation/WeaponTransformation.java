@@ -16,12 +16,13 @@ public class WeaponTransformation {
      * Creates DTO object from entity object
      * 
      * @param weapon entity object as a source of data
-     * @return WeaponDto dto object
+     * @return WeaponDto DTO object
      */
     public static WeaponDTO transformToDTO(Weapon weapon) {
 
-        if (weapon == null) return null;//{
-            //throw new NullPointerException("Entity object for transformation cannot be null");        }
+        if (weapon == null) {
+            throw new NullPointerException("Entity object for transformation cannot be null");
+        }
 
         WeaponDTO weaponDto = new WeaponDTO();
 

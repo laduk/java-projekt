@@ -6,7 +6,6 @@ import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -15,13 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class AreaTransformation {
-    
-    private static final AreaTransformation instance = new AreaTransformation();
-    
-    @Autowired
-    public static AreaTransformation getObject() {
-        return instance;
-    }
     
     /**
      * Transforms entity to data transfer object (with filled listOfCreatures).
@@ -66,16 +58,6 @@ public class AreaTransformation {
      * @return Entity created from DTO.
      */
     public static Area transformToEntity(AreaDTO areaDTO) {
-        return transformToEntity(areaDTO, true);
-    }
-    
-    /**
-     * Transforms data transfer object to entity.
-     * @param areaDTO This entity will be transformed into DTO.
-     * @param isParrent true - with listOfCreatures; false - without it.
-     * @return Entity created from DTO.
-     */
-    public static Area transformToEntity(AreaDTO areaDTO, Boolean isParrent) {
         if (areaDTO == null) {
             throw new NullPointerException("AreaDTO given is null.");
         }
@@ -88,7 +70,7 @@ public class AreaTransformation {
         
         List<CreatureDTO> creaturesDTO = areaDTO.getListOfCreatures();
         List<Creature> creatures = new ArrayList();
-        if (isParrent && creaturesDTO != null && creaturesDTO.size() > 0) {
+        if (creaturesDTO != null && creaturesDTO.size() > 0) {
             for (CreatureDTO creatureDTO : creaturesDTO) {
                 creatures.add(CreatureTransformation.transformToEntity(creatureDTO, false));
             }

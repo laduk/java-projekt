@@ -1,12 +1,9 @@
 package cz.muni.fi.pa165.creaturehunting.service;
 
-import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.data.entity.Weapon;
 import cz.muni.fi.pa165.creaturehunting.data.dao.WeaponDAO;
 import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
-import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
-import cz.muni.fi.pa165.creaturehunting.service.datatransformation.CreatureTransformation;
 import cz.muni.fi.pa165.creaturehunting.service.serviceimpl.WeaponServiceImpl;
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.WeaponTransformation;
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ public class WeaponServiceImplTest {
 
     /**
      *
-     * Testing create method on service tier using mock dao object
+     * Testing create method on service tier using mock DAO object
      */
     @Test
     public void createWeaponTest() {
@@ -72,7 +69,7 @@ public class WeaponServiceImplTest {
     
     /**
      *
-     * Testing update method on service tier using mock dao object
+     * Testing update method on service tier using mock DAO object
      */
     @Test
     public void updateWeaponTest() {
@@ -105,7 +102,7 @@ public class WeaponServiceImplTest {
     
     /**
      *
-     * Testing delete method on service tier using mock dao object
+     * Testing delete method on service tier using mock DAO object
      */
     @Test
     public void deleteWeaponTest() {
@@ -129,7 +126,7 @@ public class WeaponServiceImplTest {
     
     /**
      *
-     * Testing findWeapon method on service tier using mock dao object
+     * Testing findWeapon method on service tier using mock DAO object
      */
     @Test
     public void findWeaponByIdTest() {
@@ -145,14 +142,17 @@ public class WeaponServiceImplTest {
         weaponDto.setGunReach(1);
         weaponDto.setAmmunition("Power of Mind");
 
-        //testuje jestli vrati null v pripade ze k zadanemu id nebyl v db nalezen zaznam
+        // test return NullPointerException if any id is not in DB
         when(weaponDao.findWeapon(weaponDto.getId())).thenReturn(null);
-        WeaponDTO returnDto = weaponService.findWeapon(weaponDto.getId());
-        assertNull(returnDto);
+        try {
+            weaponService.findWeapon(weaponDto.getId());
+            fail();
+        } catch (NullPointerException ex) {
+        }
 
-        //pripad kdy se k id najde v db zaznam
+        // if in DB exist id
         when(weaponDao.findWeapon(weaponDto.getId())).thenReturn(WeaponTransformation.transformToEntity(weaponDto));
-        returnDto = weaponService.findWeapon(weaponDto.getId());
+        WeaponDTO returnDto = weaponService.findWeapon(weaponDto.getId());
         assertEquals(returnDto, weaponDto);
         verify(weaponDao, times(2)).findWeapon(weaponDto.getId());
 
@@ -166,7 +166,7 @@ public class WeaponServiceImplTest {
     @Test
     public void findAllWeaponsTest() {
 
-        //pro pripad zadneho zaznamu
+        // if doesn't exist record id DB
         List<WeaponDTO> listOfWeaponsDto = new ArrayList<WeaponDTO>();
         when(weaponDao.findAllWeapons()).thenReturn(new ArrayList<Weapon>());
         List<WeaponDTO> returnedList = weaponService.findAllWeapons();
@@ -189,7 +189,7 @@ public class WeaponServiceImplTest {
 
         weapons.add(weapon);
 
-       //pro pripad jednoho zaznamu
+        // if exist record in DB
         when(weaponDao.findAllWeapons()).thenReturn(weapons);
         returnedList = weaponService.findAllWeapons();
         assertEquals(returnedList.size(), listOfWeaponsDto.size());

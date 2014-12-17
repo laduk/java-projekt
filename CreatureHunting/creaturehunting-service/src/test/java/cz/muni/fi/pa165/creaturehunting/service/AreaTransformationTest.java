@@ -42,8 +42,8 @@ public class AreaTransformationTest {
                 area.getAcreage() == 230);
         Assert.assertTrue("Wrong transform description of area to entity.",
                 area.getDescription().equals("Beautiful city"));
-//        Assert.assertTrue("Wrong transform listOfCreatures of area to entity.",
-//                area.getListOfCreatures().get(0).getId() == 42);
+        Assert.assertTrue("Wrong transform listOfCreatures of area to entity.",
+                area.getListOfCreatures().get(0).getId() == 42);
     }
     
     /**
@@ -72,7 +72,7 @@ public class AreaTransformationTest {
                 areaDTO.getAcreage() == 367);
         Assert.assertTrue("Wrong transform description of area to DTO.",
                 areaDTO.getDescription().equals("Beautiful slovak city"));
-//        Assert.assertTrue("Wrong transform listOfCreatures of area to DTO.",
-//                areaDTO.getListOfCreatures().get(0).getId() == 51);
+        Assert.assertTrue("Wrong transform listOfCreatures of area to DTO.",
+                areaDTO.getListOfCreatures().get(0).getId() == 51);
     }
 }

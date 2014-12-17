@@ -14,7 +14,7 @@ import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
 public class HuntingExperienceTransformation {
     
     /**
-     * Transformate entity to DTO object.
+     * Transforms entity to DTO object.
      * @param huntExp This entity will be transformed into DTO.
      * @return DTO object that was created.
      */
@@ -43,7 +43,7 @@ public class HuntingExperienceTransformation {
     }
     
     /**
-     * Transformate DTO to entity.
+     * Transforms DTO to entity.
      * @param huntExpDTO This DTO will be transformed into entity.
      * @return Entity created from DTO.
      */

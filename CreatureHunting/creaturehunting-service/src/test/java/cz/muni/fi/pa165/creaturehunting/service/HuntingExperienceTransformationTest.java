@@ -29,7 +29,7 @@ public class HuntingExperienceTransformationTest {
     private HuntingExperience huntExperience;
             
     /**
-     * Class where initition of object id done, it is done before all test.
+     * Class where initiation of object id done, it is done before all test.
      */
     @Before
     public void setUp(){

@@ -12,8 +12,6 @@
             http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <tx:annotation-driven />
-    <!--context:annotation-config /-->
-    <!--tx:annotation-driven  proxy-target-class="true" transaction-manager="transactionManager"/-->
     
     <!-- Exception translation bean post processor -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>

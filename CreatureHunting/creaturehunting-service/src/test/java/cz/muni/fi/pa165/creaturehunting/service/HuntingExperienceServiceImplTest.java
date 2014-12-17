@@ -232,14 +232,14 @@ public class HuntingExperienceServiceImplTest {
     }
     
     /**
-     * Test whether is finding Efficient weapon functional.
+     * Test whether is finding Efficient weapon experiences functional.
      */
-//    @Test
-//    public void testFindEfficient(){
-//        System.out.println("--- Test Find All Effecient weapon ---");
-//        huntExpService.create(huntExperienceDTO);
-//        huntExpService.findEfficientWeapons(creatureDTO, 10);
-//        verify(huntingExperienceDAO).findEfficientWeapons(CreatureTransformation.
-//                transformToEntity(creatureDTO), 10);
-//    }
+    @Test
+    public void testFindEfficient(){
+        System.out.println("--- Test Find All Effecient weapon experiences ---");
+        huntExpService.create(huntExperienceDTO);
+        huntExpService.findEfficientWeaponExperiences(creatureDTO, 10);
+        verify(huntingExperienceDAO).findEfficientWeaponExperiences(CreatureTransformation.
+                transformToEntity(creatureDTO), 10);
+    }
 }

@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.muni.fi.pa165.creaturehunting.service.serviceimpl;
 
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.HuntingExperienceTransformation;
 import cz.muni.fi.pa165.creaturehunting.data.entity.HuntingExperience;
 import cz.muni.fi.pa165.creaturehunting.data.dao.HuntingExperienceDAO;
-import cz.muni.fi.pa165.creaturehunting.data.entity.Weapon;
 import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.service.datatransformation.CreatureTransformation;
-import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
-import cz.muni.fi.pa165.creaturehunting.service.datatransformation.WeaponTransformation;
 import cz.muni.fi.pa165.creaturehunting.api.dto.HuntingExperienceDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.HuntingExperienceService;
 import java.util.ArrayList;
@@ -89,56 +80,26 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         return listHuntExpsDTO;
     }
     
-    //Upravit jeste na servisni vrstve
-
-//    public List<WeaponDTO> findEfficientWeapons(CreatureDTO creatureDTO, int effeciency) {
-//        List<WeaponDTO> listWeaponsDTO = new ArrayList<WeaponDTO>();
-//        List<Weapon> listWeapons = new ArrayList<Weapon>();
-//        if (creatureDTO!=null && effeciency>=0 &&  effeciency<=100) {
-//            listWeapons = hunExpDAO.findEfficientWeapons(CreatureTransformation.
-//                    transformToEntity(creatureDTO), effeciency);        
-//        }else{
-//            throw new NullPointerException("Creature must not be null and"
-//                    + " effeciency must be in %");
-//        }
-//        WeaponDTO weaponDTO = new WeaponDTO();
-//        for(Weapon weapon : listWeapons){
-//            weaponDTO = WeaponTransformation.transformToDTO(weapon);
-//            listWeaponsDTO.add(weaponDTO);
-//        }
-//        return listWeaponsDTO;
-//        
-//    }
-    
-    
     public List<HuntingExperienceDTO> findEfficientWeaponExperiences(CreatureDTO creatureDTO, int effeciency){
-            
         List<HuntingExperienceDTO> listHuntingExpDTO = new ArrayList<HuntingExperienceDTO>();
-        List<HuntingExperience> listHuntExp = new ArrayList<HuntingExperience>();
+        List<HuntingExperience> listHuntExp;
         
         if (creatureDTO!=null && effeciency>=0 &&  effeciency<=100) {
             
             listHuntExp = hunExpDAO.findEfficientWeaponExperiences(CreatureTransformation.
                     transformToEntity(creatureDTO), effeciency);        
-        }else{
+        } else {
             throw new NullPointerException("Creature must not be null and"
                     + " effeciency must be in %");
         }
         
-       
-        //presype a transformuje
-        HuntingExperienceDTO huntExpDTO;// = new HuntingExperienceDTO();
+        HuntingExperienceDTO huntExpDTO;
         for(HuntingExperience exp : listHuntExp){
             huntExpDTO = HuntingExperienceTransformation.transformToDTO(exp);
             listHuntingExpDTO.add(huntExpDTO);
         }
         
-        //TODO / upravit?
-        
         return listHuntingExpDTO;
-    
     }
-    
-
     
 }
