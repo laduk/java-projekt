@@ -60,7 +60,7 @@ public class Creature implements Serializable {
     @JoinTable(
       name="CREATURE_AREA",
       joinColumns={@JoinColumn(name="CREATURE_ID", referencedColumnName="ID")},
-      inverseJoinColumns={@JoinColumn(name="AREA_ID", referencedColumnName="ID")}) //dalo by se pridat unique id, aby neslo duplikovat
+      inverseJoinColumns={@JoinColumn(name="AREA_ID", referencedColumnName="ID")})
     private List<Area> listOfAreas;
     
     /**

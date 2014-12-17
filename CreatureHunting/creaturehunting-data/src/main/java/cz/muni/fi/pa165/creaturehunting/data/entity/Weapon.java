@@ -112,8 +112,4 @@ public class Weapon implements Serializable {
         return "Weapon{" + "id=" + id + ", name=" + name + ", gunReach=" + gunReach + ", ammunition=" + ammunition + '}';
     }
     
-    
-    
-    
-    
 }

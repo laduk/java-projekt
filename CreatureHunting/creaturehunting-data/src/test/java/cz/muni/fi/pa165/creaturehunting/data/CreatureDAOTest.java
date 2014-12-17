@@ -139,7 +139,6 @@ public class CreatureDAOTest {
                 + "if you are welcome.");
         area.setAcreage(1000);
         
-        AreaDAO areas = new AreaDAOImpl(entMan);
         entMan.getTransaction().begin();
         entMan.persist(area);
         entMan.getTransaction().commit();
@@ -182,7 +181,6 @@ public class CreatureDAOTest {
                 + " you are welcome.");
         area.setAcreage(1000);
         
-        AreaDAO areas = new AreaDAOImpl(entMan);
         entMan.getTransaction().begin();
         entMan.persist(area);
         entMan.getTransaction().commit();

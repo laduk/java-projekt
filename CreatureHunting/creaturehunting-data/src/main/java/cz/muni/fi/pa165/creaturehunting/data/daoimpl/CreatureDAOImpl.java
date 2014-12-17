@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.creaturehunting.data.daoimpl;
 
 import cz.muni.fi.pa165.creaturehunting.data.dao.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
-import cz.muni.fi.pa165.creaturehunting.data.entity.HuntingExperience;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

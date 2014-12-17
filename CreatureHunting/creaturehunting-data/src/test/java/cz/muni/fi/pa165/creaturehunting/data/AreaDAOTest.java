@@ -42,7 +42,7 @@ public class AreaDAOTest {
         if(entManFact.isOpen()) entManFact.close();
     }
     
-    @Before //toto se dela pred kazdym testem
+    @Before //every test
     public void setUp() {
         entityManager = entManFact.createEntityManager();
     }
