@@ -13,7 +13,7 @@
             <a href="/creaturehunting-restClient/#/">Home</a>
             <a href="/creaturehunting-restClient/#/creatures">Creatures</a>
             <a href="/creaturehunting-restClient/#/areas">Areas</a>
-<!--                <img class="header_img" src="img/legomanager.png" alt="Lego Logo">-->
+<!--                
         </div>
         <hr>
         <div ui-view class="body_div"><p class="greetings">Welcome to client rest</p></div>
