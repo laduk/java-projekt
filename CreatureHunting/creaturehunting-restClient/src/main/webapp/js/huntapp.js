@@ -12,11 +12,11 @@ angular.module('huntApp').config(function($stateProvider) {
         templateUrl: 'creatures_add.html',
         controller: 'CreatureAddController'
     }).state('editCreature', {
-        url: '/creatures/edit',
+        url: '/creatures/:id/edit',
         templateUrl: 'creatures_edit.html',
         controller: 'CreatureEditController'
     }).state('deleteCreature', {
-        url: '/creatures/delete',
+        url: '/creatures/:id/delete',
         templateUrl: 'creatures_delete.html',
         controller: 'CreatureDeleteController'
     }).state('areas', {
@@ -28,11 +28,11 @@ angular.module('huntApp').config(function($stateProvider) {
         templateUrl: 'areas_add.html',
         controller: 'AreaAddController'
     }).state('editArea', {
-        url: '/areas/edit',
+        url: '/areas/:id/edit',
         templateUrl: 'areas_edit.html',
         controller: 'AreaEditController'
     }).state('deleteArea', {
-        url: '/areas/delete',
+        url: '/areas/:id/delete',
         templateUrl: 'areas_delete.html',
         controller: 'AreaDeleteController'
     });
