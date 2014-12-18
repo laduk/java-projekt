@@ -9,42 +9,43 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<s:layout-render name="/layout.jsp" titlekey="exp.list.title" activeHuntingTab="active">
+<s:layout-render name="/layout.jsp" titlekey="hunting.list.title" activeHuntingTab="active">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" var="actionBean"/>
 
         <div class="container">
 
+            <s:errors/>
             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" class="form-inline text-right">
                 <div class="form-group">
-                    <s:label for="b1" name="exp.creature"/>
+                    <s:label for="b1" name="hunting.creature.id"/>
                     <s:select class="form-control" id="b1" name="hunting.creature.id">
-                        <s:option value="null"/>
+                        <s:option value=""/>
                         <s:options-collection collection="${actionBean.creatures}" value="id" label="name"/>
                     </s:select>
                 </div>
                 <div class="form-group" style="margin-left:20px">
-                    <s:label for="b2" name="exp.weapon.efficiency"/>
-                    <s:text id="b2" name="findWepEff" class="form-control" style="width:50px"/> %
+                    <s:label for="b2" name="hunting.weapon.efficiency"/>
+                    <s:text id="b2" name="hunting.efficiency" class="form-control" style="width:50px"/> %
                 </div>
-                <button type="submit" name="list" class="btn btn-default btn-sm" style="margin-left:20px">
+                <button type="submit" name="doFind" class="btn btn-default btn-sm" style="margin-left:20px">
                     <span class="glyphicon glyphicon-search"></span>
                     <f:message key="all.find"/>
                 </button></p>
             </s:form>
 
-            <h2><f:message key="exp.list.title"/></h2>
+            <h2><f:message key="hunting.list.title"/></h2>
     
             <c:choose>
                 <c:when test="${actionBean.huntings != null && actionBean.huntings.size() > 0}">
                     <table class="table">
                         <tr>
                             <th>id</th>
-                            <th><f:message key="exp.weapon"/></th>
-                            <th><f:message key="exp.creature"/></th>
-                            <th><f:message key="exp.dateOfExperienceR"/></th>
-                            <th><f:message key="exp.efficiency"/></th>
-                            <th><f:message key="exp.description"/></th>
+                            <th><f:message key="hunting.weapon.id"/></th>
+                            <th><f:message key="hunting.creature.id"/></th>
+                            <th><f:message key="hunting.dateOfExperienceR"/></th>
+                            <th><f:message key="hunting.efficiency"/></th>
+                            <th><f:message key="hunting.description"/></th>
                             <th></th>
                         </tr>
                         <c:forEach items="${actionBean.huntings}" var="hunting">
@@ -72,14 +73,14 @@
                     </table>
                 </c:when>
                 <c:otherwise>
-                    <h6><f:message key="exp.list.empty"/></h6>
+                    <h6><f:message key="hunting.list.empty"/></h6>
                 </c:otherwise>
             </c:choose>
                     
             <p>
                 <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="create">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <f:message key="exp.create.title"/>
+                    <f:message key="hunting.create.title"/>
                 </s:link>
             </p>
         </div>

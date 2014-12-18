@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.creaturehunting.api.dto.WeaponDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.HuntingExperienceService;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
+import static cz.muni.fi.pa165.creaturehunting.web.BaseActionBean.escapeHTML;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -35,14 +36,14 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     @SpringBean
     private CreatureService creatureService;
     private List<HuntingExperienceDTO> huntings;
-    private List<WeaponDTO> weapons;
-    private List<CreatureDTO> creatures;
     @ValidateNestedProperties(value = {
-        @Validate(on = {"doCreate", "doEdit"}, field = "efficiency", required = true, minvalue = 0, maxvalue = 100),
-        @Validate(on = {"doCreate", "doEdit"}, field = "description", required = true, maxlength = 300),})
+        @Validate(on = {"doCreate", "doEdit"}, field = "weapon.id", required = true),
+        @Validate(on = {"doCreate", "doEdit", "doFind"}, field = "creature.id", required = true),
+        @Validate(on = {"doCreate", "doEdit", "doFind"}, field = "efficiency", required = true, minvalue = 0, maxvalue = 100),
+        @Validate(on = {"doCreate", "doEdit"}, field = "description", required = true, maxlength = 300)})
     private HuntingExperienceDTO hunting;
 
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit", "list"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit"})
     public void loadHuntExpFromDB() {
         String ids = getContext().getRequest().getParameter("hunting.id");
         if (ids == null) {
@@ -50,13 +51,7 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
         }
         hunting = huntingService.findHuntExp(Long.parseLong(ids));
     }
-
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"create", "doCreate", "edit", "doEdit", "list"})
-    public void loadWeaponsAndCreaturesFromDB() {
-        creatures = creatureService.findAllCreatures();
-        weapons = weaponService.findAllWeapons();
-    }
-
+    
     public List<HuntingExperienceDTO> getHuntings() {
         return huntings;
     }
@@ -66,19 +61,11 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     }
 
     public List<WeaponDTO> getWeapons() {
-        return weapons;
-    }
-
-    public void setWeapons(List<WeaponDTO> weapons) {
-        this.weapons = weapons;
+        return weaponService.findAllWeapons();
     }
 
     public List<CreatureDTO> getCreatures() {
-        return creatures;
-    }
-
-    public void setCreatures(List<CreatureDTO> creatures) {
-        this.creatures = creatures;
+        return creatureService.findAllCreatures();
     }
 
     public HuntingExperienceDTO getHunting() {
@@ -90,38 +77,13 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
     }
 
     @DefaultHandler
-    public Resolution list() {//TODO
-
-        String creatureId = getContext().getRequest().getParameter("hunting.creature.id");
-        String findWepEff = getContext().getRequest().getParameter("findWepEff");
-        int efficiency;
-        int parsedId;
-
-        if (findWepEff == null || findWepEff.isEmpty()) {
-            efficiency = 0;
-        } else {
-            try {
-                efficiency = Integer.parseInt(findWepEff);
-            } catch (NumberFormatException ex) {
-                efficiency = -1;
-            }
-        }
-
-        //toto je asi zbytecne
-        try {
-            parsedId = Integer.parseInt(creatureId);
-        } catch (NumberFormatException ex) {
-            parsedId = -1;
-        }
-
-        if (creatureId == null || creatureId.isEmpty() || 100 < efficiency || efficiency < 0 || parsedId < 0) {
-
-            huntings = huntingService.findAllHuntExp(); 
-
-        } else {
-
-            huntings = huntingService.findEfficientWeaponExperiences(creatureService.findCreature(parsedId), efficiency);
-        }
+    public Resolution list() {
+        huntings = huntingService.findAllHuntExp();
+        return new ForwardResolution("/HuntingExperience/list.jsp");
+    }
+    
+    public Resolution doFind() {
+        huntings = huntingService.findEfficientWeaponExperiences(hunting.getCreature(), hunting.getEfficiency());
         return new ForwardResolution("/HuntingExperience/list.jsp");
     }
 
@@ -131,7 +93,7 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
 
     public Resolution doCreate() {
         huntingService.create(hunting);
-        getContext().getMessages().add(new LocalizableMessage("exp.create.done", escapeHTML(hunting.getDescription())));
+        getContext().getMessages().add(new LocalizableMessage("hunting.create.done", escapeHTML(hunting.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
     }
 
@@ -141,7 +103,7 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
 
     public Resolution doEdit() {
         huntingService.update(hunting);
-        getContext().getMessages().add(new LocalizableMessage("exp.edit.done", escapeHTML(hunting.getDescription())));
+        getContext().getMessages().add(new LocalizableMessage("hunting.edit.done", escapeHTML(hunting.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
     }
 
@@ -151,7 +113,7 @@ public class HuntActionBean extends BaseActionBean implements ValidationErrorHan
 
     public Resolution doDelete() {
         huntingService.delete(hunting);
-        getContext().getMessages().add(new LocalizableMessage("exp.delete.done", escapeHTML(hunting.getDescription())));
+        getContext().getMessages().add(new LocalizableMessage("hunting.delete.done", escapeHTML(hunting.getDescription())));
         return new RedirectResolution(this.getClass(), "list");
     }
 

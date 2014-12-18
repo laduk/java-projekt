@@ -9,11 +9,11 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<s:layout-render name="/layout.jsp" titlekey="exp.create.title" activeHuntingTab="active">
+<s:layout-render name="/layout.jsp" titlekey="hunting.create.title" activeHuntingTab="active">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" var="actionBean"/>
         <div class="container">
-            <h2><f:message key="exp.create.title"/></h2>
+            <h2><f:message key="hunting.create.title"/></h2>
             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" class="form-horizontal">
                 <%@include file="form.jsp"%>
                 <div class="form-group">
