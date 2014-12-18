@@ -24,7 +24,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Test class for HuntingExperineceDAO.
+ * 
  * @author Matej Čižik
  */
 public class HuntingExperienceDAOImplTest {
@@ -58,9 +59,8 @@ public class HuntingExperienceDAOImplTest {
 
     /**
      * Test of createHuntingExperience method, of class
-     * HuntingExperienceDAOImpl.
-     *
-     * @throws java.text.ParseException
+     * HuntingExperienceDAOImpl
+     * @throws java.text.ParseException Thhrows parse exception.
      */
     @Test
     public void testCreateHuntingExperience() throws ParseException {
@@ -97,12 +97,14 @@ public class HuntingExperienceDAOImplTest {
         huntingExpDAO.createHuntingExperience(exp);
         entMan.getTransaction().commit();
 
-        assertFalse("Test whether HuntingExperience was saved and id is set", exp.getId() <= 0);
+        assertFalse("Test whether HuntingExperience was saved and id is set",
+                exp.getId() <= 0);
     }
 
     /**
      * Test of updateHuntingExperience method, of class
      * HuntingExperienceDAOImpl.
+     * @throws java.text.ParseException Thhrows parse exception.
      */
     @Test
     public void testUpdateHuntingExperience() throws ParseException {
@@ -123,7 +125,8 @@ public class HuntingExperienceDAOImplTest {
         entMan = entManFact.createEntityManager();
         huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
 
-        assertFalse("Test whether HuntingExperience was saved and id is set", exp.getId() <= 0);
+        assertFalse("Test whether HuntingExperience was saved and id is set", 
+                exp.getId() <= 0);
 
         HuntingExperience foundExp = huntingExpDAO.findHuntingExperience(exp.getId());
 
@@ -139,13 +142,16 @@ public class HuntingExperienceDAOImplTest {
         huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
 
         HuntingExperience exp2 = huntingExpDAO.findHuntingExperience(foundExp.getId());
-        assertEquals("Has the description been updated.", foundExp.getDescription(), exp2.getDescription());
-        assertEquals("Has the efficiency been updated.", foundExp.getEfficiency(), exp2.getEfficiency());
+        assertEquals("Has the description been updated.", foundExp.getDescription(),
+                exp2.getDescription());
+        assertEquals("Has the efficiency been updated.", foundExp.getEfficiency(),
+                exp2.getEfficiency());
     }
 
     /**
      * Test of deleteHuntingExperience method, of class
      * HuntingExperienceDAOImpl.
+     * @throws java.text.ParseException Thhrows parse exception.
      */
     @Test
     public void testDeleteHuntingExperience() throws ParseException {
@@ -174,11 +180,13 @@ public class HuntingExperienceDAOImplTest {
         entMan = entManFact.createEntityManager();
         huntingExpDAO = new HuntingExperienceDAOImpl(entMan);
 
-        assertNull("Whether object with id is deleted.", huntingExpDAO.findHuntingExperience(id));
+        assertNull("Whether object with id is deleted.",
+                huntingExpDAO.findHuntingExperience(id));
     }
 
     /**
      * Test of findHuntingExperience method, of class HuntingExperienceDAOImpl.
+     * @throws java.text.ParseException Thhrows parse exception.
      */
     @Test
     public void testFindHuntingExperience() throws ParseException {
@@ -208,6 +216,7 @@ public class HuntingExperienceDAOImplTest {
     /**
      * Test of findAllHuntingExperience method, of class
      * HuntingExperienceDAOImpl.
+     * @throws java.text.ParseException
      */
     @Test
     public void testFindAllHuntingExperience() throws ParseException {
@@ -242,11 +251,13 @@ public class HuntingExperienceDAOImplTest {
 
         List<HuntingExperience> exps = huntingExpDAO.findAllHuntingExperience();
 
-        assertTrue("If exactly 2 HuntingExperience-s were created", expsOld.size() + 2 == exps.size());
+        assertTrue("If exactly 2 HuntingExperience-s were created", 
+                expsOld.size() + 2 == exps.size());
     }
 
     /**
      * Test of findEfficientWeapons method, of class HuntingExperienceDAOImpl.
+     * @throws java.text.ParseException Thhrows parse exception.
      */
     @Test
     public void testfindEfficientWeaponExperiences() throws ParseException {
@@ -317,15 +328,19 @@ public class HuntingExperienceDAOImplTest {
 
         List<HuntingExperience> exps = huntingExpDAO.findEfficientWeaponExperiences(creature1, 70);
 
-        assertTrue("For efficiency of 70%, two experiences were found", exps.size() == 2);
+        assertTrue("For efficiency of 70%, two experiences were found", 
+                exps.size() == 2);
 
         List<HuntingExperience> exps2 = huntingExpDAO.findEfficientWeaponExperiences(creature1, 100);
 
-        assertTrue("For efficiency of 100%, only one experience was found", exps2.size() == 1);
-        assertTrue("Found experience contain th right weapon", exps2.get(0).getWeapon().equals(weapon));
+        assertTrue("For efficiency of 100%, only one experience was found",
+                exps2.size() == 1);
+        assertTrue("Found experience contain th right weapon", 
+                exps2.get(0).getWeapon().equals(weapon));
 
         List<HuntingExperience> exps3 = huntingExpDAO.findEfficientWeaponExperiences(creature1, 20);
 
-        assertTrue("For efficiency of 20%, all of three experiences were found", exps3.size() == 3);
+        assertTrue("For efficiency of 20%, all of three experiences were found",
+                exps3.size() == 3);
     }
 }

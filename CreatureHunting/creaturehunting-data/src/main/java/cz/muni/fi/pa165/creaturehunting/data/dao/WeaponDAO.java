@@ -5,19 +5,22 @@ import java.util.List;
 
 /**
  * Interface of Data Access Object for Weapon.
+ * 
  * @author Fita
  */
 public interface WeaponDAO {
     
     /**
-     * Store given weapon into database.
+     * Store given weapon into database. Id must be lesser than zero otherwise 
+     * exception is thrown. 
      * @param weapon The weapon that should be created.
      * @throws IllegalArgumentException when argument is wrong.
      */
     public void createWeapon(Weapon weapon) throws IllegalArgumentException;
     
     /**
-     * Update given weapon.
+     * Update given weapon. Check whether is id greater than zero if it is not
+     * then Weapon was not set so exception is thrown.
      * @param weapon The weapon that should be updated.
      * @throws IllegalArgumentException when argument is wrong.
      */
@@ -32,8 +35,8 @@ public interface WeaponDAO {
     /**
      * Search weapon by given id. If function is successful then returns
      * weapon of given id.
-     * @param id
-     * @return Weapon if it was found.
+     * @param id Parametr id of type long that should be find.
+     * @return Weapon if it was found or null if it is not.
      */
     public Weapon findWeapon(long id);
     

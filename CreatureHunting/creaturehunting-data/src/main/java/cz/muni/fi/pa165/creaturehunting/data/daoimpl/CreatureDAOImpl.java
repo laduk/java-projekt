@@ -9,7 +9,8 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- *
+ * Implementation of WeaponDAO interface.
+ * 
  * @author Matej Čižik
  */
 @Repository

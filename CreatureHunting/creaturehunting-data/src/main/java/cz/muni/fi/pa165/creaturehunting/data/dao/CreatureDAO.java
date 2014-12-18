@@ -4,8 +4,10 @@ import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
 import java.util.List;
 
 /**
- *
+ * Interface of Data Access Object for Creature.
+ * 
  * @author Matej Čižik
+ * 
  */
 public interface CreatureDAO {
 

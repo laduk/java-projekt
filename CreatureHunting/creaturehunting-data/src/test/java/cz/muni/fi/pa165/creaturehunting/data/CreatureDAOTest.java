@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.creaturehunting.data;
 
 import cz.muni.fi.pa165.creaturehunting.data.entity.Area;
-import cz.muni.fi.pa165.creaturehunting.data.dao.AreaDAO;
-import cz.muni.fi.pa165.creaturehunting.data.daoimpl.AreaDAOImpl;
 import cz.muni.fi.pa165.creaturehunting.data.entity.Creature;
 import cz.muni.fi.pa165.creaturehunting.data.dao.CreatureDAO;
 import cz.muni.fi.pa165.creaturehunting.data.daoimpl.CreatureDAOImpl;
@@ -20,7 +18,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Class for testing methods defined in CreatureDAO interface.
+ * 
  * @author Fita
  */
 public class CreatureDAOTest {
