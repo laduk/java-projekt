@@ -10,5 +10,5 @@ angular.module('huntApp').config(function($stateProvider) {
     });
     
 }).run(function($state) {
-  $state.go('index'); //make a transition to creature state when app starts
+  $state.go('index');
 });
