@@ -75,6 +75,15 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat6-maven-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <path>/creaturehunting-restClient/</path>
+                    <port>8084</port>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
