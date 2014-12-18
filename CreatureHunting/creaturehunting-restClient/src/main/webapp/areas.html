@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<table class="list">
+  <caption>Set of all Areas</caption>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Acreage</th>
+    <th>Spotted creatures</th>
+    <th></th> <!--add-->
+    <th></th> <!--edit-->
+    <th></th> <!--delete-->
+  </tr>
+  <tr ng-repeat="area in areas">
+    <td>{{area.id}}</td>
+    <td>{{area.name}}</td>
+    <td>{{area.acreage}}</td>
+    <td>{{area.listOfCreatures}}</td>
+  </tr>
+</table>
+<a href="creaturehunting-restClient/areas/create" class="button">Create</a>
