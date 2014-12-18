@@ -22,7 +22,7 @@
             <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css"/>
             <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css" />
             <script src="http://code.jquery.com/jquery.min.js"></script>
-            <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+            <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
             <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
             <script>
                 $(function() {
@@ -58,6 +58,11 @@
                         <li class="${activeWeaponTab}">
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean">
                                 <f:message key="navigation.weapon"/>
+                            </s:link>
+                        </li>
+                        <li>
+                            <s:link href="http://localhost:8080/creaturehunting-restClient/">
+                                Rest Client
                             </s:link>
                         </li>
                     </ul>
