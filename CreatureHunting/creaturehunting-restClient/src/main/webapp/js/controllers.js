@@ -37,4 +37,46 @@ angular.module('huntApp.controllers', [])
             $state.go('creatures');
         });
     };
+})
+.controller('CreatureAddController', function($scope, $state, Creature, Area) {
+    $scope.creature = new Creature();
+    Area.query(function(data){
+        $scope.areas = data;
+    });
+    $scope.selectedIds = [];
+    $scope.creature.areas = [];
+    $scope.addCreature = function() {
+        for(i=0; i<$scope.selectedIds.length;i++){
+            for(j=0; j<$scope.areas.length;j++){
+                if($scope.selectedIds[i] === $scope.areas[j].id) $scope.creature.areas.push($scope.areas[j]);
+            }; 
+        };
+        $scope.creature.$save(function() {
+            $state.go('creatures');
+        });
+    };
+})
+.controller('CreatureEditController',function($scope, $state, $stateParams, Creature, Area){
+    Area.query(function(data){
+        $scope.areas = data;
+    });
+
+    $scope.creature = Creature.get({ id: $stateParams.id },function(){ 
+        for(i=0; i<$scope.creature.areas.length;i++){
+            $scope.selectedIds.push($scope.creature.areas[i].id);
+        };
+    });
+    $scope.selectedIds = [];
+    $scope.updateCreature = function(){
+        $scope.creature.areas = [];
+        for(i=0; i<$scope.selectedIds.length;i++){
+            for(j=0; j<$scope.areas.length;j++){
+                if($scope.selectedIds[i] === $scope.areas[j].id) $scope.creature.areas.push($scope.areas[j]);
+            }; 
+        };
+ 
+        $scope.creature.$update(function(){
+            $state.go('creatures');
+        });
+    };
 });
