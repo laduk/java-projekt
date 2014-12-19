@@ -18,7 +18,14 @@ angular.module('huntApp.controllers', [])
         });
     };
 })
-
+.controller('AreaEditController',function($scope, $state, $stateParams, Area){
+    $scope.area = Area.get({ id: $stateParams.id });
+    $scope.updateArea = function(){ 
+        $scope.area.$update(function(){
+            $state.go('areas');
+        });
+    };
+})
 .controller('CreatureListController',function($scope, $state, Creature){
     $scope.creatures = Creature.getAll();
 });
