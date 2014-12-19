@@ -10,6 +10,15 @@ angular.module('huntApp.controllers', [])
         });
     };
 })
+.controller('AreaDeleteController', function($scope, $state, $stateParams, Area){
+    $scope.area = Area.get({ id: $stateParams.id });
+    $scope.deleteArea = function(){
+        $scope.area.$delete(function() {
+            $state.go('areas');
+        });
+    };
+})
+
 .controller('CreatureListController',function($scope, $state, Creature){
     $scope.creatures = Creature.getAll();
 });
