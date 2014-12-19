@@ -13,6 +13,7 @@
 <div class="form-group">
     <label for="acreage" class="control-label col-sm-2">Acreage [km<sup>2</sup>]</label>
     <div class="col-sm-10">
-        <input id="acreage" ng-model="area.acreage" name="acreage" type="text" style="width:300px" class="form-control"/>
+        <input id="acreage" ng-model="area.acreage" name="acreage" type="text" style="width:300px" class="form-control" ng-pattern="/^[0-9]*$/">
+        <span ng-show="areaForm.acreage.$error.pattern">Acreage must be number greater or equals 0!</span>
     </div>
 </div>
