@@ -3,9 +3,9 @@ angular.module('huntApp.controllers', [])
     $scope.areas = Area.getAll();
 })
 .controller('AreaAddController', function($scope, $state, Area) {
-    $scope.Area = new Area();
+    $scope.area = new Area();
     $scope.addArea = function(){
-        $scope.Area.$save(function() {
+        $scope.area.$save(function() {
             $state.go('areas');
         });
     };
