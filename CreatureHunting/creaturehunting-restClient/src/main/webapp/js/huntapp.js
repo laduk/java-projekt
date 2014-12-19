@@ -1,4 +1,4 @@
-angular.module('huntApp', ['ngResource','ui.router','huntApp.services','huntApp.controllers','checklist-model']);
+angular.module('huntApp', ['ngResource','ui.router','huntApp.services','huntApp.controllers']);
 
 angular.module('huntApp').config(function($stateProvider) {
     $stateProvider.state('index', {
