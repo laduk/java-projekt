@@ -4,9 +4,11 @@
  */
 package cz.muni.fi.pa165.creaturehunting.rest;
 
+import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.*;
 
@@ -61,7 +63,9 @@ public class CreatureRest {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createCreature(CreatureDTO creatureDto){        
+    public Response createCreature(CreatureDTO creatureDto){ 
+        
+        if(creatureDto.getListOfAreas() == null) creatureDto.setListOfAreas(new ArrayList<AreaDTO>());
         creatureService.create(creatureDto);
         return Response.status(Response.Status.CREATED).build();        
     }
