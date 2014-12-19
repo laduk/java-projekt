@@ -1,0 +1,20 @@
+<div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span></button>
+                <strong>Do you really want to delete this creature?</strong>
+</div>
+<form class="form-horizontal" role="form" ng-submit="deleteCreature()">
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" name="delete" class="btn btn-default">                          
+                <span class="glyphicon glyphicon-ok"></span>
+                Delete
+            </button>
+            <button type="button" name="back" class="btn btn-default" onclick="history.back(-1);">                          
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                Back
+            </button>
+        </div>
+    </div>
+</form>

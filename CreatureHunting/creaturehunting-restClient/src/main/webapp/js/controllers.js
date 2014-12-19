@@ -28,4 +28,13 @@ angular.module('huntApp.controllers', [])
 })
 .controller('CreatureListController',function($scope, $state, Creature){
     $scope.creatures = Creature.getAll();
+
+})
+.controller('CreatureDeleteController', function($scope, $state, $stateParams, Creature){
+    $scope.creature = Creature.get({ id: $stateParams.id });
+    $scope.deleteCreature = function(){
+        $scope.creature.$delete(function() {
+            $state.go('creatures');
+        });
+    };
 });
