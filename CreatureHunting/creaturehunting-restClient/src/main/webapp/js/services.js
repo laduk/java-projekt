@@ -1,6 +1,11 @@
 angular.module('huntApp.services', [])
 .factory('Area', function($resource){
     return $resource('http://localhost:8080/pa165/rest/areas/:id',{id: '@id'}, {
+        query: {
+            method: 'GET',
+            isArray:true,
+            interceptor: {responseError : showAlert}            
+        },
         getAll: {
             method: 'GET', isArray:true, 
             interceptor: {responseError : showAlert}
@@ -25,7 +30,12 @@ angular.module('huntApp.services', [])
 })
         
 .factory('Creature', function($resource){
-    return $resource('http://localhost:8080/pa165/rest/creatures/:id',{id: '@id'}, {
+    return $resource('http://localhost:8080/pa165/rest/creatures/:id',{id: '@id'}, {        
+        query: {
+            method: 'GET',
+            isArray:true,
+            interceptor: {responseError : showAlert}            
+        },
         getAll: {
             method: 'GET', isArray:true, 
             interceptor: {responseError : showAlert}
