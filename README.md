@@ -10,3 +10,7 @@ Webová aplikace se spustí v adresáři <b>CreatureHunting\creaturehunting-web<
         mvn tomcat7:run
 
 a měla by se spustit webová aplikace na url: <b>http://localhost:8080/pa165/</b>, zde je možné v menu se přepnout na RESTového klienta.
+
+Naplnění databáze defaultními daty je možné provést v adresáři <b>CreatureHunting\creaturehunting-data</b> pomocí příkazu:
+
+        mvn sql:execute
