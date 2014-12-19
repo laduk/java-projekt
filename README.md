@@ -19,4 +19,4 @@ Restový webový client se spustí v adresáři <b>CreatureHunting\creaturehunti
        
         mvn tomcat7:run
 
-spustí se web na url: <b>http://localhost:8080/creaturehunting-restClient/#/</b>
+spustí se web na url: <b>http://localhost:8084/creaturehunting-restClient/#/</b>
