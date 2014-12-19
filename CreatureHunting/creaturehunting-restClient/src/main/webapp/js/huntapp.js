@@ -9,15 +9,15 @@ angular.module('huntApp').config(function($stateProvider) {
         controller: 'CreatureListController'
     }).state('newCreature', {
         url: '/creatures/new',
-        templateUrl: 'creatures_add.html',
+        templateUrl: 'creature_add.html',
         controller: 'CreatureAddController'
     }).state('editCreature', {
         url: '/creatures/:id/edit',
-        templateUrl: 'creatures_edit.html',
+        templateUrl: 'creature_edit.html',
         controller: 'CreatureEditController'
     }).state('deleteCreature', {
         url: '/creatures/:id/delete',
-        templateUrl: 'creatures_delete.html',
+        templateUrl: 'creature_delete.html',
         controller: 'CreatureDeleteController'
     }).state('areas', {
         url: '/areas',
@@ -25,15 +25,15 @@ angular.module('huntApp').config(function($stateProvider) {
         controller: 'AreaListController'
     }).state('newArea', {
         url: '/areas/new',
-        templateUrl: 'areas_add.html',
+        templateUrl: 'area_add.html',
         controller: 'AreaAddController'
     }).state('editArea', {
         url: '/areas/:id/edit',
-        templateUrl: 'areas_edit.html',
+        templateUrl: 'area_edit.html',
         controller: 'AreaEditController'
     }).state('deleteArea', {
         url: '/areas/:id/delete',
-        templateUrl: 'areas_delete.html',
+        templateUrl: 'area_delete.html',
         controller: 'AreaDeleteController'
     });
     
