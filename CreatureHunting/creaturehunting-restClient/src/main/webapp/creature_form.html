@@ -24,11 +24,10 @@
     </div>
 </div>
 <div class="form-group">
-        <label for="listOfAreas" class="control-label col-sm-2" >Areas</label>
-        <div class="col-sm-10">
-            <select class="form-control" id="listOfAreas" ng-model="creature.listOfAreas" ng-options="area.name for area in areas" name="listOfAreas" style="width:250px" multiple="true" size="10">             
-<!--                <options-collection collection="${selectedIds}" value="area.id">-->
-            </select>
-        </div>
+    <label for="listOfAreas" class="control-label col-sm-2" >Areas</label>
+    <div class="col-sm-10">            
+        <select class="form-control" id="listOfAreas" ng-model="selectedIds" ng-options="area.name for area in areas" name="listOfAreas" style="width:250px" multiple="true" size="10">             
+            
+        </select>
     </div>
-
+</div>
