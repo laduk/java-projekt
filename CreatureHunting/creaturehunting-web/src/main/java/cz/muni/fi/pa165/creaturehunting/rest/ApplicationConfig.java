@@ -23,6 +23,5 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(cz.muni.fi.pa165.creaturehunting.rest.AreaRest.class);
         resources.add(cz.muni.fi.pa165.creaturehunting.rest.CreatureRest.class);
-        resources.add(cz.muni.fi.pa165.creaturehunting.rest.WeaponRest.class);
     }
 }
