@@ -4,22 +4,24 @@
         <th>Id</th>
         <th>Name</th>
         <th>Acreage</th>
+        <th>Description</th>
         <th>Spotted creatures</th>
-        <th></th> <!--edit-->
-        <th></th> <!--delete-->
+        <th></th>
     </tr>
     <tr ng-repeat="area in areas">
         <td>{{area.id}}</td>
         <td>{{area.name}}</td>
-        <td>{{area.acreage}}</td>        
-        <td ng-repeat="creature in area.listOfCreatures">{{creature.id+" - "+creature.name}}</td>
+        <td>{{area.acreage}}</td>     
+        <td>{{area.description}}</td>
+        <td>
+            <span ng-repeat="creature in area.listOfCreatures">{{creature.name}}, </span>
+        </td>
+            
         <td>
             <a ui-sref="editArea({id:area.id})" class="button">
                 <span class="glyphicon glyphicon-edit"></span>
                 Update
             </a>
-        </td>
-        <td>
             <a ui-sref="deleteArea({id:area.id})" class="button">
                 <span class="glyphicon glyphicon-remove"></span>
                 Delete
