@@ -19,12 +19,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
  *
@@ -35,23 +36,36 @@ import org.springframework.stereotype.Component;
 @Singleton
 public class AreaRest {
     
+    private static final XmlWebApplicationContext app_config =
+            new XmlWebApplicationContext();
+    
     @Autowired
     private AreaService service;
     
-    @Context
-    private UriInfo contextInfo;
+    public AreaRest() {
+        app_config.setNamespace("appContext");
+    }    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<AreaDTO> getAllAreas(){
-        return service.findAllAreas();
+    public Response getAllAreas(){
+        List<AreaDTO> areas = service.findAllAreas();
+        
+        GenericEntity<List<AreaDTO>> areaEntity = new GenericEntity<List<AreaDTO>>(areas) {
+        };        
+        return Response.status(Response.Status.OK).entity(areaEntity).build();
     }
     
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AreaDTO getArea(@PathParam("id") Long id) {
-        return service.findArea(id);
+    public Response getArea(@PathParam("id") Long id) {
+        try{
+            AreaDTO areaDTO = service.findArea(id);
+            return Response.status(Response.Status.OK).entity(areaDTO).build();       
+        }catch(DataAccessException ex){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
     
     @POST
@@ -63,23 +77,36 @@ public class AreaRest {
             areaDTO.setListOfCreatures(creatures);
         }
         service.create(areaDTO);        
-        return Response.created(contextInfo.getAbsolutePath()).build();
+        return Response.status(Response.Status.CREATED).build(); 
     }
     
     @PUT
-    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
     public Response updateArea(@PathParam("id") Long id,AreaDTO areaDTO){
-        areaDTO.setId(id);                
-        service.update(areaDTO);
-        return Response.created(contextInfo.getAbsolutePath()).build();
+        try{
+           service.findArea(id); //overi jestli kreaturka je v db
+           areaDTO.setId(id);
+           service.update(areaDTO);
+           return Response.status(Response.Status.OK).build();
+       }catch(DataAccessException ex){
+           return Response.status(Response.Status.NOT_FOUND).build();       
+       }
     }
     
     @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response deleteArea(@PathParam("id") Long id){
-        service.delete(service.findArea(id));
-        return Response.status(Response.Status.OK).build();
+        try{
+            AreaDTO areaDTO = service.findArea(id);
+            service.delete(areaDTO);
+            return Response.status(Response.Status.OK).build();
+        
+        }catch(DataAccessException ex){            
+            return Response.status(Response.Status.NOT_FOUND).build();        
+        }
     }
 }
