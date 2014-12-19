@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<table class="list">
-  <caption>Set of all Areas</caption>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Acreage</th>
-    <th>Spotted creatures</th>
-    <th></th> <!--add-->
-    <th></th> <!--edit-->
-    <th></th> <!--delete-->
-  </tr>
-  <tr ng-repeat="area in areas">
-    <td>{{area.id}}</td>
-    <td>{{area.name}}</td>
-    <td>{{area.acreage}}</td>
-    <td>{{area.listOfCreatures}}</td>
-  </tr>
+<table class="listTable">
+    <caption>All Areas</caption>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Acreage</th>
+        <th>Spotted creatures</th>
+        <th></th> <!--edit-->
+        <th></th> <!--delete-->
+    </tr>
+    <tr ng-repeat="area in areas">
+        <td>{{area.id}}</td>
+        <td>{{area.name}}</td>
+        <td>{{area.acreage}}</td>        
+        <td ng-repeat="creature in area.listOfCreatures">{{creature.id+" - "+creature.name}}</td>
+        <td>
+            <a ui-sref="editArea({id:area.id})" class="button">
+                <span class="glyphicon glyphicon-edit"></span>
+                Update
+            </a>
+        </td>
+        <td>
+            <a ui-sref="deleteArea({id:area.id})" class="button">
+                <span class="glyphicon glyphicon-remove"></span>
+                Delete
+            </a>
+        </td>
+    </tr>
 </table>
-<a href="/creaturehunting-restClient/areas/create" class="button">Create</a>
+<a href="/creaturehunting-restClient/areas/new" class="button">
+    <span class="glyphicon glyphicon-plus"></span>
+    New Area
+</a>

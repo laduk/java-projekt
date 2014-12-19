@@ -1,17 +1,38 @@
-
 <!DOCTYPE html>
 <table class="listTable">
-  <caption>All Creatures</caption>
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr ng-repeat="creature in creatures">
-    <td>{{creature.id}}</td>
-    <td>{{creature.name}}</td>   
-
-  </tr>
+    <caption>All Creatures</caption>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Agility</th>
+        <th>List of Areas</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr ng-repeat="creature in creatures">
+        <td>{{creature.id}}</td>
+        <td>{{creature.name}}</td>
+        <td>{{creature.height}}</td>
+        <td>{{creature.weight}}</td>
+        <td>{{creature.agility}}</td>
+        <td ng-repeat="area in creature.listOfAreas">{{area.id+" - "+area.name}}</td>
+        <td>
+            <a ui-sref="editCreature({id:creature.id})" class="button">
+                <span class="glyphicon glyphicon-edit"></span>
+                Update
+            </a>
+        </td>
+        <td>
+            <a ui-sref="deleteCreature({id:creature.id})" class="button">
+                <span class="glyphicon glyphicon-remove"></span>
+                Delete
+            </a>
+        </td>
+    </tr>
 </table>
+<a href="/creaturehunting-restClient/creatures/new" class="button">
+    <span class="glyphicon glyphicon-plus"></span>
+    New Creature
+</a>
