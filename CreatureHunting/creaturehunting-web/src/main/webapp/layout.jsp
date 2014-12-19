@@ -61,7 +61,7 @@
                             </s:link>
                         </li>
                         <li>
-                            <s:link href="http://localhost:8080/creaturehunting-restClient/">
+                            <s:link href="http://localhost:8084/creaturehunting-restClient/">
                                 Rest Client
                             </s:link>
                         </li>
