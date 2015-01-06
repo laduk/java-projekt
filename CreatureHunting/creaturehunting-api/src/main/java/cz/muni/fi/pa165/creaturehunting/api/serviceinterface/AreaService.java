@@ -8,25 +8,25 @@ import java.util.List;
  * @author Fita
  */
 public interface AreaService {
-    /*
+    /**
      * Create Area
      * @param areaDTO area DTO object
      */
     public void create(AreaDTO areaDTO);
 
-    /*
+    /**
      * Update Area
      * @param areaDTO area DTO object
      */
     public void update(AreaDTO areaDTO);
 
-    /*
+    /**
      * Delete Area 
      * @param areaDTO area DTO object
      */
     public void delete(AreaDTO areaDTO);
 
-    /*
+    /**
      * Find Area by the ID.
      * @param long id - ID of the area
      * @return AreaDTO object
@@ -34,7 +34,7 @@ public interface AreaService {
     public AreaDTO findArea(Long id);
 
     
-    /*
+    /**
      * Find all Areas.
      * @return list of AreaDTO objects
      */

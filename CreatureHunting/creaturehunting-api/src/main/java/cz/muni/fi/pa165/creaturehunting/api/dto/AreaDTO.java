@@ -3,7 +3,8 @@ package cz.muni.fi.pa165.creaturehunting.api.dto;
 import java.util.List;
 
 /**
- *
+ * Data Transfer Object for Area
+ * 
  * @author Fita
  */
 public class AreaDTO {
@@ -81,6 +82,6 @@ public class AreaDTO {
                 + description + ", acreage=" + acreage + ", listOfCreatures=" 
                 + listOfCreatures + '}';
     }
-     
-     
+    
+    
 }
