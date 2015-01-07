@@ -98,6 +98,13 @@ public class WeaponServiceImpl implements WeaponService {
         return weaponsDto;
     }
 
+    /**
+     * Find all by weapons by name.
+     * Where name must by exactly the same.
+     * 
+     * @param string given name
+     * @return List of WeaponDTOs that has the same name
+     */
     public List<WeaponDTO> findAllByName(String string) {
         
         List<WeaponDTO> weaponByName = new ArrayList();

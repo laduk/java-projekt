@@ -68,5 +68,14 @@
         <constructor-arg ref="entityManager"/>
     </bean>
     
+    <!-- LOGIN -->    
+    <bean id="logInService" 
+          class="cz.muni.fi.pa165.creaturehunting.service.serviceimpl.LogInServiceImpl">
+        <constructor-arg ref="logInDAO"/>
+    </bean>
     
+    <bean id="logInDAO" 
+          class="cz.muni.fi.pa165.creaturehunting.data.daoimpl.LogInDAOImpl">
+        <constructor-arg ref="entityManager"/>
+    </bean>   
 </beans>
