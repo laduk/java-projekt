@@ -74,4 +74,32 @@ public class LogIn implements Serializable {
     public void setIsRoot(Boolean isRoot) {
         this.isRoot = isRoot;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LogIn other = (LogIn) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;    }
+    
+    
+    
+    @Override
+    public String toString() {
+        return "LogIn [" + "id=" + id + ", name=" + name + ", password=" + password 
+                + ", " + "isRoot" + isRoot +  "% ]";              
+    }
 }
