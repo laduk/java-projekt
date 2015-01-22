@@ -167,15 +167,15 @@ public class LogInServiceImplTest {
     @Test
     public void findLogInByName(){
         System.out.println("--- Test Find By Name LogIn---");
-        List<LogIn> logInsByName = new ArrayList<LogIn>();
+        List<LogIn> logIns = new ArrayList<LogIn>();
         
-        logInsByName.add(LogInTransformation.transformToEntity(logIn1));
-        logInsByName.add(LogInTransformation.transformToEntity(logIn2));
-        when(logInDAO.findAll()).thenReturn(logInsByName);
+        logIns.add(LogInTransformation.transformToEntity(logIn1));
+        logIns.add(LogInTransformation.transformToEntity(logIn2));
+        when(logInDAO.findAll()).thenReturn(logIns);
         
         Assert.assertTrue("Wrong weapon by name was found.",
-            logInService.findAllByName("God").get(0).equals(logIn1));
-        Assert.assertTrue("Wrong list of creatures by name was found.",
-            logInService.findAllByName("God").size()==1);        
+            logInService.findByName("God").equals(logIn1));
+        Assert.assertFalse("Something was found!",
+            logInService.findByName("Go").equals(logIn1));
     }
 }

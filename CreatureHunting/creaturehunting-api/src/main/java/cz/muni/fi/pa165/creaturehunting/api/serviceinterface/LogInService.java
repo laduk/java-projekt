@@ -45,6 +45,6 @@ public interface LogInService {
      * @param name String to be find.
      * @return List of LoginDTO objects.
      */
-    public List<LogInDTO> findAllByName(String name);
+    public LogInDTO findByName(String name);
     
 }

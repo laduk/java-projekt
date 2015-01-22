@@ -105,11 +105,14 @@ public class LogInServiceImpl implements LogInService{
      * @param string Given name to be find in All LogIns.
      * @return List of data transfer objects. 
      */
-    public List<LogInDTO> findAllByName(String string) {
-        List<LogInDTO> logInDTOByName = new ArrayList<LogInDTO>();
-        for (LogInDTO logDTO : this.findAllLogIns()){
-            if (logDTO.getName().toLowerCase().matches(string.toLowerCase())) {
-                logInDTOByName.add(logDTO);
+    public LogInDTO findByName(String string) {
+        if (string == null) {
+            throw new NullPointerException("LogInDTO argument cannot be null.");
+        }
+        LogInDTO logInDTOByName = new LogInDTO();
+        for (LogInDTO logInDTO : this.findAllLogIns()){
+            if (logInDTO.getName().toLowerCase().matches(string.toLowerCase())) {
+                logInDTOByName = logInDTO;
             }
         }
         return logInDTOByName;
