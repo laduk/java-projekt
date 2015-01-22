@@ -20,14 +20,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class LogInServiceImpl implements LogInService{
     
+    @Autowired
     private LogInDAO logInDAO;
     
-    @Autowired
-    public void setLogInDao(LogInDAO logInDAO){
-        if (logInDAO == null) {
-            throw new NullPointerException();
+    /**
+     *
+     * @param logInDAO
+     */
+    public LogInServiceImpl(LogInDAO logInDAO){
+        if (logInDAO==null) {
+            throw new NullPointerException("LogInDAO must not be null!");           
         }
-        this.logInDAO = logInDAO;
+        this.logInDAO=logInDAO;
     }
 
     /**

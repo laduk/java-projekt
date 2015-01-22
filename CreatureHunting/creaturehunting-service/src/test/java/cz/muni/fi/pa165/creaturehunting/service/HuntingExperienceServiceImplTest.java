@@ -171,7 +171,7 @@ public class HuntingExperienceServiceImplTest {
      */
     @Test
     public void testCreate(){
-        System.out.println("--- Test Update ---");
+        System.out.println("--- Test Create ---");
         huntExpService.create(huntExperienceDTO);
         verify(huntingExperienceDAO).
                 createHuntingExperience(HuntingExperienceTransformation.
