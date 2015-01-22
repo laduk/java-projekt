@@ -45,8 +45,10 @@ public class LogInDTO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 7;
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 29 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 29 * hash + (this.password != null ? this.password.hashCode() : 0);
         return hash;
     }
 
