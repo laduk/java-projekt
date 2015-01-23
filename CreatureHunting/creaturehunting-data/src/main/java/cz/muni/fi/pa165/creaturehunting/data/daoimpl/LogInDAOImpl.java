@@ -52,7 +52,7 @@ public class LogInDAOImpl implements LogInDAO{
 
     @Override
     public LogIn findLogIn(long id) {
-        Query query = entityManager.createQuery("SELECT a FROM Login a WHERE a.id=:id",
+        Query query = entityManager.createQuery("SELECT a FROM LogIn a WHERE a.id=:id",
                 LogIn.class);
         query.setParameter("id", id);
         List <LogIn> logIns = query.getResultList();
@@ -65,7 +65,7 @@ public class LogInDAOImpl implements LogInDAO{
 
     @Override
     public List<LogIn> findAll() {
-        Query query = entityManager.createQuery("SELECT a FROM Login a ORDER BY a.id", 
+        Query query = entityManager.createQuery("SELECT a FROM LogIn a ORDER BY a.id", 
                 LogIn.class);
         List <LogIn> logIns = query.getResultList();
         return logIns;
