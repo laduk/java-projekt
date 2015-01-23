@@ -30,7 +30,7 @@ public class LogInTransformation {
     }
     
     /**
-     * Transform DTO back to enetity object.
+     * Transform DTO back to entity object.
      * 
      * @param logInDTO Given DTO object
      * @return LogIn that is entity object.

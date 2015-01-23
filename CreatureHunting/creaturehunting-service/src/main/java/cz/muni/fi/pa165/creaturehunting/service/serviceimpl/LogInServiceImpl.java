@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Implemetation of service layer interface.
+ * Implementation of service layer interface.
  * 
  * @author Fita
  */
