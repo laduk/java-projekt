@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.web;
 
 import cz.muni.fi.pa165.creaturehunting.api.dto.LogInDTO;
@@ -27,7 +22,7 @@ import net.sourceforge.stripes.validation.ValidationErrors;
  *
  * @author Fita
  */
-@UrlBinding("/logins/{$event}/{login.id}")
+@UrlBinding("/loggingin/{$event}/{login.id}")
 public class LogInActionBean extends BaseActionBean implements ValidationErrorHandler{
     
     @SpringBean
@@ -70,6 +65,10 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
     
     public void setLogin(LogInDTO login) {
         this.login = login;
+    }
+    
+    public List<LogInDTO> getLogins(){
+        return service.findAllLogIns();
     }
     
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit"})

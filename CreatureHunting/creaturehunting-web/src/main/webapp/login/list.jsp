@@ -3,7 +3,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<s:layout-render name="/layout.jsp" titlekey="login.list.title" activeAreaTab="active">
+<s:layout-render name="/layout.jsp" titlekey="login.list.title" activeLogInTab="active">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.creaturehunting.web.LogInActionBean" var="actionBean"/>
 
@@ -36,7 +36,7 @@
             
             <h2><f:message key="login.list.title"/></h2>
 
-            <c:choose>
+            <!--<c:choose>
                 <c:when test="${actionBean.logins != null && actionBean.logins.size() > 0}">
                     <table class="table">
                         <tr>
@@ -69,7 +69,7 @@
                 <c:otherwise>
                     <h6><f:message key="login.list.empty"/></h6>
                 </c:otherwise>
-            </c:choose>
+            </c:choose>-->
 
             <p>
                 <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.LogInActionBean" event="add">

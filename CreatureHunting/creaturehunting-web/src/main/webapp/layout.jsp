@@ -60,7 +60,7 @@
                                 <f:message key="navigation.weapon"/>
                             </s:link>
                         </li>
-                        <li class="${activeWeaponTab}">
+                        <li class="${activeLogInTab}">
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.LogInActionBean">
                                 <f:message key="navigation.login"/>
                             </s:link>
