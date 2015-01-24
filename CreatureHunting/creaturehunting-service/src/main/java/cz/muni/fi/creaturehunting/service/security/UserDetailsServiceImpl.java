@@ -25,6 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     LogInService service;
 
+    @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
     
         final LogInDTO logInDTO = service.findByName(string);
