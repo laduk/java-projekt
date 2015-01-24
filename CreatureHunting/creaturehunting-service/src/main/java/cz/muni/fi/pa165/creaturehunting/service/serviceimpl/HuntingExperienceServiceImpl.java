@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.HuntingExperienceSe
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -29,7 +30,8 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         this.hunExpDAO = hunExpDAO;
     }    
     
-
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public void create(HuntingExperienceDTO huntExpDTO) {
         if (huntExpDTO==null) {
             throw new NullPointerException("HuntExpDTO must not be null!");
@@ -39,6 +41,8 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         hunExpDAO.createHuntingExperience(huntExp);
     }
 
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void update(HuntingExperienceDTO huntExpDTO) {
         if (huntExpDTO==null) {
             throw new NullPointerException("HuntExpDTO must not be null!");
@@ -48,6 +52,8 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         hunExpDAO.updateHuntingExperience(huntExp);
     }
 
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void delete(HuntingExperienceDTO huntExpDTO) {
         if (huntExpDTO==null) {
             throw new NullPointerException("HuntExpDTO must not be null!");
@@ -56,6 +62,8 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
                     transformToEntity(huntExpDTO));        
     }
 
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public HuntingExperienceDTO findHuntExp(Long id) {
         if (id==null) {
             throw new NullPointerException("Id must not null!");
@@ -68,6 +76,8 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         return huntExpDTO;
     }
 
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public List<HuntingExperienceDTO> findAllHuntExp() {
         List<HuntingExperienceDTO> listHuntExpsDTO = new ArrayList<HuntingExperienceDTO>();
         List<HuntingExperience> listHuntExps = hunExpDAO.findAllHuntingExperience();    
@@ -80,6 +90,8 @@ public class HuntingExperienceServiceImpl implements HuntingExperienceService {
         return listHuntExpsDTO;
     }
     
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public List<HuntingExperienceDTO> findEfficientWeaponExperiences(CreatureDTO creatureDTO, int effeciency){
         List<HuntingExperienceDTO> listHuntingExpDTO = new ArrayList<HuntingExperienceDTO>();
         List<HuntingExperience> listHuntExp;

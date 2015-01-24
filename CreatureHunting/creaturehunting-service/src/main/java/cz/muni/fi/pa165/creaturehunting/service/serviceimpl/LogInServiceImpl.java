@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.creaturehunting.service.datatransformation.LogInTransfor
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +40,8 @@ public class LogInServiceImpl implements LogInService{
      * 
      * @param lidto data transfer object as a source of data
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void create(LogInDTO lidto) {
         if (lidto == null) {
             throw new  NullPointerException("LogInDTO argument cannot be null.");
@@ -51,6 +54,8 @@ public class LogInServiceImpl implements LogInService{
      * 
      * @param lidto data transfer object as a source of data
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void update(LogInDTO lidto) {
         if (lidto == null) {
             throw new  NullPointerException("LogInDTO argument cannot be null.");
@@ -63,6 +68,8 @@ public class LogInServiceImpl implements LogInService{
      * 
      * @param lidto data transfer object as a source of data
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void delete(LogInDTO lidto) {
         if (lidto == null) {
             throw new  NullPointerException("LogInDTO argument cannot be null.");
@@ -76,6 +83,8 @@ public class LogInServiceImpl implements LogInService{
      * @param l is id of typy long to be find
      * @return 
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public LogInDTO findLogIn(long l) {
         if (l < 0) {
             throw new IllegalArgumentException("ID of the wanted login cannot "
@@ -90,6 +99,8 @@ public class LogInServiceImpl implements LogInService{
      * 
      * @return List of data transfer objects. 
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public List<LogInDTO> findAllLogIns() {
         List<LogIn> logIns = logInDAO.findAll();
         List<LogInDTO> logInDTOs = new ArrayList<LogInDTO>();
@@ -105,6 +116,8 @@ public class LogInServiceImpl implements LogInService{
      * @param string Given name to be find in All LogIns.
      * @return List of data transfer objects. 
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public LogInDTO findByName(String string) {
         if (string == null) {
             throw new NullPointerException("LogInDTO argument cannot be null.");

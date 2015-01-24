@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.creaturehunting.api.dto.CreatureDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.CreatureService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ public class CreatureServiceImpl implements CreatureService {
         this.creatureDAO = creatureDAO;
     }
 
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
     @Override
     public void create(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
@@ -33,6 +35,7 @@ public class CreatureServiceImpl implements CreatureService {
                     transformToEntity(creatureDTO));
     }
     
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
     @Override
     public void update(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
@@ -42,6 +45,7 @@ public class CreatureServiceImpl implements CreatureService {
                     transformToEntity(creatureDTO));
     }
     
+    @Secured({"ROLE_ADMIN"})
     @Override
     public void delete(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
@@ -51,6 +55,7 @@ public class CreatureServiceImpl implements CreatureService {
                 transformToEntity(creatureDTO));
     }
     
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
     @Override
     public CreatureDTO findCreature(long id) {
         CreatureDTO creatureDTO = CreatureTransformation.transformToDTO(
@@ -58,6 +63,7 @@ public class CreatureServiceImpl implements CreatureService {
         return creatureDTO;
     }
     
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
     @Override
     public List<CreatureDTO> findAllCreatures() {
         List<Creature> creatures = creatureDAO.findAllCreatures();      
@@ -68,6 +74,7 @@ public class CreatureServiceImpl implements CreatureService {
         return creaturesDTO;
     }
     
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
     @Override
     public List<CreatureDTO> findAllCreaturesByName(String name) {
         List creaturesDTO = new ArrayList();

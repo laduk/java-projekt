@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.WeaponService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,8 @@ public class WeaponServiceImpl implements WeaponService {
      *
      * @param weaponDTO - data transfer object as a source of data
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public void create(WeaponDTO weaponDTO) {
         if (weaponDTO == null) {
             throw new NullPointerException("WeaponDTO argument for creation of entity cannot be null.");
@@ -46,6 +49,8 @@ public class WeaponServiceImpl implements WeaponService {
      *
      * @param weaponDTO - data transfer object as a source of data
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void update(WeaponDTO weaponDTO) {
         if (weaponDTO == null) {
             throw new NullPointerException("WeaponDTO argument for updating of entity cannot be null.");
@@ -58,6 +63,8 @@ public class WeaponServiceImpl implements WeaponService {
      *
      * @param weaponDTO - data transfer object as a source of data
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void delete(WeaponDTO weaponDTO) {
         if (weaponDTO == null) {
             throw new NullPointerException("WeaponDTO argument for deleting of entity cannot be null.");
@@ -71,6 +78,8 @@ public class WeaponServiceImpl implements WeaponService {
      * @param id given id to be find
      * @return weapon data transfer object
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public WeaponDTO findWeapon(long id) {
         if (id < 0) {
             throw new IllegalArgumentException("ID of the wanted weapon cannot be negative");
@@ -86,6 +95,8 @@ public class WeaponServiceImpl implements WeaponService {
      *
      * @return list of weapon data transfer objects
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public List<WeaponDTO> findAllWeapons() {
 
         List<Weapon> weapons = weaponDao.findAllWeapons();
@@ -105,6 +116,8 @@ public class WeaponServiceImpl implements WeaponService {
      * @param string given name
      * @return List of WeaponDTOs that has the same name
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public List<WeaponDTO> findAllByName(String string) {
         
         List<WeaponDTO> weaponByName = new ArrayList();

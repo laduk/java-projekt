@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.creaturehunting.api.dto.AreaDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.AreaService;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,8 @@ public class AreaServiceImpl implements AreaService {
      *
      * @param areaDTO - data transfer object as a source of data
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void create(AreaDTO areaDTO) {
         if (areaDTO==null) {
             throw new NullPointerException("AreaExpDTO must not null!");
@@ -42,6 +45,8 @@ public class AreaServiceImpl implements AreaService {
      *
      * @param areaDTO - data transfer object as a source of data     
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void update(AreaDTO areaDTO) {
         if (areaDTO==null) {
             throw new NullPointerException("AreaDTO must not null!");
@@ -55,6 +60,8 @@ public class AreaServiceImpl implements AreaService {
      *
      * @param areaDTO - data transfer object as a source of data
      */
+    @Secured({"ROLE_ADMIN"})
+    @Override
     public void delete(AreaDTO areaDTO) {
         if (areaDTO==null) {
             throw new NullPointerException("AreaExpDTO must not null!");
@@ -67,6 +74,8 @@ public class AreaServiceImpl implements AreaService {
      * @param id given id to be find
      * @return area data transfer object
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public AreaDTO findArea(Long id) {
         if (id==null) {
             throw new NullPointerException("Id must not null!");
@@ -82,6 +91,8 @@ public class AreaServiceImpl implements AreaService {
      *
      * @return list of area data transfer objects
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public List<AreaDTO> findAllAreas() {
         List<AreaDTO> listAreasDTO = new ArrayList<AreaDTO>();
         List<Area> listAreas = areaDAO.findAllAreas();
@@ -98,6 +109,8 @@ public class AreaServiceImpl implements AreaService {
      * @param name
      * @return list of area data transfer objects
      */
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Override
     public List<AreaDTO> findAllByName(String name) {
         List<AreaDTO> areaByName = new ArrayList();
 
