@@ -2,6 +2,8 @@ package cz.muni.fi.pa165.creaturehunting.web;
 
 import cz.muni.fi.pa165.creaturehunting.api.dto.LogInDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.LogInService;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -12,6 +14,7 @@ import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.LocalizableError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
@@ -27,7 +30,7 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
     @SpringBean
     protected LogInService service;
 
-    private List<LogInDTO> logins;
+    private List<LogInDTO> logins = new ArrayList<LogInDTO>();
     
     
     @DefaultHandler
@@ -36,7 +39,11 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
         if (name == null || name.isEmpty()) {
             logins = service.findAllLogIns();
         } else {
-            logins.add(service.findByName(name));
+            logins = null;
+            logins = new ArrayList<LogInDTO>();
+            if (service.findByName(name)!=null) {
+                logins.add(service.findByName(name));
+            }
         }
         return new ForwardResolution("/login/list.jsp");
     }
@@ -53,7 +60,7 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
         
     public Resolution doAdd() {
         if (service.findByName(login.getName())!=null) {
-            getContext().getMessages().add(new LocalizableMessage("login.add.fail",
+            getContext().getMessages().add(new LocalizableError("login.add.fail",
                 escapeHTML(login.getName())));
             return new RedirectResolution(this.getClass(), "list");
         }
@@ -83,7 +90,7 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
     }
 
     public Resolution edit() {
-        return new ForwardResolution("/area/edit.jsp");
+        return new ForwardResolution("/login/edit.jsp");
     }
 
     public Resolution doEdit() {
