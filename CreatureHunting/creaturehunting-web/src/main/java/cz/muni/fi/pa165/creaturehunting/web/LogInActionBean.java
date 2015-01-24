@@ -54,9 +54,16 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
     }
         
     public Resolution doAdd() {
-        service.create(login);
-        getContext().getMessages().add(new LocalizableMessage("login.add.done", escapeHTML(login.getName())));
-        return new RedirectResolution(this.getClass(), "list");
+        if (service.findByName(login.getName())==null) {
+            service.create(login);
+            getContext().getMessages().add(new LocalizableMessage("login.add.done",
+                    escapeHTML(login.getName())));
+            return new RedirectResolution(this.getClass(), "list");
+        }else{
+            getContext().getMessages().add(new LocalizableMessage("login.add.fail",
+                    escapeHTML(login.getName())));
+            return new RedirectResolution(this.getClass(), "list");
+        }       
     }
     
     public LogInDTO getLogin() {
