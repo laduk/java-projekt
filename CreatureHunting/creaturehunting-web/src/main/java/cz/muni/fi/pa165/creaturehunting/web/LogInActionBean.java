@@ -34,7 +34,6 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
     protected LogInService service;
 
     private List<LogInDTO> logins;
-    private Object LifecycleStage;
     
     
     @DefaultHandler
@@ -73,9 +72,6 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
         this.login = login;
     }
     
-    /**
-     *
-     */
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit"})
     public void loadLoginFromDatabase() {
         String ids = getContext().getRequest().getParameter("login.id");
