@@ -115,6 +115,8 @@ public class LogInServiceImplTest {
     @Test
     public  void testUpdate(){
         System.out.println("--- Test Update ---");
+        when(logInDAO.findLogIn(logIn1.getId())).
+                thenReturn(LogInTransformation.transformToEntity(logIn1));
         logInService.update(logIn1);
         
         verify(logInDAO).update(LogInTransformation.transformToEntity(logIn1));

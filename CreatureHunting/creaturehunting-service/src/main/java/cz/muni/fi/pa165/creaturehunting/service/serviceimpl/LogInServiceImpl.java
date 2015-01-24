@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +48,8 @@ public class LogInServiceImpl implements LogInService{
         if (lidto == null) {
             throw new  NullPointerException("LogInDTO argument cannot be null.");
         }
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        lidto.setPassword(passwordEncoder.encode(lidto.getPassword()));
         logInDAO.create(LogInTransformation.transformToEntity(lidto));
     }
 
@@ -59,6 +63,11 @@ public class LogInServiceImpl implements LogInService{
     public void update(LogInDTO lidto) {
         if (lidto == null) {
             throw new  NullPointerException("LogInDTO argument cannot be null.");
+        }
+        String hash = findLogIn(lidto.getId()).getPassword();
+        if (!lidto.getPassword().equals(hash)) {
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            lidto.setPassword(passwordEncoder.encode(lidto.getPassword()));    
         }
         logInDAO.update(LogInTransformation.transformToEntity(lidto));
     }
