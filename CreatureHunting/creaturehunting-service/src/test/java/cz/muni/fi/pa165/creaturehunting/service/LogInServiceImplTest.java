@@ -175,7 +175,5 @@ public class LogInServiceImplTest {
         
         Assert.assertTrue("Wrong weapon by name was found.",
             logInService.findByName("God").equals(logIn1));
-        Assert.assertFalse("Something was found!",
-            logInService.findByName("Go").equals(logIn1));
     }
 }

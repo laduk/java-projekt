@@ -111,10 +111,10 @@ public class LogInServiceImpl implements LogInService{
         }
         LogInDTO logInDTOByName = new LogInDTO();
         for (LogInDTO logInDTO : this.findAllLogIns()){
-            if (logInDTO.getName().toLowerCase().matches(string.toLowerCase())) {
-                logInDTOByName = logInDTO;
+            if (logInDTO.getName().toLowerCase().equals(string.toLowerCase())) {
+                return logInDTOByName = logInDTO;               
             }
         }
-        return logInDTOByName;
+        return null;
     }    
 }

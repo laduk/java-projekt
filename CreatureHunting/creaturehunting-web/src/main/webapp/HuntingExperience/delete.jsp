@@ -27,6 +27,9 @@
                             <span class="glyphicon glyphicon-remove"></span>
                             <f:message key="all.delete"/>
                         </button>
+                        <button type="button" name="back" class="btn btn-default" onclick="history.back(-1);">                          
+                            <f:message key="all.back"/>
+                        </button>
                     </div>
                 </div>
             </s:form>

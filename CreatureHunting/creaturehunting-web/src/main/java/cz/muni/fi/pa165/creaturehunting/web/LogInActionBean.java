@@ -2,8 +2,6 @@ package cz.muni.fi.pa165.creaturehunting.web;
 
 import cz.muni.fi.pa165.creaturehunting.api.dto.LogInDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.LogInService;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
