@@ -131,10 +131,9 @@ public class LogInServiceImpl implements LogInService{
         if (string == null) {
             throw new NullPointerException("LogInDTO argument cannot be null.");
         }
-        LogInDTO logInDTOByName = new LogInDTO();
         for (LogInDTO logInDTO : this.findAllLogIns()){
             if (logInDTO.getName().toLowerCase().equals(string.toLowerCase())) {
-                return logInDTOByName = logInDTO;               
+                return logInDTO;               
             }
         }
         return null;

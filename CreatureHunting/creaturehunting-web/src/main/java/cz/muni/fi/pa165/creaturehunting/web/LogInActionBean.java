@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.creaturehunting.web;
 
 import cz.muni.fi.pa165.creaturehunting.api.dto.LogInDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.LogInService;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
@@ -39,7 +38,6 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
         if (name == null || name.isEmpty()) {
             logins = service.findAllLogIns();
         } else {
-            logins = null;
             logins = new ArrayList<LogInDTO>();
             if (service.findByName(name)!=null) {
                 logins.add(service.findByName(name));
@@ -79,7 +77,7 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
     }
     
     public List<LogInDTO> getLogins(){
-        return service.findAllLogIns();
+        return logins;
     }
     
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"delete", "doDelete", "edit", "doEdit"})
