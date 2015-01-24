@@ -41,7 +41,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 GrantedAuthority grantedAuthority = new GrantedAuthority() {
                     @Override
                     public String getAuthority() {
-                        return "ROLE_SURVIVOR";
+                        return "ROLE_SURVIVOR"; 
                     }
                 };
                 
