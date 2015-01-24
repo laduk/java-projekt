@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.creaturehunting.web;
 
 import cz.muni.fi.pa165.creaturehunting.api.dto.LogInDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.LogInService;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
@@ -37,7 +38,6 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
         if (name == null || name.isEmpty()) {
             logins = service.findAllLogIns();
         } else {
-            logins = new ArrayList<LogInDTO>();
             logins.add(service.findByName(name));
         }
         return new ForwardResolution("/login/list.jsp");
@@ -54,16 +54,15 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
     }
         
     public Resolution doAdd() {
-        if (service.findByName(login.getName())==null) {
-            service.create(login);
-            getContext().getMessages().add(new LocalizableMessage("login.add.done",
-                    escapeHTML(login.getName())));
-            return new RedirectResolution(this.getClass(), "list");
-        }else{
+        if (service.findByName(login.getName())!=null) {
             getContext().getMessages().add(new LocalizableMessage("login.add.fail",
-                    escapeHTML(login.getName())));
+                escapeHTML(login.getName())));
             return new RedirectResolution(this.getClass(), "list");
-        }       
+        }
+        service.create(login);
+        getContext().getMessages().add(new LocalizableMessage("login.add.done",
+                escapeHTML(login.getName())));
+        return new RedirectResolution(this.getClass(), "list");
     }
     
     public LogInDTO getLogin() {
