@@ -18,6 +18,7 @@ import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import net.sourceforge.stripes.validation.ValidationMethod;
 
 /**
  *
@@ -57,11 +58,6 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
     }
         
     public Resolution doAdd() {
-        if (service.findByName(login.getName())!=null) {
-            getContext().getMessages().add(new LocalizableError("login.add.fail",
-                escapeHTML(login.getName())));
-            return new RedirectResolution(this.getClass(), "list");
-        }
         service.create(login);
         getContext().getMessages().add(new LocalizableMessage("login.add.done",
                 escapeHTML(login.getName())));
@@ -113,6 +109,15 @@ public class LogInActionBean extends BaseActionBean implements ValidationErrorHa
         logins = service.findAllLogIns();
         //return null to let the event handling continue
         return null;
+    }
+    
+    @ValidationMethod(on = {"doAdd", "doEdit"})
+    public void kontrola(ValidationErrors errors) {
+        if (login.getId() < 1 || !service.findLogIn(login.getId()).getName().equals(login.getName())) {
+            if (service.findByName(login.getName()) != null) {
+                errors.add(escapeHTML(login.getName()), new LocalizableError("login.add.fail"));
+            }
+        }
     }
     
 }
