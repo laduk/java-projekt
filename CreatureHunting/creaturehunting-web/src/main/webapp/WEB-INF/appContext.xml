@@ -10,6 +10,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 ">
+    <context:component-scan base-package="cz.muni.fi.pa165"/>
     
     <sec:global-method-security secured-annotations="enabled"/>
     
