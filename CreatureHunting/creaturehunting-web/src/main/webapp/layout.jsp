@@ -8,6 +8,7 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <s:layout-definition>
@@ -35,11 +36,16 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <ul class="nav nav-tabs">
+                        
+                        <sec:authorize access="isAnonymous()">
                         <li class="${activeHomeTab}">
                             <s:link href="/pa165/index.jsp">
                                 <f:message key="navigation.home"/>
                             </s:link>
                         </li>
+                        </sec:authorize>
+                        
+                        <sec:authorize url="/all">
                         <li class="${activeHuntingTab}">
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean">
                                 <f:message key="navigation.huntExp"/>
@@ -60,16 +66,20 @@
                                 <f:message key="navigation.weapon"/>
                             </s:link>
                         </li>
+                        </sec:authorize>
+                        
+                        <sec:authorize url="/admin">
                         <li class="${activeLogInTab}">
                             <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.LogInActionBean">
                                 <f:message key="navigation.login"/>
                             </s:link>
                         </li>
                         <li>
-                            <s:link href="http://localhost:8084/creaturehunting-restClient/">
+                            <s:link href="http://localhost:8080/creaturehunting-restClient/">
                                 Rest Client
                             </s:link>
                         </li>
+                        </sec:authorize>>
                     </ul>
                 </div>
             </nav>
