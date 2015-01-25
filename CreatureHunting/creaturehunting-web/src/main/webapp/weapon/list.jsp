@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <s:layout-render name="/layout.jsp" titlekey="weapon.list.title" activeWeaponTab="active">
     <s:layout-component name="body">
@@ -59,6 +60,7 @@
                                 <td><c:out value="${weapon.gunReach}"/></td>
                                 <td><c:out value="${weapon.ammunition}"/></td>
                                 <td>
+                                    <sec:authorize url="/admin">
                                     <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean" event="edit">
                                         <s:param name="weapon.id" value="${weapon.id}"/>
                                         <span class="glyphicon glyphicon-edit"></span>
@@ -69,6 +71,7 @@
                                         <span class="glyphicon glyphicon-remove"></span>
                                         <f:message key="all.delete"/>
                                     </s:link>
+                                    </sec:authorize>
                                 </td>
                             </tr>
                         </c:forEach>

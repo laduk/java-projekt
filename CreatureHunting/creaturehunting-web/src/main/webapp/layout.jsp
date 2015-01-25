@@ -82,6 +82,7 @@
                         <sec:authorize url="/all">
                             <li>
                                 <a href="<c:url value="/j_spring_security_logout" />"><b>
+                                        <span class="glyphicon glyphicon-off"></span>
                                     <f:message key="all.logout"/>
                                     <sec:authentication property="principal.username"/>
                                 </b></a>

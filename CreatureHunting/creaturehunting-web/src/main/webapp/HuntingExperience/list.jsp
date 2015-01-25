@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <s:layout-render name="/layout.jsp" titlekey="hunting.list.title" activeHuntingTab="active">
     <s:layout-component name="body">
@@ -31,7 +32,7 @@
                 <button type="submit" name="doFind" class="btn btn-default btn-sm" style="margin-left:20px">
                     <span class="glyphicon glyphicon-search"></span>
                     <f:message key="all.find"/>
-                </button></p>
+                </button>
             </s:form>
 
             <h2><f:message key="hunting.list.title"/></h2>
@@ -57,6 +58,7 @@
                                 <td><c:out value="${hunting.efficiency}"/></td>
                                 <td><c:out value="${hunting.description}"/></td>
                                 <td>
+                                    <sec:authorize url="/admin">
                                     <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean" event="edit">
                                         <s:param name="hunting.id" value="${hunting.id}"/>
                                         <span class="glyphicon glyphicon-edit"></span>
@@ -67,6 +69,7 @@
                                         <span class="glyphicon glyphicon-remove"></span>
                                         <f:message key="all.delete"/>
                                     </s:link>
+                                    </sec:authorize>
                                 </td>
                             </tr>
                         </c:forEach>
