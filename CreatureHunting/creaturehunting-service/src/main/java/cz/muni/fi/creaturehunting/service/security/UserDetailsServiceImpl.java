@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author 
  */
-@Service
+@Service("userAuthenticationProvider")
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
     
