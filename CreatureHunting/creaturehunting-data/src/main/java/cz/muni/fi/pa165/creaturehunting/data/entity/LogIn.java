@@ -41,7 +41,7 @@ public class LogIn implements Serializable {
      * Not allowed to be null.
      */
     @Column(nullable=false)
-    private Boolean isRoot;
+    private String role;
 
     public long getId() {
         return id;
@@ -67,12 +67,12 @@ public class LogIn implements Serializable {
         this.password = password;
     }
 
-    public Boolean getIsRoot() {
-        return isRoot;
+    public String getRole() {
+        return role;
     }
 
-    public void setIsRoot(Boolean isRoot) {
-        this.isRoot = isRoot;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class LogIn implements Serializable {
     
     @Override
     public String toString() {
-        return "LogIn [" + "id=" + id + ", name=" + name + ", password=" + password 
-                + ", " + "isRoot" + isRoot +  "% ]";              
+        return "LogIn [id=" + id + ", name=" + name + ", password=" + password 
+                + ", role=" + role +  "]";              
     }
 }

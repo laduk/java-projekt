@@ -25,7 +25,7 @@ public class LogInTransformation {
         logInDTO.setId(logIn.getId());
         logInDTO.setName(logIn.getName());
         logInDTO.setPassword(logIn.getPassword());
-        logInDTO.setIsRoot(logIn.getIsRoot());
+        logInDTO.setRole(logIn.getRole());
         return logInDTO;
     }
     
@@ -45,7 +45,7 @@ public class LogInTransformation {
         logIn.setId(logInDTO.getId());
         logIn.setName(logInDTO.getName());
         logIn.setPassword(logInDTO.getPassword());
-        logIn.setIsRoot(logInDTO.isIsRoot());
+        logIn.setRole(logInDTO.getRole());
         return logIn;
     }
 }

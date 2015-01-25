@@ -4,10 +4,10 @@ import cz.muni.fi.pa165.creaturehunting.api.dto.LogInDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.LogInService;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,11 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
  * @author 
  */
 @Service("userAuthenticationProvider")
-@Transactional(readOnly = true)
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
     
     @Autowired
     LogInService service;
+    
+    public void setLogInService(LogInService service) {
+        this.service = service;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
@@ -36,7 +40,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         
         
         return new UserDetails(){
-        
+            
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                List<SimpleGrantedAuthority> auths = new ArrayList<>();
+                auths.add(new SimpleGrantedAuthority(logInDTO.getRole()));
+                return auths;
+            }
+            /*
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 GrantedAuthority grantedAuthority = new GrantedAuthority() {
@@ -61,9 +72,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
                 return Collections.unmodifiableList(listAuthorities);
                 
-            }
+            }*/
             
-                        @Override
+            @Override
             public String getPassword() {
                 return logInDTO.getPassword();
             }
@@ -93,7 +104,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 return true;
             }           
             
-            };
-        }
-  }
+        };
+    }
+}
 

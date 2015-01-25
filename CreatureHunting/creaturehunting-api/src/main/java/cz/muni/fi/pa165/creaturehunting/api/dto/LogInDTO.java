@@ -9,7 +9,7 @@ public class LogInDTO {
     private long id= -1;
     private String name;
     private String password;
-    private boolean isRoot;
+    private String role;
 
     public long getId() {
         return id;
@@ -35,12 +35,12 @@ public class LogInDTO {
         this.password = password;
     }
 
-    public boolean isIsRoot() {
-        return isRoot;
+    public String getRole() {
+        return role;
     }
 
-    public void setIsRoot(boolean isRoot) {
-        this.isRoot = isRoot;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -70,6 +70,6 @@ public class LogInDTO {
 
     @Override
     public String toString() {
-        return "LogInDTO{" + "id=" + id + ", name=" + name + ", password=" + password + ", isRoot=" + isRoot + '}';
+        return "LogInDTO{" + "id=" + id + ", name=" + name + ", password=" + password + ", role=" + role + '}';
     }     
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.creaturehunting.service;
 
 import cz.muni.fi.pa165.creaturehunting.api.dto.LogInDTO;
@@ -46,12 +41,12 @@ public class LogInServiceImplTest {
         logIn2 = new LogInDTO();
         
         logIn1.setId(1);
-        logIn1.setIsRoot(Boolean.TRUE);
+        logIn1.setRole("ROLE_ADMIN");
         logIn1.setName("God");
         logIn1.setPassword("In_nomine:Patris&Filii&Spiritus_sancti");
         
         logIn2.setId(2);
-        logIn2.setIsRoot(Boolean.FALSE);
+        logIn2.setRole("ROLE_SURVIVOR");
         logIn2.setName("Survivor");
         logIn2.setName("Got1ofTWO");
     }

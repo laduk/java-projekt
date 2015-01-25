@@ -2,7 +2,8 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-                            http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+                            http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xmlns:security="http://www.springframework.org/schema/security">
     
     <!-- Declaration of Spring -->
     <listener>
@@ -16,6 +17,15 @@
         <param-value>/WEB-INF/appContext.xml</param-value>
     </context-param>
     
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     
     <!-- Declaration of JSTL -->
     <context-param>
@@ -24,6 +34,22 @@
         <param-value>StripesResources</param-value>
     </context-param>
     
+    <display-name>Jersey servlet for REST API</display-name>
+    <servlet>
+        <servlet-name>rest-ws</servlet-name>
+        <servlet-class>
+            org.glassfish.jersey.servlet.ServletContainer
+        </servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>cz.fi.muni.pa165.creaturehunting.rest</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>rest-ws</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
     
     <!-- Declaration of Stripes -->
     <filter>
@@ -36,20 +62,17 @@
             <param-name>ActionResolver.Packages</param-name>
             <param-value>cz.muni.fi.pa165.creaturehunting.web</param-value>
         </init-param>
-        
         <init-param>
             <description>locales and encodings in the app</description>
             <param-name>LocalePicker.Locales</param-name>
             <param-value>en:utf-8,cs:utf-8</param-value>
         </init-param>
-        
         <init-param>
             <description>Stripes injects Spring beans</description>
             <param-name>Interceptor.Classes</param-name>
             <param-value>net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
         </init-param>        
     </filter>
-    
     <filter-mapping>
         <filter-name>StripesFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
@@ -61,13 +84,64 @@
         <filter-name>DynamicMappingFilter</filter-name>
         <filter-class>net.sourceforge.stripes.controller.DynamicMappingFilter</filter-class>
     </filter>
-    
     <filter-mapping>
         <filter-name>DynamicMappingFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    
+    <!-- CORS -->
+    <filter>
+        <filter-name>CORS</filter-name>
+        <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+
+        <init-param>
+            <param-name>cors.allowGenericHttpRequests</param-name>
+            <param-value>true</param-value>
+        </init-param>
+
+        <!--init-param>
+            <param-name>cors.exposedHeaders</param-name>
+            <param-value>*</param-value>
+        </init-param-->
+
+        <init-param>
+            <param-name>cors.allowOrigin</param-name>
+            <param-value>*</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>cors.allowSubdomains</param-name>
+            <param-value>true</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>cors.supportedMethods</param-name>
+            <param-value>PUT, GET, POST, DELETE, HEAD, OPTIONS</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>cors.supportedHeaders</param-name>
+            <param-value>accept, content-type, Origin</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>cors.supportsCredentials</param-name>
+            <param-value>true</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>cors.maxAge</param-name>
+            <param-value>3600</param-value>
+        </init-param>
+    </filter>
+   
+    <filter-mapping>
+        <!-- CORS Filter mapping -->
+        <filter-name>CORS</filter-name>
+        <url-pattern>*</url-pattern>
     </filter-mapping>
     
     <error-page>

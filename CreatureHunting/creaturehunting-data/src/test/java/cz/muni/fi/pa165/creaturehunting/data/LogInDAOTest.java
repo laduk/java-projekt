@@ -60,12 +60,12 @@ public class LogInDAOTest {
         LogIn login = new LogIn();
         login.setName("User1");
         login.setPassword("alfa123");
-        login.setIsRoot(false);
+        login.setRole("ROLE_SURVIVOR");
 
         LogIn loginRoot = new LogIn();
         loginRoot.setName("Root1");
         loginRoot.setPassword("beta456");
-        loginRoot.setIsRoot(true);
+        loginRoot.setRole("ROLE_ADMIN");
 
         entityManager.getTransaction().begin();
         logInDao.create(login);
@@ -83,11 +83,11 @@ public class LogInDAOTest {
 
         Assert.assertEquals(logInUserFounded.getName(), login.getName());
         Assert.assertEquals(logInUserFounded.getPassword(), login.getPassword());
-        Assert.assertEquals(logInUserFounded.getIsRoot(), false);
+        Assert.assertTrue(logInUserFounded.getRole().equals("ROLE_SURVIVOR"));
 
         Assert.assertEquals(logInRootFounded.getName(), loginRoot.getName());
         Assert.assertEquals(logInRootFounded.getPassword(), loginRoot.getPassword());
-        Assert.assertEquals(logInRootFounded.getIsRoot(), true);
+        Assert.assertTrue(logInRootFounded.getRole().equals("ROLE_ADMIN"));
 
         entityManager.getTransaction().begin();
         logInDao.delete(login);
@@ -106,7 +106,7 @@ public class LogInDAOTest {
         LogIn login = new LogIn();
         login.setName("User1");
         login.setPassword("alfa123");
-        login.setIsRoot(false);
+        login.setRole("ROLE_ADMIN");
 
         entityManager.getTransaction().begin();
         logInDao.create(login);
@@ -121,7 +121,7 @@ public class LogInDAOTest {
 
         login.setName("changedName");
         login.setPassword("newPassword123");
-        login.setIsRoot(true);
+        login.setRole("ROLE_ADMIN");
 
         entityManager.getTransaction().begin();
         logInDao.update(login);
@@ -134,7 +134,7 @@ public class LogInDAOTest {
         LogIn logInUserFounded = logInDao.findLogIn(login.getId());
         Assert.assertEquals(logInUserFounded.getName(), login.getName());
         Assert.assertEquals(logInUserFounded.getPassword(), login.getPassword());
-        Assert.assertEquals(logInUserFounded.getIsRoot(), true);
+        Assert.assertTrue(logInUserFounded.getRole().equals("ROLE_ADMIN"));
 
         entityManager.getTransaction().begin();
         logInDao.delete(login);
@@ -153,7 +153,7 @@ public class LogInDAOTest {
         LogIn login = new LogIn();
         login.setName("User1");
         login.setPassword("alfa123");
-        login.setIsRoot(false);
+        login.setRole("ROLE_SURVIVOR");
 
         entityManager.getTransaction().begin();
         logInDao.create(login);
@@ -188,7 +188,7 @@ public class LogInDAOTest {
         LogIn login = new LogIn();
         login.setName("User3");
         login.setPassword("pass1234");
-        login.setIsRoot(false);
+        login.setRole("ROLE_SURVIVOR");
 
         entityManager.getTransaction().begin();
         logInDao.create(login);
@@ -203,7 +203,7 @@ public class LogInDAOTest {
         LogIn logInUserFounded = logInDao.findLogIn(login.getId());
         Assert.assertEquals(logInUserFounded.getName(), login.getName());
         Assert.assertEquals(logInUserFounded.getPassword(), login.getPassword());
-        Assert.assertEquals(logInUserFounded.getIsRoot(), login.getIsRoot());
+        Assert.assertTrue(logInUserFounded.getRole().equals(login.getRole()));
         Assert.assertEquals(logInUserFounded.getId(), login.getId());
 
         entityManager.getTransaction().begin();
@@ -224,12 +224,12 @@ public class LogInDAOTest {
         LogIn login = new LogIn();
         login.setName("User1");
         login.setPassword("alfa123");
-        login.setIsRoot(false);
+        login.setRole("ROLE_SURVIVOR");
 
         LogIn loginRoot = new LogIn();
         loginRoot.setName("Root1");
         loginRoot.setPassword("beta456");
-        loginRoot.setIsRoot(true);
+        loginRoot.setRole("ROLE_ADMIN");
 
         entityManager.getTransaction().begin();
         logInDao.create(login);

@@ -25,12 +25,12 @@ public class LogInTransformationTest {
         logIn = new LogIn();
         
         logInDTO.setId(1);
-        logInDTO.setIsRoot(Boolean.TRUE);
+        logInDTO.setRole("ROLE_ADMIN");
         logInDTO.setName("creator");
         logInDTO.setPassword("aS1dF2gH3jK4l");
         
         logIn.setId(1);
-        logIn.setIsRoot(Boolean.TRUE);
+        logIn.setRole("ROLE_ADMIN");
         logIn.setName("creator");
         logIn.setPassword("aS1dF2gH3jK4l");          
     }
