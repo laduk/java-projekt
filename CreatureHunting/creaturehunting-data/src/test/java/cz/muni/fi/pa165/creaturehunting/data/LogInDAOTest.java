@@ -50,6 +50,9 @@ public class LogInDAOTest {
         entityManager.close();
     }
 
+    /**
+     * Test of create of LogIn method from class LogInDAO.
+     */
     @Test
     public void testCreateLogIn() {
         LogInDAO logInDao = new LogInDAOImpl(entityManager);
@@ -85,68 +88,64 @@ public class LogInDAOTest {
         Assert.assertEquals(logInRootFounded.getName(), loginRoot.getName());
         Assert.assertEquals(logInRootFounded.getPassword(), loginRoot.getPassword());
         Assert.assertEquals(logInRootFounded.getIsRoot(), true);
-        
-        //
+
         entityManager.getTransaction().begin();
-        logInDao.delete(login);    
-        logInDao.delete(loginRoot); 
+        logInDao.delete(login);
+        logInDao.delete(loginRoot);
         entityManager.getTransaction().commit();
     }
 
-    
-    
- 
+    /**
+     * Test of update of LogIn method from class LogInDAO.
+     */
     @Test
     public void testUpdateLogIn() {
-        
+
         LogInDAO logInDao = new LogInDAOImpl(entityManager);
 
         LogIn login = new LogIn();
         login.setName("User1");
         login.setPassword("alfa123");
         login.setIsRoot(false);
-        
+
         entityManager.getTransaction().begin();
-        logInDao.create(login);        
+        logInDao.create(login);
         entityManager.getTransaction().commit();
         entityManager.close();
-        
+
         entityManager = entManFact.createEntityManager();
         logInDao = new LogInDAOImpl(entityManager);
-        
+
         assertFalse("Error in creating login of user before update", login.getId() < 0);
         //login = logInDao.findLogIn(login.getId());
-        
+
         login.setName("changedName");
         login.setPassword("newPassword123");
         login.setIsRoot(true);
-        
+
         entityManager.getTransaction().begin();
-        logInDao.update(login);        
+        logInDao.update(login);
         entityManager.getTransaction().commit();
         entityManager.close();
-        
+
         entityManager = entManFact.createEntityManager();
         logInDao = new LogInDAOImpl(entityManager);
-        
+
         LogIn logInUserFounded = logInDao.findLogIn(login.getId());
         Assert.assertEquals(logInUserFounded.getName(), login.getName());
         Assert.assertEquals(logInUserFounded.getPassword(), login.getPassword());
         Assert.assertEquals(logInUserFounded.getIsRoot(), true);
-        
-        
-        //
-        entityManager.getTransaction().begin();
-        logInDao.delete(login);        
-        entityManager.getTransaction().commit();
-       //entityManager.close(); ?? proc toto nejde??
-        
-    }
-    
-    
-    
-    
 
+        entityManager.getTransaction().begin();
+        logInDao.delete(login);
+        entityManager.getTransaction().commit();
+
+
+    }
+
+    /**
+     * Test of delete of LogIn method from class LogInDAO.
+     */
     @Test
     public void testDeleteLogIn() {
         LogInDAO logInDao = new LogInDAOImpl(entityManager);
@@ -155,33 +154,33 @@ public class LogInDAOTest {
         login.setName("User1");
         login.setPassword("alfa123");
         login.setIsRoot(false);
-        
+
         entityManager.getTransaction().begin();
-        logInDao.create(login);        
+        logInDao.create(login);
         entityManager.getTransaction().commit();
         entityManager.close();
-        
-        entityManager = entManFact.createEntityManager();
-        logInDao = new LogInDAOImpl(entityManager);         
-        
-        assertFalse("Error in creating login of user before deleting", login.getId() < 0);
-        
-        entityManager.getTransaction().begin();
-        logInDao.delete(login);        
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        
+
         entityManager = entManFact.createEntityManager();
         logInDao = new LogInDAOImpl(entityManager);
-        
-        Assert.assertNull(logInDao.findLogIn(login.getId()));  
-                    
-        
-    }
-    
-       
-    
 
+        assertFalse("Error in creating login of user before deleting", login.getId() < 0);
+
+        entityManager.getTransaction().begin();
+        logInDao.delete(login);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        entityManager = entManFact.createEntityManager();
+        logInDao = new LogInDAOImpl(entityManager);
+
+        Assert.assertNull(logInDao.findLogIn(login.getId()));
+
+
+    }
+
+    /**
+     * Test of finding of LogIn method from class LogInDAO.
+     */
     @Test
     public void testFindLogIn() {
         LogInDAO logInDao = new LogInDAOImpl(entityManager);
@@ -190,36 +189,36 @@ public class LogInDAOTest {
         login.setName("User3");
         login.setPassword("pass1234");
         login.setIsRoot(false);
-        
+
         entityManager.getTransaction().begin();
-        logInDao.create(login);        
+        logInDao.create(login);
         entityManager.getTransaction().commit();
         entityManager.close();
-        
+
         entityManager = entManFact.createEntityManager();
-        logInDao = new LogInDAOImpl(entityManager);         
-        
+        logInDao = new LogInDAOImpl(entityManager);
+
         assertFalse("Error in creating login of user before looking up.", login.getId() < 0);
-        
+
         LogIn logInUserFounded = logInDao.findLogIn(login.getId());
         Assert.assertEquals(logInUserFounded.getName(), login.getName());
         Assert.assertEquals(logInUserFounded.getPassword(), login.getPassword());
         Assert.assertEquals(logInUserFounded.getIsRoot(), login.getIsRoot());
         Assert.assertEquals(logInUserFounded.getId(), login.getId());
-        
+
         entityManager.getTransaction().begin();
-        logInDao.delete(login);        
+        logInDao.delete(login);
         entityManager.getTransaction().commit();
-       //entityManager.close(); //?? proc toto nejde??
-        
+       
+
     }
 
-    
-    
-    
+     /**
+     * Test of finding all of LogIns method from class LogInDAO.
+     */
     @Test
     public void testFindAll() {
-        
+
         LogInDAO logInDao = new LogInDAOImpl(entityManager);
 
         LogIn login = new LogIn();
@@ -242,19 +241,19 @@ public class LogInDAOTest {
 
         assertFalse("Error in creating login of user", login.getId() < 0);
         assertFalse("Error in creating login of root", loginRoot.getId() < 0);
-        
+
         List<LogIn> listOfLogins = logInDao.findAll();
-        
-        Assert.assertEquals(listOfLogins.size(), 2);    
-        
+
+        Assert.assertEquals(listOfLogins.size(), 2);
+
         Assert.assertTrue(listOfLogins.contains(login));
         Assert.assertTrue(listOfLogins.contains(loginRoot));
-        
+
         entityManager.getTransaction().begin();
-        logInDao.delete(login);    
-        logInDao.delete(loginRoot); 
+        logInDao.delete(login);
+        logInDao.delete(loginRoot);
         entityManager.getTransaction().commit();
-        
-        
+
+
     }
 }
