@@ -37,56 +37,54 @@
                 <div class="container-fluid">
                     <ul class="nav nav-tabs">
                         
-                        <sec:authorize access="isAnonymous()">
                         <li class="${activeHomeTab}">
                             <s:link href="/pa165/index.jsp">
                                 <f:message key="navigation.home"/>
                             </s:link>
                         </li>
-                        </sec:authorize>
                         
                         <sec:authorize url="/all">
-                        <li class="${activeHuntingTab}">
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean">
-                                <f:message key="navigation.huntExp"/>
-                            </s:link>
-                        </li>
-                        <li class="${activeCreatureTab}">
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean">
-                                <f:message key="navigation.creature"/>
-                            </s:link>
-                        </li>
-                        <li class="${activeAreaTab}">
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean">
-                                <f:message key="navigation.area"/>
-                            </s:link>
-                        </li>
-                        <li class="${activeWeaponTab}">
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean">
-                                <f:message key="navigation.weapon"/>
-                            </s:link>
-                        </li>
+                            <li class="${activeHuntingTab}">
+                                <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean">
+                                    <f:message key="navigation.huntExp"/>
+                                </s:link>
+                            </li>
+                            <li class="${activeCreatureTab}">
+                                <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.CreatureActionBean">
+                                    <f:message key="navigation.creature"/>
+                                </s:link>
+                            </li>
+                            <li class="${activeAreaTab}">
+                                <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean">
+                                    <f:message key="navigation.area"/>
+                                </s:link>
+                            </li>
+                            <li class="${activeWeaponTab}">
+                                <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.WeaponActionBean">
+                                    <f:message key="navigation.weapon"/>
+                                </s:link>
+                            </li>
                         </sec:authorize>
                         
                         <sec:authorize url="/admin">
-                        <li class="${activeLogInTab}">
-                            <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.LogInActionBean">
-                                <f:message key="navigation.login"/>
-                            </s:link>
-                        </li>
-                        <li>
-                            <s:link href="http://localhost:8080/creaturehunting-restClient/">
-                                Rest Client
-                            </s:link>
-                        </li>
+                            <li class="${activeLogInTab}">
+                                <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.LogInActionBean">
+                                    <f:message key="navigation.login"/>
+                                </s:link>
+                            </li>
+                            <li>
+                                <s:link href="http://localhost:8080/creaturehunting-restClient/">
+                                    Rest Client
+                                </s:link>
+                            </li>
                         </sec:authorize>
                         
                         <sec:authorize url="/all">
-                            <li style="background-color: red;">
-                                <a href="<c:url value="/j_spring_security_logout" />">
+                            <li>
+                                <a href="<c:url value="/j_spring_security_logout" />"><b>
                                     <f:message key="all.logout"/>
                                     <sec:authentication property="principal.username"/>
-                                </a>
+                                </b></a>
                             </li>
                         </sec:authorize>
                     </ul>
