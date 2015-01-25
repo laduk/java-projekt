@@ -12,7 +12,7 @@
             <br /><br />
             
             <sec:authorize access="isAnonymous()">
-                <form name="f" action="<s:url value='j_spring_security_check'/>" class="form-horizontal">
+                <form name="f" action="<s:url value='j_spring_security_check'/>" class="form-horizontal" method="post">
                     <div class="form-group">
                         <s:label for="b1" name="login.name" class="control-label col-sm-2"/>
                         <div class="col-sm-10">
