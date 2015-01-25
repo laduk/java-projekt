@@ -1,4 +1,4 @@
-package cz.muni.fi.creaturehunting.service.security;
+package cz.muni.fi.pa165.creaturehunting.service.security;
 
 import cz.muni.fi.pa165.creaturehunting.api.dto.LogInDTO;
 import cz.muni.fi.pa165.creaturehunting.api.serviceinterface.LogInService;

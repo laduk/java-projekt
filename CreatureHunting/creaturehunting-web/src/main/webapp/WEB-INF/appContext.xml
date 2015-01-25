@@ -11,7 +11,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 ">
     <context:annotation-config />
-    <context:component-scan base-package="cz.muni.fi.creaturehunting.service.security" />
+    <context:component-scan base-package="cz.muni.fi.pa165.creaturehunting.service.security" />
     
     <sec:global-method-security secured-annotations="enabled"/>
     
