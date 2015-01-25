@@ -79,7 +79,7 @@
                                 Rest Client
                             </s:link>
                         </li>
-                        </sec:authorize>>
+                        </sec:authorize>
                     </ul>
                 </div>
             </nav>
