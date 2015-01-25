@@ -25,6 +25,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
  *
@@ -34,9 +35,16 @@ import org.springframework.stereotype.Component;
 @Component
 @Singleton
 public class AreaRest {
-        
+    
+    private static final XmlWebApplicationContext app_config =
+            new XmlWebApplicationContext();
+    
     @Autowired
     private AreaService service;
+    
+    public AreaRest() {
+        app_config.setNamespace("appContext");
+    }    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)

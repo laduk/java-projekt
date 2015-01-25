@@ -60,13 +60,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>4.1.4.RELEASE</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>4.1.4.RELEASE</version>
+            <version>4.1.1.RELEASE</version>
         </dependency>
         
         <!-- rest -->
@@ -81,8 +75,12 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
-            <version>3.2.0.RELEASE</version>
-            <exclusions>       
+            <version>3.2.5.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>            
                 <exclusion>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-web</artifactId>
