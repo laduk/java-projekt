@@ -14,7 +14,7 @@
             <sec:authorize access="isAnonymous()">
                 <form name="f" action="<s:url value='j_spring_security_check'/>" class="form-horizontal">
                     <div class="form-group">
-                        <s:label for="b1" name="login.username" class="control-label col-sm-2"/>
+                        <s:label for="b1" name="login.name" class="control-label col-sm-2"/>
                         <div class="col-sm-10">
                             <input type="text" id="b1" name="j_username" class="form-control" style="width:300px"/>
                         </div>
@@ -32,6 +32,10 @@
                         </button>
                     </div>
                 </form>
+            </sec:authorize>
+            
+            <sec:authorize url="/all">
+                Welcome <b><sec:authentication property="principal.username" /></b>.
             </sec:authorize>
             
         </div>

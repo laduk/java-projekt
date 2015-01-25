@@ -80,6 +80,15 @@
                             </s:link>
                         </li>
                         </sec:authorize>
+                        
+                        <sec:authorize url="/all">
+                            <li style="background-color: red;">
+                                <a href="<c:url value="/j_spring_security_logout" />">
+                                    <f:message key="all.logout"/>
+                                    <sec:authentication property="principal.username"/>
+                                </a>
+                            </li>
+                        </sec:authorize>
                     </ul>
                 </div>
             </nav>
