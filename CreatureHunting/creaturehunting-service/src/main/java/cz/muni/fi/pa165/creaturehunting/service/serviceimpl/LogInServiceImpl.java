@@ -125,7 +125,6 @@ public class LogInServiceImpl implements LogInService{
      * @param string Given name to be find in All LogIns.
      * @return List of data transfer objects. 
      */
-    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
     @Override
     public LogInDTO findByName(String string) {
         if (string == null) {
