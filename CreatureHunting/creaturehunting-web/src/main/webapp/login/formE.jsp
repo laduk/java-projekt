@@ -13,9 +13,12 @@
         </div>
     </div>
         <div class="form-group">
-        <s:label for="b3" name="login.isRoot" class="control-label col-sm-2"/>
+        <s:label for="b3" name="login.role" class="control-label col-sm-2"/>
         <div class="col-sm-10">
-            <s:checkbox id="b3" name="login.isRoot" size="4" class="form-control" style="width:15px"/>
+            <s:select class="form-control" id="b3" name="login.role" style="width:100px">
+               <s:option value="ROLE_ADMIN" label="Admin"/>
+               <s:option value="ROLE_SRUVIVOR" label="User"/>
+           </s:select>
             
         </div>
     </div>
