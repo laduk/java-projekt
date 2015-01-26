@@ -18,6 +18,7 @@
             <s:select class="form-control" id="b3" name="login.role" style="width:100px">
                <s:option value="ROLE_ADMIN" label="Admin"/>
                <s:option value="ROLE_SURVIVOR" label="Survivor"/>
+               <s:option value="ROLE_REST" label="Rest"/>
            </s:select>
             
         </div>

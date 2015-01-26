@@ -25,7 +25,7 @@ public class CreatureServiceImpl implements CreatureService {
         this.creatureDAO = creatureDAO;
     }
 
-    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN", "ROLE_REST"})
     @Override
     public void create(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
@@ -35,7 +35,7 @@ public class CreatureServiceImpl implements CreatureService {
                     transformToEntity(creatureDTO));
     }
     
-    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN", "ROLE_REST"})
     @Override
     public void update(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
@@ -45,7 +45,7 @@ public class CreatureServiceImpl implements CreatureService {
                     transformToEntity(creatureDTO));
     }
     
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     @Override
     public void delete(CreatureDTO creatureDTO) {
         if (creatureDTO==null) {
@@ -55,7 +55,7 @@ public class CreatureServiceImpl implements CreatureService {
                 transformToEntity(creatureDTO));
     }
     
-    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN", "ROLE_REST"})
     @Override
     public CreatureDTO findCreature(long id) {
         CreatureDTO creatureDTO = CreatureTransformation.transformToDTO(
@@ -63,7 +63,7 @@ public class CreatureServiceImpl implements CreatureService {
         return creatureDTO;
     }
     
-    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN", "ROLE_REST"})
     @Override
     public List<CreatureDTO> findAllCreatures() {
         List<Creature> creatures = creatureDAO.findAllCreatures();      

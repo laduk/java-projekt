@@ -30,7 +30,7 @@ public class AreaServiceImpl implements AreaService {
      *
      * @param areaDTO - data transfer object as a source of data
      */
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     @Override
     public void create(AreaDTO areaDTO) {
         if (areaDTO==null) {
@@ -45,7 +45,7 @@ public class AreaServiceImpl implements AreaService {
      *
      * @param areaDTO - data transfer object as a source of data     
      */
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     @Override
     public void update(AreaDTO areaDTO) {
         if (areaDTO==null) {
@@ -60,7 +60,7 @@ public class AreaServiceImpl implements AreaService {
      *
      * @param areaDTO - data transfer object as a source of data
      */
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     @Override
     public void delete(AreaDTO areaDTO) {
         if (areaDTO==null) {
@@ -74,7 +74,7 @@ public class AreaServiceImpl implements AreaService {
      * @param id given id to be find
      * @return area data transfer object
      */
-    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN", "ROLE_REST"})
     @Override
     public AreaDTO findArea(Long id) {
         if (id==null) {
@@ -91,7 +91,7 @@ public class AreaServiceImpl implements AreaService {
      *
      * @return list of area data transfer objects
      */
-    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN"})
+    @Secured({"ROLE_SURVIVOR", "ROLE_ADMIN", "ROLE_REST"})
     @Override
     public List<AreaDTO> findAllAreas() {
         List<AreaDTO> listAreasDTO = new ArrayList<AreaDTO>();

@@ -43,7 +43,7 @@
                             </s:link>
                         </li>
                         
-                        <sec:authorize url="/all">
+                        <sec:authorize url="/allnorest">
                             <li class="${activeHuntingTab}">
                                 <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.HuntActionBean">
                                     <f:message key="navigation.huntExp"/>
@@ -72,6 +72,8 @@
                                     <f:message key="navigation.login"/>
                                 </s:link>
                             </li>
+                        </sec:authorize>
+                        <sec:authorize url="/rest">
                             <li>
                                 <s:link href="http://localhost:8080/creaturehunting-restClient/">
                                     Rest Client
