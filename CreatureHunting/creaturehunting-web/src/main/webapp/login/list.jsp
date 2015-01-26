@@ -42,14 +42,14 @@
                         <tr>
                             <th>id</th>
                             <th><f:message key="login.name"/></th>
-                            <th><f:message key="login.isRoot"/></th>
+                            <th><f:message key="login.role"/></th>
                             <th></th>
                         </tr>
                         <c:forEach items="${actionBean.logins}" var="login">
                             <tr>
                                 <td>${login.id}</td>
                                 <td><c:out value="${login.name}"/></td>
-                                <td><c:out value="${login.isRoot}"/></td>                                
+                                <td><c:out value="${login.role}"/></td>                                
                                 <td>
                                     <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.LogInActionBean" event="edit">
                                         <s:param name="login.id" value="${login.id}"/>

@@ -10,7 +10,7 @@
             <h2><f:message key="login.edit.title"/></h2>
             <s:form beanclass="cz.muni.fi.pa165.creaturehunting.web.LogInActionBean" class="form-horizontal">
                 <s:hidden name="login.id"/>
-                <%@include file="formE.jsp"%>
+                <%@include file="form.jsp"%>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" name="doEdit" class="btn btn-default btn-sm">
