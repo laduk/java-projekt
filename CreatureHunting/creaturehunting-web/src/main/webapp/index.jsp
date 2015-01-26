@@ -25,6 +25,11 @@
                         <h4><f:message key="all.info.logout"/></h4>
                     </div>
                 </c:if>
+                <c:if test="${fn:endsWith(pageContext.request.requestURI, '/needLogin.jsp')}">
+                    <div class="container bg-danger" style="margin-top:10px; margin-bottom:10px">
+                        <h4><f:message key="all.info.needlogin"/></h4>
+                    </div>
+                </c:if>
                 <form name="f" action="<s:url value='j_spring_security_check'/>" class="form-horizontal" method="post">
                     <div class="form-group">
                         <s:label for="b1" name="login.name" class="control-label col-sm-2"/>

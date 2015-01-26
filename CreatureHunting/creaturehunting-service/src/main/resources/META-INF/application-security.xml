@@ -20,7 +20,7 @@
         <intercept-url pattern="/weapon/**" access="hasRole('ROLE_SURVIVOR') || hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/HuntingExperience/**" access="hasRole('ROLE_SURVIVOR') || hasRole('ROLE_ADMIN')" />
 
-        <form-login login-page="/" default-target-url="/" authentication-failure-url="/badLogin.jsp" />
+        <form-login login-page="/needLogin.jsp" default-target-url="/" authentication-failure-url="/badLogin.jsp" />
         <logout logout-success-url="/logOut.jsp" delete-cookies="JSESSIONID"/>
     </http>      
         
