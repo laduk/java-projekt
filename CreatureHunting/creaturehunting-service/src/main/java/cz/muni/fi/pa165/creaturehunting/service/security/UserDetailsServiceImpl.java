@@ -47,32 +47,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 auths.add(new SimpleGrantedAuthority(logInDTO.getRole()));
                 return auths;
             }
-            /*
-            @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                GrantedAuthority grantedAuthority = new GrantedAuthority() {
-                    @Override
-                    public String getAuthority() {
-                        return "ROLE_SURVIVOR"; 
-                    }
-                };
-                
-                 List<GrantedAuthority> listAuthorities = new ArrayList<GrantedAuthority>();
-                listAuthorities.add(grantedAuthority);
-                
-                if (logInDTO.isIsRoot()) {
-                    GrantedAuthority adminAuthority = new GrantedAuthority() {
-                        @Override
-                        public String getAuthority() {
-                            return "ROLE_ADMIN";
-                        }
-                    };
-                    listAuthorities.add(adminAuthority);
-                }
-
-                return Collections.unmodifiableList(listAuthorities);
-                
-            }*/
             
             @Override
             public String getPassword() {
