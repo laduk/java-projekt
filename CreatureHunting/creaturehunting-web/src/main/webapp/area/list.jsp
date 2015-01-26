@@ -82,12 +82,14 @@
                 </c:otherwise>
             </c:choose>
 
+            <sec:authorize url="/admin">
             <p>
                 <s:link beanclass="cz.muni.fi.pa165.creaturehunting.web.AreaActionBean" event="add">
                     <span class="glyphicon glyphicon-plus"></span>                
                     <f:message key="area.add.title"/>
                 </s:link>
             </p>
+            </sec:authorize>
         </div>
     </s:layout-component>
 </s:layout-render>
