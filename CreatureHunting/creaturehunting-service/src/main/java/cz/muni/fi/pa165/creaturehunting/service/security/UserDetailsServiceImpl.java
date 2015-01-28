@@ -43,7 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
-                List<SimpleGrantedAuthority> auths = new ArrayList<>();
+                List<SimpleGrantedAuthority> auths = new ArrayList();
                 auths.add(new SimpleGrantedAuthority(logInDTO.getRole()));
                 return auths;
             }
